@@ -1,117 +1,319 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
-
 	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1 maximum-scale=2, user-scalable=no">
-		<meta name="apple-mobile-web-app-capable" content="yes" />
-		<meta name="mobile-web-app-capable" content="yes">
-		<meta name="apple-mobile-web-app-title" content="Add to Home">
-		<meta name="format-detection" content="telephone=no">
-		<meta http-equiv="x-rim-auto-match" content="none">
-		<title>首汽约车</title>
-		<meta name="keywords" content="首汽约车">
-		<meta name="description" content="首汽约车">
-		<meta name="Copyright" content="首汽约车">
-		<meta name="author" content="首汽约车">
-		<!-- 网站的ico图标 -->
-		<script src="soda.min.js"></script>
-		<script src="tick.js"></script>
-		<script src="transform.js"></script>
-		<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
-		<style type="text/css">
-			*{
-				font-family: "宋体";
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="keywords" content="前端开发工程师简历">
+		<meta name="description" content="前端开发工程师简历">
+		<title>前端开发工程师简历</title>
+		<link rel="stylesheet" type="text/css" href="./static/style.css">
+		<link rel="stylesheet" type="text/css" href="./static/new.css" media="all">
+		<link rel="stylesheet" href="./static/bootstrap.min.css">
+		<link rel="stylesheet" href="./static/zxbj_base.css">
+		<link rel="stylesheet" href="./static/jm0203.css">
+		<style>
+			.m-nav-ul .nav_li:nth-child(3) a.erji_a {
+				color: #F66000;
 			}
-			.box1{
-				width: 100px;
-				height: 100px;
-				border: 1px solid #F0F;
+			.m-nav-ul .nav_li:nth-child(3) a.triangle {
+				border-color: #F66000;
 			}
-			@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,300);
-@import url(http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700);
-.title{
-	font-family: "微软雅黑";
-	font-size: 12px;
-}
-.asdf{
-	font-family: "Open Sans Condensed";
-	font-size: 12px;
-}
-.wd{
-	font-family:'Open Sans';
-	font-size: 12px;
-}
+			.m-top_user li a {
+				box-sizing: content-box;
+				-moz-box-sizing: content-box;
+				-webkit-box-sizing: content-box;
+			}
+			.m-erjinav-ul {
+				margin-top: 25px;
+			}
 		</style>
 	</head>
-
-	<body style="background-color: #efeff4;">
-		<h1 class="title">transform.js和tick.js用法</h1>
-		<h1 class="asdf">transform.js和tick.js用法</h1>
-		<h1 class="wd">transform.js和tick.js用法</h1>
-		<h4>rotateZ</h4>
-		<div class="box1">rotateZ</div>
-		<script>
-			var step = 0.02;
-			var element1 = document.querySelector(".box1");
-    Transform(element1);
-    element1.rotateZ = 45;
-    tick(function () {
-        element1.rotateZ++;
-        element1.scaleX < 0.5 && (step *= -1);
-        element1.scaleX > 1.5 && (step *= -1);
-        element1.scaleX += step;
-        element1.scaleY += step;
-    });
-		</script>
-		<p>var element1 = document.querySelector("#test1");
-    Transform(element1);
-    element1.rotateZ = 45;</p>
-		<h1 class="title">soda.min.js用法</h1>
-		<div id="pic"></div>
-		<script>
-var tpl = '\
-<ul>\
-    <li soda-repeat="item in list">\
-    {{$index}}\
-    {{item.title}}\
-       <div soda-repeat="i in item.lis">\
-       {{$index}}\
-       {{i.name}}\
-       {{i.show}}\
-       </div>\
-    </li>\
-</ul>'
-
-var data = {
-    list: [
-        {title:"7月份",lis:[{name: "Hello" ,show: true},{name: "Hello" ,show: true}]}
-    ]
-};
-$("h1").click(function(){
-	data.list.push({title:"asdf",show:true})
-	$("#pic").html(soda(tpl,data))
-})
-document.getElementById("pic").innerHTML = soda(tpl,data)
-		</script>
-		<script language="JavaScript" type="text/javascript"> 
-function GetDateStr(AddDayCount) { 
-var dd = new Date(); 
-dd.setDate(dd.getDate()+AddDayCount);//获取AddDayCount天后的日期 
-var y = dd.getFullYear(); 
-var m = dd.getMonth()+1;//获取当前月份的日期 
-var d = dd.getDate(); 
-return y+"-"+m+"-"+d; 
-} 
-
-document.write("前天："+GetDateStr(-2)); 
-document.write("<br />昨天："+GetDateStr(-1)); 
-document.write("<br />今天："+GetDateStr(0)); 
-document.write("<br />明天："+GetDateStr(1)); 
-document.write("<br />后天："+GetDateStr(2)); 
-document.write("<br />大后天："+GetDateStr(20)); 
-
-</script> 
+	<!--参考网址-->
+	<!--http://www.17sucai.com/preview/14938/2016-06-30/jj/index.html-->
+	<body style="height:auto;background:#f8f8f8;">
+		<div class="n_dispage_jm">
+			<div class="n_dispage_jm_in resetEditStyle">
+				<!--编辑区域-->
+				<div class="baseStyle clearfix jm0203_j6" id="resume_body">
+					<div class="divLeft clearfix" id="bar">
+						<!--头像-->
+						<div data-toggle="modal" data-target="#myModalHead" class="headDiv" id="resume_head"> <span class="headNotice">点击替换头像</span> <img class="resume_head" src="./static/default_head.png" height="200"> </div>
+						<div id="bar_sort"></div>
+						<!--基本信息-->
+						<div class="msgDiv positonDiv resume_add_area resume_sort" id="resume_msg">
+							<ul class="editBtn">
+								<li class="btnMove" style="cursor:move;" data-placement="top" title="拖动调整上下位置"></li>
+								<li class="btnPlus resume_add" for-key="resume_msg" data-placement="bottom" title="添加一项"></li>
+							</ul>
+							<div class="baseAge baseMsg baseDel" id="resume_age">
+								<div class="delete resume_hidden" for-id="resume_age"></div>
+								<a class="resume_icon_diy icon wbdfont" for-id="age" style="font-size:none"></a>
+								<input class="baseBorder resume_msg resume_lang_age" for-key="age" placeholder="年龄/生日" value="XX岁">
+							</div>
+							<div class="baseAddress baseMsg baseDel" id="resume_address">
+								<div class="delete resume_hidden" for-id="resume_address"></div>
+								<a class="resume_icon_diy icon wbdfont" for-id="address" style="font-size:none"></a>
+								<input class="resume_msg baseBorder resume_lang_address" for-key="address" placeholder="联系地址" value="北京市通州区">
+							</div>
+							<div class="baseMobile baseMsg baseDel" id="resume_mobile">
+								<div class="delete resume_hidden" for-id="resume_mobile"></div>
+								<a class="resume_icon_diy icon wbdfont" for-id="mobile" style="font-size:none"></a>
+								<input class="resume_msg baseBorder resume_lang_mobile" for-key="mobile" placeholder="联系电话" value="15911085932">
+							</div>
+							<div class="baseEmail baseMsg baseDel" id="resume_email">
+								<div class="delete resume_hidden" for-id="resume_email"></div>
+								<a class="resume_icon_diy icon wbdfont" for-id="email" style="font-size:none"></a>
+								<input class="resume_msg baseBorder resume_lang_email" for-key="email" placeholder="电子邮箱" value="15911085932@163.com">
+							</div>
+						</div>
+						<!--个人技能-->
+						<div class="skillDiv positonDiv resume_add_area resume_graph resume_sort" id="resume_graph">
+							<ul class="editBtn">
+								<li class="btnMove" style="cursor:move;" data-placement="top" title="拖动调整上下位置"></li>
+								<li class="btnPlus resume_add" for-key="resume_graph" data-placement="bottom" title="添加一项"></li>
+								<li class="btnDel resume_hidden" for-id="resume_graph" data-placement="bottom" title="隐藏该模块"></li>
+							</ul>
+							<ul class="skillUl resume_append_area">
+								<li class="baseDel resume_delete_area resume_graph_item">
+									<div class="skillTitle">
+										<input class="resume_value baseBorder" for-key="resume_skill_graph" placeholder="填写你的技能名称" value="html5">
+									</div>
+									<span><i class="resume_line" for-id="resume_skill_graph" style="width:128px;border-top-style:solid;border-top-width:8px;"></i></span>
+									<div class="delete resume_delete"></div>
+								</li>
+								<li class="baseDel resume_delete_area resume_graph_item">
+									<div class="skillTitle">
+										<input class="resume_value baseBorder" for-key="53815fa3293e57988958e27243b16870" placeholder="填写你的技能名称" value="Vue">
+									</div>
+									<span><i class="resume_line" for-id="53815fa3293e57988958e27243b16870" style="width:128px;border-top-style:solid;border-top-width:8px;"></i></span>
+									<div class="delete resume_delete"></div>
+								</li>
+								<li class="baseDel resume_delete_area resume_graph_item">
+									<div class="skillTitle">
+										<input class="resume_value baseBorder" for-key="0fb2de17b37fd50c14ccda4d9b96bd94" placeholder="填写你的技能名称" value="微信小程序">
+									</div>
+									<span><i class="resume_line" for-id="0fb2de17b37fd50c14ccda4d9b96bd94" style="width:128px;border-top-style:solid;border-top-width:8px;"></i></span>
+									<div class="delete resume_delete"></div>
+								</li>
+								<li class="baseDel resume_delete_area resume_graph_item">
+									<div class="skillTitle">
+										<input class="resume_value baseBorder" for-key="0bab43524d96b1b58129f46097ee14b7" placeholder="填写你的技能名称" value="Jquery">
+									</div>
+									<span><i class="resume_line" for-id="0bab43524d96b1b58129f46097ee14b7" style="width:128px;border-top-style:solid;border-top-width:8px;"></i></span>
+									<div class="delete resume_delete"></div>
+								</li>
+							</ul>
+						</div>
+						<!--兴趣爱好-->
+						<div class="hobbyDiv positonDiv resume_add_area resume_icon resume_sort" id="resume_icon">
+							<ul class="editBtn">
+								<li class="btnMove" style="cursor:move;" data-placement="top" title="拖动调整上下位置"></li>
+								<li class="btnPlus resume_add" for-key="resume_icon" data-placement="bottom" title="添加一项"></li>
+								<li class="btnDel resume_hidden" for-id="resume_icon" data-placement="bottom" title="隐藏该模块"></li>
+							</ul>
+							<dl class="clearfix">
+								<dt><span>
+              <div class="resume_lang_hobby">兴趣爱好</div>
+              </span></dt>
+								<dd class="resume_append_area">
+									<div class="hobbyicon baseDel resume_delete_area resume_icon_item">
+										<a class="resume_icon_diy icon wbdfont" for-id="resume_hobby_icon" style="font-size:none"></a> <span class="hobbyTitle">
+                        <input class="resume_value baseBorder" for-key="resume_hobby_icon" placeholder="兴趣爱好" value="上网">
+                        </span>
+										<div class="delete resume_delete"></div>
+									</div>
+									<div class="hobbyicon baseDel resume_delete_area resume_icon_item">
+										<a class="resume_icon_diy icon wbdfont" for-id="9eff2552587f9d5970ebab85696208dc" style="font-size:none"></a> <span class="hobbyTitle">
+                        <input class="resume_value baseBorder" for-key="9eff2552587f9d5970ebab85696208dc" placeholder="兴趣爱好" value="上网">
+                        </span>
+										<div class="delete resume_delete"></div>
+									</div>
+									<div class="hobbyicon baseDel resume_delete_area resume_icon_item">
+										<a class="resume_icon_diy icon wbdfont" for-id="162b8459a4a82554da5e6a12c2f21c8f" style="font-size:none"></a> <span class="hobbyTitle">
+                        <input class="resume_value baseBorder" for-key="162b8459a4a82554da5e6a12c2f21c8f" placeholder="兴趣爱好" value="上网">
+                        </span>
+										<div class="delete resume_delete"></div>
+									</div>
+									<div class="hobbyicon baseDel resume_delete_area resume_icon_item">
+										<a class="resume_icon_diy icon wbdfont" for-id="b3cf5ddaec3cbe67762a2d8d3df17f17" style="font-size:none"></a> <span class="hobbyTitle">
+                        <input class="resume_value baseBorder" for-key="b3cf5ddaec3cbe67762a2d8d3df17f17" placeholder="兴趣爱好" value="上网">
+                        </span>
+										<div class="delete resume_delete"></div>
+									</div>
+								</dd>
+							</dl>
+						</div>
+					</div>
+					<div class="divRight clearfix resume_main" id="foo">
+						<!--姓名、求职意向-->
+						<div class="nameDiv positonDiv" id="resume_name">
+							<h1>
+            <div class="resume_msg baseBorder resume_notice resume_lang_name" notice-key="msg" for-key="name" for-value="html" contenteditable="true">王立冬</div>
+          </h1>
+							<h2>
+            <div class="resume_msg baseBorder resume_notice resume_lang_job" notice-key="job" for-key="job" for-value="html" contenteditable="true">求职目标：前端开发工程师</div>
+          </h2>
+						</div>
+						<div id="foo_sort"></div>
+						<!--教育背景-->
+						<div class="eduDiv baseItem positonDiv resume_item resume_add_area resume_sort resume_notice" notice-key="edu" id="resume_edu" for-key="edu">
+							<ul class="editBtn">
+								<li class="btnMove" style="cursor:move;" data-placement="top" title="拖动调整上下位置"></li>
+								<li class="btnPlus resume_add" for-key="resume_item" data-placement="bottom" title="添加一项"></li>
+								<li class="btnDel resume_hidden" for-id="resume_edu" data-placement="bottom" title="隐藏该模块"></li>
+							</ul>
+							<dl>
+								<dt> <a class="resume_icon_diy icon wbdfont" for-id="edu" style="font-size:none"></a> <span>
+              <div class="resume_lang_edu">教育背景</div>
+              <div class="Border resume_line" for-id="edu" style="width:668px;border-top-style:solid;border-top-width:2px;"></div>
+              </span> </dt>
+								<dd class="resume_append_area">
+									<div class="baseContent baseDel resume_item_items resume_delete_area">
+										<div class="delete resume_delete"></div>
+										<div class="conTitle"> <span class="conTitle_time">
+                  <div class="resume_time baseBorder" contenteditable="true">2003.09-2006.07</div>
+                  </span> <span class="conTitle_company">
+                  <div class="resume_unit baseBorder" contenteditable="true">河北管理干部学院</div>
+                  </span> <span class="conTitle_post">
+                  <div class="resume_job baseBorder" contenteditable="true">电子商务</div>
+                  </span> </div>
+										<div class="baseDel_ resume_delete_area_">
+											<div class="delete_ resume_delete_"></div>
+											<div class="conDisc baseBorder baseDel resume_value" contenteditable="true" data-toggle="tooltip" data-placement="top" title="复制粘贴文字请右键-粘贴为纯文本">
+												<!--<p>主修课程</p>-->
+												<!--<p>主修课程</p>-->
+											</div>
+										</div>
+									</div>
+								</dd>
+							</dl>
+						</div>
+						<!--工作经历-->
+						<div class="workDiv baseItem positonDiv resume_item resume_add_area resume_sort resume_notice" notice-key="work" id="resume_work" for-key="work">
+							<ul class="editBtn">
+								<li class="btnMove" style="cursor:move;" data-placement="top" title="拖动调整上下位置"></li>
+								<li class="btnPlus resume_add" for-key="resume_item" data-placement="bottom" title="添加一项"></li>
+								<li class="btnDel resume_hidden" for-id="resume_work" data-placement="bottom" title="隐藏该模块"></li>
+							</ul>
+							<dl>
+								<dt> <a class="resume_icon_diy icon wbdfont" for-id="work" style="font-size:none"></a> <span>
+              <div class="resume_lang_work">工作经历</div>
+              <div class="Border resume_line" for-id="work" style="width:668px;border-top-style:solid;border-top-width:2px;"></div>
+              </span> </dt>
+								<dd class="resume_append_area">
+									<div class="baseContent baseDel resume_item_items resume_delete_area">
+										<div class="delete resume_delete"></div>
+										<div class="conTitle"> <span class="conTitle_time">
+                  <div class="resume_time baseBorder" contenteditable="true">2015.6-至今</div>
+                  </span> <span class="conTitle_company">
+                  <div class="resume_unit baseBorder" contenteditable="true">首汽约车北京有限公司</div>
+                  </span> <span class="conTitle_post">
+                  <div class="resume_job baseBorder" contenteditable="true">前端开发工程师</div>
+                  </span> </div>
+										<div class="baseDel_ resume_delete_area_">
+											<div class="delete_ resume_delete_"></div>
+											<div class="conDisc baseBorder resume_value" contenteditable="true" data-toggle="tooltip" data-placement="top" title="复制粘贴文字请右键-粘贴为纯文本">
+												<p>1. 负责PC端及移动端前端的开发工作，能够整理相关的技术文档;</p>
+												<p>2. 负责与产品、UI和后端做良好的沟通，对产品能够提供持续的体验优化;</p>
+												<p>3. 参与负责通用组件的开发.</p>
+											</div>
+										</div>
+									</div>
+								</dd>
+							</dl>
+						</div>
+						<!--项目经验-->
+						<div class="outexperDiv baseItem positonDiv resume_item resume_add_area resume_sort resume_notice" notice-key="project" id="resume_project" for-key="project">
+							<ul class="editBtn">
+								<li class="btnMove" style="cursor:move;" data-placement="top" title="拖动调整上下位置"></li>
+								<li class="btnPlus resume_add" for-key="resume_item" data-placement="bottom" title="添加一项"></li>
+								<li class="btnDel resume_hidden" for-id="resume_project" data-placement="bottom" title="隐藏该模块"></li>
+							</ul>
+							<dl>
+								<dt> <a class="resume_icon_diy icon wbdfont" for-id="project" style="font-size:none"></a> <span>
+              <div class="resume_lang_project">项目经验</div>
+              <div class="Border resume_line" for-id="project" style="width:668px;border-top-style:solid;border-top-width:2px;"></div>
+              </span> </dt>
+								<dd class="resume_append_area">
+									<div class="baseContent baseDel resume_item_items resume_delete_area">
+										<div class="delete resume_delete"></div>
+										<div class="conTitle"> <span class="conTitle_time">
+                  <div class="resume_time baseBorder" contenteditable="true">2015.6-至今</div>
+                  </span> <span class="conTitle_company">
+                  <div class="resume_unit baseBorder" contenteditable="true">首汽约车H5</div>
+                  </span> <span class="conTitle_post">
+                  <div class="resume_job baseBorder" contenteditable="true"></div>
+                  </span> </div>
+										<div class="baseDel_ resume_delete_area_">
+											<div class="delete_ resume_delete_"></div>
+											<div class="conDisc baseBorder resume_value" contenteditable="true" data-toggle="tooltip" data-placement="top" title="复制粘贴文字请右键-粘贴为纯文本">
+												<p>地图选址vue组件编写</p>
+												<p></p>
+											</div>
+										</div>
+									</div>
+									<div class="baseContent baseDel resume_item_items resume_delete_area">
+										<div class="delete resume_delete"></div>
+										<div class="conTitle"> <span class="conTitle_time">
+                  <div class="resume_time baseBorder" contenteditable="true">2015.6-至今</div>
+                  </span> <span class="conTitle_company">
+                  <div class="resume_unit baseBorder" contenteditable="true">微信小程序</div>
+                  </span> <span class="conTitle_post">
+                  <div class="resume_job baseBorder" contenteditable="true"></div>
+                  </span> </div>
+										<div class="baseDel_ resume_delete_area_">
+											<div class="delete_ resume_delete_"></div>
+											<div class="conDisc baseBorder resume_value" contenteditable="true" data-toggle="tooltip" data-placement="top" title="复制粘贴文字请右键-粘贴为纯文本">
+												<p>微信小程序页面组件拆分和个人中心功能实现</p>
+											</div>
+										</div>
+									</div>
+									<div class="baseContent baseDel resume_item_items resume_delete_area">
+										<div class="delete resume_delete"></div>
+										<div class="conTitle"> <span class="conTitle_time">
+                  <div class="resume_time baseBorder" contenteditable="true">2015.6-至今</div>
+                  </span> <span class="conTitle_company">
+                  <div class="resume_unit baseBorder" contenteditable="true">H5活动</div>
+                  </span> <span class="conTitle_post">
+                  <div class="resume_job baseBorder" contenteditable="true"></div>
+                  </span> </div>
+										<div class="baseDel_ resume_delete_area_">
+											<div class="delete_ resume_delete_"></div>
+											<div class="conDisc baseBorder resume_value" contenteditable="true" data-toggle="tooltip" data-placement="top" title="复制粘贴文字请右键-粘贴为纯文本">
+												<p>市场推广活动制作。</p>
+											</div>
+										</div>
+									</div>
+								</dd>
+							</dl>
+						</div>
+						<!--自我评价-->
+						<div class="selfDiv baseItem positonDiv resume_item resume_sort resume_notice" notice-key="self" id="resume_self" for-key="self">
+							<ul class="editBtn">
+								<li class="btnMove" style="cursor:move;" data-placement="top" title="拖动调整上下位置"></li>
+								<li class="btnPlus" data-placement="bottom" title="添加一项" style="display:none;"></li>
+								<li class="btnDel resume_hidden" for-id="resume_self" data-placement="bottom" title="隐藏该模块"></li>
+							</ul>
+							<dl>
+								<dt> <a class="resume_icon_diy icon wbdfont" for-id="self" style="font-size:none"></a> 
+									<span>
+						              <div class="resume_lang_self">自我评价</div>
+						              <div class="Border resume_line" for-id="self" style="width:668px;border-top-style:solid;border-top-width:2px;"></div>
+						            </span>
+								</dt>
+								<dd>
+									<div class="baseContent">
+										<div class="conDisc baseBorder resume_lang_self_value resume_value" contenteditable="true" data-toggle="tooltip" data-placement="top" title="复制粘贴文字请右键-粘贴为纯文本">
+											<p>本人做事稳重，对待工作认真，责任心较强，待人真诚，善于沟通，时刻保持学习，积极拥抱变化。喜</p>
+											<p>欢前端开发，具备一定的分析、设计、开发能力，拥有较强的学习能力与团队精神，能够很快的适应工</p>
+											<p>作环境。</p>
+										</div>
+									</div>
+								</dd>
+							</dl>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</body>
-
 </html>
