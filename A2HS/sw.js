@@ -1,6 +1,6 @@
 self.addEventListener('install', function(e) {
   e.waitUntil(
-    caches.open('video-store').then(function(cache) {
+    caches.open('demo-store').then(function(cache) {
       return cache.addAll([
         '/A2HS/',
         '/A2HS/index.html',
