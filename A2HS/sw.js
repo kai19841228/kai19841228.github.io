@@ -1,7 +1,6 @@
 self.addEventListener('install', function(e) {
   e.waitUntil(
     caches.open('demo-store').then(function(cache) {
-      console.log(cache)
       return cache.addAll([
         '/A2HS/',
         '/A2HS/index.html',
