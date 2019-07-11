@@ -11,7 +11,7 @@ setInterval(function() {
   imgElem.src = 'images/' + randomChoice + '.jpg';
 }, 2000)
 
-// Register service worker to control making site work offline
+// 注册服务以控制使网站脱机工作
 
 if('serviceWorker' in navigator) {
   navigator.serviceWorker
@@ -19,7 +19,7 @@ if('serviceWorker' in navigator) {
            .then(function() { console.log('Service Worker Registered'); });
 }
 
-// Code to handle install prompt on desktop
+// 处理桌面上安装提示的代码
 
 let deferredPrompt;
 const addBtn = document.querySelector('.add-button');
