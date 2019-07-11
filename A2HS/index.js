@@ -98,3 +98,69 @@ window.addEventListener('load', function () {
     }
   });
 });
+
+if (!window.indexedDB) {
+  window.alert("Your browser doesn't support a stable version of IndexedDB. Such and such feature will not be available.")
+} else {
+  var db;
+  var request = indexedDB.open("MyTestDatabase");
+  const customerData = [
+    { ssn: "444-44-4444", name: "Bill", age: 35, email: "bill@company.com" },
+    { ssn: "555-55-5555", name: "Donna", age: 32, email: "donna@home.org" }
+  ];
+  request.onerror = function(event) {
+    alert("Why didn't you allow my web app to use IndexedDB?!");
+  };
+  request.onsuccess = function(event) {
+    db = event.target.result;
+  };
+  request.onupgradeneeded = function(event) {
+    var db = event.target.result;
+
+    // 建立一个对象仓库来存储我们客户的相关信息，我们选择 ssn 作为键路径（key path）
+    // 因为 ssn 可以保证是不重复的，用数据结构的ssn为主键。
+    var objectStore = db.createObjectStore("customers", { keyPath: "ssn" });
+
+    // autoIncrement : true,自增的一个数字主键
+    // var objectStore = db.createObjectStore("customers", { autoIncrement : true });
+
+    // 建立一个索引来通过姓名来搜索客户。名字可能会重复，所以我们不能使用 unique 索引
+    objectStore.createIndex("name", "name", { unique: false });
+
+    // 使用邮箱建立索引，我们向确保客户的邮箱不会重复，所以我们使用 unique 索引
+    objectStore.createIndex("email", "email", { unique: true });
+
+    // 使用事务的 oncomplete 事件确保在插入数据前对象仓库已经创建完毕
+    objectStore.transaction.oncomplete = function(event) {
+      // 将数据保存到新创建的对象仓库
+      var customerObjectStore = db.transaction("customers", "readwrite").objectStore("customers");
+      customerData.forEach(function(customer) {
+        customerObjectStore.add(customer);
+      });
+    };
+  };
+
+  // 读取数据库数据
+  var transaction = db.transaction(["customers"]);
+  var objectStore = transaction.objectStore("customers");
+  var request = objectStore.get("444-44-4444");
+  request.onerror = function(event) {
+    // 错误处理!
+  };
+  request.onsuccess = function(event) {
+    // 对 request.result 做些操作！
+    console.log(event)
+    alert("Name for SSN 444-44-4444 is " + request.result);
+  };
+  // 简写方式
+  // db.transaction("customers").objectStore("customers").get("444-44-4444").onsuccess = function(event) {
+  //   alert("Name for SSN 444-44-4444 is " + event.target);
+  // };
+
+  // 使用索引查找，如果没有索引你将得到 DOMException
+  var index = db.transaction("customers").objectStore("customers").index("name");
+  index.get("Donna").onsuccess = function(event) {
+    // alert("Donna's SSN is " + event.target.result.ssn);
+    console.log(event)
+  };
+}
