@@ -11,5 +11,10 @@
   ],
   "name": "Awesome fox pictures",
   "short_name": "Foxes",
-  "start_url": "/A2HS/index.html"
+  "start_url": "/A2HS/index.html",
+  "permissions": {
+    "desktop-notification": {
+      "description": "Needed for creating system notifications."
+    }
+  }
 }

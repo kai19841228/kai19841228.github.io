@@ -50,6 +50,7 @@ window.addEventListener('beforeinstallprompt', (e) => {
   });
 });
 
+// 通常你应在你的应用首次初始化的时候请求显示通知的权限
 window.addEventListener('load', function () {
   Notification.requestPermission(function (status) {
     // 这将使我们能在 Chrome/Safari 中使用 Notification.permission
@@ -58,3 +59,8 @@ window.addEventListener('load', function () {
     }
   });
 });
+
+var n = new Notification("Hi!");
+n.onshow = function () { 
+  setTimeout(n.close.bind(n), 5000); 
+}
