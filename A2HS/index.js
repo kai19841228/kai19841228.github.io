@@ -16,7 +16,7 @@ setInterval(function() {
 if('serviceWorker' in navigator) {
   navigator.serviceWorker
            .register('/A2HS/sw.js')
-           .then(function() { console.log('Service Worker Registered'); });
+           .then(function() { console.log('Service Worker 注册成功'); });
 }
 
 // 处理桌面上安装提示的代码
