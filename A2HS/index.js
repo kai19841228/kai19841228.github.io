@@ -49,3 +49,12 @@ window.addEventListener('beforeinstallprompt', (e) => {
       });
   });
 });
+
+window.addEventListener('load', function () {
+  Notification.requestPermission(function (status) {
+    // 这将使我们能在 Chrome/Safari 中使用 Notification.permission
+    if (Notification.permission !== status) {
+      Notification.permission = status;
+    }
+  });
+});
