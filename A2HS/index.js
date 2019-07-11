@@ -158,9 +158,11 @@ if (!window.indexedDB) {
   // };
 
   // 使用索引查找，如果没有索引你将得到 DOMException
-  var index = db.transaction("customers").objectStore("customers").index("name");
-  index.get("Donna").onsuccess = function(event) {
-    // alert("Donna's SSN is " + event.target.result.ssn);
-    console.log(event)
-  };
+  setTimeout(function() {
+    var index = db.transaction("customers").objectStore("customers").index("name");
+    index.get("Donna").onsuccess = function(event) {
+      // alert("Donna's SSN is " + event.target.result.ssn);
+      console.log(event)
+    };
+  },3000)
 }
