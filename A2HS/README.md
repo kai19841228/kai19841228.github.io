@@ -15,3 +15,5 @@ https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Add_to_home_sc
 index.js  判断是否支持 serviceWorker 支持注册服务，以控制脱机时工作
 
 sw.js 缓存对象，把脱机要用到的资源缓存下来，脱机也能正常展示。
+
+cache 缓存 https://developer.mozilla.org/zh-CN/docs/Web/API/CacheStorage
