@@ -41,7 +41,7 @@ self.addEventListener('install', function(e) {
     event.waitUntil( // 延迟activate事件直到
       caches.keys().then(function(keys){
         return Promise.all(keys.map(function(key, i){ // 清除旧版本缓存
-          if(key !== CACHE_VERSION){
+          if(key !== 'demo-store'){
             return caches.delete(keys[i]);
           }
         }))
