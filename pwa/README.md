@@ -1,5 +1,6 @@
 # peavue
 
+sw-precache-webpack-plugin 插件
 一个pwa service-worker应用实例，要放在根目录下。否则文件目录对不上。
 
 > A Vue.js project
