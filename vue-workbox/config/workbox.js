@@ -1,6 +1,6 @@
 const path = require('path');
-const dist = './dist';
-console.log(dist)
+const dist = './vue-workbox/dist';
+
 module.exports = {
     globDirectory: dist,
     globPatterns: ['**/*.{html,js,css}'],
