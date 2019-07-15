@@ -1,5 +1,5 @@
 const path = require('path');
-const dist = './vue-workbox/dist';
+const dist = './dist';
 
 module.exports = {
     globDirectory: dist,
