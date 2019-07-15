@@ -4,7 +4,7 @@ const utils = require('./utils')
 const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
 var SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
-const PUBLIC_PATH = 'https://www.my-project-name.com/'
+const PUBLIC_PATH = 'https://kai19841228.github.io/pwa/ws/'
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
