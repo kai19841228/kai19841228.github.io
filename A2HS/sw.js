@@ -44,6 +44,7 @@ self.addEventListener('fetch', function (e) {
                 return response;
             });
         });
+		console.log("需要缓存")
     }
     /* ******************************* */
 
