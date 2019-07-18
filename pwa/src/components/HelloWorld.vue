@@ -84,12 +84,21 @@
 </template>
 
 <script>
+import ajaxApi from '@/js/axiosConfig'
 export default {
   name: 'HelloWorld',
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
     }
+  },
+  mounted: function () {
+    ajaxApi.getParam('/gw-passenger-wap/zhuanche-passenger/api/v1/common/group/list?type=1&cid=44&nId=&sId=2', {}).then(function (data) {
+      console.log(data.data)
+    })
+    ajaxApi.PostParam('/gw-passenger-wap/zhuanche-passenger/passenger/charge/getServiceType', {cid: 44}).then(function (data) {
+      console.log(data.data)
+    })
   }
 }
 </script>
