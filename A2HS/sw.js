@@ -50,7 +50,7 @@ self.addEventListener('install', function(e) {
   });
   
   // 在index。html里注册同步，断网后重连会调用 e.tag 为 sample_sync执行操作。
-  self.addEventListener('sync', function (e) {
+  self.addEventListener('https://gw-passenger-wap.01zhuanche.com/gw-passenger-wap/zhuanche-passenger/passenger/charge/getServiceType', function (e) {
     console.log(`service worker需要进行后台同步，tag: ${e.tag}`);
     var init = {
         method: 'GET'
