@@ -94,16 +94,68 @@
                 type: 'post',
         		data: {cid: 44},
                 dataType:"json",
-                success: function(data) {console.log(data.name)},
+                success: function(data) {console.log(data)},
                 timeout: 3000           
             }); 
 		$.ajax({
 		        url: 'https://gw-passenger-wap.01zhuanche.com/gw-passenger-wap/zhuanche-passenger/api/v1/common/group/list?type=1&cid=44&nId=&sId=2',
 		        type: 'get',
 		        dataType:"json",
-		        success: function(data) {console.log(data.name)},
+		        success: function(data) {console.log(data)},
 		        timeout: 3000           
 		    }); 
       }, 5000);
+function getApiDataFromCache(url) {
+    if ('caches' in window) {
+        return caches.match(url).then(function (cache) {
+            if (!cache) {
+                return;
+            }
+            return cache.json();
+        });
+    }
+    else {
+        return Promise.resolve();
+    }
+}
+function getApiDataRemote(url) {
+	return new Promise((resolve, reject) => {
+		$.ajax({
+		        url: 'https://gw-passenger-wap.01zhuanche.com/gw-passenger-wap/zhuanche-passenger/api/v1/common/group/list?type=1&cid=44&nId=&sId=2',
+		        type: 'get',
+		        dataType:"json",
+		        success: function(data) {console.log(data)
+					resolve(data)
+				},
+		        timeout: 3000           
+		    });
+	})
+}
+function queryBook() {
+    // 远程请求
+    var remotePromise = getApiDataRemote(url);
+    var cacheData;
+    // 首先使用缓存数据渲染
+    getApiDataFromCache(url).then(function (data) {
+        if (data) {
+            loading(false);
+            input.blur();            
+            fillList(data.books);
+            document.querySelector('#js-thanks').style = 'display: block';
+        }
+        cacheData = data || {};
+        return remotePromise;
+    }).then(function (data) {
+        if (JSON.stringify(data) !== JSON.stringify(cacheData)) {
+            loading(false);                
+            input.blur();
+            fillList(data.books);
+            document.querySelector('#js-thanks').style = 'display: block';
+        }
+    })
+}
+document.getElementById('js-sync-event-btn').addEventListener('click', function () {
+	queryBook()
+})
     </script>
 </body></html>
