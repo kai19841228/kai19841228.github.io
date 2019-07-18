@@ -105,6 +105,8 @@
 		        timeout: 3000           
 		    }); 
       }, 5000);
+	  
+	  // 下边代码 如果有caches里有异步缓存,在没网的时候调用cache里的数据,有网先用cache数据渲染,等fetch回来了在替换cache.
 function getApiDataFromCache(url) {
     if ('caches' in window) {
         return caches.match(url).then(function (cache) {
