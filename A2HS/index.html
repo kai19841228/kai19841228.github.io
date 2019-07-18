@@ -137,20 +137,14 @@ function queryBook(url) {
     var cacheData;
     // 首先使用缓存数据渲染
     getApiDataFromCache(url).then(function (data) {
-        if (data) {
-            loading(false);
-            input.blur();            
-            fillList(data.books);
-            document.querySelector('#js-thanks').style = 'display: block';
+        if (data) {           
+            console.log(data);
         }
         cacheData = data || {};
         return remotePromise;
     }).then(function (data) {
         if (JSON.stringify(data) !== JSON.stringify(cacheData)) {
-            loading(false);                
-            input.blur();
-            fillList(data.books);
-            document.querySelector('#js-thanks').style = 'display: block';
+            console.log(data);
         }
     })
 }
