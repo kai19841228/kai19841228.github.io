@@ -68,17 +68,26 @@
     <button class="add-button">Add to home screen</button>
     <button class="button">Notify me!</button>
     <script>
-      setTimeout(() => {
-		  // 在主页添加后台同步,断网后重连在次调用,在sw里有处理事件
+setTimeout(() => {
+		  // 在主页添加后台同步,断网后重连在次调用,在sw里有处理事件, sw要先初始化.
+	if ('serviceWorker' in navigator && 'SyncManager' in window) {
         navigator.serviceWorker.ready.then(function (registration) {
         var tag = "sample_sync";
             registration.sync.register(tag).then(function () {
                 console.log('后台同步已触发', tag);
+				$.ajax({
+				        url: 'https://gw-passenger-wap.01zhuanche.com/gw-passenger-wap/zhuanche-passenger/api/v1/common/group/list?type=1&cid=44&nId=&sId=2',
+				        type: 'get',
+				        dataType:"json",
+				        success: function(data) {console.log(data.name)},
+				        timeout: 3000           
+				    }); 
             }).catch(function (err) {
                 console.log('后台同步触发失败', err);
             });
         });
-      }, 3000);
+	}
+}, 3000);
       setTimeout(() => {
         $.ajax({
                 url: 'https://gw-passenger-wap.01zhuanche.com/gw-passenger-wap/zhuanche-passenger/passenger/charge/getServiceType',
@@ -88,13 +97,6 @@
                 success: function(data) {console.log(data.name)},
                 timeout: 3000           
             }); 
-		$.ajax({
-		        url: 'https://gw-passenger-wap.01zhuanche.com/gw-passenger-wap/zhuanche-passenger/api/v1/common/group/list?type=1&cid=44&nId=&sId=2',
-		        type: 'get',
-		        dataType:"json",
-		        success: function(data) {console.log(data.name)},
-		        timeout: 3000           
-		    }); 
       }, 5000);
     </script>
 </body></html>
