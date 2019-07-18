@@ -69,6 +69,7 @@
     <button class="button">Notify me!</button>
     <script>
       setTimeout(() => {
+		  // 在主页添加后台同步,断网后重连在次调用,在sw里有处理事件
         navigator.serviceWorker.ready.then(function (registration) {
         var tag = "sample_sync";
             registration.sync.register(tag).then(function () {
