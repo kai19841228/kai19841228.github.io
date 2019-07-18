@@ -1,7 +1,7 @@
 const Qs = require('qs')
 const axios = require('axios')
 const axiosConfig = {
-  prefixUrl: 'https://gw-passenger-wap.01zhuanche.com',
+  prefixUrl: 'https://news.163.com',
   setUrl (url) {
     return axiosConfig.prefixUrl + url
   },

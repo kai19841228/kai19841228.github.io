@@ -97,13 +97,13 @@
         //         success: function(data) {console.log(data)},
         //         timeout: 3000           
         //     }); 
-		// $.ajax({
-		//         url: 'https://gw-passenger-wap.01zhuanche.com/gw-passenger-wap/zhuanche-passenger/api/v1/common/group/list?type=1&cid=44&nId=&sId=2',
-		//         type: 'get',
-		//         dataType:"json",
-		//         success: function(data) {console.log(data)},
-		//         timeout: 3000           
-		//     }); 
+		$.ajax({
+		        url: 'https://www.ele.me/restapi/shopping/v1/cities',
+		        type: 'get',
+		        dataType:"json",
+		        success: function(data) {console.log(data)},
+		        timeout: 3000           
+		    }); 
       }, 5000);
 	  
 	  // 下边代码 如果有caches里有异步缓存,在没网的时候调用cache里的数据,有网先用cache数据渲染,等fetch回来了在替换cache.
