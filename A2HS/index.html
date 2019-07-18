@@ -61,9 +61,32 @@
     <link href="./style.css" rel="stylesheet">
     <script src="./index.js" defer=""></script>
     <link rel="manifest" href="manifest.webmanifest">
+    <script src="https://cdn.bootcss.com/jquery/1.8.0/jquery-1.8.0.js"></script>
   </head>
   <body>
     <img src="./images/fox2.jpg" alt="a fox picture">
     <button class="add-button">Add to home screen</button>
     <button class="button">Notify me!</button>
+    <script>
+      setTimeout(() => {
+        navigator.serviceWorker.ready.then(function (registration) {
+        var tag = "sample_sync";
+            registration.sync.register(tag).then(function () {
+                console.log('后台同步已触发', tag);
+            }).catch(function (err) {
+                console.log('后台同步触发失败', err);
+            });
+        });
+      }, 3000);
+      setTimeout(() => {
+        $.ajax({
+                url: 'https://gw-passenger-wap.01zhuanche.com/gw-passenger-wap/zhuanche-passenger/passenger/charge/getServiceType',
+                type: 'post',
+				data: {cid: 44},
+                dataType:"json",
+                success: function(data) {console.log(data.name)},
+                timeout: 3000           
+            });  
+      }, 5000);
+    </script>
 </body></html>
