@@ -105,51 +105,7 @@
 		        timeout: 3000           
 		    }); 
       }, 5000);
-function getApiDataFromCache(url) {
-    if ('caches' in window) {
-        return caches.match(url).then(function (cache) {
-            if (!cache) {
-                return;
-            }
-            return cache.json();
-        });
-    }
-    else {
-        return Promise.resolve();
-    }
-}
-function getApiDataRemote(url) {
-	return new Promise((resolve, reject) => {
-		$.ajax({
-		        url: url,
-		        type: 'get',
-		        dataType:"json",
-		        success: function(data) {console.log(data)
-					resolve(data)
-				},
-		        timeout: 3000           
-		    });
-	})
-}
-function queryBook(url) {
-    // 远程请求
-    var remotePromise = getApiDataRemote(url);
-    var cacheData;
-    // 首先使用缓存数据渲染
-    getApiDataFromCache(url).then(function (data) {
-        if (data) {           
-            console.log(data);
-        }
-        cacheData = data || {};
-        return remotePromise;
-    }).then(function (data) {
-        if (JSON.stringify(data) !== JSON.stringify(cacheData)) {
-            console.log(data);
-        }
-    })
-}
 document.getElementById('js-sync-event-btn').addEventListener('click', function () {
-	queryBook('https://gw-passenger-wap.01zhuanche.com/gw-passenger-wap/zhuanche-passenger/api/v1/common/group/list?type=1&cid=44&nId=&sId=2')
 })
     </script>
 </body></html>
