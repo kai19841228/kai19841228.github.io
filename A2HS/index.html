@@ -66,25 +66,25 @@
   <body>
     <img src="./images/fox2.jpg" alt="a fox picture">
     <button class="add-button">Add to home screen</button>
-    <button class="button">Notify me!</button>
+    <button id="js-sync-event-btn">断网后 重连同步</button>
+	<input id="js-search-input" value="789" />
     <script>
 setTimeout(() => {
 		  // 在主页添加后台同步,断网后重连在次调用,在sw里有处理事件, sw要先初始化.
-	if ('serviceWorker' in navigator && 'SyncManager' in window) {
+	if ('serviceWorker' in navigator && 'SyncManager' in window && false) {
         navigator.serviceWorker.ready.then(function (registration) {
-        var tag = "sample_sync";
-            registration.sync.register(tag).then(function () {
-                console.log('后台同步已触发', tag);
-				$.ajax({
-				        url: 'https://gw-passenger-wap.01zhuanche.com/gw-passenger-wap/zhuanche-passenger/api/v1/common/group/list?type=1&cid=44&nId=&sId=2',
-				        type: 'get',
-				        dataType:"json",
-				        success: function(data) {console.log(data.name)},
-				        timeout: 3000           
-				    }); 
-            }).catch(function (err) {
-                console.log('后台同步触发失败', err);
-            });
+			document.getElementById('js-sync-event-btn').addEventListener('click', function () {
+				registration.sync.register(tag).then(function () {
+					console.log('后台同步已触发', tag);
+
+					// 使用postMessage进行数据通信
+					var inputValue = document.querySelector('#js-search-input').value;
+					var msg = JSON.stringify({type: 'bgsync', msg: {name: inputValue}});
+					navigator.serviceWorker.controller.postMessage(msg);
+				}).catch(function (err) {
+					console.log('后台同步触发失败', err);
+				});
+			});
         });
 	}
 }, 3000);
@@ -97,6 +97,13 @@ setTimeout(() => {
                 success: function(data) {console.log(data.name)},
                 timeout: 3000           
             }); 
+		$.ajax({
+		        url: 'https://gw-passenger-wap.01zhuanche.com/gw-passenger-wap/zhuanche-passenger/api/v1/common/group/list?type=1&cid=44&nId=&sId=2',
+		        type: 'get',
+		        dataType:"json",
+		        success: function(data) {console.log(data.name)},
+		        timeout: 3000           
+		    }); 
       }, 5000);
     </script>
 </body></html>

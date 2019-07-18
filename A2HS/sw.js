@@ -20,14 +20,46 @@ self.addEventListener('install', function(e) {
  });
  
 //  fetch 用来监听用户的网络请求，并给出回应
- self.addEventListener('fetch', function(e) {
-   console.log(e.request.url);
-   e.respondWith(
-     caches.match(e.request).then(function(response) {
-       return response || fetch(e.request);
-     })
-   );
- });
+var apiCacheName = 'api-0-1-1';
+self.addEventListener('fetch', function (e) {
+    // 需要缓存的xhr请求
+    var cacheRequestUrls = [
+        'https://gw-passenger-wap.01zhuanche.com/gw-passenger-wap/zhuanche-passenger/passenger/charge/getServiceType'
+    ];
+    console.log('现在正在请求：' + e.request.url);
+
+    // 判断当前请求是否需要缓存
+    var needCache = cacheRequestUrls.some(function (url) {
+        return e.request.url.indexOf(url) > -1;
+    });
+
+    /**** 这里是对XHR数据缓存的相关操作 ****/
+    if (needCache) {
+        // 需要缓存
+        // 使用fetch请求数据，并将请求结果clone一份缓存到cache
+        // 此部分缓存后在browser中使用全局变量caches获取
+        caches.open(apiCacheName).then(function (cache) {
+            return fetch(e.request).then(function (response) {
+                cache.put(e.request.url, response.clone());
+                return response;
+            });
+        });
+    }
+    /* ******************************* */
+
+    else {
+        // 非api请求，直接查询cache
+        // 如果有cache则直接返回，否则通过fetch请求
+        e.respondWith(
+            caches.match(e.request).then(function (cache) {
+                return cache || fetch(e.request);
+            }).catch(function (err) {
+                console.log(err);
+                return fetch(e.request);
+            })
+        );
+    }
+});
 
 //  你的 Service worker 总会有要更新的时候。在那时，你需要按照一下步骤来更新：
 // 1、更新你 service worker 的 JavaScript 文件。
