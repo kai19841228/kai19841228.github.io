@@ -24,8 +24,7 @@ var apiCacheName = 'api-0-1-1';
 self.addEventListener('fetch', function (e) {
     // 需要缓存的xhr请求
     var cacheRequestUrls = [
-        '/gw-passenger-wap/zhuanche-passenger/api/v1/common/group/list',
-		'/gw-passenger-wap/zhuanche-passenger/passenger/charge/getServiceType'
+        '/validateAndCacheCardInfo.json'
     ];
     console.log('现在正在请求：' + e.request.url);
 
