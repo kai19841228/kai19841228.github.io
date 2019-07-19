@@ -24,7 +24,7 @@ var apiCacheName = 'api-0-1-1';
 self.addEventListener('fetch', function (e) {
     // 需要缓存的xhr请求
     var cacheRequestUrls = [
-        '/validateAndCacheCardInfo.json'
+        '/journalismApi'
     ];
     console.log('现在正在请求：' + e.request.url);
 
