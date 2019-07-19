@@ -1,10 +1,10 @@
 // 1、开启一个缓存
 // 2、缓存我们的文件
 // 3、确定所有的资源是否要被缓存
-
+var CacheName = 'demo-store'
 self.addEventListener('install', function(e) {
   e.waitUntil(
-    caches.open('demo-store').then(function(cache) {
+    caches.open(CacheName).then(function(cache) {
       return cache.addAll([
         '/A2HS/',
         '/A2HS/index.html',
@@ -74,7 +74,7 @@ self.addEventListener('fetch', function (e) {
     event.waitUntil( // 延迟activate事件直到
       caches.keys().then(function(keys){
         return Promise.all(keys.map(function(key, i){ // 清除旧版本缓存
-          if(key !== 'demo-store'){
+          if(key !== CacheName && key !== apiCacheName){
             return caches.delete(keys[i]);
           }
         }))
