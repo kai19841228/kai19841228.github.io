@@ -12,10 +12,11 @@ setInterval(function() {
 }, 2000)
 
 // 注册服务以控制使网站脱机工作
+// 如果sw不更新，就在sw后追加一个版本
 
 if('serviceWorker' in navigator) {
   navigator.serviceWorker
-           .register('/A2HS/sw.js?v=2')
+           .register('/A2HS/sw.js?v=3')
            .then(function() { console.log('Service Worker 注册成功'); });
 }
 
