@@ -19,12 +19,12 @@ self.addEventListener('install', function(e) {
     // 清理旧版本的一种方法。把老的CacheName删掉。要多刷新几次才能生效
     caches.keys().then(function (cacheList) {
       return Promise.all(
-          cacheList.map(function (cacheName) {
-              if (cacheName !== 'two') {
-                  console.log('清理',cacheName);
-                  return caches.delete(cacheName);
-              }
-          })
+        cacheList.map(function (cacheName) {
+            if (cacheName !== 'two') {
+                console.log('清理',cacheName);
+                return caches.delete(cacheName);
+            }
+        })
       )
     }),
     // 马上更新新的sw
@@ -86,12 +86,15 @@ self.addEventListener('fetch', function (e) {
   // 监听worker的activate事件
   console.log('activate')
     event.waitUntil( // 延迟activate事件直到
-      caches.keys().then(function(keys){
-        return Promise.all(keys.map(function(key, i){ // 清除旧版本缓存
-          if(key !== CacheName && key !== apiCacheName){
-            return caches.delete(keys[i]);
-          }
-        }))
+      caches.keys().then(function (cacheList) {
+        return Promise.all(
+          cacheList.map(function (cacheName) {
+              if (cacheName !== CacheName && cacheName !== apiCacheName) {
+                  console.log('清理',cacheName);
+                  return caches.delete(cacheName);
+              }
+          })
+        )
       })
     )
   });
