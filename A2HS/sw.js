@@ -72,6 +72,7 @@ self.addEventListener('fetch', function (e) {
 
  self.addEventListener('activate', function (event) { 
   // 监听worker的activate事件
+  console.log('activate')
     event.waitUntil( // 延迟activate事件直到
       caches.keys().then(function(keys){
         return Promise.all(keys.map(function(key, i){ // 清除旧版本缓存
