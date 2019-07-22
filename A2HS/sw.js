@@ -2,6 +2,7 @@
 // 2、缓存我们的文件
 // 3、确定所有的资源是否要被缓存
 var CacheName = 'demo-store'
+var apiCacheName = 'api-0-1-1';
 self.addEventListener('install', function(e) {
   e.waitUntil(
     caches.open(CacheName).then(function(cache) {
@@ -20,7 +21,7 @@ self.addEventListener('install', function(e) {
     caches.keys().then(function (cacheList) {
       return Promise.all(
         cacheList.map(function (cacheName) {
-            if (cacheName !== 'two') {
+            if (cacheName !== CacheName && cacheName !== apiCacheName) {
                 console.log('清理',cacheName);
                 return caches.delete(cacheName);
             }
@@ -33,7 +34,6 @@ self.addEventListener('install', function(e) {
  })
  
 //  fetch 用来监听用户的网络请求，并给出回应
-var apiCacheName = 'api-0-1-1';
 self.addEventListener('fetch', function (e) {
     // 需要缓存的xhr请求
     var cacheRequestUrls = [
