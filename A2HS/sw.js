@@ -10,6 +10,7 @@ self.addEventListener('install', function(e) {
         '/A2HS/index.html',
         '/A2HS/index.js',
         '/A2HS/style.css',
+        '/A2HS/images/favicon.jpg',
         '/A2HS/images/fox1.jpg',
         '/A2HS/images/fox2.jpg',
         '/A2HS/images/fox3.jpg',
