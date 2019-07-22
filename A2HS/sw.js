@@ -15,9 +15,22 @@ self.addEventListener('install', function(e) {
         '/A2HS/images/fox3.jpg',
         '/A2HS/images/fox4.jpg'
       ]);
-    })
-  );
- });
+    }),
+    // 清理旧版本的一种方法。把老的CacheName删掉。要多刷新几次才能生效
+    caches.keys().then(function (cacheList) {
+      return Promise.all(
+          cacheList.map(function (cacheName) {
+              if (cacheName !== 'two') {
+                  console.log('清理',cacheName);
+                  return caches.delete(cacheName);
+              }
+          })
+      )
+    }),
+    // 马上更新新的sw
+    self.skipWaiting()
+  )
+ })
  
 //  fetch 用来监听用户的网络请求，并给出回应
 var apiCacheName = 'api-0-1-1';
