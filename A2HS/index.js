@@ -17,8 +17,28 @@ setInterval(function() {
 if('serviceWorker' in navigator) {
   navigator.serviceWorker
            .register('/A2HS/sw.js?v=3')
-           .then(function() { console.log('Service Worker 注册成功'); });
+           .then(function(reg) {
+             console.log('Service Worker 注册成功'); 
+             console.log(reg.waiting)
+          });
 }
+//当发现控制自己的 SW 已经发生了变化，那就刷新自己，让新的 SW 控制，就一定能保证数据的一致性。
+// 避免页面无限的自我刷新。为了弥补这一点，需要添加一个 flag 判断一下
+var refreshing = false
+navigator.serviceWorker.addEventListener('controllerchange', () => {
+  if (refreshing) {
+    return
+  }
+  refreshing = true;
+  window.location.reload();
+});
+
+function emitUpdate() {
+  var event = document.createEvent('Event');
+  event.initEvent('sw.update', true, true);
+  window.dispatchEvent(event);
+}
+
 
 // 处理桌面上安装提示的代码
 
