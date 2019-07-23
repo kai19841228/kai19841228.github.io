@@ -1,3 +1,21 @@
+class SimpleEvent {
+  constructor() {
+      this.listenrs = {};
+  }
+
+  once(tag, cb) {
+      this.listenrs[tag] || (this.listenrs[tag] = []);
+      this.listenrs[tag].push(cb);
+  }
+
+  trigger(tag, data) {
+      this.listenrs[tag] = this.listenrs[tag] || [];
+      let listenr;
+      while (listenr = this.listenrs[tag].shift()) {
+          listenr(data)
+      }
+  }
+}
 // 1、开启一个缓存
 // 2、缓存我们的文件
 // 3、确定所有的资源是否要被缓存
@@ -100,18 +118,28 @@ self.addEventListener('fetch', function (e) {
   });
   
   // 在index。html里注册同步，断网后重连会调用 e.tag 为 sample_sync执行操作。
-  self.addEventListener('sync', function (e) {
-    console.log(`service worker需要进行后台同步，tag: ${e.tag}`);
-    var init = {
-        method: 'GET'
-    };
-    if (e.tag === 'sample_sync') {
-        var request = new Request(`https://gw-passenger-wap.01zhuanche.com/gw-passenger-wap/zhuanche-passenger/api/v1/common/group/list?type=1&cid=44&nId=&sId=2`, init);
-        e.waitUntil(
-            fetch(request).then(function (response) {
-                response.json().then(console.log.bind(console));
-                return response;
-            })
-        );
-    }
+self.addEventListener('sync', function (e) {
+  console.log(`service worker需要进行后台同步，tag: ${e.tag}`);
+  var init = {
+      method: 'GET'
+  };
+  if (e.tag === 'sample_sync') {
+      var request = new Request(`https://gw-passenger-wap.01zhuanche.com/gw-passenger-wap/zhuanche-passenger/api/v1/common/group/list?type=1&cid=44&nId=&sId=2`, init);
+      e.waitUntil(
+          fetch(request).then(function (response) {
+              response.json().then(console.log.bind(console));
+              return response;
+          })
+      );
+  }
+});
+
+const simpleEvent = new SimpleEvent();
+self.addEventListener('message', function (e) {
+    var data = JSON.parse(e.data);
+    var type = data.type;
+    var msg = data.msg;
+    console.log(`service worker收到消息 type：${type}；msg：${JSON.stringify(msg)}`);
+
+    simpleEvent.trigger(type, msg);
 });

@@ -69,25 +69,23 @@
     <button id="js-sync-event-btn" style="background: #333;color: #FFF;">异步请求</button>
 	<!-- <input id="js-search-input" value="789" /> -->
     <script>
-// setTimeout(() => {
-// 		  // 在主页添加后台同步,断网后重连在次调用,在sw里有处理事件, sw要先初始化.
-// 	if ('serviceWorker' in navigator && 'SyncManager' in window) {
-//         navigator.serviceWorker.ready.then(function (registration) {
-// 			document.getElementById('js-sync-event-btn').addEventListener('click', function () {
-// 				registration.sync.register(tag).then(function () {
-// 					console.log('后台同步已触发', tag);
-// 
-// 					// 使用postMessage进行数据通信
-// 					var inputValue = document.querySelector('#js-search-input').value;
-// 					var msg = JSON.stringify({type: 'bgsync', msg: {name: inputValue}});
-// 					navigator.serviceWorker.controller.postMessage(msg);
-// 				}).catch(function (err) {
-// 					console.log('后台同步触发失败', err);
-// 				});
-// 			});
-//         });
-// 	}
-// }, 3000);
+// 在主页添加后台同步,断网后重连在次调用,在sw里有处理事件, sw要先初始化.
+var tag = 'sample_sync'
+if ('serviceWorker' in navigator && 'SyncManager' in window) {
+    navigator.serviceWorker.ready.then(function (registration) {
+        document.getElementById('js-sync-event-btn').addEventListener('click', function () {
+            registration.sync.register(tag).then(function () {
+                console.log('后台同步已触发', tag);
+                // 使用postMessage进行数据通信
+                var inputValue = document.querySelector('#js-search-input').value;
+                var msg = JSON.stringify({type: 'bgsync', msg: {name: inputValue}});
+                navigator.serviceWorker.controller.postMessage(msg);
+            }).catch(function (err) {
+                console.log('后台同步触发失败', err);
+            });
+        });
+    });
+}
         // $.ajax({
         //         url: 'https://gw-passenger-wap.01zhuanche.com/gw-passenger-wap/zhuanche-passenger/passenger/charge/getServiceType',
         //         type: 'post',
