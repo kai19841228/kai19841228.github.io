@@ -147,10 +147,10 @@ self.addEventListener('message', function (e) {
     simpleEvent.trigger(type, msg);
 });
 
-// 处理通知 点击关闭
+// 监听通知 点击关闭  // showNotification 能够设置actions
 self.addEventListener('notificationclick', event => {
   // notification click event
-  console.log(event)
+  console.log(event.action)
 });
 
 self.addEventListener('notificationclose', event => {
