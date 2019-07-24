@@ -126,13 +126,13 @@ self.addEventListener('sync', function (e) {
       method: 'GET'
   };
   if (e.tag === 'sample_sync') {
-      var request = new Request(`https://gw-passenger-wap.01zhuanche.com/gw-passenger-wap/zhuanche-passenger/api/v1/common/group/list?type=1&cid=44&nId=&sId=2`, init);
-      e.waitUntil(
-          fetch(request).then(function (response) {
-              response.json().then(console.log.bind(console));
-              return response;
-          })
-      );
+      // var request = new Request(`https://gw-passenger-wap.01zhuanche.com/gw-passenger-wap/zhuanche-passenger/api/v1/common/group/list?type=1&cid=44&nId=&sId=2`, init);
+      // e.waitUntil(
+      //     fetch(request).then(function (response) {
+      //         response.json().then(console.log.bind(console));
+      //         return response;
+      //     })
+      // );
   }
 });
 
