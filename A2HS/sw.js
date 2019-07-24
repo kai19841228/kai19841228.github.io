@@ -102,14 +102,15 @@ self.addEventListener('fetch', function (e) {
 
  self.addEventListener('activate', function (event) { 
   // 监听worker的activate事件
+  var cacheWhitelist = [CacheName, apiCacheName] // 白名单不会被删除
   console.log('activate')
     event.waitUntil( // 延迟activate事件直到
       caches.keys().then(function (cacheList) {
         return Promise.all(
           cacheList.map(function (cacheName) {
-              if (cacheName !== CacheName && cacheName !== apiCacheName) {
-                  console.log('清理',cacheName);
-                  return caches.delete(cacheName);
+            // 跟白名单比较，不是白名单的删除
+              if (cacheWhitelist.indexOf(cacheName) === -1) {
+                return caches.delete(cacheName);
               }
           })
         )
@@ -144,4 +145,15 @@ self.addEventListener('message', function (e) {
     console.log(`service worker收到消息 type：${type}；msg：${JSON.stringify(msg)}`);
 
     simpleEvent.trigger(type, msg);
+});
+
+// 处理通知 点击关闭
+self.addEventListener('notificationclick', event => {
+  // notification click event
+  console.log(event)
+});
+
+self.addEventListener('notificationclose', event => {
+  // notification closed event
+  console.log(event)
 });
