@@ -19,8 +19,8 @@ class SimpleEvent {
 // 1、开启一个缓存
 // 2、缓存我们的文件
 // 3、确定所有的资源是否要被缓存
-var CacheName = 'demo-store'
-var apiCacheName = 'api-0-1-1';
+var CacheName = 'demo-store-v1'
+var apiCacheName = 'api-v-1';
 self.addEventListener('install', function(e) {
   e.waitUntil(
     // 清理旧版本的一种方法。把老的CacheName删掉。要多刷新几次才能生效

@@ -16,7 +16,7 @@ setInterval(function() {
 
 if('serviceWorker' in navigator) {
   navigator.serviceWorker
-           .register('/A2HS/sw.js?v=3')
+           .register('/A2HS/sw.js?v=4')
            .then(function(reg) {
              console.log('Service Worker 注册成功'); 
           });
