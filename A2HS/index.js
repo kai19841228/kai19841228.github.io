@@ -1,3 +1,15 @@
+if(window.Notification) {
+  if(window.Notification.permission == "granted") {
+      var notification = new Notification('你有一条新信息', {
+          body: "你好我是王小婷",
+
+          icon: "/A2HS/images/fox1.jpg"
+      });
+  } else {
+      window.Notification.requestPermission();
+  }
+} else alert('你的浏览器不支持此消息提示功能，请使用chrome内核的浏览器！');
+
 const images = ['fox1','fox2','fox3','fox4'];
 const imgElem = document.querySelector('img');
 
