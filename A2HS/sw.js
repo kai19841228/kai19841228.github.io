@@ -23,6 +23,17 @@ var CacheName = 'demo-store'
 var apiCacheName = 'api-0-1-1';
 self.addEventListener('install', function(e) {
   e.waitUntil(
+    // 清理旧版本的一种方法。把老的CacheName删掉。要多刷新几次才能生效
+    caches.keys().then(function (cacheList) {
+      return Promise.all(
+        cacheList.map(function (cacheName) {
+            if (cacheName !== CacheName && cacheName !== apiCacheName) {
+                console.log('清理',cacheName);
+                return caches.delete(cacheName);
+            }
+        })
+      )
+    }),
     caches.open(CacheName).then(function(cache) {
       return cache.addAll([
         '/A2HS/',
@@ -35,18 +46,8 @@ self.addEventListener('install', function(e) {
         '/A2HS/images/fox4.jpg'
       ]);
     }).then(function() {
+      console.log('缓存完毕')
       return self.skipWaiting()
-    }),
-    // 清理旧版本的一种方法。把老的CacheName删掉。要多刷新几次才能生效
-    caches.keys().then(function (cacheList) {
-      return Promise.all(
-        cacheList.map(function (cacheName) {
-            if (cacheName !== CacheName && cacheName !== apiCacheName) {
-                console.log('清理',cacheName);
-                return caches.delete(cacheName);
-            }
-        })
-      )
     })
   )
  })
