@@ -34,6 +34,8 @@ self.addEventListener('install', function(e) {
         '/A2HS/images/fox3.jpg',
         '/A2HS/images/fox4.jpg'
       ]);
+    }).then(function() {
+      return self.skipWaiting()
     }),
     // 清理旧版本的一种方法。把老的CacheName删掉。要多刷新几次才能生效
     caches.keys().then(function (cacheList) {
@@ -45,9 +47,7 @@ self.addEventListener('install', function(e) {
             }
         })
       )
-    }),
-    // 马上更新新的sw
-    self.skipWaiting()
+    })
   )
  })
  
@@ -113,6 +113,8 @@ self.addEventListener('fetch', function (e) {
               }
           })
         )
+      }).then(function(){
+        return self.clients.claim()
       })
     )
   });
