@@ -90,7 +90,18 @@ if ('serviceWorker' in navigator && 'SyncManager' in window) {
                     body: 'Buzz! Buzz!',
                     icon: '/A2HS/images/fox1.jpg',
                     vibrate: [200, 100, 200, 100, 200, 100, 200],
-                    tag: 'vibration-sample'
+                    tag: 'vibration-sample',
+                    actions: [
+                        {
+                            action: 'coffee-action',
+                            title: 'Coffee',
+                            icon: '/A2HS/images/fox3.jpg'
+                        },
+                        {
+                            action: 'doughnut-action',
+                            title: 'Doughnut',
+                            icon: '/A2HS/images/fox4.jpg'
+                        }]
                     });
                 });
                 }
