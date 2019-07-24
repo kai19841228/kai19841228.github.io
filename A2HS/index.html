@@ -67,7 +67,7 @@
     <img src="./images/fox2.jpg" alt="a fox picture">
     <button class="add-button">Add to home screen</button>
     <button id="js-sync-event-btn" style="background: #333;color: #FFF;">异步请求</button>
-	<!-- <input id="js-search-input" value="789" /> -->
+	<input style="display: none;" id="js-search-input" value="789" />
     <script>
 // 在主页添加后台同步,断网后重连在次调用,在sw里有处理事件, sw要先初始化.
 var tag = 'sample_sync'
@@ -82,6 +82,16 @@ if ('serviceWorker' in navigator && 'SyncManager' in window) {
                 navigator.serviceWorker.controller.postMessage(msg);
             }).catch(function (err) {
                 console.log('后台同步触发失败', err);
+            });
+            Notification.requestPermission(function(result) {
+                if (result === 'granted') {
+                    registration.showNotification('Vibration Sample', {
+                    body: 'Buzz! Buzz!',
+                    icon: '../images/touch/chrome-touch-icon-192x192.png',
+                    vibrate: [200, 100, 200, 100, 200, 100, 200],
+                    tag: 'vibration-sample'
+                    });
+                }
             });
         });
     });
