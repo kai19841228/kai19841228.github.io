@@ -36,6 +36,7 @@ self.addEventListener('install', function(e) {
     }),
     caches.open(CacheName).then(function(cache) {
       return cache.addAll([
+        '/A2HS/manifest.webmanifest',
         '/A2HS/',
         '/A2HS/index.html',
         '/A2HS/index.js',
