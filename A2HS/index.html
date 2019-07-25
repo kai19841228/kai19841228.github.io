@@ -118,13 +118,7 @@ if ('serviceWorker' in navigator && 'SyncManager' in window) {
         //         success: function(data) {console.log(data)},
         //         timeout: 3000           
         //     });
-		$.ajax({
-            url: 'https://www.apiopen.top/journalismApi',
-            type: 'get',
-            dataType:"json",
-            success: function(data) {console.log(data)},
-            timeout: 3000           
-        });
+        fetch('https://www.apiopen.top/journalismApi')
 	  
 	  // 下边代码 如果有caches里有异步缓存,在没网的时候调用cache里的数据,有网先用cache数据渲染,等fetch回来了在替换cache.
 function getApiDataFromCache(url) {
@@ -141,17 +135,7 @@ function getApiDataFromCache(url) {
     }
 }
 function getApiDataRemote(url) {
-	return new Promise((resolve, reject) => {
-		$.ajax({
-		        url: url,
-		        type: 'get',
-		        dataType:"json",
-		        success: function(data) {console.log(data)
-					resolve(data)
-				},
-		        timeout: 3000           
-		    });
-	})
+    return fetch('https://www.apiopen.top/journalismApi')
 }
 function queryBook(url) {
     // 远程请求
