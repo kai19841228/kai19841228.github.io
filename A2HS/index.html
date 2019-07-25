@@ -119,7 +119,7 @@ if ('serviceWorker' in navigator && 'SyncManager' in window) {
         //         timeout: 3000           
         //     });
 		$.ajax({
-            url: 'https://www.apiopen.top/weatherApi?city=%E6%88%90%E9%83%BD',
+            url: 'https://www.apiopen.top/weatherApi?city=成都',
             type: 'get',
             dataType:"json",
             success: function(data) {console.log(data)},
@@ -171,7 +171,7 @@ function queryBook(url) {
     })
 }
 document.getElementById('js-sync-event-btn').addEventListener('click', function () {
-	queryBook('https://www.apiopen.top/weatherApi?city=%E6%88%90%E9%83%BD')
+	queryBook('https://www.apiopen.top/weatherApi?city=成都')
 })
     </script>
 </body></html>
