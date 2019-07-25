@@ -36,7 +36,7 @@ if('serviceWorker' in navigator) {
 }
 // 当发现控制自己的 SW 已经发生了变化，那就刷新自己，让新的 SW 控制，就一定能保证数据的一致性。
 // 避免页面无限的自我刷新。为了弥补这一点，需要添加一个 flag 判断一下
-// 会在用户使用中刷新页面。
+// 会在用户使用中刷新页面。 看是否要用到
 var refreshing = false
 navigator.serviceWorker.addEventListener('controllerchange', () => {
   if (refreshing) {
