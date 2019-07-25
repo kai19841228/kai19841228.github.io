@@ -57,7 +57,7 @@ self.addEventListener('install', function(e) {
 self.addEventListener('fetch', function (e) {
     // 需要缓存的xhr请求
     var cacheRequestUrls = [
-        '/journalismApi'
+        '/weatherApi'
     ];
     console.log('现在正在请求：' + e.request.url);
 
