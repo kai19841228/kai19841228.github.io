@@ -25,15 +25,12 @@ var cacheWhitelist = [CacheName, apiCacheName] // 白名单不会被删除
 self.addEventListener('install', function(e) {
   e.waitUntil(
     // 清理旧版本的一种方法。把老的CacheName删掉。要多刷新几次才能生效
-    caches.keys().then(function (cacheList) {
-      return Promise.all(
-        cacheList.map(function (cacheName) {
-          // 跟白名单比较，不是白名单的删除
-            if (cacheWhitelist.indexOf(cacheName) === -1) {
-              return caches.delete(cacheName);
-            }
-        })
-      )
+    caches.keys().then(function(keyList) {
+      return Promise.all(keyList.map(function(key) {
+        if (cacheWhitelist.indexOf(key) === -1) {
+          return caches.delete(key);
+        }
+      }));
     }),
     caches.open(CacheName).then(function(cache) {
       return cache.addAll([
