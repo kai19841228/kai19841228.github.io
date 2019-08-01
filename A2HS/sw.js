@@ -28,12 +28,10 @@ self.addEventListener('install', function(e) {
     caches.keys().then(function (cacheList) {
       return Promise.all(
         cacheList.map(function (cacheName) {
-          // 跟白名单比较，不是白名单的删除
-            cacheWhitelist.map(function(key){
-              if (key.indexOf(cacheName) === -1) {
-                return caches.delete(key);
-              }
-            })
+            if (cacheName !== CacheName && cacheName !== apiCacheName) {
+                console.log('清理',cacheName);
+                return caches.delete(cacheName);
+            }
         })
       )
     }),
