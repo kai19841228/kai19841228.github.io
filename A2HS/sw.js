@@ -61,6 +61,8 @@ self.addEventListener('install', function(e) {
       }).then(function() {
         console.log('缓存完毕')
         return self.skipWaiting()
+      }).catch(function(e){
+        console.log(e)
       })
     })
   )
