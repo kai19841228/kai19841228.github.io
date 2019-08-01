@@ -19,7 +19,7 @@ class SimpleEvent {
 // 1、开启一个缓存
 // 2、缓存我们的文件
 // 3、确定所有的资源是否要被缓存
-var CacheName = 'demo-store-v3'
+var CacheName = 'static-v-3'
 var apiCacheName = 'api-v-3';
 var cacheWhitelist = [CacheName, apiCacheName] // 白名单不会被删除
 self.addEventListener('install', function(e) {
