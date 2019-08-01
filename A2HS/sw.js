@@ -35,6 +35,15 @@ self.addEventListener('install', function(e) {
         })
       )
     }),
+    caches.open(fontCacheName).then(function(cache) {
+      return cache.addAll([
+        '/A2HS/js/swiper.min.js',
+        '/A2HS/js/swiper.animate1.0.3.min.js',
+        '/A2HS/css/swiper.min.css',
+        '/A2HS/css/animate.min.css',
+        '/A2HS/images/mem8YaGs126MiZpBA-UFVZ0bf8pkAg.woff2'
+      ]);
+    }),
     caches.open(staticCacheName).then(function(cache) {
       return cache.addAll([
         '/A2HS/manifest.webmanifest',
@@ -52,15 +61,6 @@ self.addEventListener('install', function(e) {
     }).then(function() {
       console.log('缓存完毕')
       return self.skipWaiting()
-    }),
-    caches.open(fontCacheName).then(function(cache) {
-      return cache.addAll([
-        '/A2HS/js/swiper.min.js',
-        '/A2HS/js/swiper.animate1.0.3.min.js',
-        '/A2HS/css/swiper.min.css',
-        '/A2HS/css/animate.min.css',
-        '/A2HS/images/mem8YaGs126MiZpBA-UFVZ0bf8pkAg.woff2'
-      ]);
     })
   )
  })
