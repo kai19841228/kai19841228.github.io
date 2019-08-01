@@ -62,6 +62,7 @@ self.addEventListener('install', function(e) {
         console.log('缓存完毕')
         return self.skipWaiting()
       }).catch(function(e){
+        console.log('cache出错')
         console.log(e)
       })
     })
