@@ -57,7 +57,6 @@ self.addEventListener('install', function(e) {
  
 //  fetch 用来监听用户的网络请求，并给出回应
 self.addEventListener('fetch', function (e) {
-  console.log(e)
     // 需要缓存的xhr请求
     var cacheRequestUrls = [
         '/weatherApi'
