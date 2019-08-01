@@ -21,10 +21,19 @@ class SimpleEvent {
 // 3、确定所有的资源是否要被缓存
 var CacheName = 'demo-store-v2'
 var apiCacheName = 'api-v-2';
-var cacheWhitelist = [CacheName, apiCacheName] // 白名单不会被删除
 self.addEventListener('install', function(e) {
   e.waitUntil(
     // 清理旧版本的一种方法。把老的CacheName删掉。要多刷新几次才能生效
+    caches.keys().then(function (cacheList) {
+      return Promise.all(
+        cacheList.map(function (cacheName) {
+            if (cacheName !== CacheName && cacheName !== apiCacheName) {
+                console.log('清理',cacheName);
+                return caches.delete(cacheName);
+            }
+        })
+      )
+    }),
     caches.open(CacheName).then(function(cache) {
       return cache.addAll([
         '/A2HS/manifest.webmanifest',
@@ -35,8 +44,6 @@ self.addEventListener('install', function(e) {
         '/A2HS/images/fox1.jpg',
         '/A2HS/images/fox2.jpg',
         '/A2HS/images/fox3.jpg',
-        '/A2HS/images/fox-icon.png',
-        '/A2HS/images/favicon.ico',
         '/A2HS/images/fox4.jpg'
       ]);
     }).then(function() {
@@ -97,6 +104,7 @@ self.addEventListener('fetch', function (e) {
 
  self.addEventListener('activate', function (event) { 
   // 监听worker的activate事件
+  var cacheWhitelist = [CacheName, apiCacheName] // 白名单不会被删除
   console.log('activate')
     event.waitUntil( // 延迟activate事件直到
       caches.keys().then(function (cacheList) {
