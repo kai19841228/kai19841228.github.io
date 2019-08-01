@@ -62,12 +62,55 @@
     <script src="./index.js" defer=""></script>
     <link rel="manifest" href="manifest.webmanifest">
     <script src="https://cdn.bootcss.com/jquery/1.8.0/jquery-1.8.0.js"></script>
+    <script src="./js/swiper.min.js"></script>
+    <script src="./js/swiper.animate1.0.3.min.js"></script>
+    <link rel="stylesheet" href="./css/swiper.min.css">
+    <link rel="stylesheet" href="./css/animate.min.css">
+    <style>
+    .swiper-container {
+      width: 300px;
+      height: 300px;
+      padding: 50px;
+    }
+    .swiper-slide {
+      background-position: center;
+      background-size: cover;
+      width: 300px;
+      height: 300px;
+    }
+    img{
+        width: 100%;height: auto;
+    }
+</style>
   </head>
   <body>
-    <img src="./images/fox2.jpg" alt="a fox picture">
+    <div class="swiper-container">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide"><img src="./images/fox1.jpg" alt="a fox picture"></div>
+        <div class="swiper-slide"><img src="./images/fox2.jpg" alt="a fox picture"></div>
+        <div class="swiper-slide"><img src="./images/fox3.jpg" alt="a fox picture"></div>
+        <div class="swiper-slide"><img src="./images/fox4.jpg" alt="a fox picture"></div>
+    </div>
+    <!-- Add Pagination -->
+    <div class="swiper-pagination"></div>
+    </div>    
     <button class="add-button">Add to home screen</button>
     <button id="js-sync-event-btn" style="background: #333;color: #FFF;">异步请求</button>
-	<input style="display: none;" id="js-search-input" value="789" />
+    <input style="display: none;" id="js-search-input" value="789" />
+    <script>
+    var swiper = new Swiper('.swiper-container', {
+      effect: 'flip',
+      grabCursor: true,
+      loop: true,
+      pagination: {
+        el: '.swiper-pagination',
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+    </script>        
     <script>
 // 在主页添加后台同步,断网后重连在次调用,在sw里有处理事件, sw要先初始化.
 var tag = 'sample_sync'

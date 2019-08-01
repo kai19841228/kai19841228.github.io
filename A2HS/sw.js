@@ -41,6 +41,7 @@ self.addEventListener('install', function(e) {
         '/A2HS/',
         '/A2HS/index.html',
         '/A2HS/index.js',
+        '/A2HS/index.js',
         '/A2HS/style.css',
         '/A2HS/images/fox1.jpg',
         '/A2HS/images/fox2.jpg',
@@ -54,6 +55,10 @@ self.addEventListener('install', function(e) {
     }),
     caches.open(fontCacheName).then(function(cache) {
       return cache.addAll([
+        '/A2HS/js/swiper.min.js',
+        '/A2HS/js/swiper.animate1.0.3.min.js',
+        '/A2HS/css/swiper.min.css',
+        '/A2HS/css/animate.min.css',
         '/A2HS/images/mem8YaGs126MiZpBA-UFVZ0bf8pkAg.woff2'
       ]);
     })
