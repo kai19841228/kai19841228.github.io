@@ -21,7 +21,6 @@ class SimpleEvent {
 // 3、确定所有的资源是否要被缓存
 var CacheName = 'static-v3'
 var apiCacheName = 'api-v3';
-var cacheWhitelist = [CacheName, apiCacheName] // 白名单不会被删除
 self.addEventListener('install', function(e) {
   e.waitUntil(
     // 清理旧版本的一种方法。把老的CacheName删掉。要多刷新几次才能生效
@@ -111,12 +110,10 @@ self.addEventListener('fetch', function (e) {
       caches.keys().then(function (cacheList) {
         return Promise.all(
           cacheList.map(function (cacheName) {
-            // 跟白名单比较，不是白名单的删除
-              cacheWhitelist.map(function(key){
-                if (key.indexOf(cacheName) === -1) {
-                  return caches.delete(key);
-                }
-              })
+              if (cacheName !== CacheName && cacheName !== apiCacheName) {
+                  console.log('清理',cacheName);
+                  return caches.delete(cacheName);
+              }
           })
         )
       }).then(function(){
