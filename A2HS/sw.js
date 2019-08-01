@@ -44,6 +44,7 @@ self.addEventListener('install', function(e) {
         '/A2HS/images/fox1.jpg',
         '/A2HS/images/fox2.jpg',
         '/A2HS/images/fox3.jpg',
+        '/A2HS/images/fox-icon.png',
         '/A2HS/images/fox4.jpg'
       ]);
     }).then(function() {
