@@ -65,6 +65,27 @@ self.addEventListener('install', function(e) {
         console.log('cache出错')
         console.log(e)
       })
+    }),
+    caches.open(staticCacheName).then(function(cache) {
+      return cache.addAll([
+        '/A2HS/manifest.webmanifest',
+        '/A2HS/',
+        '/A2HS/index.html',
+        '/A2HS/index.js',
+        '/A2HS/index.js',
+        '/A2HS/style.css',
+        '/A2HS/images/fox1.jpg',
+        '/A2HS/images/fox2.jpg',
+        '/A2HS/images/fox3.jpg',
+        '/A2HS/images/fox-icon.png',
+        '/A2HS/images/fox4.jpg'
+      ]);
+    }).then(function() {
+      console.log('缓存完毕')
+      return self.skipWaiting()
+    }).catch(function(e){
+      console.log('cache出错')
+      console.log(e)
     })
   )
  })
