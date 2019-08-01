@@ -19,22 +19,23 @@ class SimpleEvent {
 // 1、开启一个缓存
 // 2、缓存我们的文件
 // 3、确定所有的资源是否要被缓存
-var CacheName = 'static-v9'
+var staticCacheName = 'static-v9'
 var apiCacheName = 'api-v9';
+var fontCacheName = 'api-v9';
 self.addEventListener('install', function(e) {
   e.waitUntil(
     // 清理旧版本的一种方法。把老的CacheName删掉。要多刷新几次才能生效
     caches.keys().then(function (cacheList) {
       return Promise.all(
         cacheList.map(function (cacheName) {
-            if (cacheName !== CacheName && cacheName !== apiCacheName) {
-                console.log('清理',cacheName);
-                return caches.delete(cacheName);
-            }
+          if (cacheName !== staticCacheName && cacheName !== apiCacheName && cacheName !== fontCacheName) {
+              console.log('清理',cacheName);
+              return caches.delete(cacheName);
+          }
         })
       )
     }),
-    caches.open(CacheName).then(function(cache) {
+    caches.open(staticCacheName).then(function(cache) {
       return cache.addAll([
         '/A2HS/manifest.webmanifest',
         '/A2HS/',
@@ -45,12 +46,16 @@ self.addEventListener('install', function(e) {
         '/A2HS/images/fox2.jpg',
         '/A2HS/images/fox3.jpg',
         '/A2HS/images/fox-icon.png',
-        '/A2HS/images/mem8YaGs126MiZpBA-UFVZ0bf8pkAg.woff2',
         '/A2HS/images/fox4.jpg'
       ]);
     }).then(function() {
       console.log('缓存完毕')
       return self.skipWaiting()
+    }),
+    caches.open(fontCacheName).then(function(cache) {
+      return cache.addAll([
+        '/A2HS/images/mem8YaGs126MiZpBA-UFVZ0bf8pkAg.woff2'
+      ]);
     })
   )
  })
@@ -111,7 +116,7 @@ self.addEventListener('fetch', function (e) {
       caches.keys().then(function (cacheList) {
         return Promise.all(
           cacheList.map(function (cacheName) {
-              if (cacheName !== CacheName && cacheName !== apiCacheName) {
+              if (cacheName !== staticCacheName && cacheName !== apiCacheName && cacheName !== fontCacheName) {
                   console.log('清理',cacheName);
                   return caches.delete(cacheName);
               }
