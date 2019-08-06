@@ -1,9 +1,9 @@
 {
   "scope": "/",
-  "name": "Awesome fox pictures",
-  "short_name": "Foxes",
+  "name": "麦卡出行-代人叫车,即时用车,预约用车,接送机用车,机构用车,日租用车,半日租用车",
+  "short_name": "麦卡出行",
   "start_url": "/A2HS/index.html",
-  "description": "Shows random fox pictures. Hey, at least it isn't cats.",
+  "description": "麦卡出行,高品质出行专家,安全的网约车专车平台,专业的打车软件!",
   "display": "fullscreen",
   "lang": "cn",
   "orientation": "portrait",
