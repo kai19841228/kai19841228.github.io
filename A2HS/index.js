@@ -29,7 +29,7 @@ if(window.Notification) {
 
 if('serviceWorker' in navigator) {
   navigator.serviceWorker
-           .register('/A2HS/sw.js?v=11', {scope: './'})
+           .register('/A2HS/sw.js?v=101', {scope: './'})
            .then(function(reg) {
              console.log('Service Worker 注册成功'); 
           });
