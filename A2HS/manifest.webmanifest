@@ -11,12 +11,7 @@
   "background_color": "purple",
   "icons": [
     {
-      "src": "./images/fox-icon.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "https://kai19841228.github.io/A2HS/images/fox-icon.png",
+      "src": "images/fox-icon.png",
       "sizes": "192x192",
       "type": "image/png"
     }
