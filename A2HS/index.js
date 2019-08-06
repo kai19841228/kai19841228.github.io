@@ -1,3 +1,5 @@
+
+console.log(window.Notification.permission)
 if(window.Notification) {
   if(window.Notification.permission == "granted") {
       var notification = new Notification('你有一条新信息', {
@@ -29,7 +31,7 @@ if(window.Notification) {
 
 if('serviceWorker' in navigator) {
   navigator.serviceWorker
-           .register('/A2HS/sw.js?v=101', {scope: './'})
+           .register('/A2HS/sw.js?v=1111', {scope: './'})
            .then(function(reg) {
              console.log('Service Worker 注册成功！作用域为: ', reg.scope); 
           });
