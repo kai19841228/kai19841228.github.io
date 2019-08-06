@@ -31,7 +31,7 @@ if('serviceWorker' in navigator) {
   navigator.serviceWorker
            .register('/A2HS/sw.js?v=101', {scope: './'})
            .then(function(reg) {
-             console.log('Service Worker 注册成功'); 
+             console.log('Service Worker 注册成功！作用域为: ', reg.scope); 
           });
 }
 // 当发现控制自己的 SW 已经发生了变化，那就刷新自己，让新的 SW 控制，就一定能保证数据的一致性。
