@@ -6,7 +6,7 @@ if(window.Notification) {
           icon: "/A2HS/images/fox1.jpg"
       });
   } else {
-      window.Notification.requestPermission();
+      // window.Notification.requestPermission();
   }
 } else alert('你的浏览器不支持此消息提示功能，请使用chrome内核的浏览器！');
 
