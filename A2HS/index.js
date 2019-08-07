@@ -31,7 +31,7 @@ if(window.Notification) {
 
 if('serviceWorker' in navigator) {
   navigator.serviceWorker
-           .register('/A2HS/sw.js?v=1214', {scope: './'})
+           .register('/A2HS/sw.js?v=1314', {scope: './'})
            .then(function(reg) {
              console.log('Service Worker 注册成功！作用域为: ', reg.scope); 
           });

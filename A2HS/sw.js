@@ -19,9 +19,9 @@ class SimpleEvent {
 // 1、开启一个缓存
 // 2、缓存我们的文件
 // 3、确定所有的资源是否要被缓存
-var staticCacheName = 'static-v1214'
-var apiCacheName = 'api-v1214';
-var fontCacheName = 'font-v1214';
+var staticCacheName = 'static-v1314'
+var apiCacheName = 'api-v1314';
+var fontCacheName = 'font-v1314';
 self.addEventListener('install', function(e) {
   e.waitUntil(
     // 清理旧版本的一种方法。把老的CacheName删掉。要多刷新几次才能生效
@@ -49,7 +49,6 @@ self.addEventListener('install', function(e) {
         return cache.addAll([
           '/A2HS/',
           '/A2HS/index.html',
-          '/A2HS/index.js',
           '/A2HS/style.css',
           '/A2HS/images/fox1.jpg',
           '/A2HS/images/fox2.jpg',
