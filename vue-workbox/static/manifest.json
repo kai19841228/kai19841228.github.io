@@ -1,14 +1,15 @@
 {
-    "name": "example-vue-workbox",
-    "short_name": "test-pwa",
+    "name": "麦卡出行,高品质出行专家",
+    "short_name": "麦卡出行",
+    "description": "麦卡出行,高品质出行专家,安全的网约车专车平台,专业的打车软件!",
     "icons": [
       {
-        "src": "/static/img/icons/android-chrome-192x192.png",
+        "src": "/static/images/fox-icon.png",
         "sizes": "192x192",
         "type": "image/png"
       },
       {
-        "src": "/static/img/icons/android-chrome-512x512.png",
+        "src": "/static/images/fox-icon.png",
         "sizes": "512x512",
         "type": "image/png"
       }
