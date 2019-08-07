@@ -94,7 +94,7 @@ export default {
   },
   mounted: function () {
     console.log(ajaxApi)
-    ajaxApi.getParam('/special/new2016_rbeijing_api/', {}).then(function (data) {
+    ajaxApi.getParam('https://www.apiopen.top/weatherApi?city=北京', {}).then(function (data) {
       console.log(data.data)
     })
     // ajaxApi.PostParam('/gw-passenger-wap/zhuanche-passenger/passenger/charge/getServiceType', {cid: 44}).then(function (data) {
