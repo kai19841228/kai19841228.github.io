@@ -28,7 +28,7 @@ if(window.Notification) {
 // 注册服务以控制使网站脱机工作
 // 如果sw不更新，就在sw后追加一个版本
 // 在把sw里的CacheName和apiCacheName 的名称也改下名字
-var version = '1.0.1';
+var version = '1.1.1';
 
 if('serviceWorker' in navigator) {
   navigator.serviceWorker
