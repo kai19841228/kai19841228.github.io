@@ -133,6 +133,7 @@ function shouldFetchAndCache(request) {
 }
 function onFetch(event) {
   const request = event.request;
+console.log(request)
 console.log(request + '999999')
   // 应当永远从网络请求的资源
   // 如果请求失败，则使用离线资源替代
