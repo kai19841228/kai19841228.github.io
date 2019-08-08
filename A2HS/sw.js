@@ -16,26 +16,32 @@ class SimpleEvent {
       }
   }
 }
+function removeOldCache() {
+  return caches
+      .keys()
+      .then(keys =>
+          Promise.all( // 等待所有旧的资源都清理完成
+              keys
+              .filter(key => !key.startsWith(version)) // 过滤不需要删除的资源
+              .map(key => caches.delete(key)) // 删除旧版本资源，返回为 Promise 对象
+          )
+      )
+      .then(() => {
+          log('removeOldCache completed.');
+      });
+}
+function cacheKey() {
+  return [version, ...arguments].join(':');
+}
+const version = 'maika_1';
 // 1、开启一个缓存
 // 2、缓存我们的文件
 // 3、确定所有的资源是否要被缓存
-var staticCacheName = 'static-v1314'
-var apiCacheName = 'api-v1314';
-var fontCacheName = 'font-v1314';
 self.addEventListener('install', function(e) {
   e.waitUntil(
     // 清理旧版本的一种方法。把老的CacheName删掉。要多刷新几次才能生效
-    caches.keys().then(function (cacheList) {
-      return Promise.all(
-        cacheList.map(function (cacheName) {
-          if (cacheName !== staticCacheName && cacheName !== apiCacheName && cacheName !== fontCacheName) {
-              console.log('清理',cacheName);
-              return caches.delete(cacheName);
-          }
-        })
-      )
-    }),
-    caches.open(fontCacheName).then(function(cache) {
+    removeOldCache(),
+    caches.open(cacheKey('font')).then(function(cache) {
       return cache.addAll([
         '/A2HS/js/swiper.min.js',
         '/A2HS/js/swiper.animate1.0.3.min.js',
@@ -45,7 +51,7 @@ self.addEventListener('install', function(e) {
         '/A2HS/images/mem8YaGs126MiZpBA-UFVZ0bf8pkAg.woff2'
       ]);
     }).then(function() {
-      caches.open(staticCacheName).then(function(cache) {
+      caches.open(cacheKey('static')).then(function(cache) {
         return cache.addAll([
           '/A2HS/',
           '/A2HS/index.html',
@@ -85,7 +91,7 @@ self.addEventListener('fetch', function (e) {
         // 需要缓存
         // 使用fetch请求数据，并将请求结果clone一份缓存到cache
         // 此部分缓存后在browser中使用全局变量caches获取
-        caches.open(apiCacheName).then(function (cache) {
+        caches.open(cacheKey('api')).then(function (cache) {
             return fetch(e.request).then(function (response) {
                 cache.put(e.request.url, response.clone());
                 return response;
@@ -115,25 +121,15 @@ self.addEventListener('fetch', function (e) {
 // 3、此时，当前页面生效的依然是老版本的 service worker ，新的 service worker 会进入“waitting”状态。
 // 4、当页面关闭后，来的 service worker 会被干掉，新的 service worker 接管页面。
 // 5、一旦新的 service worker 生效后会触发 active 事件。
-
- self.addEventListener('activate', function (event) { 
+self.addEventListener('activate', function (event) { 
   // 监听worker的activate事件
   console.log('activate')
-    event.waitUntil( // 延迟activate事件直到
-      caches.keys().then(function (cacheList) {
-        return Promise.all(
-          cacheList.map(function (cacheName) {
-              if (cacheName !== staticCacheName && cacheName !== apiCacheName && cacheName !== fontCacheName) {
-                  console.log('清理',cacheName);
-                  return caches.delete(cacheName);
-              }
-          })
-        )
-      }).then(function(){
-        return self.clients.claim()
-      })
-    )
-  });
+  event.waitUntil(Promise.all([
+    // 更新客户端
+    self.clients.claim(),
+    removeOldCache()
+  ]))
+});
   
   // 在index。html里注册同步，断网后重连会调用 e.tag 为 sample_sync执行操作。
 self.addEventListener('sync', function (e) {
