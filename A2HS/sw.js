@@ -136,7 +136,7 @@ function onFetch(event) {
   // 应当永远从网络请求的资源
   // 如果请求失败，则使用离线资源替代
   if (shouldAlwaysFetch(request)) {
-      log('AlwaysFetch request: ', event.request.url);
+      console.log('AlwaysFetch request: ', event.request.url);
       event.respondWith(networkedOrOffline(request));
       return;
   }
