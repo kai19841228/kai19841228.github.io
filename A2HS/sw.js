@@ -33,7 +33,7 @@ function removeOldCache() {
 function cacheKey() {
   return [version, ...arguments].join(':');
 }
-const version = 'maika_v8';
+const version = 'maika_v9';
 const ignoreCache = [
   /https?:\/\/hm.baidu.com\//,
   /https?:\/\/cdn.bootcss.com\//,
