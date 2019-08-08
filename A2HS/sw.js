@@ -53,35 +53,35 @@ self.addEventListener('install', function(e) {
   e.waitUntil(
     // 清理旧版本的一种方法。把老的CacheName删掉。要多刷新几次才能生效
     removeOldCache(),
-    caches.open(cacheKey('font')).then(function(cache) {
-      return cache.addAll([
-        '/A2HS/js/swiper.min.js',
-        '/A2HS/js/swiper.animate1.0.3.min.js',
-        '/A2HS/css/swiper.min.css',
-        '/A2HS/css/animate.min.css',
-        '../vconsole.min.js',
-        '/A2HS/images/mem8YaGs126MiZpBA-UFVZ0bf8pkAg.woff2'
-      ]);
-    }).then(function() {
-      caches.open(cacheKey('static')).then(function(cache) {
-        return cache.addAll([
-          '/A2HS/',
-          '/A2HS/index.html',
-          '/A2HS/style.css',
-          '/A2HS/images/fox1.jpg',
-          '/A2HS/images/fox2.jpg',
-          '/A2HS/images/fox3.jpg',
-          '/A2HS/images/fox-icon.png',
-          '/A2HS/images/fox4.jpg'
-        ]);
-      }).then(function() {
-        console.log('缓存完毕')
-        self.skipWaiting()
-      }).catch(function(e){
-        console.log('cache出错')
-        console.log(e)
-      })
-    })
+    // caches.open(cacheKey('font')).then(function(cache) {
+    //   return cache.addAll([
+    //     '/A2HS/js/swiper.min.js',
+    //     '/A2HS/js/swiper.animate1.0.3.min.js',
+    //     '/A2HS/css/swiper.min.css',
+    //     '/A2HS/css/animate.min.css',
+    //     '../vconsole.min.js',
+    //     '/A2HS/images/mem8YaGs126MiZpBA-UFVZ0bf8pkAg.woff2'
+    //   ]);
+    // }).then(function() {
+    //   caches.open(cacheKey('static')).then(function(cache) {
+    //     return cache.addAll([
+    //       '/A2HS/',
+    //       '/A2HS/index.html',
+    //       '/A2HS/style.css',
+    //       '/A2HS/images/fox1.jpg',
+    //       '/A2HS/images/fox2.jpg',
+    //       '/A2HS/images/fox3.jpg',
+    //       '/A2HS/images/fox-icon.png',
+    //       '/A2HS/images/fox4.jpg'
+    //     ]);
+    //   }).then(function() {
+    //     console.log('缓存完毕')
+    //     self.skipWaiting()
+    //   }).catch(function(e){
+    //     console.log('cache出错')
+    //     console.log(e)
+    //   })
+    // })
   )
  })
  // 优先从网络请求，失败则使用离线资源替代
@@ -133,9 +133,6 @@ function shouldFetchAndCache(request) {
 }
 function onFetch(event) {
   const request = event.request;
-console.log(request.url)
-console.log(request.url.startsWith('chrome-extension'))
-console.log(request + '999999')
 if(request.url.startsWith('chrome-extension')) { return}
   // 应当永远从网络请求的资源
   // 如果请求失败，则使用离线资源替代
