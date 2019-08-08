@@ -28,12 +28,17 @@ if(window.Notification) {
 // 注册服务以控制使网站脱机工作
 // 如果sw不更新，就在sw后追加一个版本
 // 在把sw里的CacheName和apiCacheName 的名称也改下名字
+var version = '1.0.1';
 
 if('serviceWorker' in navigator) {
   navigator.serviceWorker
-           .register('/A2HS/sw.js?v=1314', {scope: './'})
+           .register('/A2HS/sw.js', {scope: './'})
            .then(function(reg) {
              console.log('Service Worker 注册成功！作用域为: ', reg.scope); 
+            //  手动更新
+             if (localStorage.getItem('sw_version') !== version) {
+              reg.update().then(() => localStorage.setItem('sw_version', version));
+             }
           });
 }
 // 当发现控制自己的 SW 已经发生了变化，那就刷新自己，让新的 SW 控制，就一定能保证数据的一致性。
