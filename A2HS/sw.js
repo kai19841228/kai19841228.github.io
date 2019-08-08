@@ -33,7 +33,7 @@ function removeOldCache() {
 function cacheKey() {
   return [version, ...arguments].join(':');
 }
-const version = 'maika_1';
+const version = 'maika_v1';
 // 1、开启一个缓存
 // 2、缓存我们的文件
 // 3、确定所有的资源是否要被缓存
