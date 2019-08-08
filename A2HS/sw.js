@@ -54,7 +54,7 @@ self.addEventListener('install', function(e) {
     removeOldCache(),
     caches.open(cacheKey('static')).then(function(cache) {
       return cache.addAll([
-        '/A2HS/'
+        '../vconsole.min.js'
       ]);
     }).then(function() {
       console.log('缓存完毕')
