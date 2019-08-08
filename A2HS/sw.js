@@ -26,14 +26,11 @@ function removeOldCache() {
               .map(key => caches.delete(key)) // 删除旧版本资源，返回为 Promise 对象
           )
       )
-      .then(() => {
-          console.log('removeOldCache completed.');
-      });
 }
 function cacheKey() {
   return [version, ...arguments].join(':');
 }
-const version = 'maika_v9';
+const version = 'maika_v10';
 const ignoreCache = [
   /https?:\/\/hm.baidu.com\//,
   /https?:\/\/cdn.bootcss.com\//,
@@ -51,8 +48,11 @@ const ignoreCache = [
 self.addEventListener('install', function(e) {
   e.waitUntil(
     // 清理旧版本的一种方法。把老的CacheName删掉。要多刷新几次才能生效
-    removeOldCache(),
-    self.clients.claim()
+    removeOldCache()
+    .then(() => {
+        console.log('removeOldCache completed.');
+        self.clients.claim()
+    })
   )
  })
  // 优先从网络请求，失败则使用离线资源替代
