@@ -33,7 +33,7 @@ function removeOldCache() {
 function cacheKey() {
   return [version, ...arguments].join(':');
 }
-const version = 'maika_v1';
+const version = 'maika_v2';
 const ignoreCache = [
   /https?:\/\/hm.baidu.com\//,
   /https?:\/\/cdn.bootcss.com\//,
@@ -44,7 +44,6 @@ const ignoreCache = [
   /https?:\/\/cdn1.lncld.net\//,
   /https?:\/\/api.leancloud.cn\//,
   /https?:\/\/lzw.me\/wp\-admin/,
-  /chrome-extension?:\/\/ikkbfngojljohpekonpldkamedehakni\/wp\-admin/,
 ];
 // 1、开启一个缓存
 // 2、缓存我们的文件

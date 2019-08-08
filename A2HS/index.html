@@ -96,9 +96,10 @@
     <div class="swiper-pagination"></div>
     </div>    
     <button class="add-button">Add to home screen</button>
-    <button id="js-sync-event-btn" style="background: #333;color: #FFF;">异步请求</button>
+    <button id="js-sync-event-btn" style="background: #333;color: #FFF;">同步</button>
+    <button id="js-btn" style="background: #333;color: #FFF;">异步请求</button>
     <input style="display: none;" id="js-search-input" value="789" />
-    ❤️❤️❤️❤️
+    ❤️❤️❤️❤️❤️
     <script>
     window.vConsole = new window.VConsole();
     var swiper = new Swiper('.swiper-container', {
@@ -217,7 +218,7 @@ function queryBook(url) {
         }
     })
 }
-document.getElementById('js-sync-event-btn').addEventListener('click', function () {
+document.getElementById('js-btn').addEventListener('click', function () {
 	queryBook('https://www.apiopen.top/weatherApi?city=成都')
 })
     </script>
