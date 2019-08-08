@@ -34,6 +34,17 @@ function cacheKey() {
   return [version, ...arguments].join(':');
 }
 const version = 'maika_v1';
+const ignoreCache = [
+  /https?:\/\/hm.baidu.com\//,
+  /https?:\/\/cdn.bootcss.com\//,
+  /https?:\/\/static.duoshuo.com\//,
+  /https?:\/\/www.google-analytics.com\//,
+  /https?:\/\/dn-lbstatics.qbox.me\//,
+  /https?:\/\/ajax.cloudflare.com\//,
+  /https?:\/\/cdn1.lncld.net\//,
+  /https?:\/\/api.leancloud.cn\//,
+  /https?:\/\/lzw.me\/wp\-admin/,
+];
 // 1、开启一个缓存
 // 2、缓存我们的文件
 // 3、确定所有的资源是否要被缓存
@@ -64,7 +75,7 @@ self.addEventListener('install', function(e) {
         ]);
       }).then(function() {
         console.log('缓存完毕')
-        return self.skipWaiting()
+        self.skipWaiting()
       }).catch(function(e){
         console.log('cache出错')
         console.log(e)
@@ -72,9 +83,79 @@ self.addEventListener('install', function(e) {
     })
   )
  })
- 
+ // 优先从网络请求，失败则使用离线资源替代
+function networkedOrOffline(request) {
+  return fetch(request)
+      .then(response => {
+          log('(network)', request.method, request.url);
+          return response;
+      })
+      .catch(() => cachedResponse(request));
+}
+// 从缓存读取或使用离线资源替代
+function cachedResponse(request) {
+  return caches
+      .match(request)
+      .then((response) => response );
+}
+// 优先从 cache 读取，读取失败则从网络请求并缓存。网络请求也失败，则使用离线资源替代
+function cachedOrNetworked(request) {
+  return caches.match(request)
+      .then((response) => {
+          log(response ? '(cached)' : '(network: cache miss)', request.method, request.url);
+          return response ||
+              networkedAndCache(request)
+      });
+}
+// 从网络请求，并将请求成功的资源缓存
+function networkedAndCache(request) {
+  return fetch(request)
+      .then(response => {
+          const copy = response.clone();
+
+          caches.open(cacheKey('resources'))
+              .then(cache => {
+                  cache.put(request, copy);
+              });
+
+          log("(network: cache write)", request.method, request.url);
+          return response;
+      });
+}
+// 不需要缓存的请求
+function shouldAlwaysFetch(request) {
+  return request.method !== 'GET' || ignoreCache.some(regex => request.url.match(regex));
+}
+// 缓存 html 页面
+function shouldFetchAndCache(request) {
+  return (/text\/html/i).test(request.headers.get('Accept'));
+}
+function onFetch(event) {
+  const request = event.request;
+
+  // 应当永远从网络请求的资源
+  // 如果请求失败，则使用离线资源替代
+  if (shouldAlwaysFetch(request)) {
+      log('AlwaysFetch request: ', event.request.url);
+      event.respondWith(networkedOrOffline(request));
+      return;
+  }
+
+  // 应当从网络请求并缓存的资源
+  // 如果请求失败，则尝试从缓存读取，读取失败则使用离线资源替代
+  if (shouldFetchAndCache(request)) {
+      event.respondWith(
+          networkedAndCache(request).catch(() => cachedResponse(request))
+      );
+      return;
+  }
+
+  event.respondWith(cachedOrNetworked(request));
+}
 //  fetch 用来监听用户的网络请求，并给出回应
 self.addEventListener('fetch', function (e) {
+  onFetch()
+  return false;
     // 需要缓存的xhr请求
     var cacheRequestUrls = [
         '/weatherApi'
