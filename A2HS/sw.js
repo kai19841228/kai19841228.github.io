@@ -35,14 +35,8 @@ function cacheKey() {
 }
 const version = 'maika_v40';
 const ignoreCache = [
-  /https?:\/\/hm.baidu.com\//,
-  /https?:\/\/cdn.bootcss.com\//,
-  /https?:\/\/static.duoshuo.com\//,
-  /https?:\/\/www.google-analytics.com\//,
-  /https?:\/\/dn-lbstatics.qbox.me\//,
-  /https?:\/\/ajax.cloudflare.com\//,
-  /https?:\/\/cdn1.lncld.net\//,
-  /https?:\/\/api.leancloud.cn\//,
+  /https?:\/\/cdn.bootcss.com\//, // https://cdn.bootcss.com/
+  /https?:\/\/cdn.bootcss.com\/jquery\//, // https://cdn.bootcss.com/jquery/
   /https?:\/\/lzw.me\/wp\-admin/,
 ];
 // 1、开启一个缓存
