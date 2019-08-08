@@ -44,6 +44,7 @@ const ignoreCache = [
   /https?:\/\/cdn1.lncld.net\//,
   /https?:\/\/api.leancloud.cn\//,
   /https?:\/\/lzw.me\/wp\-admin/,
+  /chrome-extension?:\/\/ikkbfngojljohpekonpldkamedehakni\/wp\-admin/,
 ];
 // 1、开启一个缓存
 // 2、缓存我们的文件
