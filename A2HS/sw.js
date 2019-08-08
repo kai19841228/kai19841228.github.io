@@ -131,12 +131,7 @@ if (needCache) {
   // 需要缓存
   // 使用fetch请求数据，并将请求结果clone一份缓存到cache
   // 此部分缓存后在browser中使用全局变量caches获取
-  caches.open(cacheKey('resources')).then(function (cache) {
-      return fetch(event.request).then(function (response) {
-          cache.put(event.request.url, response.clone());
-          return response;
-      });
-  });
+  networkedAndCache(request)
 }
   event.respondWith(cachedOrNetworked(request));
 }
