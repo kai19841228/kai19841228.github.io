@@ -154,7 +154,7 @@ function onFetch(event) {
 }
 //  fetch 用来监听用户的网络请求，并给出回应
 self.addEventListener('fetch', function (e) {
-  onFetch()
+  onFetch(e)
   return false;
     // 需要缓存的xhr请求
     var cacheRequestUrls = [
