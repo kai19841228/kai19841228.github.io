@@ -133,8 +133,10 @@ function shouldFetchAndCache(request) {
 }
 function onFetch(event) {
   const request = event.request;
-console.log(request)
+console.log(request.url)
+console.log(request.url.startsWith('chrome-extension'))
 console.log(request + '999999')
+if(request.url.startsWith('chrome-extension')) { return}
   // 应当永远从网络请求的资源
   // 如果请求失败，则使用离线资源替代
   if (shouldAlwaysFetch(request)) {
