@@ -27,7 +27,7 @@ function removeOldCache() {
           )
       )
       .then(() => {
-          log('removeOldCache completed.');
+          console.log('removeOldCache completed.');
       });
 }
 function cacheKey() {
