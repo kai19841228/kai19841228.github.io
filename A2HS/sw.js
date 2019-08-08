@@ -33,7 +33,7 @@ function removeOldCache() {
 function cacheKey() {
   return [version, ...arguments].join(':');
 }
-const version = 'maika_v20';
+const version = 'maika_v30';
 const ignoreCache = [
   /https?:\/\/hm.baidu.com\//,
   /https?:\/\/cdn.bootcss.com\//,
@@ -121,7 +121,23 @@ if(request.url.startsWith('chrome-extension')) { return}
       );
       return;
   }
-
+var cacheRequestUrls = [
+    '/weatherApi'
+];
+var needCache = cacheRequestUrls.some(function (url) {
+  return e.request.url.indexOf(url) > -1;
+})
+if (needCache) {
+  // 需要缓存
+  // 使用fetch请求数据，并将请求结果clone一份缓存到cache
+  // 此部分缓存后在browser中使用全局变量caches获取
+  caches.open(cacheKey('resources')).then(function (cache) {
+      return fetch(e.request).then(function (response) {
+          cache.put(e.request.url, response.clone());
+          return response;
+      });
+  });
+}
   event.respondWith(cachedOrNetworked(request));
 }
 //  fetch 用来监听用户的网络请求，并给出回应
