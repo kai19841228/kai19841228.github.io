@@ -167,3 +167,25 @@ self.addEventListener('notificationclose', event => {
   // notification closed event
   console.log(event)
 });
+
+self.addEventListener('offline', function() {
+  console.log('离线通知')
+  Notification.requestPermission().then(grant => {
+    if (grant !== 'granted') {
+        return
+    }
+    const notification = new Notification("Hi，网络不给力哟", {
+        body: '您的网络貌似离线了，不过在志文工作室里访问过的页面还可以继续打开~',
+        icon: '//lzw.me/images/avatar/lzwme-80x80.png'
+    })
+    notification.onclick = function() {
+        notification.close()
+    }
+  })
+})
+
+self.addEventListener('online', function() {
+  console.log('在线通知')
+})
+
+  
