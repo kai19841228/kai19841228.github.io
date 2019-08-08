@@ -87,7 +87,7 @@ self.addEventListener('install', function(e) {
 function networkedOrOffline(request) {
   return fetch(request)
       .then(response => {
-          log('(network)', request.method, request.url);
+          console.log('(network)', request.method, request.url);
           return response;
       })
       .catch(() => cachedResponse(request));
@@ -102,7 +102,7 @@ function cachedResponse(request) {
 function cachedOrNetworked(request) {
   return caches.match(request)
       .then((response) => {
-          log(response ? '(cached)' : '(network: cache miss)', request.method, request.url);
+          console.log(response ? '(cached)' : '(network: cache miss)', request.method, request.url);
           return response ||
               networkedAndCache(request)
       });
@@ -118,7 +118,7 @@ function networkedAndCache(request) {
                   cache.put(request, copy);
               });
 
-          log("(network: cache write)", request.method, request.url);
+          console.log("(network: cache write)", request.method, request.url);
           return response;
       });
 }
