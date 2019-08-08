@@ -30,7 +30,7 @@ function removeOldCache() {
 function cacheKey() {
   return [version, ...arguments].join(':');
 }
-const version = 'maika_v10';
+const version = 'maika_v11';
 const ignoreCache = [
   /https?:\/\/hm.baidu.com\//,
   /https?:\/\/cdn.bootcss.com\//,
@@ -48,11 +48,8 @@ const ignoreCache = [
 self.addEventListener('install', function(e) {
   e.waitUntil(
     // 清理旧版本的一种方法。把老的CacheName删掉。要多刷新几次才能生效
-    removeOldCache()
-    .then(() => {
-        console.log('removeOldCache completed.');
-        self.clients.claim()
-    })
+    removeOldCache(),
+    self.clients.claim()
   )
  })
  // 优先从网络请求，失败则使用离线资源替代
