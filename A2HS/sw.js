@@ -186,13 +186,14 @@ self.addEventListener('notificationclose', event => {
   console.log(event)
 });
 
+// push推送消息
 self.addEventListener('push', function (e) {
   var data = e.data;
   console.log(e)
   if (e.data) {
       data = data.json();
       console.log('push的数据为：', data);
-      self.registration.showNotification(data.text);        
+      self.registration.showNotification(data);        
   } 
   else {
       console.log('push没有任何数据');
