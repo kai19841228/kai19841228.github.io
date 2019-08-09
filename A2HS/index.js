@@ -27,7 +27,7 @@ if(window.Notification) {
 
 // 注册服务以控制使网站脱机工作
 // 如果sw不更新，就在sw后追加一个版本
-// 在把sw里的CacheName和apiCacheName 的名称也改下名字
+// 在把sw里的 version ，清楚cache 和更新Service Worker
 var version = '1.1.2';
 
 if('serviceWorker' in navigator) {
@@ -35,7 +35,7 @@ if('serviceWorker' in navigator) {
            .register('/A2HS/sw.js', {scope: './'})
            .then(function(reg) {
              console.log('Service Worker 注册成功！作用域为: ', reg.scope); 
-            //  手动更新
+            //  手动更新，根据缓存版本对比看是否要updata Service Worker
              if (localStorage.getItem('sw_version') !== version) {
               reg.update().then(() => localStorage.setItem('sw_version', version));
              }
