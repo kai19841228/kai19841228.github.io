@@ -98,8 +98,9 @@
     <button class="add-button">Add to home screen</button>
     <button id="js-sync-event-btn" style="background: #333;color: #FFF;">同步</button>
     <button id="js-btn" style="background: #333;color: #FFF;">异步请求</button>
+    <button id="js-n" style="background: #333;color: #FFF;">通知提醒</button>
     <input style="display: none;" id="js-search-input" value="789" />
-    ❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️
+    ❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️
     <script>
     window.vConsole = new window.VConsole();
     var swiper = new Swiper('.swiper-container', {
@@ -220,6 +221,17 @@ function queryBook(url) {
 }
 document.getElementById('js-btn').addEventListener('click', function () {
 	queryBook('https://www.apiopen.top/weatherApi?city=成都')
+})
+document.getElementById('js-n').addEventListener('click', function () {
+    if(window.Notification) {
+        if(window.Notification.permission == "granted") {
+            var notification = new Notification('你有一条新信息', {
+                body: "你好我是王小婷"
+            });
+        } else {
+            window.Notification.requestPermission();
+        }
+    } else alert('你的浏览器不支持此消息提示功能，请使用chrome内核的浏览器！');
 })
     </script>
 </body></html>
