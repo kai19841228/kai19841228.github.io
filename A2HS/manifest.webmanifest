@@ -4,9 +4,9 @@
   "display": "standalone",
   "icons": [
     {
-      "src": "images/fox-icon.png",
-      "sizes": "192x192",
-      "type": "image/png"
+      "src": "images/fox-icon.jpg",
+      "sizes": "217x217",
+      "type": "image/jpg"
     }
   ],
   "name": "麦卡出行,高品质出行专家",
