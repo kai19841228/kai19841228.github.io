@@ -2,14 +2,14 @@ importScripts("/precache-manifest.ebebbc721c5826af8fef4ff448c1009a.js", "https:/
 
 // 设置相应缓存的名字的前缀和后缀
 workbox.core.setCacheNameDetails({
-  prefix: 'browse-exp',
-  suffix: 'v1.0.0',
+  prefix: 'maika',
+  suffix: 'v1.0.1',
 });
 // 让我们的service worker尽快的得到更新和获取页面的控制权
 workbox.skipWaiting();
 workbox.clientsClaim();
 
-workbox.precaching.precacheAndRoute(self.\_\_precacheManifest || \[\]);
+workbox.precaching.precacheAndRoute(self.__precacheManifest || []);
 
 // 对我们请求的数据进行缓存，这里采用 networkFirst 策略
 workbox.routing.registerRoute(
