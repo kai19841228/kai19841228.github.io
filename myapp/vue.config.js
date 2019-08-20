@@ -37,7 +37,7 @@ module.exports = {
   pwa: {
     name: '麦卡出行',
     themeColor: '#ff8400',
-    msTileColor: '#FF00FF',
+    msTileColor: '#000000',
     appleMobileWebAppCapable: 'yes',
     appleMobileWebAppStatusBarStyle: 'black',
     workboxPluginMode: 'GenerateSW',
