@@ -8,15 +8,15 @@ self.__precacheManifest = [
     "url": "/js/chunk-vendors.b9bf9b67.js"
   },
   {
-    "revision": "84138d7fe11de56d7973",
-    "url": "/js/app.501dcc9c.js"
+    "revision": "c31d53a36258ef75cba1",
+    "url": "/js/app.ba2c80a8.js"
   },
   {
     "revision": "8010404ae6138d705ccd",
     "url": "/js/about.53ddcff3.js"
   },
   {
-    "revision": "34c19752eae5802827996e698c6382b9",
+    "revision": "00a35980d22666b04b69db543d28df35",
     "url": "/index.html"
   },
   {
@@ -32,7 +32,7 @@ self.__precacheManifest = [
     "url": "/img/fox-icon.0b54852c.png"
   },
   {
-    "revision": "84138d7fe11de56d7973",
+    "revision": "c31d53a36258ef75cba1",
     "url": "/css/app.d0e827a0.css"
   }
 ];

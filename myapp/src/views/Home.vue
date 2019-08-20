@@ -24,7 +24,6 @@ export default {
           type: 'get',
           dataType:"json",
           success: function(data) {console.log(data)
-        resolve(data)
       },
           timeout: 3000           
       });
