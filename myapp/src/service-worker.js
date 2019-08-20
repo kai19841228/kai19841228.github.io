@@ -1,7 +1,7 @@
 // 设置相应缓存的名字的前缀和后缀
 workbox.core.setCacheNameDetails({
   prefix: 'maika',
-  suffix: 'v1.0.1',
+  suffix: 'v1.1.1',
 });
 // 让我们的service worker尽快的得到更新和获取页面的控制权
 workbox.skipWaiting();
