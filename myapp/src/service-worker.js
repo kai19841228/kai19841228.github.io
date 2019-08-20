@@ -1,5 +1,3 @@
-importScripts("/precache-manifest.ebebbc721c5826af8fef4ff448c1009a.js", "https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
-
 // 设置相应缓存的名字的前缀和后缀
 workbox.core.setCacheNameDetails({
   prefix: 'browse-exp',
