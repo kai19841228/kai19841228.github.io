@@ -7,7 +7,7 @@ workbox.core.setCacheNameDetails({
 workbox.skipWaiting();
 workbox.clientsClaim();
 
-workbox.precaching.precacheAndRoute(self.\_\_precacheManifest || \[\]);
+workbox.precaching.precacheAndRoute(self.__precacheManifest || []);
 
 // 对我们请求的数据进行缓存，这里采用 networkFirst 策略
 workbox.routing.registerRoute(
