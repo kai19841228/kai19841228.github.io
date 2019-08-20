@@ -13,6 +13,22 @@ export default {
   name: "home",
   components: {
     HelloWorld
+  },
+  mounted () {
+    this.getdata()
+  },
+  methods: {
+    getdata (){
+      $.ajax({
+          url: 'https://www.apiopen.top/weatherApi?city=北京',
+          type: 'get',
+          dataType:"json",
+          success: function(data) {console.log(data)
+        resolve(data)
+      },
+          timeout: 3000           
+      });
+    }
   }
 };
 </script>
