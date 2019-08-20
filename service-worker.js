@@ -25,6 +25,7 @@ workbox.routing.registerRoute(
   workbox.strategies.networkFirst()
 )
 
+/*
 workbox.routing.registerRoute(
   /.*\.(?:png|jpg|jpeg|svg|gif)/g,
   new workbox.strategies.CacheFirst({
@@ -43,5 +44,5 @@ workbox.routing.registerRoute(
           }),
       ],
   }),
-);
+);*/
 
