@@ -4,19 +4,19 @@ self.__precacheManifest = [
     "url": "/robots.txt"
   },
   {
-    "revision": "b744ace337bfaf7691e2",
-    "url": "/js/chunk-vendors.b9bf9b67.js"
+    "revision": "226662a2e3455fa2fb44",
+    "url": "/js/chunk-vendors.53a75641.js"
   },
   {
-    "revision": "b21e3112f067bc11485e",
-    "url": "/js/app.a5381129.js"
+    "revision": "11a88519e07d7dd66465",
+    "url": "/js/app.1893e018.js"
   },
   {
     "revision": "8010404ae6138d705ccd",
     "url": "/js/about.53ddcff3.js"
   },
   {
-    "revision": "7d9f6100db21dc3873e04102c4015f4c",
+    "revision": "eee6bfe0f352ca2f771a8e7b48678e91",
     "url": "/index.html"
   },
   {
@@ -32,7 +32,7 @@ self.__precacheManifest = [
     "url": "/img/fox-icon.0b54852c.png"
   },
   {
-    "revision": "b21e3112f067bc11485e",
+    "revision": "11a88519e07d7dd66465",
     "url": "/css/app.d0e827a0.css"
   }
 ];
