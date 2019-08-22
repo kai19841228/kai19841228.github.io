@@ -1,30 +1,451 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<script src="http://libs.baidu.com/jquery/1.8.3/jquery.min.js"></script>
-	<script src = "https://webapi.amap.com/maps?v=1.4.10&key=565a6b4ad06b2391b8a81eaf2bdcf511"></script>
-    <title>定位</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="keywords" content="前端开发工程师简历">
+    <meta name="description" content="前端开发工程师简历">
+    <title>前端开发工程师简历</title>
+    <link rel="stylesheet" type="text/css" href="./static/style.css">
+    <link rel="stylesheet" type="text/css" href="./static/new.css" media="all">
+    <link rel="stylesheet" href="./static/bootstrap.min.css">
+    <link rel="stylesheet" href="./static/zxbj_base.css">
+    <link rel="stylesheet" href="./static/jm0203.css">
+    <link rel="fluid-icon" href="https://github.com/fluidicon.png" title="GitHub">
+    <!-- <link rel="shortcut icon" href="./static/fluidicon.png" type="image/x-icon"> -->
+    <link rel="shortcut icon" href="https://github.com/fluidicon.png" type="image/x-icon">
+    <style>
+        .m-nav-ul .nav_li:nth-child(3) a.erji_a {
+            color: #F66000;
+        }
+
+        .m-nav-ul .nav_li:nth-child(3) a.triangle {
+            border-color: #F66000;
+        }
+
+        .m-top_user li a {
+            box-sizing: content-box;
+            -moz-box-sizing: content-box;
+            -webkit-box-sizing: content-box;
+        }
+
+        .m-erjinav-ul {
+            margin-top: 25px;
+        }
+    </style>
 </head>
-<body>
-	<div id="container"></div>
-    <div id="baidu_geo">
-22334455
+<!--参考网址-->
+<!--http://www.17sucai.com/preview/14938/2016-06-30/jj/index.html-->
+
+<body style="height:auto;background:#f8f8f8;">
+    <div class="n_dispage_jm">
+        <div class="n_dispage_jm_in resetEditStyle">
+            <!--编辑区域-->
+            <div class="baseStyle clearfix jm0203_j6" id="resume_body">
+                <div class="divLeft clearfix" id="bar">
+                    <!--头像-->
+                    <div data-toggle="modal" data-target="#myModalHead" class="headDiv" id="resume_head">
+                        <span class="headNotice">点击替换头像</span>
+                        <img class="resume_head" src="./static/head.png" height="200"> </div>
+                    <div id="bar_sort"></div>
+                    <!--基本信息-->
+                    <div class="msgDiv positonDiv resume_add_area resume_sort" id="resume_msg">
+                        <div class="baseAge baseMsg baseDel" id="resume_age">
+                            <div class="delete resume_hidden"></div>
+                            <a class="resume_icon_diy icon wbdfont" style="font-size:none"></a>
+                            <input class="baseBorder resume_msg resume_lang_age" disabled="true" placeholder="年龄/生日" value="34岁">
+                        </div>
+                        <div class="baseAddress baseMsg baseDel" id="resume_address">
+                            <div class="delete resume_hidden"></div>
+                            <a class="resume_icon_diy icon wbdfont" style="font-size:none"></a>
+                            <input class="resume_msg baseBorder resume_lang_address" disabled="true" placeholder="联系地址" value="北京市朝阳区">
+                        </div>
+                        <div class="baseMobile baseMsg baseDel" id="resume_mobile">
+                            <div class="delete resume_hidden"></div>
+                            <a class="resume_icon_diy icon wbdfont" style="font-size:none"></a>
+                            <input class="resume_msg baseBorder resume_lang_mobile" disabled="true" placeholder="联系电话" value="15911085932">
+                        </div>
+                        <div class="baseEmail baseMsg baseDel" id="resume_email">
+                            <div class="delete resume_hidden"></div>
+                            <a class="resume_icon_diy icon wbdfont" style="font-size:none"></a>
+                            <input class="resume_msg baseBorder resume_lang_email" disabled="true" placeholder="电子邮箱" value="15911085932@163.com">
+                        </div>
+                    </div>
+                    <!--个人技能-->
+                    <div class="skillDiv positonDiv resume_add_area resume_graph resume_sort" id="resume_graph">
+                        <ul class="skillUl resume_append_area">
+                            <li class="baseDel resume_delete_area resume_graph_item">
+                                <div class="skillTitle">
+                                    <input class="resume_value baseBorder" placeholder="填写你的技能名称" disabled="true" value="html5+css3+flex">
+                                </div>
+                                <span>
+                                    <i class="resume_line" style="width:128px;border-top-style:solid;border-top-width:8px;"></i>
+                                </span>
+                                <div class="delete resume_delete"></div>
+                            </li>
+                            <li class="baseDel resume_delete_area resume_graph_item">
+                                <div class="skillTitle">
+                                    <input class="resume_value baseBorder" placeholder="填写你的技能名称" disabled="true"
+                                        value="Vue全家桶">
+                                </div>
+                                <span>
+                                    <i class="resume_line" style="width:128px;border-top-style:solid;border-top-width:8px;"></i>
+                                </span>
+                                <div class="delete resume_delete"></div>
+                            </li>
+                            <li class="baseDel resume_delete_area resume_graph_item">
+                                <div class="skillTitle">
+                                    <input class="resume_value baseBorder" placeholder="填写你的技能名称" disabled="true"
+                                        value="微信小程序">
+                                </div>
+                                <span>
+                                    <i class="resume_line" style="width:128px;border-top-style:solid;border-top-width:8px;"></i>
+                                </span>
+                                <div class="delete resume_delete"></div>
+                            </li>
+                            <li class="baseDel resume_delete_area resume_graph_item">
+                                <div class="skillTitle">
+                                    <input class="resume_value baseBorder" placeholder="填写你的技能名称" disabled="true"
+                                        value="mpvue（美团开源）">
+                                </div>
+                                <span>
+                                    <i class="resume_line" style="width:128px;border-top-style:solid;border-top-width:8px;"></i>
+                                </span>
+                                <div class="delete resume_delete"></div>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--兴趣爱好-->
+                    <div class="hobbyDiv positonDiv resume_add_area resume_icon resume_sort" id="resume_icon">
+                        <dl class="clearfix">
+                            <dt>
+                                <span>
+                                    <div class="resume_lang_hobby">兴趣爱好</div>
+                                </span>
+                            </dt>
+                            <dd class="resume_append_area">
+                                <div class="hobbyicon baseDel resume_delete_area resume_icon_item">
+                                    <a class="resume_icon_diy icon wbdfont" style="font-size:none"></a>
+                                    <span class="hobbyTitle">
+                                        <input class="resume_value baseBorder" placeholder="兴趣爱好" disabled="true" value="看书">
+                                    </span>
+                                    <div class="delete resume_delete"></div>
+                                </div>
+                                <div class="hobbyicon baseDel resume_delete_area resume_icon_item">
+                                    <a class="resume_icon_diy icon wbdfont" style="font-size:none"></a>
+                                    <span class="hobbyTitle">
+                                        <input class="resume_value baseBorder" placeholder="兴趣爱好" disabled="true" value="运动">
+                                    </span>
+                                    <div class="delete resume_delete"></div>
+                                </div>
+                                <div class="hobbyicon baseDel resume_delete_area resume_icon_item">
+                                    <a class="resume_icon_diy icon wbdfont" style="font-size:none"></a>
+                                    <span class="hobbyTitle">
+                                        <input class="resume_value baseBorder" placeholder="兴趣爱好" disabled="true" value="技术宅">
+                                    </span>
+                                    <div class="delete resume_delete"></div>
+                                </div>
+                                <div class="hobbyicon baseDel resume_delete_area resume_icon_item">
+                                    <a class="resume_icon_diy icon wbdfont" style="font-size:none"></a>
+                                    <span class="hobbyTitle">
+                                        <input class="resume_value baseBorder" placeholder="兴趣爱好" disabled="true" value="拍照">
+                                    </span>
+                                    <div class="delete resume_delete"></div>
+                                </div>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+                <div class="divRight clearfix resume_main" id="foo">
+                    <!--姓名、求职意向-->
+                    <div class="nameDiv positonDiv" id="resume_name">
+                        <h1>
+                            <div class="resume_msg baseBorder resume_notice resume_lang_name">王立冬</div>
+                        </h1>
+                        <h2>
+                            <div class="resume_msg baseBorder resume_notice resume_lang_job">求职目标：前端开发工程师</div>
+                            <div class="resume_msg baseBorder resume_notice resume_lang_job">熟悉前后端分离的开发模式，前端既生产组件，也参与到业务模块的前端部分开发，后台组提供API；</div>
+                            <div class="resume_msg baseBorder resume_notice resume_lang_job">熟练使用hml5\js\css3等技术，且具备良好代码习惯，能写出易读易维护的代码；</div>
+                            <div class="resume_msg baseBorder resume_notice resume_lang_job">熟练使用vue vuex vue-router，vue全家桶开发；</div>
+                            <div class="resume_msg baseBorder resume_notice resume_lang_job">熟练使用wxml wxss 开发小程序；</div>
+                            <div class="resume_msg baseBorder resume_notice resume_lang_job">丰富的web开发经验，4+前端工作经验，样式和js逻辑并重；</div>
+                            <div class="resume_msg baseBorder resume_notice resume_lang_job">丰富的项目经验，参与首汽约车H5开发（vue全家桶），首汽约车小程序开发（微信原生），首汽约车各种活动页面制作。</div>
+                        </h2>
+                    </div>
+                    <div id="foo_sort"></div>
+                    <!--教育背景-->
+                    <div class="eduDiv baseItem positonDiv resume_item resume_add_area resume_sort resume_notice" id="resume_edu">
+                        <dl>
+                            <dt>
+                                <a class="resume_icon_diy icon wbdfont" style="font-size:none"></a>
+                                <span>
+                                    <div class="resume_lang_edu">教育背景</div>
+                                    <div class="Border resume_line" style="width:668px;border-top-style:solid;border-top-width:2px;"></div>
+                                </span>
+                            </dt>
+                            <dd class="resume_append_area">
+                                <div class="baseContent baseDel resume_item_items resume_delete_area">
+                                	<div class="delete resume_delete"></div>
+                                	<div class="conTitle">
+                                		<span class="conTitle_time">
+                                			<div class="resume_time baseBorder">2003.09-2006.07</div>
+                                		</span>
+                                		<span class="conTitle_company">
+                                			<div class="resume_unit baseBorder">河北管理干部学院</div>
+                                		</span>
+                                		<span class="conTitle_post">
+                                			<div class="resume_job baseBorder">电子商务</div>
+                                		</span>
+                                	</div>
+                                	<div class="baseDel_ resume_delete_area_">
+                                		<div class="delete_ resume_delete_"></div>
+                                		<div class="conDisc baseBorder baseDel resume_value">
+                                			<!--<p>主修课程</p>-->
+                                			<!--<p>主修课程</p>-->
+                                		</div>
+                                	</div>
+                                </div>
+                            </dd>
+                        </dl>
+                    </div>
+                    <!--工作经历-->
+                    <div class="workDiv baseItem positonDiv resume_item resume_add_area resume_sort resume_notice" id="resume_work">
+                        <dl>
+                            <dt>
+                                <a class="resume_icon_diy icon wbdfont" style="font-size:none"></a>
+                                <span>
+                                    <div class="resume_lang_work">工作经历</div>
+                                    <div class="Border resume_line" style="width:668px;border-top-style:solid;border-top-width:2px;"></div>
+                                </span>
+                            </dt>
+                            <dd class="resume_append_area">
+                                <div class="baseContent baseDel resume_item_items resume_delete_area">
+                                    <div class="delete resume_delete"></div>
+                                    <div class="conTitle">
+                                        <span class="conTitle_time">
+                                            <div class="resume_time baseBorder">2018.11-至今</div>
+                                        </span>
+                                        <span class="conTitle_company">
+                                            <div class="resume_unit baseBorder">安徽瑞翼行网络科技有限公司</div>
+                                        </span>
+                                        <span class="conTitle_post">
+                                            <div class="resume_job baseBorder">前端开发工程师</div>
+                                        </span>
+                                    </div>
+                                    <div class="baseDel_ resume_delete_area_">
+                                        <div class="delete_ resume_delete_"></div>
+                                        <div class="conDisc baseBorder resume_value">
+                                            <p>1. 实行前后端分离的开发模式，前端既生产组件，也参与到业务模块的前端部分开发，后台提供API；</p>
+                                            <p>2. 负责与产品、UI和后端做良好的沟通，对产品能够提供持续的体验优化;</p>
+                                            <p>3. 熟练使用hml5\js\css3等技术，且具备良好代码习惯，能写出易读易维护的代码；</p>
+                                            <p>4. 熟练使用vue vuex vue-router，vue全家桶开发</p>
+                                            <p>5. 熟练使用wxml wxss 开发小程序</p>
+                                            <p>6. 良好的学习能力，问题解决能力，沟通能力，团队合作能力，创新能力，抗压能力。</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="baseContent baseDel resume_item_items resume_delete_area">
+                                    <div class="delete resume_delete"></div>
+                                    <div class="conTitle">
+                                        <span class="conTitle_time">
+                                            <div class="resume_time baseBorder">2015.6-2018.10</div>
+                                        </span>
+                                        <span class="conTitle_company">
+                                            <div class="resume_unit baseBorder">首汽约车北京有限公司</div>
+                                        </span>
+                                        <span class="conTitle_post">
+                                            <div class="resume_job baseBorder">前端开发工程师</div>
+                                        </span>
+                                    </div>
+                                    <div class="baseDel_ resume_delete_area_">
+                                        <div class="delete_ resume_delete_"></div>
+                                        <div class="conDisc baseBorder resume_value">
+                                            <p>1. 实行前后端分离的开发模式，前端既生产组件，也参与到业务模块的前端部分开发，后台提供API；</p>
+                                            <p>2. 负责与产品、UI和后端做良好的沟通，对产品能够提供持续的体验优化;</p>
+                                            <p>3. 熟练使用hml5\js\css3等技术，且具备良好代码习惯，能写出易读易维护的代码；</p>
+                                            <p>4. 熟练使用vue vuex vue-router，vue全家桶开发</p>
+                                            <p>5. 熟练使用wxml wxss 开发小程序</p>
+                                            <p>6. 良好的学习能力，问题解决能力，沟通能力，团队合作能力，创新能力，抗压能力。</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="baseContent baseDel resume_item_items resume_delete_area">
+                                	<div class="delete resume_delete"></div>
+                                	<div class="conTitle">
+                                		<span class="conTitle_time">
+                                			<div class="resume_time baseBorder" contenteditable="true">2014.6-2015.6</div>
+                                		</span>
+                                		<span class="conTitle_company">
+                                			<div class="resume_unit baseBorder" contenteditable="true">中进名车文化传播（北京）有限公司</div>
+                                		</span>
+                                		<span class="conTitle_post">
+                                			<div class="resume_job baseBorder" contenteditable="true">前端开发工程师</div>
+                                		</span>
+                                	</div>
+                                	<div class="baseDel_ resume_delete_area_">
+                                		<div class="delete_ resume_delete_"></div>
+                                		<div class="conDisc baseBorder resume_value" contenteditable="true" data-toggle="tooltip" data-placement="top" title="复制粘贴文字请右键-粘贴为纯文本">
+                                			<p>1. 负责PC端及移动端前端的开发工作;</p>
+                                			<p>2. 负责与产品、UI和后端做良好的沟通，对产品能够提供持续的体验优化;</p>
+											<p>3. 熟练使用hml5\js\css3等技术，且具备良好代码习惯，能写出易读易维护的代码；</p>
+											<p>4. 良好的学习能力，问题解决能力，沟通能力，团队合作能力，创新能力，抗压能力。</p>
+                                		</div>
+                                	</div>
+                                </div>
+								<div class="baseContent baseDel resume_item_items resume_delete_area">
+									<div class="delete resume_delete"></div>
+									<div class="conTitle">
+										<span class="conTitle_time">
+											<div class="resume_time baseBorder" contenteditable="true">2013.10-2014.6</div>
+										</span>
+										<span class="conTitle_company">
+											<div class="resume_unit baseBorder" contenteditable="true">世纪大象群文化传播有限公司</div>
+										</span>
+										<span class="conTitle_post">
+											<div class="resume_job baseBorder" contenteditable="true">前端开发工程师 flash为主</div>
+										</span>
+									</div>
+									<div class="baseDel_ resume_delete_area_">
+										<div class="delete_ resume_delete_"></div>
+										<div class="conDisc baseBorder resume_value" contenteditable="true" data-toggle="tooltip" data-placement="top" title="复制粘贴文字请右键-粘贴为纯文本">
+											<p>1. 负责PC端及移动端前端的开发工作;</p>
+											<p>2. 负责与产品、UI和后端做良好的沟通，对产品能够提供持续的体验优化;</p>
+											<p>3. 熟练使用hml5\js\css3等技术，且具备良好代码习惯，能写出易读易维护的代码；</p>
+											<p>4. 良好的学习能力，问题解决能力，沟通能力，团队合作能力，创新能力，抗压能力。</p>
+										</div>
+									</div>
+								</div>
+                            </dd>
+                        </dl>
+                    </div>
+                    <!--项目经验-->
+                    <div class="outexperDiv baseItem positonDiv resume_item resume_add_area resume_sort resume_notice" id="resume_project">
+                        <dl>
+                            <dt>
+                                <a class="resume_icon_diy icon wbdfont" style="font-size:none"></a>
+                                <span>
+                                    <div class="resume_lang_project">项目经验</div>
+                                    <div class="Border resume_line" style="width:668px;border-top-style:solid;border-top-width:2px;"></div>
+                                </span>
+                            </dt>
+                            <dd class="resume_append_area">
+                                <div class="baseContent baseDel resume_item_items resume_delete_area">
+                                    <div class="delete resume_delete"></div>
+                                    <div class="conTitle">
+                                        <span class="conTitle_time">
+                                            <div class="resume_time baseBorder">2018.11-至今</div>
+                                        </span>
+                                        <span class="conTitle_company">
+                                            <div class="resume_unit baseBorder">安徽瑞翼行网络科技有限公司 后台管理系统</div>
+                                        </span>
+                                        <span class="conTitle_post">
+                                            <div class="resume_job baseBorder"></div>
+                                        </span>
+                                    </div>
+                                    <div class="baseDel_ resume_delete_area_">
+                                        <div class="delete_ resume_delete_"></div>
+                                        <div class="conDisc baseBorder resume_value">
+                                            <p>使用vue vuex vue-router，vue全家桶开发</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="baseContent baseDel resume_item_items resume_delete_area">
+                                    <div class="delete resume_delete"></div>
+                                    <div class="conTitle">
+                                        <span class="conTitle_time">
+                                            <div class="resume_time baseBorder">2015.6-2018.10</div>
+                                        </span>
+                                        <span class="conTitle_company">
+                                            <div class="resume_unit baseBorder">首汽约车H5（vue全家桶）</div>
+                                        </span>
+                                        <span class="conTitle_post">
+                                            <div class="resume_job baseBorder"></div>
+                                        </span>
+                                    </div>
+                                    <div class="baseDel_ resume_delete_area_">
+                                        <div class="delete_ resume_delete_"></div>
+                                        <div class="conDisc baseBorder resume_value">
+                                            <p>熟练使用vue vuex vue-router，vue全家桶开发</p>
+                                            <p>用vue全家桶开发H5相关的上下车地址选择组件拆分和js逻辑</p>
+                                            <p>根据产品需求优化H5</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="baseContent baseDel resume_item_items resume_delete_area">
+                                    <div class="delete resume_delete"></div>
+                                    <div class="conTitle">
+                                        <span class="conTitle_time">
+                                            <div class="resume_time baseBorder">2015.6-2018.10</div>
+                                        </span>
+                                        <span class="conTitle_company">
+                                            <div class="resume_unit baseBorder">微信小程序</div>
+                                        </span>
+                                        <span class="conTitle_post">
+                                            <div class="resume_job baseBorder"></div>
+                                        </span>
+                                    </div>
+                                    <div class="baseDel_ resume_delete_area_">
+                                        <div class="delete_ resume_delete_"></div>
+                                        <div class="conDisc baseBorder resume_value">
+                                            <p>熟练使用wxml wxss 开发小程序</p>
+                                            <p>基于原生微信小程序开发跟人中心先关页面</p>
+                                            <p>我的钱包发票开具功能制作</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="baseContent baseDel resume_item_items resume_delete_area">
+                                    <div class="delete resume_delete"></div>
+                                    <div class="conTitle">
+                                        <span class="conTitle_time">
+                                            <div class="resume_time baseBorder">2015.6-2018.10</div>
+                                        </span>
+                                        <span class="conTitle_company">
+                                            <div class="resume_unit baseBorder">H5活动</div>
+                                        </span>
+                                        <span class="conTitle_post">
+                                            <div class="resume_job baseBorder"></div>
+                                        </span>
+                                    </div>
+                                    <div class="baseDel_ resume_delete_area_">
+                                        <div class="delete_ resume_delete_"></div>
+                                        <div class="conDisc baseBorder resume_value">
+                                            <p>市场推广活动制作。</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </dd>
+                        </dl>
+                    </div>
+                    <!--自我评价-->
+                    <div class="selfDiv baseItem positonDiv resume_item resume_sort resume_notice" id="resume_self">
+                        <dl>
+                            <dt>
+                                <a class="resume_icon_diy icon wbdfont" style="font-size:none"></a>
+                                <span>
+                                    <div class="resume_lang_self">自我评价</div>
+                                    <div class="Border resume_line" style="width:668px;border-top-style:solid;border-top-width:2px;"></div>
+                                </span>
+                            </dt>
+                            <dd>
+                                <div class="baseContent">
+                                    <div class="conDisc baseBorder resume_lang_self_value resume_value">
+										<p>实行前后端分离的开发模式，前端组既生产组件，也参与到业务模块的前端部分开发，
+后台组只提供API。</p>
+										<p>熟练使用hml5\js\css3等技术，且具备良好代码习惯，能写出易读易维护的代码；<br>
+熟练使用vue vuex vue-router，vue全家桶开发<br>
+熟练使用wxml wxss 开发小程序<br>
+良好的学习能力，问题解决能力，沟通能力，团队合作能力，创新能力，抗压能力。</p>
+                                        <p>本人做事稳重，对待工作认真，责任心较强，待人真诚，善于沟通，时刻保持学习，积极拥抱变化。喜</p>
+                                        <p>欢前端开发，具备一定的分析、设计、开发能力，拥有较强的学习能力与团队精神。</p>
+                                    </div>
+                                </div>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-	<script type="text/javascript">
-	    //初始化地图时，若center属性缺省，地图默认定位到用户所在城市的中心
-	    var map = new AMap.Map('container', {
-	        resizeEnable: true
-	    });
-		map.getCity(function(r){
-			console.log(r)
-			var str = '当前城市adcode：'+map.getAdcode()+'<br>'+'当前中心点：'+map.getCenter()+'<br>' + '当前城市：' + r.province + r.city + r.district+'<br>' +'城市citycode：' + r.citycode 
-			console.log(str)
-			$('#baidu_geo').html(str)
-		})
-		
-	</script>
 </body>
+
 </html>
