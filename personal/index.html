@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<script src="http://libs.baidu.com/jquery/1.8.3/jquery.min.js"></script>
+	<script src = "https://webapi.amap.com/maps?v=1.4.10&key=565a6b4ad06b2391b8a81eaf2bdcf511"></script>
+    <title>定位</title>
+</head>
+<body>
+	<div id="container"></div>
+    <div id="baidu_geo">
+22334455
+    </div>
+	<script type="text/javascript">
+	    //初始化地图时，若center属性缺省，地图默认定位到用户所在城市的中心
+	    var map = new AMap.Map('container', {
+	        resizeEnable: true
+	    });
+		map.getCity(function(r){
+			console.log(r)
+			var str = '当前城市adcode：'+map.getAdcode()+'<br>'+'当前中心点：'+map.getCenter()+'<br>' + '当前城市：' + r.province + r.city + r.district+'<br>' +'城市citycode：' + r.citycode 
+			console.log(str)
+			$('#baidu_geo').html(str)
+		})
+		
+	</script>
+</body>
+</html>
