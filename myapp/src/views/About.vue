@@ -17,7 +17,9 @@ export default {
   mounted() {},
   methods: {
     notifi() {
-      Push.create("测试提示");
+      Push.create("司机已到达", {
+        body: "司机会与你即时取得联系。"
+      });
       // if (window.Notification) {
       //   if (window.Notification.permission == "granted") {
       //     var notification = new Notification("你有一条新信息", {

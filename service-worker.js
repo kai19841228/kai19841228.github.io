@@ -1,4 +1,4 @@
-importScripts("/precache-manifest.22b4d5cc02145cf56804f32b7fba233e.js", "https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
+importScripts("/precache-manifest.3c26eec79cc384dd46b86fd6ae4f3631.js", "https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 // 设置相应缓存的名字的前缀和后缀  这的suffix变更了。也要改下registerServiceWorker。js里
 workbox.core.setCacheNameDetails({
@@ -12,7 +12,7 @@ workbox.clientsClaim();
 workbox.precaching.precacheAndRoute(self.__precacheManifest || []);
 
 // 对我们请求的数据进行缓存，这里采用 networkFirst 策略
-workbox.routing.registerRoute(
+/*workbox.routing.registerRoute(
   new RegExp('.\*experiments?.\*'),
   workbox.strategies.networkFirst()
 );
@@ -23,7 +23,7 @@ workbox.routing.registerRoute(
 workbox.routing.registerRoute(
   new RegExp('.\*experiment\_types.\*'),
   workbox.strategies.networkFirst()
-)
+)*/
 
 /*
 workbox.routing.registerRoute(
