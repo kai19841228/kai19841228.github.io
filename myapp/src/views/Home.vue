@@ -18,7 +18,7 @@ export default {
   mounted() {
     this.getdata();
     window.vConsole = new window.VConsole();
-    Push.create("Hello World!");
+    Push.create("主页 测试提示");
   },
   methods: {
     getdata() {
