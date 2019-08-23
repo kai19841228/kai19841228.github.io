@@ -1,4 +1,4 @@
-importScripts("/precache-manifest.6b345a6c9af8ba9e2d66e2fe39a5b43e.js", "https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
+importScripts("/precache-manifest.80ea4c54d270f4a5ab485d574214c632.js", "https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 // 设置相应缓存的名字的前缀和后缀  这的suffix变更了。也要改下registerServiceWorker。js里
 workbox.core.setCacheNameDetails({

@@ -7,6 +7,7 @@
 
 <script>
 // @ is an alias to /src
+import Push from "push.js";
 import HelloWorld from "@/components/HelloWorld.vue";
 
 export default {
@@ -16,6 +17,8 @@ export default {
   },
   mounted() {
     this.getdata();
+    window.vConsole = new window.VConsole();
+    Push.create("Hello World!");
   },
   methods: {
     getdata() {
