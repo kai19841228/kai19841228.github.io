@@ -9,10 +9,10 @@ workbox.core.setCacheNameDetails({
 workbox.skipWaiting();
 workbox.clientsClaim();
 
-// workbox.precaching.precacheAndRoute(self.__precacheManifest || []);
+workbox.precaching.precacheAndRoute(self.__precacheManifest || []);
 
 // 对我们请求的数据进行缓存，这里采用 networkFirst 策略
-/*workbox.routing.registerRoute(
+workbox.routing.registerRoute(
   new RegExp('.\*experiments?.\*'),
   workbox.strategies.networkFirst()
 );
@@ -23,7 +23,7 @@ workbox.routing.registerRoute(
 workbox.routing.registerRoute(
   new RegExp('.\*experiment\_types.\*'),
   workbox.strategies.networkFirst()
-)*/
+)
 
 /*
 workbox.routing.registerRoute(
