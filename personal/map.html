@@ -24,6 +24,15 @@
 			console.log(str)
 			$('#baidu_geo').html(str)
 		})
+		AMap.plugin('AMap.CitySearch', function () {
+			var citySearch = new AMap.CitySearch()
+			citySearch.getLocalCity(function (status, result) {
+				if (status === 'complete' && result.info === 'OK') {
+				// 查询成功，result即为当前所在城市信息
+				console.log(result)
+				}
+			})
+		})
 		
 	</script>
 </body>

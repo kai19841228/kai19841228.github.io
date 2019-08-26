@@ -18,7 +18,9 @@ export default {
   methods: {
     notifi() {
       Push.create("司机已到达", {
-        body: "司机会与你即时取得联系。"
+        body: "司机会与你即时取得联系。",
+        timeout: 10000,
+        requireInteraction: true
       });
     }
   }
