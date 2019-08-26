@@ -12,7 +12,8 @@
 	<div id="container"></div>
     <div id="baidu_geo">
 22334455
-    </div>
+	</div>
+	<div id="citysearch"></div>
 	<script type="text/javascript">
 	    //初始化地图时，若center属性缺省，地图默认定位到用户所在城市的中心
 	    var map = new AMap.Map('container', {
@@ -30,6 +31,7 @@
 				if (status === 'complete' && result.info === 'OK') {
 				// 查询成功，result即为当前所在城市信息
 				console.log(result)
+				var str = '返回信息：' + result.adcode + '' + result.city + '' + result.province
 				}
 			})
 		})
