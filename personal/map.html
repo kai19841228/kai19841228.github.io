@@ -36,7 +36,7 @@
 				if (status === 'complete' && result.info === 'OK') {
 				// 查询成功，result即为当前所在城市信息
 				console.log(result)
-				var str = '返回信息：' + result.adcode + '' + result.city + '' + result.province
+				var str = '返回信息：' + result.adcode + '省份' + result.province + '城市' + result.city
 				$('#citysearch').html(str)
 				}
 			})
