@@ -1,9 +1,9 @@
-importScripts("/precache-manifest.d8fdf5c00ab97c6c6a845f308b9dfe68.js", "https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
+importScripts("/precache-manifest.0aea6ab5a531e46c87465f116ddc649b.js", "https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 // 设置相应缓存的名字的前缀和后缀  这的suffix变更了。也要改下registerServiceWorker。js里
 workbox.core.setCacheNameDetails({
   prefix: 'maika',
-  suffix: 'v1.2.2',
+  suffix: 'v1.2.3',
 });
 // 让我们的service worker尽快的得到更新和获取页面的控制权
 workbox.skipWaiting();
