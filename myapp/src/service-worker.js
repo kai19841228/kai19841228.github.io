@@ -1,7 +1,9 @@
 // 设置相应缓存的名字的前缀和后缀  这的suffix变更了。也要改下registerServiceWorker。js里
+const version = 'v1.2.4';
+
 workbox.core.setCacheNameDetails({
   prefix: 'maika',
-  suffix: 'v1.2.3',
+  suffix: version,
 });
 // 让我们的service worker尽快的得到更新和获取页面的控制权
 workbox.skipWaiting();
@@ -9,6 +11,30 @@ workbox.clientsClaim();
 
 workbox.precaching.precacheAndRoute(self.__precacheManifest || []);
 
+function contain (str, conStr) {
+  return str.indexOf(conStr) !== -1
+}
+function removeOldCache() {
+  return caches
+      .keys()
+      .then(keys =>
+          Promise.all( // 等待所有旧的资源都清理完成
+              keys
+              .filter(key => !contain (key, version)) // 过滤不需要删除的资源
+              .map(key => caches.delete(key)) // 删除旧版本资源，返回为 Promise 对象
+          )
+      )
+      .then(() => {
+          console.log('removeOldCache completed.');
+      });
+}
+self.addEventListener('install', function(e) {
+  e.waitUntil(
+    // 清理旧版本的一种方法。把老的CacheName删掉。要多刷新几次才能生效
+    removeOldCache(),
+    self.skipWaiting()
+  )
+})
 // 对我们请求的数据进行缓存，这里采用 networkFirst 策略
 /*workbox.routing.registerRoute(
   new RegExp('.\*experiments?.\*'),
