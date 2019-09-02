@@ -1,7 +1,7 @@
 // 设置相应缓存的名字的前缀和后缀  这的suffix变更了。也要改下registerServiceWorker。js里
 workbox.core.setCacheNameDetails({
   prefix: 'maika',
-  suffix: 'v1.2.1',
+  suffix: 'v1.2.2',
 });
 // 让我们的service worker尽快的得到更新和获取页面的控制权
 workbox.skipWaiting();
