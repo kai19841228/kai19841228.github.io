@@ -1,4 +1,4 @@
-importScripts("/precache-manifest.3c26eec79cc384dd46b86fd6ae4f3631.js", "https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
+importScripts("/precache-manifest.d8fdf5c00ab97c6c6a845f308b9dfe68.js", "https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 // 设置相应缓存的名字的前缀和后缀  这的suffix变更了。也要改下registerServiceWorker。js里
 workbox.core.setCacheNameDetails({
@@ -12,7 +12,7 @@ workbox.clientsClaim();
 workbox.precaching.precacheAndRoute(self.__precacheManifest || []);
 
 // 对我们请求的数据进行缓存，这里采用 networkFirst 策略
-workbox.routing.registerRoute(
+/*workbox.routing.registerRoute(
   new RegExp('.\*experiments?.\*'),
   workbox.strategies.networkFirst()
 );
@@ -24,6 +24,64 @@ workbox.routing.registerRoute(
   new RegExp('.\*experiment\_types.\*'),
   workbox.strategies.networkFirst()
 )
+workbox.routing.registerRoute(
+  new RegExp('/^https:\/\/api/'),
+  workbox.strategies.networkFirst()
+)
+workbox.routing.registerRoute(
+  new RegExp('/^https:\/\/cdn/'),
+  workbox.strategies.networkFirst()
+)*/
+
+// html的缓存策略
+/*
+workbox.routing.registerRoute(
+  new RegExp(''.*\.html'),
+  workbox.strategies.networkFirst()
+)
+workbox.routing.registerRoute(
+  new RegExp('.*\.(?:js|css)'),
+  workbox.strategies.cacheFirst()
+)
+
+workbox.routing.registerRoute(
+  new RegExp('https://your\.cdn\.com/'),
+  workbox.strategies.staleWhileRevalidate()
+)
+
+workbox.routing.registerRoute(
+  new RegExp('https://your\.img\.cdn\.com/'),
+  workbox.strategies.cacheFirst({
+    cacheName: 'example:img'
+  })
+)
+runtimeCaching: [
+    {
+      // To match cross-origin requests, use a RegExp that matches
+      // the start of the origin:
+      urlPattern: new RegExp('^https://api'),
+      handler: 'staleWhileRevalidate',
+      options: {
+        // Configure which responses are considered cacheable.
+        cacheableResponse: {
+          statuses: [200]
+        }
+      }
+    },
+    {
+      urlPattern: new RegExp('^https://cdn'),
+      // Apply a network-first strategy.
+      handler: 'networkFirst',
+      options: {
+        // Fall back to the cache after 2 seconds.
+        networkTimeoutSeconds: 2,
+        cacheableResponse: {
+          statuses: [200]
+        }
+      }
+    }
+  ]
+*/
 
 /*
 workbox.routing.registerRoute(
