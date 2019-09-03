@@ -8,4 +8,11 @@ Upload files 可以把文件传到github上。它下边又可以在细分二级�
 
 https://kai19841228.github.io/A2HS/    在谷歌浏览器和苹果浏览器把当前web添加到桌面快捷方式
 
-https://kai19841228.github.io/personal/
+https://kai19841228.github.io/personal/  个人简历
+https://kai19841228.github.io/personal/map.html 高德地图 获取当前城市
+
+pwa 是vue 2.96 用 sw-precache-webpack-plugin 实现的缓存
+
+A2HS 是原生js 实现的sw
+
+myapp 是vue3.0 实现的pwa。

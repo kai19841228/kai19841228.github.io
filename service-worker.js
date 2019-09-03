@@ -1,4 +1,4 @@
-importScripts("/precache-manifest.0aea6ab5a531e46c87465f116ddc649b.js", "https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
+importScripts("/precache-manifest.548f061dcd8ee07cbebe717a00ef9b78.js", "https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 // 设置相应缓存的名字的前缀和后缀  这的suffix变更了。也要改下registerServiceWorker。js里
 const version = 'v1.2.4';
@@ -12,6 +12,12 @@ workbox.skipWaiting();
 workbox.clientsClaim();
 
 workbox.precaching.precacheAndRoute(self.__precacheManifest || []);
+
+// html的缓存策略
+workbox.routing.registerRoute(
+  new RegExp('.*\.html'),
+  workbox.strategies.networkFirst()
+)
 
 function contain (str, conStr) {
   return str.indexOf(conStr) !== -1
@@ -36,7 +42,7 @@ self.addEventListener('install', function(e) {
     removeOldCache(),
     self.skipWaiting()
   )
- })
+})
 // 对我们请求的数据进行缓存，这里采用 networkFirst 策略
 /*workbox.routing.registerRoute(
   new RegExp('.\*experiments?.\*'),
@@ -59,12 +65,7 @@ workbox.routing.registerRoute(
   workbox.strategies.networkFirst()
 )*/
 
-// html的缓存策略
 /*
-workbox.routing.registerRoute(
-  new RegExp(''.*\.html'),
-  workbox.strategies.networkFirst()
-)
 workbox.routing.registerRoute(
   new RegExp('.*\.(?:js|css)'),
   workbox.strategies.cacheFirst()

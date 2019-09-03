@@ -16,7 +16,6 @@ export default {
   },
   mounted() {
     this.getdata();
-    window.vConsole = new window.VConsole();
   },
   methods: {
     getdata() {

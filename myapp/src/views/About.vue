@@ -16,7 +16,7 @@ export default {
   name: "home",
   components: {},
   mounted() {
-    this.DexieInit();
+    // this.DexieInit();
   },
   methods: {
     notifi() {

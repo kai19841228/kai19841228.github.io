@@ -11,6 +11,12 @@ workbox.clientsClaim();
 
 workbox.precaching.precacheAndRoute(self.__precacheManifest || []);
 
+// html的缓存策略
+workbox.routing.registerRoute(
+  new RegExp('.*\.html'),
+  workbox.strategies.networkFirst()
+)
+
 function contain (str, conStr) {
   return str.indexOf(conStr) !== -1
 }
@@ -60,7 +66,7 @@ workbox.routing.registerRoute(
 // html的缓存策略
 /*
 workbox.routing.registerRoute(
-  new RegExp(''.*\.html'),
+  new RegExp('.*\.html'),
   workbox.strategies.networkFirst()
 )
 workbox.routing.registerRoute(
