@@ -85,6 +85,13 @@ workbox.routing.registerRoute(
     cacheName: 'example:img'
   })
 )
+workbox.routing.registerRoute(
+  new RegExp('/.*\.js/'),
+  new RegExp('/.*\.css/'),
+  workbox.strategies.cacheFirst({
+    cacheName: 'example:img'
+  })
+)
 runtimeCaching: [
     {
       // To match cross-origin requests, use a RegExp that matches
