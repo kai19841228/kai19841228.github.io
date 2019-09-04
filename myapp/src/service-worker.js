@@ -8,7 +8,13 @@ workbox.core.setCacheNameDetails({
 // 让我们的service worker尽快的得到更新和获取页面的控制权
 workbox.skipWaiting();
 workbox.clientsClaim();
-
+self.__precacheManifest = [{
+  "revision": "b6216d61c03e6ce0c9aea6ca7808f7ca",
+  "url": "/img/icons/favicon-32x32.png"
+},{
+  "revision": "b6216d61c03e6ce0c9aea6ca7808f7ca",
+  "url": "/img/icons/favicon-16x16.png"
+}].concat(self.__precacheManifest || [])
 workbox.precaching.precacheAndRoute(self.__precacheManifest || []);
 
 // html的缓存策略
