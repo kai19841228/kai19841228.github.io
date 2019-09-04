@@ -20,6 +20,10 @@ workbox.routing.registerRoute(
   new RegExp('.*\.(?:js|css)'),
   workbox.strategies.staleWhileRevalidate()
 )
+workbox.routing.registerRoute(
+  new RegExp('/^https:\/\/www.apiopen.top\/weatherApi/'),
+  workbox.strategies.networkFirst()
+)
 
 function contain (str, conStr) {
   return str.indexOf(conStr) !== -1
@@ -57,9 +61,6 @@ self.addEventListener('activate', function (event) {
     self.clients.claim(),
     removeOldCache()
   ]))
-})
-self.addEventListener('fetch', function (e) {
-  console.log('现在正在请求：' + e.request.url);
 })
 self.addEventListener('sync', function (e) {
 })
