@@ -20,10 +20,6 @@ workbox.routing.registerRoute(
   new RegExp('.*\.(?:js|css)'),
   workbox.strategies.staleWhileRevalidate()
 )
-workbox.routing.registerRoute(
-  new RegExp('/^https:\/\/www.apiopen.top\/weatherApi/'),
-  workbox.strategies.networkFirst()
-)
 
 function contain (str, conStr) {
   return str.indexOf(conStr) !== -1
