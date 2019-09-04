@@ -26,6 +26,10 @@ workbox.routing.registerRoute(
   new RegExp('.*\.(?:js|css)'),
   workbox.strategies.staleWhileRevalidate()
 )
+workbox.routing.registerRoute(
+  /.*\.(?:png|jpg|jpeg|svg|gif)/g,
+  workbox.strategies.staleWhileRevalidate()
+);
 
 function contain (str, conStr) {
   return str.indexOf(conStr) !== -1
