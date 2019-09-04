@@ -69,8 +69,6 @@ self.addEventListener('activate', function (event) {
     removeOldCache()
   ]))
 });
-self.addEventListener('fetch', function (e) {
-})
 // 对我们请求的数据进行缓存，这里采用 networkFirst 策略
 /*workbox.routing.registerRoute(
   new RegExp('.\*experiments?.\*'),
