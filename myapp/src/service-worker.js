@@ -35,6 +35,9 @@ workbox.routing.registerRoute(
 function contain (str, conStr) {
   return str.indexOf(conStr) !== -1
 }
+function cacheKey() {
+  return [version, ...arguments].join(':');
+}
 function removeOldCache() {
   return caches
       .keys()
