@@ -40,11 +40,11 @@ module.exports = {
     msTileColor: '#000000',
     appleMobileWebAppCapable: 'yes',
     appleMobileWebAppStatusBarStyle: 'black',
-    workboxPluginMode: 'GenerateSW',
-    // workboxPluginMode: 'InjectManifest',
-    // workboxOptions: {
-    //   swSrc: 'src/service-worker.js'
-    // }
+    // workboxPluginMode: 'GenerateSW',
+    workboxPluginMode: 'InjectManifest',
+    workboxOptions: {
+      swSrc: 'src/service-worker.js'
+    }
   }, // configure webpack-dev-server behavior
   devServer: {
     open: true,
