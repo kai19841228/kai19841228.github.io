@@ -11,12 +11,17 @@
 // @ is an alias to /src
 // import HelloWorld from "@/components/HelloWorld.vue";
 import Push from "push.js";
+import ajaxApi from '@/js/axiosConfig'
 
 export default {
   name: "home",
   components: {},
   mounted() {
     // this.DexieInit();
+    console.log(ajaxApi)
+    ajaxApi.getParam('https://www.apiopen.top/weatherApi?city=北京', {}).then(function (data) {
+      console.log(data.data)
+    })
   },
   methods: {
     notifi() {

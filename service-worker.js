@@ -1,4 +1,4 @@
-importScripts("/precache-manifest.548f061dcd8ee07cbebe717a00ef9b78.js", "https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
+importScripts("/precache-manifest.3104d9e6dbed727b9bc8a760007b3022.js", "https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 // 设置相应缓存的名字的前缀和后缀  这的suffix变更了。也要改下registerServiceWorker。js里
 const version = 'v1.2.4';
