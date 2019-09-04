@@ -18,6 +18,21 @@ workbox.routing.registerRoute(
   new RegExp('.*\.html'),
   workbox.strategies.networkFirst()
 )
+workbox.routing.registerRoute(
+  new RegExp('.*\.(?:js|css)'),
+  workbox.strategies.staleWhileRevalidate()
+)
+workbox.routing.registerRoute(
+  /\.(?:png|gif|jpg|jpeg|svg)$/,
+  workbox.strategies.staleWhileRevalidate({
+      plugins: [
+          new workbox.expiration.Plugin({
+              maxEntries: 6000, // 最大的缓存数，超过之后则走 LRU 策略清除最老最少使用缓存
+              maxAgeSeconds: 30 * 24 * 60 * 60, // 这只最长缓存时间为 30 天
+          }),
+      ],
+  }),
+);
 
 function contain (str, conStr) {
   return str.indexOf(conStr) !== -1
@@ -37,11 +52,45 @@ function removeOldCache() {
       });
 }
 self.addEventListener('install', function(e) {
+  console.log('install')
   e.waitUntil(
     // 清理旧版本的一种方法。把老的CacheName删掉。要多刷新几次才能生效
     removeOldCache(),
     self.skipWaiting()
   )
+})
+self.addEventListener('activate', function (event) { 
+  // 监听worker的activate事件
+  console.log('activate')
+  event.waitUntil(Promise.all([
+    // 更新客户端
+    self.clients.claim(),
+    removeOldCache()
+  ]))
+});
+self.addEventListener('fetch', function (e) {
+  // 需要缓存的xhr请求白名单
+  var cacheRequestUrls = [
+    '/weatherApi'
+  ];
+  console.log('现在正在请求：' + e.request.url);
+  // 判断当前请求是否需要缓存
+  var needCache = cacheRequestUrls.some(function (url) {
+    return e.request.url.indexOf(url) > -1;
+  });
+  /**** 这里是对XHR数据缓存的相关操作 ****/
+  if (needCache) {
+    // 需要缓存
+    // 使用fetch请求数据，并将请求结果clone一份缓存到cache
+    // 此部分缓存后在browser中使用全局变量caches获取
+    caches.open(cacheKey('api')).then(function (cache) {
+        return fetch(e.request).then(function (response) {
+            cache.put(e.request.url, response.clone());
+            return response;
+        });
+    });
+    console.log("需要缓存")
+  }
 })
 // 对我们请求的数据进行缓存，这里采用 networkFirst 策略
 /*workbox.routing.registerRoute(
@@ -65,7 +114,12 @@ workbox.routing.registerRoute(
   workbox.strategies.networkFirst()
 )*/
 
+// html的缓存策略
 /*
+workbox.routing.registerRoute(
+  new RegExp('.*\.html'),
+  workbox.strategies.networkFirst()
+)
 workbox.routing.registerRoute(
   new RegExp('.*\.(?:js|css)'),
   workbox.strategies.cacheFirst()
@@ -78,6 +132,13 @@ workbox.routing.registerRoute(
 
 workbox.routing.registerRoute(
   new RegExp('https://your\.img\.cdn\.com/'),
+  workbox.strategies.cacheFirst({
+    cacheName: 'example:img'
+  })
+)
+workbox.routing.registerRoute(
+  new RegExp('/.*\.js/'),
+  new RegExp('/.*\.css/'),
   workbox.strategies.cacheFirst({
     cacheName: 'example:img'
   })
@@ -129,5 +190,6 @@ workbox.routing.registerRoute(
           }),
       ],
   }),
-);*/
+);
+*/
 
