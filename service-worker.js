@@ -1,4 +1,4 @@
-importScripts("/precache-manifest.3104d9e6dbed727b9bc8a760007b3022.js", "https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
+importScripts("/precache-manifest.781d74c35b09f5892f6adf93aea0816f.js", "https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 // 设置相应缓存的名字的前缀和后缀  这的suffix变更了。也要改下registerServiceWorker。js里
 const version = 'v1.2.4';
@@ -82,18 +82,18 @@ self.addEventListener('fetch', function (e) {
     return e.request.url.indexOf(url) > -1;
   });
   /**** 这里是对XHR数据缓存的相关操作 ****/
-  if (needCache) {
-    // 需要缓存
-    // 使用fetch请求数据，并将请求结果clone一份缓存到cache
-    // 此部分缓存后在browser中使用全局变量caches获取
-    caches.open(cacheKey('api')).then(function (cache) {
-        return fetch(e.request).then(function (response) {
-            cache.put(e.request.url, response.clone());
-            return response;
-        });
-    });
-    console.log("需要缓存")
-  }
+  // if (needCache) {
+  //   // 需要缓存
+  //   // 使用fetch请求数据，并将请求结果clone一份缓存到cache
+  //   // 此部分缓存后在browser中使用全局变量caches获取
+  //   caches.open(cacheKey('api')).then(function (cache) {
+  //       return fetch(e.request).then(function (response) {
+  //           cache.put(e.request.url, response.clone());
+  //           return response;
+  //       });
+  //   });
+  //   console.log("需要缓存")
+  // }
 })
 // 对我们请求的数据进行缓存，这里采用 networkFirst 策略
 /*workbox.routing.registerRoute(

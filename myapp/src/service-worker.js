@@ -80,18 +80,18 @@ self.addEventListener('fetch', function (e) {
     return e.request.url.indexOf(url) > -1;
   });
   /**** 这里是对XHR数据缓存的相关操作 ****/
-  if (needCache) {
-    // 需要缓存
-    // 使用fetch请求数据，并将请求结果clone一份缓存到cache
-    // 此部分缓存后在browser中使用全局变量caches获取
-    caches.open(cacheKey('api')).then(function (cache) {
-        return fetch(e.request).then(function (response) {
-            cache.put(e.request.url, response.clone());
-            return response;
-        });
-    });
-    console.log("需要缓存")
-  }
+  // if (needCache) {
+  //   // 需要缓存
+  //   // 使用fetch请求数据，并将请求结果clone一份缓存到cache
+  //   // 此部分缓存后在browser中使用全局变量caches获取
+  //   caches.open(cacheKey('api')).then(function (cache) {
+  //       return fetch(e.request).then(function (response) {
+  //           cache.put(e.request.url, response.clone());
+  //           return response;
+  //       });
+  //   });
+  //   console.log("需要缓存")
+  // }
 })
 // 对我们请求的数据进行缓存，这里采用 networkFirst 策略
 /*workbox.routing.registerRoute(
