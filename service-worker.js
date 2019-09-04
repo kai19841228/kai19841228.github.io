@@ -60,9 +60,6 @@ self.addEventListener('activate', function (event) {
     removeOldCache()
   ]))
 })
-self.addEventListener('fetch', function (e) {
-  console.log('现在正在请求：' + e.request.url);
-})
 self.addEventListener('sync', function (e) {
 })
 // 监听通知 点击关闭  // showNotification 能够设置actions
