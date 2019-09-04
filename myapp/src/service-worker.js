@@ -20,17 +20,6 @@ workbox.routing.registerRoute(
   new RegExp('.*\.(?:js|css)'),
   workbox.strategies.staleWhileRevalidate()
 )
-workbox.routing.registerRoute(
-  /\.(?:png|gif|jpg|jpeg|svg)$/,
-  workbox.strategies.staleWhileRevalidate({
-      plugins: [
-          new workbox.expiration.Plugin({
-              maxEntries: 6000, // 最大的缓存数，超过之后则走 LRU 策略清除最老最少使用缓存
-              maxAgeSeconds: 30 * 24 * 60 * 60, // 这只最长缓存时间为 30 天
-          }),
-      ],
-  }),
-);
 
 function contain (str, conStr) {
   return str.indexOf(conStr) !== -1
