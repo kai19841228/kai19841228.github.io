@@ -68,7 +68,32 @@ self.addEventListener('activate', function (event) {
     self.clients.claim(),
     removeOldCache()
   ]))
+})
+self.addEventListener('sync', function (e) {
+})
+// 监听通知 点击关闭  // showNotification 能够设置actions
+self.addEventListener('notificationclick', event => {
+  // notification click event
+  console.log(event.action)
+})
+
+self.addEventListener('notificationclose', event => {
+  // notification closed event
+  console.log(event)
 });
+// push推送消息
+self.addEventListener('push', function (e) {
+  var data = e.data;
+  console.log(e)
+  if (e.data) {
+      data = data.json();
+      console.log('push的数据为：', data);
+      self.registration.showNotification(data);        
+  } 
+  else {
+      console.log('push没有任何数据');
+  }
+})
 // 对我们请求的数据进行缓存，这里采用 networkFirst 策略
 /*workbox.routing.registerRoute(
   new RegExp('.\*experiments?.\*'),
