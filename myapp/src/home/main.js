@@ -14,4 +14,4 @@ new Vue({
     window.vConsole = new window.VConsole();
   },
   methods: {}
-}).$mount("#home");
+}).$mount("#app");

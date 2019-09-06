@@ -1,5 +1,5 @@
 <template>
-  <div id="home">
+  <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/hello">About</router-link>
@@ -8,7 +8,7 @@
   </div>
 </template>
 <style lang="stylus">
-#home
+#app
   font-family 'Avenir', Helvetica, Arial, sans-serif
   -webkit-font-smoothing antialiased
   -moz-osx-font-smoothing grayscale
