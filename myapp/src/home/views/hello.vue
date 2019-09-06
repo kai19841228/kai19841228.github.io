@@ -1,9 +1,8 @@
 <template>
-  <div class="about">
-    <img alt="Vue logo" src="../../public/img/fox-icon.png" />
-    <div>
-      <button @click="notifi">通知提醒</button>
-    </div>
+  <div class="hello">
+    <h1>我是home----- helllo</h1>
+    <img alt="Vue logo" src="../../../public/img/fox-icon.png" />
+    <div></div>
     <a href="home.html">跳转home页面</a>
     <a href="/">跳转index页面</a>
   </div>
@@ -13,10 +12,10 @@
 // @ is an alias to /src
 // import HelloWorld from "@/components/HelloWorld.vue";
 import Push from "push.js";
-import ajaxApi from "@/js/axiosConfig";
+import ajaxApi from "../../js/axiosConfig";
 
 export default {
-  name: "home",
+  name: "hello",
   components: {},
   mounted() {
     // this.DexieInit();

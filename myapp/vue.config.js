@@ -1,3 +1,4 @@
+const baseUrl = '/'
 module.exports = {
   /** 区分打包环境与开发环境
    * process.env.NODE_ENV==='production'  (打包环境)
@@ -63,11 +64,58 @@ module.exports = {
               '^/api': ''
         }
       }
-    } // string | Object
-    // before: app => {}
+    }, // string | Object
+    before: function(app) {
+      // const base = baseUrl.replace(/\/+$/, '')
+      // app.get(`${base}/:page/*`, function(req, res, next) {
+      //   if (['index', 'home'].includes(req.params.page)) {
+      //     req.url = `${base}/${req.params.page}/`;
+      //     next('route');
+      //   } else {
+      //     next();
+      //   }
+      // })
+    }
   }, // 第三方插件配置
 
   pluginOptions: {
     // ...
+  },
+  // https://www.cnblogs.com/guiltyWay/p/10320653.html 多页面配置
+  // https://blog.csdn.net/Tomwildboar/article/details/88979023 多页面配置
+  pages: {
+    index: {
+      // page 的入口
+      entry: 'src/main.js',
+      // 模板来源
+      template: 'public/index.html',
+      // 在 dist/index.html 的输出
+      filename: 'index.html',
+      // 当使用 title 选项时，
+      // template 中的 title 标签需要是 <title><%= htmlWebpackPlugin.options.title %></title>
+      title: '练习',
+      // 在这个页面中包含的块，默认情况下会包含
+      // 提取出来的通用 chunk 和 vendor chunk。
+      // chunks: ['chunk-vendors', 'chunk-common', 'index']
+    },
+    home: {
+      // page 的入口
+      entry: 'src/home/main.js',
+      // 模板来源
+      template: 'public/home.html',
+      // 在 dist/index.html 的输出
+      filename: 'home.html',
+      // 当使用 title 选项时，
+      // template 中的 title 标签需要是 <title><%= htmlWebpackPlugin.options.title %></title>
+      title: '练home习',
+      // 在这个页面中包含的块，默认情况下会包含
+      // 提取出来的通用 chunk 和 vendor chunk。
+      // chunks: ['chunk-vendors', 'chunk-common', 'home']
+    },
+    // 当使用只有入口的字符串格式时，
+    // 模板会被推导为 `public/subpage.html`
+    // 并且如果找不到的话，就回退到 `public/index.html`。
+    // 输出文件名会被推导为 `subpage.html`。
+    // subpage: 'src/home/main.js'
   }
 };
