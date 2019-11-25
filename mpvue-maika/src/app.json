@@ -5,7 +5,10 @@
     "pages/regeo/main",
     "pages/Valuation/main",
     "pages/Recharge/main",
-    "pages/RechargeSure/main"
+    "pages/RechargeSure/main",
+    "pages/orderPolling/main",
+    "pages/orderSuc/main",
+    "pages/RechargeSuc/main"
   ],
   "permission": {
     "scope.userLocation": {

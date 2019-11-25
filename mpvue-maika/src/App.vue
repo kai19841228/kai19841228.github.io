@@ -1,17 +1,18 @@
 <script>
 import Vue from 'vue'
+import store from '@/store/store'
 export default {
   mounted () {
     // 根据query所带参数来调用不容环境的接口。
     var opations = mpvue.getLaunchOptionsSync()
     if (opations.query.env === 'dev') {
-      Vue.prototype.$baseUrl = 'http://dev.cebbank.m.imycargo.com/api'
+      Vue.prototype.$baseUrl = 'http://dev.cebbank.m.imycargo.com'
     } else if (opations.query.env === 'test') {
-      Vue.prototype.$baseUrl = 'http://test.cebbank.m.imycargo.com/api'
+      Vue.prototype.$baseUrl = 'http://test.m.imycargo.com'
     } else if (opations.query.env === 'pre') {
-      Vue.prototype.$baseUrl = 'http://test.cebbank.m.imycargo.com/api'
+      Vue.prototype.$baseUrl = 'http://test.m.imycargo.com'
     } else {
-      Vue.prototype.$baseUrl = 'http://m.imycargo.com/api'
+      Vue.prototype.$baseUrl = 'http://m.imycargo.com'
     }
     console.log(this.$baseUrl)
   },
@@ -23,9 +24,11 @@ export default {
   onShow () {
     // `this` 指向 vm 实例
     console.log('App show')
+    store.dispatch('setState', mpvue.getStorageSync('order'))
   },
   onHide () {
     console.log('App Hide')
+    mpvue.setStorageSync('order', store.state.order)
   }
 }
 </script>

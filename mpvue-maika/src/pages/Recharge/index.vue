@@ -11,6 +11,7 @@
       <input type="tel" placeholder="请输入其他金额" class="input_je" v-model="customMoney" @blur="inputMoney" @input="inputMoney" maxlength="6">
     </div>
   </div>
+  <div class="submitHold"><a class="submit" @click="submitHandle">充值</a></div>
 </div>
 </template>
 <script>
@@ -20,7 +21,7 @@ export default {
   data () {
     return {
       rechargeList: [{'amount': 50, 'prompt': '无标签'}, {'amount': 100, 'prompt': '无标签'}, {'amount': 300, 'prompt': '无标签'}, {'amount': 500, 'prompt': '无标签'}, {'amount': 1000, 'prompt': '无标签'}, {'amount': 2000, 'prompt': '无标签'}], // 充值金额列表
-      customMoney: '1', // 自定义充值金额
+      customMoney: '', // 自定义充值金额
       rechargeMoney: 0
     }
   },
@@ -37,13 +38,15 @@ export default {
     changeCharge (item) {
       this.rechargeMoney = item
       this.customMoney = ''
-      console.log(this.rechargeMoney)
     },
     inputMoney (e) {
-      console.log(this.customMoney)
       var self = this
       self.customMoney = self.customMoney.replace(/^0(0+)|[^\d]+/g, '')
       self.rechargeMoney = self.customMoney
+    },
+    submitHandle () {
+      let url = '../RechargeSuc/main'
+      mpvue.navigateTo({ url })
     }
   },
   onLoad: function (options) {
@@ -109,6 +112,24 @@ export default {
     font-size: 20px;
     background-color: #efefef;
     color: #222;
-    box-shadow: 0 5px 6px hsla(0,0%,78%,.5);
+    box-shadow: 0 5px 6px hsla(0,0%,78%,.5);box-sizing: border-box;
+}
+.submitHold{
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 30px;
+}
+.submitHold .submit {
+    display: block;
+    height: 38px;
+    background: #ff8400;
+    border: 1px solid #ff8400;
+    border-radius: 5px;
+    font-size: 18px;
+    font-family: PingFang SC;
+    font-weight: 600;
+    color: #fff;
+    line-height: 38px;
+    text-align: center;
 }
 </style>

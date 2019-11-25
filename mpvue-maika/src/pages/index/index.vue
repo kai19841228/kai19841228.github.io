@@ -16,6 +16,9 @@
     </div>
   </div>
   <div class="submitHold"><a class="submit" @click="submitHandle">呼叫约车</a></div>
+  <div class="submitHold"><a class="submit" @click="pai(1)">派单</a></div>
+  <div class="submitHold"><a class="submit" @click="pai(2)">派单成功</a></div>
+  <div class="submitHold"><a class="submit" @click="pai(3)">充值页面</a></div>
 </div>
 </template>
 <script>
@@ -81,9 +84,19 @@ export default {
       mpvue.navigateTo({ url })
     },
     submitHandle () {
-      let url = '../Recharge/main'
-      mpvue.navigateTo({ url })
-      // order.getPlaceOrder(this)
+      order.getPlaceOrder(this)
+    },
+    pai (val) {
+      if (val === 1) {
+        let url = '../orderPolling/main?orderId=22925&orderNo=P1574415401785373'
+        mpvue.navigateTo({ url })
+      } else if (val === 2) {
+        let url = '../orderSuc/main?orderId=22925&orderNo=P1574415401785373'
+        mpvue.navigateTo({ url })
+      } else if (val === 3) {
+        let url = '../Recharge/main'
+        mpvue.navigateTo({ url })
+      }
     }
   },
   onLoad () {

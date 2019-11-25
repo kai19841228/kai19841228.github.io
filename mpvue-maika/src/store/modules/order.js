@@ -8,6 +8,7 @@ const SET_RIDER_PHONE = 'SET_RIDER_PHONE'
 const SET_RIDER_NAME = 'SET_RIDER_NAME'
 const SET_CURRENT_CITY = 'SET_CURRENT_CITY'
 const SET_SWITCH_STATU = 'SET_SWITCH_STATU'
+const SET_STATE = 'SET_STATE'
 const state = {
   cityCurrent: {
     status: 0
@@ -50,6 +51,9 @@ const mutations = {
     const obj = state
     obj.count += 1
   },
+  SET_STATE (state, data) {
+    state = data
+  },
   SET_CITY_CURRENT (state, data) {
     state.menu = data
   },
@@ -86,6 +90,9 @@ const mutations = {
   }
 }
 const actions = {
+  setState (context, data) {
+    context.commit(SET_STATE, data)
+  },
   setMenuData (context, data) {
     context.commit(SET_CITY_CURRENT, data)
   },

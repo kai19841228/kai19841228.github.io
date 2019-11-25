@@ -2,8 +2,9 @@
   <div class="address">
     <div class="search">
       <span class="searchLeft" @click="toCity">{{address === 'up' ? cityUp.cityName : cityDown.cityName}}</span>
-      <input id="input" type="text" class="searchText" :placeholder="searchtext" @input="autoInput" @blur="blurInput">
-      <span class="cancel" @click="autoInput">搜索</span>
+      <input id="input" type="text" class="searchText" :placeholder="searchtext" v-model="textSearch" @blur="blurInput">
+      <span  @click="autoInput">搜索</span>
+      <span class="cancel" @click="backPage">取消</span>
     </div>
     <div class="addressList">
       <div class="case" v-for="(item, i) in items" :key="i" @click="addressHandle(item)">
@@ -36,6 +37,9 @@ export default {
     }
   },
   watch: {
+    textSearch: function (val, val1) {
+      this.autoInput()
+    }
   },
   methods: {
     toCity () {

@@ -1,13 +1,12 @@
 <template>
-  <web-view :src="htmlSrc"></web-view>
+<div></div>
 </template>
 <script>
 // import order from '@/services/order'
-import store from '@/store/store'
+// import store from '@/store/store'
 export default {
   data () {
     return {
-      htmlSrc: ''
     }
   },
   components: {
@@ -25,7 +24,6 @@ export default {
     console.log(options)
   },
   mounted () {
-    this.htmlSrc = 'http://test.rest-h5.imycargo.com/#/pValuation?cityId=' + store.state.order.cityUp.cityId + '&groupId=1&bookingServiceTypeId=1&bookingDate=' + Math.ceil(new Date().getTime() / 1000)
   }
 }
 </script>
