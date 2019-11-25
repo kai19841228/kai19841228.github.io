@@ -14,7 +14,6 @@ const orderData = {
         if (ret && ret.data && ret.data.token) {
           mpvue.setStorageSync('token', ret.data.token)
         }
-        console.log('999', ret)
         if (ret.code === 500210) {
           mpvue.showModal({
             title: '提示',

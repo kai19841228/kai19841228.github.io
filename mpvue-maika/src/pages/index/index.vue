@@ -15,7 +15,7 @@
       <p><span class="valuation" @click="valuationHandle">计价规则</span></p>
     </div>
   </div>
-  <div class="submitHold"><a class="submit" @click="submitHandle">呼叫约车</a></div>
+  <div class="submitHold"><a id="wld" class="submit" @click="submitHandle">呼叫约车</a></div>
   <div class="submitHold"><a class="submit" @click="pai(1)">派单</a></div>
   <div class="submitHold"><a class="submit" @click="pai(2)">派单成功</a></div>
   <div class="submitHold"><a class="submit" @click="pai(3)">充值页面</a></div>
@@ -103,6 +103,11 @@ export default {
   },
   mounted () {
     // let app = getApp()
+    const query = wx.createSelectorQuery()
+    query.select('#wld').boundingClientRect()
+    query.exec((res) => {
+      console.log(res[0])
+    })
   },
   onShow () {
     console.log(store)
