@@ -1,0 +1,153 @@
+<style lang="less">
+.clearfix:after, .clearfix:before {
+    display: table;
+    content: "";
+}
+.midd {
+  width: 100%;
+  border-top: 15px solid #f7f7f7;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 0 5%;
+  .pack {
+  width: 100%;
+  font-size: 15px;
+  color: #999;
+    .h3 {
+    height: 50px;
+    line-height: 50px;
+    color: #333;
+    font-size: 15px;
+    }
+    .list{
+      .clearfix {
+          view {
+          width: 30%;
+          float: left;
+          text-align: center;
+          height: 40px;
+          line-height: 40px;
+          box-sizing: border-box;
+          margin-bottom: 5%;
+          border-radius: 8px;
+          cursor: pointer;
+          margin-right: 5%;
+          background-color: #efefef;
+          color: #222;
+          box-shadow: 0 3px 6px hsla(0,0%,78%,.5);
+          }
+          view:nth-child(3n+3) {
+            margin-right: 0;
+          }
+          .on {
+            background: #ff8400;
+            background-size: 26%;
+            overflow: hidden;
+            color: #fff;
+          }
+      }
+    }
+    .input_je {
+      height: 40px;
+      line-height: 40px;
+      padding: 5px 0;
+      width: 100%;
+      display: block;
+      padding-left: 15px;
+      border-radius: 10px;
+      font-size: 20px;
+      background-color: #efefef;
+      color: #222;
+      box-shadow: 0 5px 6px hsla(0,0%,78%,.5);box-sizing: border-box;
+    }
+  }
+}
+.submitHold{
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 30px;
+}
+.submitHold .submit {
+    display: block;
+    height: 38px;
+    background: #ff8400;
+    border: 1px solid #ff8400;
+    border-radius: 5px;
+    font-size: 18px;
+    font-family: PingFang SC;
+    font-weight: 600;
+    color: #fff;
+    line-height: 38px;
+    text-align: center;
+}
+</style>
+<template>
+  <view class="container" style="background:#FFF;">
+    <view class="midd">
+      <view class="pack">
+        <view class="h3">充值金额：</view>
+        <view class="list">
+          <view class="clearfix">
+            <!-- <li v-for="(item, i) in rechargeList" :key="i" :class="[rechargeMoney==item.amount&&customMoney=='' ? 'on' : '']" @tap="changeCharge(item.amount)">{{item.amount}}元</li> -->
+            <view  wx:for="{{rechargeList}}" wx:key="index" class="li {{ [ rechargeMoney==item.amount&&customMoney=='' ? 'on' : '' ] }}" @tap="changeCharge({{item.amount}})">{{item.amount}}元</view>
+          </view>
+        </view>
+        <input type="tel" placeholder="请输入其他金额" class="input_je" value="{{customMoney}}" @blur="inputMoney" @input="inputMoney" maxlength="6">
+      </view>
+    </view>
+    <view class="submitHold"><view class="submit" @tap="submitHandle">充值</view></view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import global from '../mixins/global'
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: '充值'
+    }
+    components = { // 声明页面所引用的子组件
+    }
+    mixins = [global] // 声明页面所引用的Mixin实例
+    data = {
+      rechargeList: [{'amount': 50, 'prompt': '无标签'}, {'amount': 100, 'prompt': '无标签'}, {'amount': 300, 'prompt': '无标签'}, {'amount': 500, 'prompt': '无标签'}, {'amount': 1000, 'prompt': '无标签'}, {'amount': 2000, 'prompt': '无标签'}], // 充值金额列表
+      customMoney: '', // 自定义充值金额
+      rechargeMoney: 0
+    }
+    computed = { // 声明[计算属性]
+      now () {
+        return +new Date()
+      }
+    }
+    watch = {} // 声明数据watcher
+    methods = { // 声明页面响应事件。注意，此处只用于声明页面bind，catch事件
+      changeCharge (item) {
+        this.rechargeMoney = item
+        this.customMoney = ''
+      },
+      inputMoney (e) {
+        var self = this
+        self.customMoney = e.detail.value
+        self.rechargeMoney = self.customMoney
+      },
+      submitHandle () {
+        if (this.rechargeMoney <= 0) {
+          wepy.showToast({title: '充值金额为正整数', icon: 'none'})
+          return
+        }
+        if ((this.rechargeMoney + '').indexOf('.') > -1) {
+          wepy.showToast({ title: '充值金额为整数', icon: 'none' })
+          return
+        }
+        let url = '/pages/RechargeSure?rechargeMoney=' + this.rechargeMoney
+        wepy.navigateTo({ url })
+      }
+    }
+    events = { // 声明组件之间的事件传递
+    }
+    onLoad() {
+      // let self = this
+    }
+    onShow () {} // 只在 Page 实例中会存在页面生命周期函数
+  }
+</script>

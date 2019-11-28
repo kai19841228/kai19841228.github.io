@@ -1,0 +1,106 @@
+<style lang="less">
+.rechargeSure{
+  position: relative;
+  padding-top: 0;
+  z-index: 4;
+  min-height: 998px;
+  box-sizing: border-box;
+  background-color: #fff;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+  // justify-content: center;
+  -ms-flex-align: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  height:100%;
+    .midd{
+      width: 100%;
+      border-top: 15px solid #f7f7f7;
+      margin-bottom: 50px;
+      text-align: center;
+      .pack{
+        width: 90%;
+        margin: 0 auto;
+        font-size: 15px;
+        color: #999;
+        .h3{
+          height: 50px;
+          line-height: 50px;
+          color: #333;
+          font-size: 17px;
+          span{
+            color: #ff8400;
+          }
+        }
+      }
+    }
+    .submitHold{
+      width: 100%;
+      margin: 0 auto;
+      margin-top: 30px;
+      .submit{
+        font-size: 15px;
+        text-align: center;
+        height: 40px;
+        line-height: 40px;
+        background-color: #ff8400;
+        color: #fff;
+        display: block;
+        width: 90%;
+        margin: 0 auto;
+        border-radius: 40px;
+      }
+    }
+}
+</style>
+<template>
+  <view class="container">
+    <div class="rechargeSure">
+      <div class="midd">
+        <div class="pack">
+          <view class="h3">充值金额：<span>{{rechargeMoney}}元</span></view>
+        </div>
+      </div>
+      <div class="submitHold">
+        <a class="submit" @tap="submitPayment">付款</a>
+      </div>
+    </div>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import global from '../mixins/global'
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: '充值'
+    }
+    components = { // 声明页面所引用的子组件
+    }
+    mixins = [global] // 声明页面所引用的Mixin实例
+    data = {
+      rechargeMoney: ''
+    }
+    computed = { // 声明[计算属性]
+      now () {
+        return +new Date()
+      }
+    }
+    watch = {} // 声明数据watcher
+    methods = { // 声明页面响应事件。注意，此处只用于声明页面bind，catch事件
+      submitPayment (item) {
+        let url = '/pages/RechargeSuc'
+        wepy.navigateTo({ url })
+      }
+    }
+    events = { // 声明组件之间的事件传递
+    }
+    onLoad(options) {
+      // let self = this
+      this.rechargeMoney = options.rechargeMoney
+    }
+    onShow () {} // 只在 Page 实例中会存在页面生命周期函数
+  }
+</script>

@@ -1,0 +1,138 @@
+<style lang="less">
+.rst{
+  width: 100%;
+  padding-top: 5%;
+    .pic{
+      display: block;
+      width: 50%;
+      margin: 0 auto;
+    }
+    .back_index{
+      display: block;
+      width: 90%;
+      padding: 0 50px;
+      text-align: center;
+      height: 40px;
+      line-height: 40px;
+      background-color: #ff8400;
+      color: #fff;
+      font-size: 17px;
+      margin: 0 auto;
+      margin-top: 20px;
+      border-radius: 5px;
+    }
+    .rst_succes{
+      background-color: #fff;
+      border-top: 1px solid #e5e5e5;
+      width: 90%;
+      margin: 0 auto;
+      border-bottom-right-radius: 5px;
+      border-bottom-left-radius: 5px;
+      .co_mo{
+        text-align: center;
+        padding-top: 10px;
+        font-size: 17px;
+        color: #333;
+        padding-bottom: 10px;
+      }
+    }
+    .rst_fail{
+      background-color: #fff;
+      border-top: 1px solid #e5e5e5;
+      width: 90%;
+      margin: 0 auto;
+      border-bottom-right-radius: 5px;
+      border-bottom-left-radius: 5px;
+      .co_mo{
+        text-align: center;
+        padding-top: 10px;
+        font-size: 17px;
+        color: #333;
+        padding-bottom: 10px;
+      }
+    }
+    .rst_going{
+      background-color: #fff;
+      border-top: 1px solid #e5e5e5;
+      width: 90%;
+      margin: 0 auto;
+      border-bottom-right-radius: 5px;
+      border-bottom-left-radius: 5px;
+      .co_mo{
+        text-align: center;
+        padding-top: 10px;
+        font-size: 17px;
+        color: #333;
+        padding-bottom: 10px;
+      }
+      .rstps{
+        text-align: center;
+        width: 100%;
+        margin-bottom: 10px;
+        color: #999;
+      }
+    }
+  }
+</style>
+<template>
+  <view class="container">
+    <view v-if="successPage" class="rst">
+      <view class="rst_succes" >
+        <view class="clearfix co_mo">充值成功</view>
+        <image class="pic" src="../static/rst_icon01.png"></image>
+      </view>
+      <button class="back_index" @tap="goHome">马上用车</button>
+    </view>
+    <view v-if="errorPage" class="rst">
+      <view class="rst_fail" >
+        <view class="clearfix co_mo">充值失败</view>
+        <image class="pic" src="../static/rst_icon02.png"></image>
+      </view>
+      <button class="back_index" @tap="goHome">马上用车</button>
+    </view>
+    <view v-if="loadingPage" class="rst">
+      <view class="rst_going" >
+        <view class="clearfix co_mo">充值处理中...</view>
+        <view class="rstps">请稍后到“APP 钱包”中查看</view>
+        <image class="pic" src="../static/rst_icon03.png"></image>
+      </view>
+      <button class="back_index" @tap="goHome">马上用车</button>
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import global from '../mixins/global'
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: '充值'
+    }
+    components = { // 声明页面所引用的子组件
+    }
+    mixins = [global] // 声明页面所引用的Mixin实例
+    data = {
+      successPage: true,
+      errorPage: true,
+      loadingPage: true
+    }
+    computed = { // 声明[计算属性]
+      now () {
+        return +new Date()
+      }
+    }
+    watch = {} // 声明数据watcher
+    methods = { // 声明页面响应事件。注意，此处只用于声明页面bind，catch事件
+      goHome (item) {
+        let url = '/pages/index'
+        wepy.reLaunch({ url: url })
+      }
+    }
+    events = { // 声明组件之间的事件传递
+    }
+    onLoad() {
+      // let self = this
+    }
+    onShow () {} // 只在 Page 实例中会存在页面生命周期函数
+  }
+</script>

@@ -1,0 +1,46 @@
+<style lang="less">
+</style>
+<template>
+  <view class="container">
+    <web-view src="{{htmlSrc}}"> </web-view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import global from '../mixins/global'
+  import { connect } from 'wepy-redux'
+  @connect({
+    cityUp (state) {
+      return state.order.cityUp
+    }
+  }, {
+  })
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: '麦卡出行'
+    }
+    components = { // 声明页面所引用的子组件
+    }
+    mixins = [global] // 声明页面所引用的Mixin实例
+    data = {
+      htmlSrc: ''
+    }
+    computed = { // 声明[计算属性]
+    }
+    watch = {} // 声明数据watcher
+    methods = { // 声明页面响应事件。注意，此处只用于声明页面bind，catch事件
+    }
+    events = { // 声明组件之间的事件传递
+    }
+    onLoad() {
+      // let self = this
+    }
+    onShow () {
+      console.log(this.data.htmlSrc)
+      this.data.htmlSrc = 'http://test.rest-h5.imycargo.com/#/pValuation?cityId=' + this.cityUp.cityId + '&groupId=1&bookingServiceTypeId=1&bookingDate=' + Math.ceil(new Date().getTime() / 1000)
+      this.$apply()
+      console.log(this.data.htmlSrc)
+    } // 只在 Page 实例中会存在页面生命周期函数
+  }
+</script>

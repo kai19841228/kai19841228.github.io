@@ -1,0 +1,146 @@
+<style lang="less">
+.hold{
+    border-top: 15px solid #f7f7f7;
+    width: 96%;
+    background-color: #ffffff;
+    box-sizing: border-box;
+    padding: 10px 10px;
+    .driver{
+      padding: 15px;
+      box-sizing: border-box;
+      .driverHold{
+        .driverData{
+          display: -ms-flexbox;
+          display: -webkit-box;
+          display: flex;
+          -webkit-box-align: center;
+          align-items: center;
+          -webkit-box-orient: vertical;
+          -webkit-box-direction: normal;
+          -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+          font-size: 15px;
+          color: #666;
+          border-bottom: 2px solid #D2D2D2;
+          padding-bottom: 10px;
+          margin-bottom: 10px;
+          .center{
+            flex: 1;
+          }
+          .li .h1{
+              font-size: 20px;
+            }
+          .li .h2{
+              font-size: 15px;
+              color: #FF8400;
+              padding: 4px 0;
+            }
+          .li .h3{
+              font-size: 15px;
+            }
+           .head{
+            width: 80px;
+            height: 80px;
+            padding-right: 10px;
+          }
+           .start{
+            width: 15px;
+            height: 15px;
+            vertical-align:text-top;
+          }
+           .phone{
+            width: 30px;
+            height: 30px;
+          }
+        }
+      }
+    }
+  }
+      .Handle{
+        width: 100%;
+        text-align:center;
+        .submit{
+          display: inline-block;
+          width: 33%;
+          height:40px;
+          border-radius:10px;
+          font-size:13px;
+          font-family:PingFang SC;
+          font-weight:600;
+          color:#666666;
+          line-height:40px;
+          text-align: center;
+          margin: 0 auto;
+          padding-left: 10px;
+          background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACBElEQVRYR8WXPWgbQRCF3+jcSJUhkaoYQ8BdwEWKxNVpQgwBgxuDwCF1wK6cyu21qezKBtchAUGagMHgkNNWkosUgnQBg0gqKYFUUqPTmD3uxOos6X5SrKoDzcz7dnZmdpdg+UeW9ZEZwPO8kuu6LwDsAHgOYAPAarSAfwB+AugAuFRKffM8b5JlcakAzWbTqdVqb0XkGMB6lqAAekT0vt/vXzQajWCZz1IA3/efAPgAYDOjcNKsC+ANM/9Y5L8QQCm1GwTBJyKqFBQP3URk6DjOvuu6X+bFmQugxSeTyWcAK/8jbviOS6XS3jyIewA67SJyE638FxH9FpGtIiBE1BaRRwDWdCaI6FlyO2YAdMFVq9Xv8Z7rAMPh8FW5XP4YVX8ejsvRaPS6UqlcGQvoDgaDp2ZhzgC0Wq0DETlLqISBckIs9CGiw3q9fh5rTAGiPr9d0Gp5INJse0qpx/GcmAL4vv8SwPWSHKcF1q5ZbLTdNjN/1R8mwAmAo5RNXiaQVVxLnDLzuyRAOxqxaYU2TyiPuI7fYeaws8wM/AHwIE09+t8URIEi/cvMD5MAYwBORoDpfuuPnB2iXQJmDoecmQHrANa3wHoRWm9Du4PI+ijWLWH1MNIA1o9jDWH1QhJPQatXMhPC2qU0hrB6LY8hrD5MzJPR2tMsx/FcyDT1bVgoag6nO+AFkjCW0DBCAAAAAElFTkSuQmCC) no-repeat left 10px center;
+          background-size: 15px;
+          border: 1px solid #d1d0cf;
+          border-radius: 20px;
+        }
+      }
+</style>
+<template>
+  <view class="container">
+    <view class="hold">
+      <view class="driver">
+        <view class="driverHold">
+          <view class="driverData">
+            <view class="li">
+              <image class="head" style="" src="../static/icon_driver.png"></image>
+            </view>
+            <view class="li center">
+              <view class="h1">{{driverData.driverName || '程师傅'}}</view>
+              <view class="h2">{{driverData.carNo || '京B8888'}}</view>
+              <view>{{driverData.color+driverData.modelDetail || '白色 新能源'}}</view>
+            </view>
+            <view class="li">
+              <view class="h3">
+                <image class="start" style="" src="../static/icon_star.png"></image> 5.0{{driverData.score}} {{driverData.orderCount || 0}}单</view>
+              <view style="text-align:center;margin-top:8px;">
+                <image class="phone" @tap="callPhone" style="" src="../static/icon_phone.png"></image></view>
+            </view>
+          </view>
+        </view>
+        <view class="Handle">
+          <view class="submit" @tap="cancel">取消订单</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import global from '../mixins/global'
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: '派单成功'
+    }
+    components = { // 声明页面所引用的子组件
+    }
+    mixins = [global] // 声明页面所引用的Mixin实例
+    data = {
+      mynum: 20
+    }
+    computed = { // 声明[计算属性]
+      now () {
+        return +new Date()
+      }
+    }
+    watch = {} // 声明数据watcher
+    methods = { // 声明页面响应事件。注意，此处只用于声明页面bind，catch事件
+      callPhone () {
+        wepy.makePhoneCall({ phoneNumber: '10086' })
+      },
+      cancel () {
+        // 取消订单
+      }
+    }
+    events = { // 声明组件之间的事件传递
+    }
+    onLoad() {
+      // let self = this
+    }
+    onShow () {} // 只在 Page 实例中会存在页面生命周期函数
+  }
+</script>

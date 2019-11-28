@@ -1,0 +1,62 @@
+<style lang="less">
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  background: #f5f5f5;
+}
+</style>
+
+<script>
+import wepy from 'wepy'
+import 'wepy-async-function'
+
+import { setStore } from 'wepy-redux'
+import configStore from './store'
+
+const store = configStore()
+setStore(store)
+
+export default class extends wepy.app {
+  config = {
+    pages: [
+      'pages/index',
+      'pages/orderPolling',
+      'pages/orderSuc',
+      'pages/Recharge',
+      'pages/Valuation',
+      'pages/regeo',
+      'pages/cityChange',
+      'pages/RechargeSure',
+      'pages/RechargeSuc'
+    ],
+    window: {
+      backgroundTextStyle: 'light',
+      navigationBarBackgroundColor: '#fff',
+      navigationBarTitleText: '麦卡出行',
+      navigationBarTextStyle: 'black'
+    }
+  }
+  globalData = {
+    baseURL: 'http://cebbank.m.imycargo.com'
+  }
+  constructor () {
+    super()
+    this.use('requestfix')
+    this.use('promisify')
+  }
+  onLaunch(options) {
+    if (options.query.env === 'dev') {
+      this.globalData.baseURL = 'http://dev.cebbank.m.imycargo.com'
+    } else if (options.query.env === 'test') {
+      this.globalData.baseURL = 'http://test.cebbank.m.imycargo.com'
+    } else if (options.query.env === 'pre') {
+      this.globalData.baseURL = 'http://pre.cebbank.m.imycargo.com'
+    } if (options.query.env === 'pre') {
+      this.globalData.baseURL = 'http://cebbank.m.imycargo.com'
+    }
+  }
+}
+</script>

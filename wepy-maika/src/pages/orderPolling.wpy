@@ -1,0 +1,86 @@
+<style lang="less">
+.whiting {
+  font-size: 16px;
+  background-color: #fff;
+  width: 90%;
+  display: block;
+  margin-top: 15px;
+  padding-top: 15%;
+  padding-bottom: 5%;
+  position: relative;
+  box-sizing: border-box;
+}
+.whiting .djs {
+  width: 60%;
+  margin: 0 auto
+}
+.whiting .djs .w_pic {
+  width:240px;height:240px;
+  display: block;
+  margin: 0 auto;
+}
+.whiting .djs .span {
+  font-size: 16px;
+  color: #999;
+  display: block;
+  width: 100%;
+  text-align: center;
+  position: absolute;
+  top: 180px;
+}
+.whiting .btn_cal {
+  display: block;
+  width: 130px;
+  margin: 0 auto;
+  margin-top: 40px;
+  height: 40px;
+  line-height: 40px;
+  color: #ff8400;
+  border: 1px solid #ff8400;
+  text-align: center;
+}
+</style>
+<template>
+  <view class="container">
+    <div class="whiting">
+      <div class="djs">
+        <image class="w_pic" style="" src="../static/app_icon32.gif"></image>
+        <view class="span" style="">正在为您挑选司机</view>
+      </div>
+      <a class="btn_cal" @click="orderCancel">取消订单</a>
+    </div>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import global from '../mixins/global'
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: '派单'
+    }
+    components = { // 声明页面所引用的子组件
+    }
+    mixins = [global] // 声明页面所引用的Mixin实例
+    data = {
+      mynum: 20
+    }
+    computed = { // 声明[计算属性]
+      now () {
+        return +new Date()
+      }
+    }
+    watch = {} // 声明数据watcher
+    methods = { // 声明页面响应事件。注意，此处只用于声明页面bind，catch事件
+      tap () {
+        console.log('do noting from ' + this.$name)
+      }
+    }
+    events = { // 声明组件之间的事件传递
+    }
+    onLoad() {
+      // let self = this
+    }
+    onShow () {} // 只在 Page 实例中会存在页面生命周期函数
+  }
+</script>

@@ -9,7 +9,7 @@
     <div class="downAdress item"><input type="text" disabled @click="addressHandle('down')" v-model="downAdress.name" placeholder="您在哪下车"></div>
     <div class="cost">
       <h1>优享型</h1>
-      <img style="width:200px;height:56px;" src="http://rest-h5.imycargo.com/static/appimg/car.png">
+      <img style="width:200px;height:56px;" :src="predict.imgUrl || '//rest-h5.imycargo.com/static/appimg/car.png'">
       <p>约 <span>{{predict.debtAmount || 0}}</span> 元 
       <em style="display: inline-block;" v-if="predict && predict.discountAmount != 0">已减免 <span>{{predict.discountAmount}}</span> 元</em></p>
       <p><span class="valuation" @click="valuationHandle">计价规则</span></p>
