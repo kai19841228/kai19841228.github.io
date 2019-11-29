@@ -11,8 +11,6 @@
   box-sizing: border-box;
 }
 .whiting .djs {
-  width: 60%;
-  margin: 0 auto
 }
 .whiting .djs .w_pic {
   width:240px;height:240px;
@@ -42,13 +40,13 @@
 </style>
 <template>
   <view class="container">
-    <div class="whiting">
-      <div class="djs">
+    <view class="whiting">
+      <view class="djs">
         <image class="w_pic" style="" src="../static/app_icon32.gif"></image>
         <view class="span" style="">正在为您挑选司机</view>
-      </div>
+      </view>
       <a class="btn_cal" @click="orderCancel">取消订单</a>
-    </div>
+    </view>
   </view>
 </template>
 

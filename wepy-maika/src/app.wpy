@@ -30,7 +30,9 @@ export default class extends wepy.app {
       'pages/regeo',
       'pages/cityChange',
       'pages/RechargeSure',
-      'pages/RechargeSuc'
+      'pages/RechargeSuc',
+      'pages/user',
+      'pages/login'
     ],
     window: {
       backgroundTextStyle: 'light',

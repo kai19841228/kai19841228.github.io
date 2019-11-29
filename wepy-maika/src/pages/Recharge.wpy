@@ -49,13 +49,12 @@
     }
     .input_je {
       height: 40px;
-      line-height: 40px;
-      padding: 5px 0;
+      padding: 6px 0;
       width: 100%;
       display: block;
       padding-left: 15px;
       border-radius: 10px;
-      font-size: 20px;
+      font-size: 16px;
       background-color: #efefef;
       color: #222;
       box-shadow: 0 5px 6px hsla(0,0%,78%,.5);box-sizing: border-box;
@@ -92,7 +91,7 @@
             <view  wx:for="{{rechargeList}}" wx:key="index" class="li {{ [ rechargeMoney==item.amount&&customMoney=='' ? 'on' : '' ] }}" @tap="changeCharge({{item.amount}})">{{item.amount}}元</view>
           </view>
         </view>
-        <input type="tel" placeholder="请输入其他金额" class="input_je" value="{{customMoney}}" @blur="inputMoney" @input="inputMoney" maxlength="6">
+        <input class="input_je" type="tel" placeholder="请输入其他金额" value="{{customMoney}}" @blur="inputMoney" @input="inputMoney" maxlength="6"/>
       </view>
     </view>
     <view class="submitHold"><view class="submit" @tap="submitHandle">充值</view></view>
@@ -135,8 +134,8 @@
           wepy.showToast({title: '充值金额为正整数', icon: 'none'})
           return
         }
-        if ((this.rechargeMoney + '').indexOf('.') > -1) {
-          wepy.showToast({ title: '充值金额为整数', icon: 'none' })
+        if (this.rechargeMoney <= 1) {
+          wepy.showToast({title: '充值金额应大于1元', icon: 'none'})
           return
         }
         let url = '/pages/RechargeSure?rechargeMoney=' + this.rechargeMoney

@@ -1,0 +1,66 @@
+<style lang="less">
+.top-menu-wrapper {
+  white-space: nowrap;
+  position: absolute;
+  top: 0rpx;
+  left: 80rpx;
+  border-left: 1rpx dashed #bfbdbe;
+}
+.top-menu-item {
+  display: inline-block;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  font-size: 16px;
+  color: #bfbdbe;
+  padding-left:20px;
+}
+.top-menu-item.on{
+  color: #ff8400;
+}
+</style>
+<template>
+  <scroll-view class="top-menu-wrapper" scroll-x="true" style="{{ 'width:' + scrolWidth + 'px;'}}">
+        <view wx:for="{{ menus }}" wx:key="index" class="top-menu-item {{ [ isActive==item.serviceTypeCode ? 'on' : '' ] }}" catchtap="onTypeChange({{item.serviceTypeCode}})">{{ item.serviceTypeName }}</view>
+      </scroll-view>
+</template>
+<script>
+  import wepy from 'wepy'
+
+  export default class TopMenu extends wepy.component {
+    props = {
+      scrolWidth: {},
+      menus: {
+        default: []
+      },
+      // 父向子单向动态传值
+      syncTitle: {
+        type: String,
+        default: 'null'
+      },
+      // 父向子 子向父 双向传值。twoWay要为true
+      isActive: {
+        type: String,
+        twoWay: true
+      }
+    }
+
+    data = {
+    }
+    events = {
+    }
+
+    watch = {
+      menus (curVal, oldVal) {
+        console.log(`旧值：${oldVal}，新值：${curVal}`)
+      }
+    }
+
+    methods = {
+      onTypeChange (item) {
+        this.isActive = item
+        this.$emit('some-event', 1, 2, 3)
+      }
+    }
+  }
+</script>

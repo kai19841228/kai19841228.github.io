@@ -77,34 +77,57 @@
   line-height: 38px;
   text-align: center;
 }
+.header {
+  box-sizing: border-box;
+  background: #FFF;
+  width: 100%;
+  height: 80rpx;
+  position: relative;
+  .user-container {
+    width: 80rpx;height: 80rpx;text-align: center;
+    .user {
+      width:40rpx;height:40rpx;
+      margin-top: 20rpx;
+    }
+  }
+}
 </style>
 <template>
-  <view class="container orderPlace">
-    <view class="mainHold">
-      <view class="phone item"><input type="tel" bindblur="setUserPhone(event)" @input="inputChange" value="{{userPhone}}" maxlength="11" placeholder="预订人手机号"/></view>
-      <view class="item" style="padding:8px 0;background:none;padding-left: 30px;"><span style="padding-right:16px;">代人叫车</span><switch checked="{{switchStatu}}" color="#ff8400" bindchange="setSwitchStatu(event)"></switch></view>
-      <view class="phone item" wx:if="{{ switchStatu }}"><input type="tel" bindblur="setRiderPhone({{riderPhone}})" value="{{riderPhone}}" maxlength="11" placeholder="乘车人手机号"/></view>
-      <view class="user item" wx:if="{{ switchStatu }}"><input type="text" bindblur="setRiderName({{riderName}})" value="{{riderName}}" maxlength="11" placeholder="乘车人姓名"/></view>
-      <view class="item"><input type="text" disabled @tap="addressHandle('up')" value="{{upAdress.name}}" placeholder="您在哪上车"/></view>
-      <view class="downAdress item"><input type="text" disabled @tap="addressHandle('down')" value="{{downAdress.name}}" placeholder="您在哪下车"/></view>
-      <view class="cost">
-        <view class="title">优享型</view>
-        <image style="width:200px;height:56px;" src="{{predict.imgUrl || '//rest-h5.imycargo.com/static/appimg/car.png'}}"></image>
-        <view class="p">约 <span>{{predict.debtAmount || 0}}</span> 元 
-        <em style="display: inline-block;" v-if="predict && predict.discountAmount != 0">已减免 <span>{{predict.discountAmount}}</span> 元</em></view>
-        <view class="p"><span class="valuation" @tap="valuationHandle">计价规则</span></view>
+  <view class="container">
+    <view id="header" class="header">
+      <view class="user-container" id="user-container" catchtap='onUser'>
+        <image class='user' src="../static/app_icon021.png"></image>
       </view>
+      <TopMenu :scrolWidth.sync="scrolWidth" :menus.sync="menus" :isActive.sync="isActive"></TopMenu>
     </view>
-    <view class="submitHold"><button class="submit" bindtap="submitHandle">呼叫约车</button></view>
-    <view class="submitHold"><button class="submit" bindtap="pai(1)">派单</button></view>
-    <view class="submitHold"><button class="submit" bindtap="pai(2)">派单成功</button></view>
-    <view class="submitHold"><button class="submit" bindtap="pai(3)">充值页面</button></view>
-    <view class="submitHold"><button class="submit" bindtap="pai(4)">ceshi</button></view>
+    <view class="orderPlace">
+      <view class="mainHold">
+        <view class="phone item"><input type="tel" bindblur="setUserPhone(event)" @input="inputChange" value="{{userPhone}}" maxlength="11" placeholder="预订人手机号"/></view>
+        <view class="item" style="padding:8px 0;background:none;padding-left: 30px;"><span style="padding-right:16px;">代人叫车</span><switch checked="{{switchStatu}}" color="#ff8400" bindchange="setSwitchStatu(event)"></switch></view>
+        <view class="phone item" wx:if="{{ switchStatu }}"><input type="tel" bindblur="setRiderPhone({{riderPhone}})" value="{{riderPhone}}" maxlength="11" placeholder="乘车人手机号"/></view>
+        <view class="user item" wx:if="{{ switchStatu }}"><input type="text" bindblur="setRiderName({{riderName}})" value="{{riderName}}" maxlength="11" placeholder="乘车人姓名"/></view>
+        <view class="item"><input type="text" disabled @tap="addressHandle('up')" value="{{upAdress.name}}" placeholder="您在哪上车"/></view>
+        <view class="downAdress item"><input type="text" disabled @tap="addressHandle('down')" value="{{downAdress.name}}" placeholder="您在哪下车"/></view>
+        <view class="cost">
+          <view class="title">优享型</view>
+          <image style="width:200px;height:56px;" src="{{predict.imgUrl || '//rest-h5.imycargo.com/static/appimg/car.png'}}"></image>
+          <view class="p">约 <span>{{predict.debtAmount || 0}}</span> 元 
+          <em style="display: inline-block;" v-if="predict && predict.discountAmount != 0">已减免 <span>{{predict.discountAmount}}</span> 元</em></view>
+          <view class="p"><span class="valuation" @tap="valuationHandle">计价规则</span></view>
+        </view>
+      </view>
+      <view class="submitHold"><button class="submit" bindtap="submitHandle">呼叫约车</button></view>
+      <view class="submitHold"><button class="submit" bindtap="pai(1)">派单</button></view>
+      <view class="submitHold"><button class="submit" bindtap="pai(2)">派单成功</button></view>
+      <view class="submitHold"><button class="submit" bindtap="pai(3)">充值页面</button></view>
+      <view class="submitHold"><button class="submit" bindtap="pai(4)">ceshi</button></view>
+    </view>
   </view>
 </template>
 
 <script>
   import wepy from 'wepy'
+  import TopMenu from '@/components/topmenu'
   import { connect } from 'wepy-redux'
   import global from '../mixins/global'
   import order from '../utils/order'
@@ -147,17 +170,30 @@
       navigationBarTitleText: '麦卡出行'
     }
     components = { // 声明页面所引用的子组件
+      TopMenu: TopMenu
     }
     mixins = [global] // 声明页面所引用的Mixin实例
     data = {
-      predict: ''
+      predict: '',
+      menus: [
+        {serviceTypeCode: 'JSYC', serviceTypeName: '即时', serviceFlag: 1, sort: '1'},
+        {serviceTypeCode: 'YYYC', serviceTypeName: '预约', serviceFlag: 1, sort: '2'},
+        {serviceTypeCode: 'JJYC', serviceTypeName: '接机', serviceFlag: 1, sort: '3'},
+        {serviceTypeCode: 'SJYC', serviceTypeName: '送机', serviceFlag: 1, sort: '4'},
+        {serviceTypeCode: 'CZC', serviceTypeName: '出租车', serviceFlag: 1, sort: '5'}
+      ],
+      isActive: 'JSYC',
+      scrolWidth: ''
     }
     computed = { // 声明[计算属性]
       now () {
         return +new Date()
       }
     }
-    watch = {} // 声明数据watcher
+    watch = {
+      isActive (val, old) {
+      }
+    } // 声明数据watcher
     methods = { // 声明页面响应事件。注意，此处只用于声明页面bind，catch事件
       submitHandle () {
         order.getPlaceOrder(this)
@@ -188,9 +224,17 @@
       },
       inputChange (e) {
         console.log(e)
+      },
+      onUser () {
+        let url = '/pages/user'
+        wepy.navigateTo({ url })
       }
     }
     events = { // 声明组件之间的事件传递
+      // 父组件声名，在子组件里触发传值。https://www.jianshu.com/p/e30436ba773f
+      'some-event': (p1, p2, p3, $event) => {
+        // console.log(`${this.$name} receive ${$event.name} from ${$event.source.$name}`)
+      }
     }
     onLoad() {
       // let self = this
@@ -206,6 +250,13 @@
         order.getOrderCollect(this)
       }
       this.$apply()
+      const query = wx.createSelectorQuery()
+      query.select('#user-container').boundingClientRect()
+      query.exec((res) => {
+        const sys = wx.getSystemInfoSync()
+        this.scrolWidth = sys.safeArea.width - res[0].width - 10
+        this.$apply()
+      })
     } // 只在 Page 实例中会存在页面生命周期函数
   }
 </script>

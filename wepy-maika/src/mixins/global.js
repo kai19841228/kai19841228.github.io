@@ -7,7 +7,6 @@ export default class testMixin extends wepy.mixin {
   methods = {
     tap () {
       this.mixin = 'mixin data was changed'
-      console.log('mixin method tap')
     }
   }
 
@@ -15,7 +14,10 @@ export default class testMixin extends wepy.mixin {
     console.log('mixin onShow')
   }
 
+  onHide() {
+    console.log('mixin hide')
+  }
+
   onLoad() {
-    console.log('mixin onLoad')
   }
 }

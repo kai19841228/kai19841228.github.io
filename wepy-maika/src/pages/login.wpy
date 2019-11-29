@@ -1,0 +1,130 @@
+<style lang="less">
+.pop-dialog-title{
+  text-align: center;
+  padding: 50rpx 0;
+}
+.weui-input{
+  width: 100%;
+  padding: 10rpx;
+}
+.login-container{
+  display: flex;
+  width: 100%;
+  height: 100;
+  align-items: center;
+  justify-content:center;
+  background-color: #FFF;
+}
+.login-container .next-button{
+  background-color:#bfbfbf;
+  width: 700rpx;
+  margin:30rpx auto;
+  font-size:32rpx;
+  color:#FFF;
+  line-height:86rpx;
+}
+.login-container .next-button.on{
+  background-color:#ff8400;
+}
+</style>
+<template>
+  <!-- 手机号输入框 -->
+  <view class="container login-container">
+    <view class="login-phone" wx:if="{{ _phoneVisible }}">
+      <view class="pop-dialog-title">登录</view>
+      <view class="pop-dialog-content">
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_input">
+            <input type='number' class="weui-input" style="border-top:1px solid rgba(255,132,0,0.2);border-bottom:1px solid rgba(255,132,0,0.2);" placeholder="请输入手机号" bindinput="_vailPhone" maxlength = "11" />
+          </view>
+        </view>
+      </view>
+      <button wx:if="{{_nextButtonOn4PhoneInput}}" class="next-button on" type="primary" catchtap="_sendPhoneMsg">下一步</button>
+      <button wx:else class="next-button" type="primary">下一步</button>
+    </view>
+    <!-- 短信证码 -->
+    <view class="login-code" wx:if="{{ _codeVisible }}">
+      <view class="pop-dialog-title">登录</view>
+      <view class="pop-dialog-content" style="width: 100%;box-sizing: border-box;position: relative;padding-bottom: 0;">
+        <view class="weui-cells weui-cells_after-title" style="text-align:left;border-top:1px solid rgba(255,132,0,0.2);border-bottom:1px solid rgba(255,132,0,0.2);">
+          <view class="weui-cell weui-cell_input" style="width: 60%;text-align: center;display: inline-block;">
+            <input type='number' style="width: 100%;" class="weui-input" placeholder="短信验证码" bindinput="_vailPhoneCode"  maxlength = "6"/>
+          </view>
+          <view style="width: 40%;text-align: center;position: absolute;top: 50%;right: 0;transform: translate(0%,-50%);">
+            <text style="width: 100%;" wx:if="{{_remainSeconds > 0}}">{{ _remainSeconds }}s</text><!-- 倒计时 -->
+            <text style="width: 100%;" wx:else catchtap="_resendPhoneMsg">获取短信</text><!-- 倒计时 -->
+          </view>
+        </view>
+      </view>
+      <button wx:if="{{_loginButtonO4Input}}" class='next-button on' type="primary" catchtap="_submitLogin">快速登录</button>
+      <button wx:else class='next-button' type="primary">快速登录</button>
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import global from '../mixins/global'
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: '麦卡出行'
+    }
+    components = { // 声明页面所引用的子组件
+    }
+    mixins = [global] // 声明页面所引用的Mixin实例
+    data = {
+      intervalhandle: '', // 计时器
+      _remainSeconds: '', // 计时器 数字
+      _nextButtonOn4PhoneInput: true, // 下一步按钮 可以点击，变色
+      _loginButtonO4Input: false, // 登陆按钮 可以点击，变色
+      _phoneVisible: true, // 手机号输入 可见，
+      _codeVisible: false // 填写验证码，登陆可见
+    }
+    computed = { // 声明[计算属性]
+      now () {
+        return +new Date()
+      }
+    }
+    watch = {} // 声明数据watcher
+    methods = { // 声明页面响应事件。注意，此处只用于声明页面bind，catch事件
+      _sendPhoneMsg () {
+        console.log('发送短信验证码,显示验证码')
+        this._phoneVisible = false
+        this._codeVisible = true
+      },
+      _submitLogin () {
+        console.log('登陆')
+        this._phoneVisible = true
+        this._codeVisible = false
+        this._loginButtonO4Input = false
+      },
+      _resendPhoneMsg () {
+        console.log('获取验证码')
+        this._remainSeconds = 90
+        this._loginButtonO4Input = true
+        this._runRemainSeconds()
+      }
+    }
+    // 执行短信下发间隔的计时器函数
+    _runRemainSeconds() {
+      // 默认执行前先清一下句柄
+      const _self = this
+      if (_self.intervalhandle != null) clearInterval(_self.intervalhandle)
+      _self.intervalhandle = setInterval(function () {
+        console.log(_self._remainSeconds)
+        _self._remainSeconds--
+        if (_self.remainSeconds === 0) {
+          clearInterval(_self.intervalhandle)
+        }
+        _self.$apply()
+      }, 1000)
+    }
+    events = { // 声明组件之间的事件传递
+    }
+    onLoad(options) {
+      // let self = this
+      console.log(options)
+    }
+    onShow () {} // 只在 Page 实例中会存在页面生命周期函数
+  }
+</script>

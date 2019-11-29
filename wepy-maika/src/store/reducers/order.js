@@ -1,5 +1,4 @@
 import { handleActions } from 'redux-actions'
-const SET_CITY_CURRENT = 'SET_CITY_CURRENT'
 const SET_UP_ADRESS = 'SET_UP_ADRESS'
 const SET_DOWN_ADRESS = 'SET_DOWN_ADRESS'
 const SET_UP_CITY = 'SET_UP_CITY'
@@ -14,9 +13,6 @@ const SET_STATE = 'SET_STATE'
 export default handleActions({
   SET_STATE (state, data) {
     state = data
-  },
-  SET_CITY_CURRENT (state, data) {
-    state.menu = data
   },
   SET_UP_ADRESS (state, data) {
     return {
