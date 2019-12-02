@@ -113,7 +113,7 @@
       _self.intervalhandle = setInterval(function () {
         console.log(_self._remainSeconds)
         _self._remainSeconds--
-        if (_self.remainSeconds === 0) {
+        if (_self._remainSeconds === 0) {
           clearInterval(_self.intervalhandle)
         }
         _self.$apply()
@@ -124,6 +124,10 @@
     onLoad(options) {
       // let self = this
       console.log(options)
+    }
+    onUnload(options) {
+      let _self = this
+      clearInterval(_self.intervalhandle)
     }
     onShow () {} // 只在 Page 实例中会存在页面生命周期函数
   }

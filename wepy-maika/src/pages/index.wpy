@@ -102,6 +102,8 @@
     </view>
     <view class="orderPlace">
       <view class="mainHold">
+        <view class="submitHold"><button class="submit" bindtap="pai(4)">初始化时间数据</button></view>
+        <timeSelect id="timeSelect"></timeSelect>
         <view class="phone item"><input type="tel" bindblur="setUserPhone(event)" @input="inputChange" value="{{userPhone}}" maxlength="11" placeholder="预订人手机号"/></view>
         <view class="item" style="padding:8px 0;background:none;padding-left: 30px;"><span style="padding-right:16px;">代人叫车</span><switch checked="{{switchStatu}}" color="#ff8400" bindchange="setSwitchStatu(event)"></switch></view>
         <view class="phone item" wx:if="{{ switchStatu }}"><input type="tel" bindblur="setRiderPhone({{riderPhone}})" value="{{riderPhone}}" maxlength="11" placeholder="乘车人手机号"/></view>
@@ -120,7 +122,6 @@
       <view class="submitHold"><button class="submit" bindtap="pai(1)">派单</button></view>
       <view class="submitHold"><button class="submit" bindtap="pai(2)">派单成功</button></view>
       <view class="submitHold"><button class="submit" bindtap="pai(3)">充值页面</button></view>
-      <view class="submitHold"><button class="submit" bindtap="pai(4)">ceshi</button></view>
     </view>
   </view>
 </template>
@@ -128,6 +129,7 @@
 <script>
   import wepy from 'wepy'
   import TopMenu from '@/components/topmenu'
+  import timeSelect from '@/components/timeSelect'
   import { connect } from 'wepy-redux'
   import global from '../mixins/global'
   import order from '../utils/order'
@@ -170,7 +172,8 @@
       navigationBarTitleText: '麦卡出行'
     }
     components = { // 声明页面所引用的子组件
-      TopMenu: TopMenu
+      TopMenu: TopMenu,
+      timeSelect: timeSelect
     }
     mixins = [global] // 声明页面所引用的Mixin实例
     data = {
@@ -209,9 +212,8 @@
           let url = '/pages/Recharge'
           wepy.navigateTo({ url })
         } else if (val === '4') {
-          console.log(this)
-          let url = '/pages/cityChange?city=up'
-          wepy.navigateTo({ url })
+          // console.log(this)
+          this.$invoke('timeSelect', 'init', 'someArgs')
         }
       },
       valuationHandle () {

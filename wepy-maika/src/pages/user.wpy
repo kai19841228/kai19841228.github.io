@@ -87,7 +87,7 @@
         </view>
         <view class="user" catchtap="_onLogin">{{ userName || "请点击登录" }}</view>
         <view class="ul">
-          <view class="li {{ item.className }}" catchtap="_onSelect" wx:for="{{ list }}" wx:key="index">{{ item.text }}</view>
+          <view class="li {{ item.className }}" catchtap="_onSelect({{item}})" wx:for="{{ list }}" wx:key="index">{{ item.text }}</view>
         </view>
         <view class="logout" wx:if="{{userName != ''}}" catchtap="logout">退出登录</view>
       </view>
@@ -110,19 +110,19 @@
       list: [{
         className: 'history',
         text: '我的行程',
-        url: '../Trip/trip'
+        url: '/pages/myTrip'
       }, {
         className: 'account',
         text: '我的钱包',
-        url: '../Account/Account'
+        url: '/pages/myTrip'
       }, {
         className: 'terms',
         text: '用户条款',
-        url: '../Term/list'
+        url: '/pages/myTrip'
       }, {
         className: 'aboutus',
         text: '关于我们',
-        url: '../Term/aboutus'
+        url: '/pages/myTrip'
       }]
     }
     computed = { // 声明[计算属性]
@@ -138,10 +138,10 @@
           let url = '/pages/login'
           wepy.navigateTo({ url })
         }
-        // wepy.setStorageSync('token', '0b6b25453a1d10985e2a7fffaa983fbb')
-        // this.userName = wepy.getStorageSync('token')
+        wepy.setStorageSync('token', '0b6b25453a1d10985e2a7fffaa983fbb')
+        this.userName = wepy.getStorageSync('token')
       },
-      _onSelect (event) {
+      _onSelect (item, event) {
         if (this.userName === '') {
           wx.showModal({
             title: '提示', // 提示的标题,
@@ -158,9 +158,9 @@
             }
           })
         } else {
-          console.log('选中页面跳转')
-          // let url = '/pages/user'
-          // wepy.navigateTo({ url })
+          console.log('选中页面跳转', item.url)
+          let url = item.url
+          wepy.navigateTo({ url })
         }
       },
       logout () {

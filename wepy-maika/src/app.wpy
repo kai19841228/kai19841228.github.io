@@ -32,7 +32,8 @@ export default class extends wepy.app {
       'pages/RechargeSure',
       'pages/RechargeSuc',
       'pages/user',
-      'pages/login'
+      'pages/login',
+      'pages/myTrip'
     ],
     window: {
       backgroundTextStyle: 'light',
