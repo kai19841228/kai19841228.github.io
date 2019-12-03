@@ -1,36 +1,58 @@
 <template>
-<div class="orderPlace">
-  <div class="mainHold">
-    <div class="phone item"><input type="tel" @blur="userPhoneChange" v-model="userPhone" maxlength="11" placeholder="预订人手机号"></div>
-    <div class="item" style="padding:8px 0;background:none;padding-left: 30px;"><span style="padding-right:16px;">代人叫车</span><switch :checked="switchStatu" @change="switchChange"/></div>
-    <div v-show="switchStatu" class="phone item"><input type="tel" @blur="riderPhoneChange" v-model="riderPhone" maxlength="11" placeholder="预订人手机号"></div>
-    <div v-show="switchStatu" class="user item"><input type="tel" @blur="riderNameChange" v-model="riderName" placeholder="预订人姓名"></div>
-    <div class="item"><input type="text" disabled @click="addressHandle('up')" v-model="upAdress.name" placeholder="您在哪上车"></div>
-    <div class="downAdress item"><input type="text" disabled @click="addressHandle('down')" v-model="downAdress.name" placeholder="您在哪下车"></div>
-    <div class="cost">
-      <h1>优享型</h1>
-      <img style="width:200px;height:56px;" :src="predict.imgUrl || '//rest-h5.imycargo.com/static/appimg/car.png'">
-      <p>约 <span>{{predict.debtAmount || 0}}</span> 元 
-      <em style="display: inline-block;" v-if="predict && predict.discountAmount != 0">已减免 <span>{{predict.discountAmount}}</span> 元</em></p>
-      <p><span class="valuation" @click="valuationHandle">计价规则</span></p>
+<div class="container">
+  <view id="header" class="header">
+    <view class="user-container" id="user-container" @tap='onUser'>
+      <image class='user' src="/static/images/app_icon021.png"></image>
+    </view>
+    <TopMenu :menus="menus" :isActive="isActive" :scrollWidth="scrollWidth" @isActiveChange="activeChange"></TopMenu>
+  </view>
+  <div class="orderPlace">
+    <div class="mainHold">
+      <timeSelector></timeSelector>
+      <div class="phone item"><input type="tel" @blur="userPhoneChange" v-model="userPhone" maxlength="11" placeholder="预订人手机号"></div>
+      <div class="item" style="padding:8px 0;background:none;padding-left: 30px;"><span style="padding-right:16px;">代人叫车</span><switch :checked="switchStatu" @change="switchChange"/></div>
+      <div v-show="switchStatu" class="phone item"><input type="tel" @blur="riderPhoneChange" v-model="riderPhone" maxlength="11" placeholder="预订人手机号"></div>
+      <div v-show="switchStatu" class="user item"><input type="tel" @blur="riderNameChange" v-model="riderName" placeholder="预订人姓名"></div>
+      <div class="item"><input type="text" disabled @click="addressHandle('up')" v-model="upAdress.name" placeholder="您在哪上车"></div>
+      <div class="downAdress item"><input type="text" disabled @click="addressHandle('down')" v-model="downAdress.name" placeholder="您在哪下车"></div>
+      <div class="cost">
+        <h1>优享型</h1>
+        <img style="width:200px;height:56px;" :src="predict.imgUrl || '//rest-h5.imycargo.com/static/appimg/car.png'">
+        <p>约 <span>{{predict.debtAmount || 0}}</span> 元 
+        <em style="display: inline-block;" v-if="predict && predict.discountAmount != 0">已减免 <span>{{predict.discountAmount}}</span> 元</em></p>
+        <p><span class="valuation" @click="valuationHandle">计价规则</span></p>
+      </div>
     </div>
+    <div class="submitHold"><a id="wld" class="submit" @click="submitHandle">呼叫约车</a></div>
+    <div class="submitHold"><a class="submit" @click="pai(1)">派单</a></div>
+    <div class="submitHold"><a class="submit" @click="pai(2)">派单成功</a></div>
+    <div class="submitHold"><a class="submit" @click="pai(3)">充值页面</a></div>
   </div>
-  <div class="submitHold"><a id="wld" class="submit" @click="submitHandle">呼叫约车</a></div>
-  <div class="submitHold"><a class="submit" @click="pai(1)">派单</a></div>
-  <div class="submitHold"><a class="submit" @click="pai(2)">派单成功</a></div>
-  <div class="submitHold"><a class="submit" @click="pai(3)">充值页面</a></div>
 </div>
 </template>
 <script>
+import TopMenu from '@/components/TopMenu'
+import timeSelector from '@/components/timeSelector'
 import store from '@/store/store'
 import order from '@/services/order'
 export default {
   data () {
     return {
-      predict: ''
+      predict: '',
+      menus: [
+        {serviceTypeCode: 'JSYC', serviceTypeName: '即时', serviceFlag: 1, sort: '1'},
+        {serviceTypeCode: 'YYYC', serviceTypeName: '预约', serviceFlag: 1, sort: '2'},
+        {serviceTypeCode: 'JJYC', serviceTypeName: '接机', serviceFlag: 1, sort: '3'},
+        {serviceTypeCode: 'SJYC', serviceTypeName: '送机', serviceFlag: 1, sort: '4'},
+        {serviceTypeCode: 'CZC', serviceTypeName: '出租车', serviceFlag: 1, sort: '5'}
+      ],
+      isActive: 'JSYC',
+      scrollWidth: 200
     }
   },
   components: {
+    TopMenu,
+    timeSelector
   },
   computed: {
     switchStatu () {
@@ -50,6 +72,11 @@ export default {
     },
     downAdress () {
       return store.state.order.downAdress
+    }
+  },
+  watch: {
+    isActive: function (val, old) {
+      // console.log(val, old)
     }
   },
   methods: {
@@ -97,17 +124,20 @@ export default {
         let url = '../Recharge/main'
         mpvue.navigateTo({ url })
       }
+    },
+    // 菜单按钮变化记录
+    activeChange (item) {
+      this.isActive = item
+    },
+    onUser () {
+      let url = '../userCenter/main'
+      mpvue.navigateTo({ url })
     }
   },
   onLoad () {
   },
   mounted () {
     // let app = getApp()
-    const query = wx.createSelectorQuery()
-    query.select('#wld').boundingClientRect()
-    query.exec((res) => {
-      console.log(res[0])
-    })
   },
   onShow () {
     console.log(store)
@@ -123,24 +153,27 @@ export default {
     if (this.upAdress.name && this.downAdress.name) {
       order.getOrderCollect(this)
     }
+    // 动态设置 按钮容器的宽度
+    const query = mpvue.createSelectorQuery()
+    query.select('#user-container').boundingClientRect()
+    query.exec((res) => {
+      const sys = mpvue.getSystemInfoSync()
+      this.scrollWidth = sys.safeArea.width - res[0].width - 15
+    })
   }
 }
 </script>
 
 <style lang="postcss" scoped>
 .orderPlace{
+  flex: 1;
   width: 100%;
-  height: 100%;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-pack: center;
-  -ms-flex-align: center;
   align-items: center;
-  -ms-flex-direction: column;
   flex-direction: column;
   box-sizing: border-box;
-  padding: 0 10px;
-  padding-top: 10px;
+  padding: 10px;
+  overflow: auto;
 }
 .mainHold{
   width: 100%;
@@ -205,5 +238,19 @@ export default {
     color: #fff;
     line-height: 38px;
     text-align: center;
+}
+.header {
+  box-sizing: border-box;
+  background: #FFF;
+  width: 100%;
+  height: 80rpx;
+  position: relative;
+}
+.header .user-container {
+  width: 80rpx;height: 80rpx;text-align: center; 
+}
+.header .user-container .user {
+  width:40rpx;height:40rpx;
+  margin-top: 20rpx;
 }
 </style>

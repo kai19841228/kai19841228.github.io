@@ -36,13 +36,12 @@ export default {
 <style>
 @import "../static/weui.wxss";
 .container {
-  height: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  padding: 200rpx 0;
   box-sizing: border-box;
+  background: #f5f5f5;
 }
 /* this rule will be remove */
 * {

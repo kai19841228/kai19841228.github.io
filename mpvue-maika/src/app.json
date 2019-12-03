@@ -8,7 +8,8 @@
     "pages/RechargeSure/main",
     "pages/orderPolling/main",
     "pages/orderSuc/main",
-    "pages/RechargeSuc/main"
+    "pages/RechargeSuc/main",
+    "pages/userCenter/main"
   ],
   "permission": {
     "scope.userLocation": {

@@ -9,6 +9,7 @@ const SET_RIDER_NAME = 'SET_RIDER_NAME'
 const SET_CURRENT_CITY = 'SET_CURRENT_CITY'
 const SET_SWITCH_STATU = 'SET_SWITCH_STATU'
 const SET_STATE = 'SET_STATE'
+const SET_BOOKING_START_TIME = 'SET_BOOKING_START_TIME'
 const state = {
   cityCurrent: {
     status: 0
@@ -31,6 +32,11 @@ const state = {
     centeralLoGd: '',
     status: 0
   }, // 下车城市
+  orderTime: {
+    bookingStartTime: '',
+    flightBookingStartTime: '',
+    timeStr: '现在'
+  }, // 下单时间
   switchStatu: false, // 页面带人叫车状态切换
   upAdress: {}, // 上车地址
   downAdress: {}, // 下车地址
@@ -50,6 +56,11 @@ const mutations = {
   increment: (state) => {
     const obj = state
     obj.count += 1
+  },
+  SET_BOOKING_START_TIME (state, data) {
+    console.log(state, data)
+    state.orderTime.timeStr = data.timeStr
+    state.orderTime.bookingStartTime = data.time
   },
   SET_STATE (state, data) {
     state = data
@@ -90,6 +101,9 @@ const mutations = {
   }
 }
 const actions = {
+  setBookingStartTime (context, data) {
+    context.commit(SET_BOOKING_START_TIME, data)
+  },
   setState (context, data) {
     context.commit(SET_STATE, data)
   },
