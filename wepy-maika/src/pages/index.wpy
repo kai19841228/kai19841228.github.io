@@ -1,17 +1,13 @@
 <style lang="less">
 .orderPlace{
+  flex: 1;
   width: 100%;
-  height: 100%;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-pack: center;
-  -ms-flex-align: center;
   align-items: center;
-  -ms-flex-direction: column;
   flex-direction: column;
   box-sizing: border-box;
-  padding: 0 10px;
-  padding-top: 10px;
+  padding: 10px;
+  overflow: auto;
 }
 .mainHold{
   width: 100%;
@@ -100,7 +96,7 @@
       </view>
       <TopMenu :scrolWidth.sync="scrolWidth" :menus.sync="menus" :isActive.sync="isActive"></TopMenu>
     </view>
-    <view class="orderPlace">
+    <scroll-view scroll-y='true' enable-flex="true" scroll-top='{{ scrollTop }}' @scroll="scroll" id='theId' class="orderPlace">
       <view class="mainHold">
         <timeSelect id="timeSelect" @tap="timeInit"></timeSelect>
         <view class="phone item"><input type="tel" bindblur="setUserPhone(event)" @input="inputChange" value="{{userPhone}}" maxlength="11" placeholder="预订人手机号"/></view>
@@ -122,7 +118,7 @@
       <view class="submitHold"><button class="submit" bindtap="pai(2)">派单成功</button></view>
       <view class="submitHold"><button class="submit" bindtap="pai(3)">充值页面</button></view>
         <view class="submitHold"><button class="submit" bindtap="pai(4)">初始化时间数据</button></view>
-    </view>
+    </scroll-view>
   </view>
 </template>
 
@@ -178,6 +174,7 @@
     }
     mixins = [global] // 声明页面所引用的Mixin实例
     data = {
+      scrollTop: 10,
       predict: '',
       menus: [
         {serviceTypeCode: 'JSYC', serviceTypeName: '即时', serviceFlag: 1, sort: '1'},
@@ -196,9 +193,16 @@
     }
     watch = {
       isActive (val, old) {
+        console.log(this.scrollTop)
+        this.scrollTop = 0
+        this.$apply()
+        console.log(this.scrollTop)
       }
     } // 声明数据watcher
     methods = { // 声明页面响应事件。注意，此处只用于声明页面bind，catch事件
+      scroll () {
+        this.scrollTop = ''
+      },
       submitHandle () {
         order.getPlaceOrder(this)
       },

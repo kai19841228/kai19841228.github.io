@@ -6,7 +6,7 @@
     </view>
     <TopMenu :menus="menus" :isActive="isActive" :scrollWidth="scrollWidth" @isActiveChange="activeChange"></TopMenu>
   </view>
-  <div class="orderPlace">
+  <scroll-view scroll-y='true' enable-flex="true" :scroll-top="scrollTop" @scroll="scroll" id='theId' class="orderPlace">
     <div class="mainHold">
       <timeSelector></timeSelector>
       <div class="phone item"><input type="tel" @blur="userPhoneChange" v-model="userPhone" maxlength="11" placeholder="预订人手机号"></div>
@@ -27,7 +27,7 @@
     <div class="submitHold"><a class="submit" @click="pai(1)">派单</a></div>
     <div class="submitHold"><a class="submit" @click="pai(2)">派单成功</a></div>
     <div class="submitHold"><a class="submit" @click="pai(3)">充值页面</a></div>
-  </div>
+  </scroll-view>
 </div>
 </template>
 <script>
@@ -38,6 +38,7 @@ import order from '@/services/order'
 export default {
   data () {
     return {
+      scrollTop: '',
       predict: '',
       menus: [
         {serviceTypeCode: 'JSYC', serviceTypeName: '即时', serviceFlag: 1, sort: '1'},
@@ -128,10 +129,16 @@ export default {
     // 菜单按钮变化记录
     activeChange (item) {
       this.isActive = item
+      console.log(this.scrollTop)
+      this.scrollTop = 0
+      console.log(this.scrollTop)
     },
     onUser () {
       let url = '../userCenter/main'
       mpvue.navigateTo({ url })
+    },
+    scroll () {
+      this.scrollTop = ''
     }
   },
   onLoad () {

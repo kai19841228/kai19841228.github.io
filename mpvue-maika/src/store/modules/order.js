@@ -22,7 +22,7 @@ const state = {
     centeralLaGd: '',
     centeralLoGd: '',
     status: 0
-  }, // 下车城市
+  }, // 上车城市
   cityDown: {
     cityId: '',
     cityName: '',
