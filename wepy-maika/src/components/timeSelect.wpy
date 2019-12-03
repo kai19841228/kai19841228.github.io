@@ -61,7 +61,7 @@
       },
       MaxReserveMinute: { // 最大时间预定时间
         type: Number,
-        default: 24 * 60 * 7
+        default: 24 * 60 * 70
       },
       // 分钟间隔
       minuteSpan: {
@@ -197,7 +197,20 @@
       } else {
         chooseTime = this.dialOptions[0][dialIndex[0]] + ' ' + this.getFormatString(this.dialOptions[1][dialIndex[1]]) + ':' + this.getFormatString(this.dialOptions[2][dialIndex[2]])
       }
-      // console.log('所选时间:', chooseTime)
+      let dayStr = this.dialOptions[0][dialIndex[0]]
+      let hour = this.getFormatString(this.dialOptions[1][dialIndex[1]])
+      let minute = this.getFormatString(this.dialOptions[2][dialIndex[2]])
+      let dayInfo = dayStr.replace(/[\u4E00-\u9FA5]/g, ' ').split(' ')
+      let choosedTime = new Date()
+      choosedTime.setMonth(dayInfo[0] - 1)
+      choosedTime.setDate(dayInfo[1])
+      choosedTime.setHours(hour)
+      choosedTime.setMinutes(minute)
+      if (chooseTime === '现在') {
+        choosedTime = new Date()
+      }
+      this.$wxpage.setOrderTime('', choosedTime, chooseTime)
+      console.log('真正的时间戳:', choosedTime)
       return chooseTime
     }
     getFormatString (str) {
@@ -208,13 +221,13 @@
     methods = {
       cancelPick (e) {
         console.log('取消')
-        this.dialIndex = [0, 0, 0]
-        this.iniT()
+        // this.dialIndex = [0, 0, 0]
+        // this.iniT()
       },
       confirmPick (e) {
         this.chooseTime = this.getChooseTime(e.detail.value)
-        this.dialIndex = [0, 0, 0]
-        this.iniT()
+        // this.dialIndex = [0, 0, 0]
+        // this.iniT()
         console.log(this.chooseTime)
         // this.chooseTime 是现在取 new Date()，不是现在直接用
       },
@@ -243,7 +256,6 @@
       },
       'init': (p1, $event) => {
         // console.log($event, p1)
-        console.log(this)
         this.iniT()
       }
     }

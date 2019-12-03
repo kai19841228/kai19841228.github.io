@@ -155,7 +155,7 @@
           </view>
           <view class="title" wx:if="{{ historyTrip.length > 0 }}">历史行程</view>
             <view class="HistoryList">
-              <view catchtap="navigateToHandle" class="trip" wx:for="{{ historyTrip }}" wx:key="index">
+              <view catchtap="navigateToHandle" class="trip" wx:for="{{ historyTrip }}" wx:key="{{index}}">
                 <view><text>及时订单</text><text style="float: right;">已完成</text></view>
                 <view class="time">时间</view>
                 <view class="up">上车地址</view>
@@ -186,12 +186,12 @@
     data = {
       type: 1,
       currentTripList: [
-        // {serviceType: '预约订单', status: '待服务', bookingTime: '2019-12-2', bookingStartAddr: '万豪国际', bookingEndAddr: '万豪国际'}
+        {serviceType: '预约订单', status: '待服务', bookingTime: '2019-12-2', bookingStartAddr: '万豪国际', bookingEndAddr: '万豪国际'}
       ],
       historyTrip: [
-        // {serviceType: '预约订单', status: '已完成', bookingTime: '2019-12-2', bookingStartAddr: '万豪国际', bookingEndAddr: '万豪国际'},
-        // {serviceType: '预约订单', status: '待服务', bookingTime: '2019-12-2', bookingStartAddr: '万豪国际', bookingEndAddr: '万豪国际'},
-        // {serviceType: '预约订单', status: '待服务', bookingTime: '2019-12-2', bookingStartAddr: '万豪国际', bookingEndAddr: '万豪国际'}
+        {serviceType: '预约订单', status: '已完成', bookingTime: '2019-12-2', bookingStartAddr: '万豪国际', bookingEndAddr: '万豪国际'},
+        {serviceType: '预约订单', status: '待服务', bookingTime: '2019-12-2', bookingStartAddr: '万豪国际', bookingEndAddr: '万豪国际'},
+        {serviceType: '预约订单', status: '待服务', bookingTime: '2019-12-2', bookingStartAddr: '万豪国际', bookingEndAddr: '万豪国际'}
       ]
     }
     computed = { // 声明[计算属性]

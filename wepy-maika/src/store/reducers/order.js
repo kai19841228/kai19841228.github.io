@@ -8,11 +8,22 @@ const SET_RIDER_PHONE = 'SET_RIDER_PHONE'
 const SET_RIDER_NAME = 'SET_RIDER_NAME'
 const SET_CURRENT_CITY = 'SET_CURRENT_CITY'
 const SET_SWITCH_STATU = 'SET_SWITCH_STATU'
+const SET_TIME = 'SET_TIME'
 const SET_STATE = 'SET_STATE'
 
 export default handleActions({
   SET_STATE (state, data) {
     state = data
+  },
+  SET_TIME (state, data) {
+    let obj = {
+      title: data.payload[1],
+      data: data.payload[0]
+    }
+    return {
+      ...state,
+      orderTime: obj
+    }
   },
   SET_UP_ADRESS (state, data) {
     return {
@@ -92,6 +103,7 @@ export default handleActions({
     centeralLoGd: '',
     status: 0
   }, // 下车城市
+  orderTime: {}, // 下单时间
   switchStatu: false, // 页面带人叫车状态切换
   upAdress: {}, // 上车地址
   downAdress: {}, // 下车地址
