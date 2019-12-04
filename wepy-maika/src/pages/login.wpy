@@ -35,7 +35,7 @@
       <view class="pop-dialog-content">
         <view class="weui-cells weui-cells_after-title">
           <view class="weui-cell weui-cell_input">
-            <input type='number' class="weui-input" style="border-top:1px solid rgba(255,132,0,0.2);border-bottom:1px solid rgba(255,132,0,0.2);" placeholder="请输入手机号" bindinput="_vailPhone" maxlength = "11" />
+            <input type='number' class="weui-input" style="border-top:1px solid rgba(255,132,0,0.2);border-bottom:1px solid rgba(255,132,0,0.2);" placeholder="请输入手机号" @input="_vailPhone" @blur="_vailPhone" maxlength = "11" />
           </view>
         </view>
       </view>
@@ -65,6 +65,7 @@
 <script>
   import wepy from 'wepy'
   import global from '../mixins/global'
+  import order from '../utils/order'
   export default class Index extends wepy.page {
     config = {
       navigationBarTitleText: '麦卡出行'
@@ -73,9 +74,10 @@
     }
     mixins = [global] // 声明页面所引用的Mixin实例
     data = {
+      phone: '', // 计时器
       intervalhandle: '', // 计时器
       _remainSeconds: '', // 计时器 数字
-      _nextButtonOn4PhoneInput: true, // 下一步按钮 可以点击，变色
+      _nextButtonOn4PhoneInput: false, // 下一步按钮 可以点击，变色
       _loginButtonO4Input: false, // 登陆按钮 可以点击，变色
       _phoneVisible: true, // 手机号输入 可见，
       _codeVisible: false // 填写验证码，登陆可见
@@ -87,10 +89,21 @@
     }
     watch = {} // 声明数据watcher
     methods = { // 声明页面响应事件。注意，此处只用于声明页面bind，catch事件
+      _vailPhone (e) {
+        console.log(e.detail.value)
+        var patrn = /^((?:11|12|13|14|15|16|17|18|19)\d{9}|0(?:10|2\d|[3-9]\d{2})[1-9]\d{6,7})$/
+        this.phone = e.detail.value
+        if (!patrn.exec(e.detail.value)) {
+          this._nextButtonOn4PhoneInput = false
+        } else {
+          this._nextButtonOn4PhoneInput = true
+        }
+      },
       _sendPhoneMsg () {
         console.log('发送短信验证码,显示验证码')
-        this._phoneVisible = false
-        this._codeVisible = true
+        order.verifyCode(this)
+        // this._phoneVisible = false
+        // this._codeVisible = true
       },
       _submitLogin () {
         console.log('登陆')

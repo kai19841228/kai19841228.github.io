@@ -112,6 +112,7 @@
 <script>
   import wepy from 'wepy'
   import global from '../mixins/global'
+  import order from '../utils/order'
   export default class Index extends wepy.page {
     config = {
       navigationBarTitleText: '派单成功'
@@ -120,7 +121,9 @@
     }
     mixins = [global] // 声明页面所引用的Mixin实例
     data = {
-      mynum: 20
+      orderId: '',
+      orderNo: '',
+      driverData: ''
     }
     computed = { // 声明[计算属性]
       now () {
@@ -134,13 +137,18 @@
       },
       cancel () {
         // 取消订单
+        order.cancelOrderPrejudge(this)
       }
     }
     events = { // 声明组件之间的事件传递
     }
-    onLoad() {
+    onLoad(options) {
       // let self = this
+      this.orderId = options.orderId
+      this.orderNo = options.orderNo
     }
-    onShow () {} // 只在 Page 实例中会存在页面生命周期函数
+    onShow () {
+      order.getDriver(this)
+    } // 只在 Page 实例中会存在页面生命周期函数
   }
 </script>

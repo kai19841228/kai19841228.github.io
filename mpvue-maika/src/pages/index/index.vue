@@ -2,7 +2,7 @@
 <div class="container">
   <view id="header" class="header">
     <view class="user-container" id="user-container" @tap='onUser'>
-      <image class='user' src="/static/images/app_icon021.png"></image>
+      <img class='user' src="/static/images/app_icon021.png">
     </view>
     <TopMenu :menus="menus" :isActive="isActive" :scrollWidth="scrollWidth" @isActiveChange="activeChange"></TopMenu>
   </view>
@@ -147,10 +147,10 @@ export default {
     // let app = getApp()
   },
   onShow () {
-    console.log(store)
+    mpvue.setNavigationBarTitle({ title: '首汽约车' })
+    // console.log(store)
     // 进入主页 看上车地址有没有城市名称 没有调用定位当前城市信息和服务类型
     // 城市名称有值 检查上车城市开通服务了没有
-    console.log(store.state.order.cityUp.cityName)
     if (!store.state.order.cityUp.cityName) {
       order.getCurrentCity(this, {})
     } else {
@@ -187,7 +187,7 @@ export default {
   background-color: #fff;
 }
 .mainHold .item {
-    border-bottom: 1px solid #d9d9d9;
+    border-bottom: 1rpx solid #e5e5e5;
     padding: 12px 0;
     padding-left: 30px;
     background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABnElEQVQ4T7WVzS5DQRTHf6etdGfpKxYSnqDxANgTomLBG/gKFohLmrgiLIi23sCqrRD22NcjSFj43tkR2iNzU+XeTptUapZzzvzmzMz//EewDJ0hShujFBlB6AXaS2mPKFeEOOaJI0nxHlwuwQl1GUPZRei0bVaeU+4QFsQh+zuvDNQEISLsA9M1QZXBNJ/MSYKiCf0AXVJ/gH3j0+IwUwZ6x4RMnZX504VxWSUjmiTKK9dV7uyCAnsoeSKEKRAjzDzQb9n8nma6RV0mgENLwg4OywL6O6bmmjbZQlmyrJkU3SCLEA8EL3EYCMJ8YJcLoM+3TsmZCm+ArgBwSBzOat2pugwCp4GcWwN8A6K+wCftkuCpJjBBGxEeAznv/wJs8JE3yaKVjyKOVRo/nedyXiGf0qPYZaNss8aKVTYbbCHVZGOcpaWGsI1RhMjzQZgwMWMIVmEbs3ihx+vlhrRekXFZJ/M/5uBVaeyriSTKVF0moRxQYLbCvr4hdRmssmiOaTVYX5+ah2oljjJc+gI6SvEH7wsQTngmZ/sCvgB0Rprw3p/oOwAAAABJRU5ErkJggg==) no-repeat left 8px center;

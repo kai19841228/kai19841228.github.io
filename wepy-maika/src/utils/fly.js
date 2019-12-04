@@ -2,8 +2,12 @@ import wepy from 'wepy'
 const Fly = require('flyio/dist/npm/wx')
 const fly = new Fly()
 const axiosConfig = {
-  getPostParam: function (url, param, vm) {
-    fly.config.baseURL = vm.$parent.globalData.baseURL
+  getPostParam: function (url, param, vm, baseURL) {
+    if (baseURL) {
+      fly.config.baseURL = vm.$parent.globalData.userURL
+    } else {
+      fly.config.baseURL = vm.$parent.globalData.baseURL
+    }
     return fly.post(url, param, {headers: {
         'content-type': 'application/x-www-form-urlencoded',
         'app-version': '2.2.5',
@@ -11,8 +15,12 @@ const axiosConfig = {
         'token': wepy.getStorageSync('token')
       }})
   },
-  getPostParamCallF: function (url, param, callFunc, vm) {
-    fly.config.baseURL = vm.$parent.globalData.baseURL
+  getPostParamCallF: function (url, param, callFunc, vm, baseURL) {
+    if (baseURL) {
+      fly.config.baseURL = vm.$parent.globalData.userURL
+    } else {
+      fly.config.baseURL = vm.$parent.globalData.baseURL
+    }
     fly.post(url, param, {headers: {
         'content-type': 'application/x-www-form-urlencoded',
         'app-version': '2.2.5',

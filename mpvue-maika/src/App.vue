@@ -14,20 +14,19 @@ export default {
     } else {
       Vue.prototype.$baseUrl = 'http://m.imycargo.com'
     }
-    console.log(this.$baseUrl)
   },
   created () {
   },
   onLaunch (opts) {
-    console.log('App Launch', opts)
+    // console.log('App Launch', opts)
   },
   onShow () {
     // `this` 指向 vm 实例
-    console.log('App show')
+    // console.log('App show')
     store.dispatch('setState', mpvue.getStorageSync('order'))
   },
   onHide () {
-    console.log('App Hide')
+    // console.log('App Hide')
     mpvue.setStorageSync('order', store.state.order)
   }
 }

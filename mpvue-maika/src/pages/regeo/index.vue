@@ -93,6 +93,7 @@ export default {
   },
   mounted () {
     this.items = []
+    mpvue.setNavigationBarTitle({ title: '地址选择' })
   }
 }
 </script>

@@ -9,7 +9,8 @@
     "pages/orderPolling/main",
     "pages/orderSuc/main",
     "pages/RechargeSuc/main",
-    "pages/userCenter/main"
+    "pages/userCenter/main",
+    "pages/myTrip/main"
   ],
   "permission": {
     "scope.userLocation": {
@@ -19,7 +20,7 @@
   "window": {
     "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
+    "navigationBarTitleText": "首汽约车",
     "navigationBarTextStyle": "black"
   }
 }

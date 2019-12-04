@@ -1,10 +1,10 @@
 export default {
   ajax (options) {
-    var randomSum = function (min, max) {
-      return min + Math.round(Math.random() * (max - min))
-    }
-    var rtime = randomSum(0, 100000)
-    console.log('[' + rtime + ']服务请求地址：', options.url)
+    // var randomSum = function (min, max) {
+    //   return min + Math.round(Math.random() * (max - min))
+    // }
+    // var rtime = randomSum(0, 100000)
+    // console.log('[' + rtime + ']服务请求地址：', options.url)
     var cookies = []
     cookies.push('app-version=2.2.5')
     cookies.push('app-channel-num=CH_GD_H5')
@@ -32,27 +32,27 @@ export default {
       dataType: _options.dataType,
       // 数据格式的转换也在这进行处理
       success: function (res) {
-        console.log('res', res)
+        // console.log('res', res)
         if (res.statusCode === 200) {
-          console.log('[' + rtime + ']服务返回数据：', res.data)
+          // console.log('[' + rtime + ']服务返回数据：', res.data)
           typeof _options.success === 'function' && _options.success.call(this, res.data)
         } else {
           res.data = {
             code: -100200,
             message: 'the statusCode is ' + res.statusCode + ' for wx.request'
           }
-          console.log('[' + rtime + ']服务返回数据：', res.data)
+          // console.log('[' + rtime + ']服务返回数据：', res.data)
           typeof _options.success === 'function' && _options.success.call(this, res.data)
         }
       },
       fail: function (err) {
-        console.log('err', err)
+        // console.log('err', err)
         var retData = {
           code: -100201,
           message: '请求失败',
           err: err
         }
-        console.log('[' + rtime + ']服务返回数据：', retData)
+        // console.log('[' + rtime + ']服务返回数据：', retData)
         typeof _options.error === 'function' && _options.error.call(this, retData)
       }
     }
@@ -72,10 +72,10 @@ export default {
       if (token) {
         _header['token'] = token
       }
-      console.log('[' + rtime + ']服务请求的header：', _header)
+      // console.log('[' + rtime + ']服务请求的header：', _header)
     }
     _wxOption.header = _header
-    console.log('[' + rtime + ']服务请求入参：', _wxOption.data)
+    // console.log('[' + rtime + ']服务请求入参：', _wxOption.data)
     mpvue.request(_wxOption)
   }
 }

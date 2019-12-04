@@ -40,7 +40,6 @@ const orderData = {
     orderData.Ajax(vm, '/api/mycar/user/city/getCurrentCityServiceTypeByIp', data, orderData.dealCurrentCity)
   },
   dealCurrentCity (vm, data) {
-    console.log(data)
     if (data.code === 0) {
       store.dispatch('setCurrentCity', data.data.cityInfoVO)
       if (store.state.order.cityUp.status === 0) {
@@ -107,7 +106,6 @@ const orderData = {
     orderData.Ajax(vm, '/api/mycar/user/city/getCityList', {cityName: vm.searchCityText}, orderData.dealCityList)
   },
   dealCityList (vm, data) {
-    console.log(data)
     if (data.code === 0) {
       vm.openCityList = data.data
       console.log(vm.openCityList)
@@ -134,7 +132,6 @@ const orderData = {
     orderData.Ajax(vm, '/api/mycar/user/orderCollect/estimateCost/v2-2-5', param, orderData.dealOrderCollect)
   },
   dealOrderCollect (vm, data) {
-    console.log(data)
     vm.predict = data.data.costList[0]
   },
   // 加密
@@ -171,15 +168,12 @@ const orderData = {
       currentAddrShort: vm.upAdress.name, // 预定上车短地址
       currentPoint: orderData.encrypt(vm.upAdress.location.lng + ',' + vm.upAdress.location.lat) // 预定上车坐标点
     }
-    console.log(param)
     orderData.Ajax(vm, '/api/mycar/user/order/placeOrderInfoInH5', param, orderData.dealPlaceOrder)
   },
   dealPlaceOrder (vm, data) {
-    console.log(data)
     if (data.code === 0) {
       console.log('跳转派单轮询页面')
       const url = '../orderPolling/main?orderId=' + data.data.orderId + '&' + 'orderNo=' + data.data.orderNo
-      console.log(url)
       mpvue.reLaunch({ url })
     } else if (data.code === 500330) {
       mpvue.showModal({
@@ -270,7 +264,6 @@ const orderData = {
     orderData.Ajax(vm, '/api/mycar/user/orderDispatch/pollService', {orderId: vm.orderId}, orderData.dealOrderPoll)
   },
   dealOrderPoll (vm, data) {
-    console.log(data)
     if (data.code === 0) {
       if (data.data.status === 30) {
         // 30状态 跳转成功页
@@ -314,7 +307,6 @@ const orderData = {
     orderData.Ajax(vm, '/api/mycar/user/order/info/getMyCarOrderDetail/v2-2-5', {orderNo: vm.orderNo}, orderData.dealDriver)
   },
   dealDriver (vm, data) {
-    console.log(data)
     vm.driverData = data
   },
   // 查看支付结果

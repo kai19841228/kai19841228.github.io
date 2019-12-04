@@ -1,5 +1,5 @@
 <template>
-<div class="weui-cells weui-cells_after-title">
+<div class="weui-cells_after-title">
   <picker mode="multiSelector" @cancel="cancelPick" @change="confirmPick" @columnchange="changeSelect" :value="dialIndex" :range="dialOptions">
     <view class="picker lh">
       <div class="timer_icon"></div>
@@ -91,7 +91,6 @@ export default {
       listHours = this.getHoursList()
       listMinutes = this.getMinutesList(listHours)
       this.dialOptions = [listDays, listHours, listMinutes]
-      console.log(this.dialOptions)
     },
     getFormatString (str) {
       str = str ? str.replace(/[\u4E00-\u9FA5]/g, '') : ''

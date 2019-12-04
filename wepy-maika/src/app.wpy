@@ -43,7 +43,8 @@ export default class extends wepy.app {
     }
   }
   globalData = {
-    baseURL: 'http://cebbank.m.imycargo.com'
+    baseURL: 'http://cebbank.m.imycargo.com',
+    userURL: 'https://user.ruiyx.com'
   }
   constructor () {
     super()
@@ -53,12 +54,16 @@ export default class extends wepy.app {
   onLaunch(options) {
     if (options.query.env === 'dev') {
       this.globalData.baseURL = 'http://dev.cebbank.m.imycargo.com'
+      this.globalData.userURL = 'https://test.user.ruiyx.com'
     } else if (options.query.env === 'test') {
       this.globalData.baseURL = 'http://test.cebbank.m.imycargo.com'
+      this.globalData.userURL = 'https://test.user.ruiyx.com'
     } else if (options.query.env === 'pre') {
       this.globalData.baseURL = 'http://pre.cebbank.m.imycargo.com'
-    } if (options.query.env === 'pre') {
+      this.globalData.userURL = 'https://pre.user.ruiyx.com'
+    } else {
       this.globalData.baseURL = 'http://cebbank.m.imycargo.com'
+      this.globalData.userURL = 'https://user.ruiyx.com'
     }
   }
 }

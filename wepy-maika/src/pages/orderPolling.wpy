@@ -45,7 +45,7 @@
         <image class="w_pic" style="" src="../static/app_icon32.gif"></image>
         <view class="span" style="">正在为您挑选司机</view>
       </view>
-      <a class="btn_cal" @click="orderCancel">取消订单</a>
+      <button class="btn_cal" @tap="orderCancel">取消订单</button>
     </view>
   </view>
 </template>
@@ -53,6 +53,7 @@
 <script>
   import wepy from 'wepy'
   import global from '../mixins/global'
+  import order from '../utils/order'
   export default class Index extends wepy.page {
     config = {
       navigationBarTitleText: '派单'
@@ -61,7 +62,10 @@
     }
     mixins = [global] // 声明页面所引用的Mixin实例
     data = {
-      mynum: 20
+      orderId: '',
+      orderNo: '',
+      timer: '', // 正计时 显示
+      timerAjax: ''
     }
     computed = { // 声明[计算属性]
       now () {
@@ -70,15 +74,40 @@
     }
     watch = {} // 声明数据watcher
     methods = { // 声明页面响应事件。注意，此处只用于声明页面bind，catch事件
-      tap () {
-        console.log('do noting from ' + this.$name)
+      orderCancel () {
+        // 取消订单
+        order.cancelOrderPrejudge(this)
+      }
+    }
+    orderPoll () {
+      var self = this
+      // 轮询订单
+      order.getOrderPoll(self)
+    }
+    // 清空 time
+    clearTime () {
+      if (this.timerAjax) {
+        clearInterval(this.timerAjax)
       }
     }
     events = { // 声明组件之间的事件传递
     }
-    onLoad() {
+    onLoad(options) {
       // let self = this
+      this.orderId = options.orderId
+      this.orderNo = options.orderNo
     }
-    onShow () {} // 只在 Page 实例中会存在页面生命周期函数
+    onUnload () {
+      this.clearTime()
+    }
+    onShow () {
+      var self = this
+      this.clearTime()
+      this.orderPoll()
+      this.timerAjax = setInterval(getPoll, 5000)
+      function getPoll () {
+        self.orderPoll()
+      }
+    } // 只在 Page 实例中会存在页面生命周期函数
   }
 </script>

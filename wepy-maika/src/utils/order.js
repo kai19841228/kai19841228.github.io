@@ -152,6 +152,12 @@ const order = {
           }
         }
       })
+    } else if (data.data.code === 500332) {
+      wepy.showToast({
+        title: '您有一笔未支付订单，支付完成后才可继续用车！请前往app支付。',
+        icon: 'none',
+        duration: 2000
+      })
     } else {
       wepy.showToast({
         title: data.data.message,
@@ -159,6 +165,139 @@ const order = {
         duration: 2000
       })
     }
+  },
+  // 轮询订单
+  getOrderPoll (vm) {
+    ajaxApi.getPostParamCallF('/api/mycar/user/orderDispatch/pollService', {orderId: vm.orderId}, order.dealOrderPoll, vm)
+  },
+  dealOrderPoll (vm, data) {
+    if (data.status === 30) {
+      // 30状态 跳转成功页
+      let url = '/pages/orderSuc?orderId=' + data.orderId + '&' + 'orderNo=' + data.orderNo
+      wepy.navigateTo({ url })
+    } else if (data.status === 100) {
+      // 100状态为取消 调用接口返回提示信息
+      vm.clearTime()
+      ajaxApi.getPostParam('/api/mycar/user/order/info/getMyCarOrderDetail/v2-2-5', {orderNo: vm.orderNo}, vm).then(function (response) {
+        if (response.data.code === 0) {
+          wx.showModal({
+            title: '提示',
+            content: response.data.data.cancelDesc,
+            showCancel: false,
+            confirmColor: '#ff8400',
+            success (res) {
+              if (res.confirm) {
+                console.log('用户点击确定 去充值页面')
+                let url = '/pages/index'
+                wepy.reLaunch({ url })
+              }
+            }
+          })
+        } else {
+          wepy.showToast({
+            title: response.data.message,
+            icon: 'none',
+            duration: 2000
+          })
+        }
+      })
+    }
+  },
+  // 取消预判
+  cancelOrderPrejudge (vm) {
+    ajaxApi.getPostParam('/api/mycar/user/orderMgmt/checkCancel', {orderId: vm.orderId}, vm).then(function (response) {
+      if (response.data.code === 500501 || response.data.code === 500502 || response.data.code === 500503 || response.data.code === 500506 || response.data.code === 500507 || response.data.code === 500508 || response.data.code === 500510) {
+        wx.showModal({
+          title: '提示',
+          content: response.data.message,
+          showCancel: true,
+          confirmColor: '#ff8400',
+          success (res) {
+            if (res.confirm) {
+              // console.log('调用取消接口')
+              order.cancelOrder(vm)
+            }
+          }
+        })
+      } else if (response.data.code === 500504 || response.data.code === 500505 || response.data.code === 500509) {
+        wepy.showToast({
+          title: '已产生违约金，请到app端取消并支付违约金',
+          icon: 'none',
+          duration: 2000
+        })
+      } else if (response.data.code === 500511) {
+        wepy.showToast({
+          title: '订单在行程中或已完成，不能取消',
+          icon: 'none',
+          duration: 2000
+        })
+      } else {
+        wepy.showToast({
+          title: response.data.message,
+          icon: 'none',
+          duration: 2000
+        })
+      }
+    })
+  },
+  // 取消订单
+  cancelOrder (vm) {
+    ajaxApi.getPostParamCallF('/api/mycar/user/orderMgmt/cancelOrder', {orderId: vm.orderId}, order.dealcancelOrder, vm)
+  },
+  dealcancelOrder (vm, data) {
+    if (vm.timer) {
+      clearTimeout(vm.timer)
+      clearInterval(vm.timerAjax)
+    }
+    wx.showModal({
+      title: '提示',
+      content: '取消成功',
+      showCancel: false,
+      confirmColor: '#ff8400',
+      success (res) {
+        if (res.confirm) {
+          // console.log('调用取消接口')
+          let url = '/pages/index'
+          wepy.reLaunch({ url })
+        }
+      }
+    })
+  },
+  // 司机信息
+  getDriver (vm) {
+    ajaxApi.getPostParamCallF('/api/mycar/user/order/info/getMyCarOrderDetail/v2-2-5', {orderNo: vm.orderNo}, order.dealDriver, vm)
+  },
+  dealDriver (vm, data) {
+    vm.driverData = data
+  },
+  // 获取验证码
+  verifyCode (vm) {
+    let parem ={
+      phone: vm.phone
+    }
+    ajaxApi.getPostParamCallF('/api/user/login/getVerifyCode', parem, order.dealverifyCode, vm, true)
+  },
+  dealverifyCode (vm, data) {
+  },
+  // 登陆
+  login (vm) {
+    let parem ={
+      phone: '',
+      verifyCode: '',
+      pushId: '',
+      pushIdGetui: '',
+      pushIdXiaomi: '',
+      pushIdHuawei: '',
+      pushIdMycar: '',
+      pushIdRonglian: '',
+      cityId: '',
+      cityName: '',
+      longitude: '',
+      latitude: '',
+    }
+    ajaxApi.getPostParamCallF('/api/user/login/login', parem, order.dealLogin, vm, true)
+  },
+  dealLogin (vm, data) {
   }
 }
 export default order
