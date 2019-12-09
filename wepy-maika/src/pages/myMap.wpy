@@ -1,8 +1,8 @@
 <style lang="less">
 #wxMap{
   width: 100%;
-  height: 100%;
   position: relative;
+  flex: 1;
 }
 .position_orin{
   width: 40px;
@@ -24,14 +24,45 @@
   height: 72rpx;
   margin: 10rpx auto 0;
 }
+.icon{
+  top: 45%;
+  left: 49.8%;
+  -webkit-transform:translate(-50%,-50%);
+  -moz-transform:translate(-50%,-50%);
+  transform:translate(-50%,-50%);
+  position: absolute;
+}
+.icon-jt{
+  width: 72rpx;
+  height: 72rpx;
+}
+.position_back{
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  left: 15px;
+  bottom:45rpx;
+}
 </style>
 <template>
   <view class="container">
+  <view>
+    <button @tap="tapHs">改变高度地图自适应高度</button>
+    <view hidden="{{isb}}">465</view>
+  </view>
     <map id="wxMap" show-location="true" longitude="{{longitude}}" latitude="{{latitude}}" polyline="{{polyline}}" show-compass="true" scale="10" markers="{{markers}}" @markertap="makertap" @regionchange="regionchange">
+      <!--返回定位原点-->
       <cover-image class="position_orin" src="../static/location.png" @tap="goToLocation"></cover-image>
+      <!--地图中心显示的图片-->
       <cover-view class="sqyc_marker_qi">
         <cover-image class="marker" src="../static/poi.png"></cover-image>
       </cover-view>
+      <!--上车地址图片-->
+      <cover-view class="icon">
+        <cover-image class="icon-jt" src="../static/sqyc_marker_qi.png" ></cover-image>
+      </cover-view>
+      <!--类似首汽 选择上下地址后返回地址选择-->
+      <cover-image class="position_back" src="../static/arrow.png" @tap="goBack"></cover-image>
     </map>
   </view>
 </template>
@@ -73,7 +104,8 @@
         arrowLine: true,
         borderColor: '#000',
         borderWidth: 5
-      }]
+      }],
+      isb: true
     }
     computed = { // 声明[计算属性]
       now () {
@@ -82,6 +114,12 @@
     }
     watch = {} // 声明数据watcher
     methods = { // 声明页面响应事件。注意，此处只用于声明页面bind，catch事件
+      goBack () {
+        console.log('执行操作')
+      },
+      tapHs () {
+        this.isb = !this.isb
+      },
       makertap (e) {
         console.log(e)
         // var id = e.markerId
