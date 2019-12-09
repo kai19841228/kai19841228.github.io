@@ -55,13 +55,15 @@ export default class extends wepy.app {
   }
   constructor () {
     super()
+    // 在入口文件app.wpy构造函数中super下方加入以下两段 this.use('requestfix'); this.use('promisify');
+    // 第一个是解决了同时发起多个request时候的异常修复 第二个是开启promise await async等功能的必需代码
     this.use('requestfix')
     this.use('promisify')
   }
   onLaunch(options) {
     if (options.query.env === 'dev') {
       this.globalData.baseURL = 'http://dev.cebbank.m.imycargo.com'
-      this.globalData.userURL = 'https://dev.user.imycargo.com'
+      this.globalData.userURL = 'https://test.user.imycargo.com'
     } else if (options.query.env === 'test') {
       this.globalData.baseURL = 'http://test.cebbank.m.imycargo.com'
       this.globalData.userURL = 'https://test.user.imycargo.com'

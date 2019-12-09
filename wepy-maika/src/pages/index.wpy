@@ -194,10 +194,8 @@
     }
     watch = {
       isActive (val, old) {
-        console.log(this.scrollTop)
         this.scrollTop = 0
         this.$apply()
-        console.log(this.scrollTop)
       }
     } // 声明数据watcher
     methods = { // 声明页面响应事件。注意，此处只用于声明页面bind，catch事件
