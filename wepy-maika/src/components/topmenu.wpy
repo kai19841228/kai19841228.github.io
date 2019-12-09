@@ -52,7 +52,7 @@
 
     watch = {
       menus (curVal, oldVal) {
-        console.log(`旧值：${oldVal}，新值：${curVal}`)
+        // console.log(`旧值：${oldVal}，新值：${curVal}`)
       }
     }
 

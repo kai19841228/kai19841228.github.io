@@ -1,5 +1,6 @@
 import ajaxApi from './fly.js'
 import wepy from 'wepy'
+var amap = require('../static/js/amap-wx.js')
 var CryptoJS = require('crypto-js')
 const order = {
   // 城市列表
@@ -273,9 +274,9 @@ const order = {
   // 获取验证码
   verifyCode (vm) {
     let parem ={
-      phone: vm.phone
+      phone: order.encrypt(vm.phone)
     }
-    ajaxApi.getPostParamCallF('/api/user/login/getVerifyCode', parem, order.dealverifyCode, vm, true)
+    ajaxApi.getPostParamCallF('/api/user/login/getVerifyCode', parem, order.dealverifyCode, vm, 1)
   },
   dealverifyCode (vm, data) {
   },
@@ -295,7 +296,7 @@ const order = {
       longitude: '',
       latitude: '',
     }
-    ajaxApi.getPostParamCallF('/api/user/login/login', parem, order.dealLogin, vm, true)
+    ajaxApi.getPostParamCallF('/api/user/login/login', parem, order.dealLogin, vm, 1)
   },
   dealLogin (vm, data) {
   }

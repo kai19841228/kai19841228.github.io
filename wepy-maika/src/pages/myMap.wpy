@@ -1,0 +1,159 @@
+<style lang="less">
+#wxMap{
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.position_orin{
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  right:15px;
+  bottom:45rpx;
+}
+.sqyc_marker_qi{
+  top: 45%;
+  left: 49.8%;
+  -webkit-transform:translate(-50%,-50%);
+  -moz-transform:translate(-50%,-50%);
+  transform:translate(-50%,-50%);
+  position: absolute;
+}
+.sqyc_marker_qi .marker{
+  width: 72rpx;
+  height: 72rpx;
+  margin: 10rpx auto 0;
+}
+</style>
+<template>
+  <view class="container">
+    <map id="wxMap" show-location="true" longitude="{{longitude}}" latitude="{{latitude}}" polyline="{{polyline}}" show-compass="true" scale="10" markers="{{markers}}" @markertap="makertap" @regionchange="regionchange">
+      <cover-image class="position_orin" src="../static/location.png" @tap="goToLocation"></cover-image>
+      <cover-view class="sqyc_marker_qi">
+        <cover-image class="marker" src="../static/poi.png"></cover-image>
+      </cover-view>
+    </map>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import global from '../mixins/global'
+  // import order from '../utils/order'
+  import map from '../js/map'
+  // var amap = require('../static/js/amap-wx.js')
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: '地图'
+    }
+    components = { // 声明页面所引用的子组件
+    }
+    mixins = [global] // 声明页面所引用的Mixin实例
+    data = {
+      includePoint: [],
+      latitude: [],
+      longitude: [],
+      myAmapFun: '',
+      markersData: '',
+      mapCtx: '',
+      markers: [],
+      polyline: [{
+        points: [
+          {
+            latitude: 39.921737,
+            longitude: 116.443457
+          }, {
+            longitude: 116.44345,
+            latitude: 39.921422
+          }
+        ],
+        color: '#ff6600',
+        width: 2,
+        dottedLine: false,
+        arrowLine: true,
+        borderColor: '#000',
+        borderWidth: 5
+      }]
+    }
+    computed = { // 声明[计算属性]
+      now () {
+        return +new Date()
+      }
+    }
+    watch = {} // 声明数据watcher
+    methods = { // 声明页面响应事件。注意，此处只用于声明页面bind，catch事件
+      makertap (e) {
+        console.log(e)
+        // var id = e.markerId
+      },
+      goToLocation () { // 将地图中心移动到当前定位点。需要配合map组件的show-location使用
+        var that = this
+        map.goToLocation(that)
+      },
+      regionchange (e) {
+        if (e.detail.type !== 'end') return
+        let that = this
+        function getCenterLocation (vm, data) {
+          // 地图拖动，获取经纬度 返回地址信息。
+          map.regeoData(that, {latitude: data.latitude, longitude: data.longitude})
+        }
+        map.getCenterLocation(that, getCenterLocation)
+      }
+    }
+    events = { // 声明组件之间的事件传递
+    }
+    onLoad(options) {
+      console.log(options)
+    }
+    onReady() {
+    }
+    onShow () {
+      var that = this
+      map.mapInit(that)
+      // 获取定位位置坐标
+      function getLocation (vm, data) {
+        console.log('当前经纬度：')
+        console.log(data)
+        that.includePoint.push({latitude: data.latitude, longitude: data.longitude})
+        that.latitude = data.latitude
+        that.longitude = data.longitude
+        map.includePoint(vm, that.includePoint)
+        vm.$apply()
+      }
+      map.getLocation(that, getLocation)
+      // 获取定位位置或指定位置的详细地址信息，逆地理编码
+      function getRegeo (vm, data) {
+        console.log('当前经纬度逆地理：')
+        console.log(data)
+      }
+      map.getLocation(that, getRegeo)
+      // 获取POI数据
+      function getPoiAround (vm, data) {
+        vm.markersData = data.markers
+        var newMarkers = []
+        vm.polyline[0].points = []
+        vm.markersData.forEach(function (item, index) {
+          if (index < 16) return
+          newMarkers.push({
+            id: item.id,
+            latitude: item.latitude,
+            longitude: item.longitude,
+            iconPath: '/static/sqyc_marker.png',
+            width: 40,
+            height: 40
+          })
+          vm.polyline[0].points.push({
+            longitude: item.longitude,
+            latitude: item.latitude
+          })
+        })
+        console.log(map.getDistance(vm.polyline[0].points[1].latitude, vm.polyline[0].points[1].longitude, vm.polyline[0].points[2].latitude, vm.polyline[0].points[2].longitude))
+        console.log(map.GetDistance(vm.polyline[0].points[1].latitude, vm.polyline[0].points[1].longitude, vm.polyline[0].points[2].latitude, vm.polyline[0].points[2].longitude))
+        // map.includePoint(vm, vm.polyline[0].points)
+        vm.markers = vm.markers.concat(newMarkers)
+        vm.$apply()
+      }
+      map.getPoiAround(that, {}, getPoiAround)
+    } // 只在 Page 实例中会存在页面生命周期函数
+  }
+</script>

@@ -3,8 +3,10 @@ const Fly = require('flyio/dist/npm/wx')
 const fly = new Fly()
 const axiosConfig = {
   getPostParam: function (url, param, vm, baseURL) {
-    if (baseURL) {
+    if (baseURL === 1) {
       fly.config.baseURL = vm.$parent.globalData.userURL
+    } else if (baseURL === 2) {
+      fly.config.baseURL = vm.$parent.globalData.mapURL
     } else {
       fly.config.baseURL = vm.$parent.globalData.baseURL
     }
@@ -16,8 +18,10 @@ const axiosConfig = {
       }})
   },
   getPostParamCallF: function (url, param, callFunc, vm, baseURL) {
-    if (baseURL) {
+    if (baseURL === 1) {
       fly.config.baseURL = vm.$parent.globalData.userURL
+    } else if (baseURL === 2) {
+      fly.config.baseURL = vm.$parent.globalData.mapURL
     } else {
       fly.config.baseURL = vm.$parent.globalData.baseURL
     }
@@ -45,8 +49,14 @@ const axiosConfig = {
         console.log(error)
       })
   },
-  getParamCallF: function (url, param, callFunc, vm) {
-    fly.config.baseURL = vm.$parent.globalData.baseURL
+  getParamCallF: function (url, param, callFunc, vm, baseURL) {
+    if (baseURL === 1) {
+      fly.config.baseURL = vm.$parent.globalData.userURL
+    } else if (baseURL === 2) {
+      fly.config.baseURL = vm.$parent.globalData.mapURL
+    } else {
+      fly.config.baseURL = vm.$parent.globalData.baseURL
+    }
     fly.get(url, param, {headers: {
         'content-type': 'application/x-www-form-urlencoded',
         'app-version': '2.2.5',
