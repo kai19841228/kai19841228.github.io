@@ -117,7 +117,7 @@
       <view class="submitHold"><button class="submit" bindtap="pai(1)">派单</button></view>
       <view class="submitHold"><button class="submit" bindtap="pai(2)">派单成功</button></view>
       <view class="submitHold"><button class="submit" bindtap="pai(3)">充值页面</button></view>
-      <view class="submitHold"><button class="submit" bindtap="pai(4)">初始化时间数据</button></view>
+      <view class="submitHold"><button class="submit" bindtap="pai(4)">controls控制</button></view>
       <view class="submitHold"><button class="submit" bindtap="pai(5)">跳转到地图</button></view>
     </scroll-view>
   </view>
@@ -216,8 +216,8 @@
           let url = '/pages/Recharge'
           wepy.navigateTo({ url })
         } else if (val === '4') {
-          // console.log(this)
-          // this.$invoke('timeSelect', 'init', 'someArgs')
+          let url = '/pages/myMapTwo'
+          wepy.navigateTo({ url })
         } else if (val === '5') {
           let url = '/pages/myMap'
           wepy.navigateTo({ url })

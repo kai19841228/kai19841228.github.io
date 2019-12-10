@@ -4,45 +4,6 @@
   position: relative;
   flex: 1;
 }
-.position_orin{
-  width: 40px;
-  height: 40px;
-  position: absolute;
-  right:15px;
-  bottom:45rpx;
-}
-.sqyc_marker_qi{
-  top: 45%;
-  left: 49.8%;
-  -webkit-transform:translate(-50%,-50%);
-  -moz-transform:translate(-50%,-50%);
-  transform:translate(-50%,-50%);
-  position: absolute;
-}
-.sqyc_marker_qi .marker{
-  width: 72rpx;
-  height: 72rpx;
-  margin: 10rpx auto 0;
-}
-.icon{
-  top: 45%;
-  left: 49.8%;
-  -webkit-transform:translate(-50%,-50%);
-  -moz-transform:translate(-50%,-50%);
-  transform:translate(-50%,-50%);
-  position: absolute;
-}
-.icon-jt{
-  width: 72rpx;
-  height: 72rpx;
-}
-.position_back{
-  width: 40px;
-  height: 40px;
-  position: absolute;
-  left: 15px;
-  bottom:45rpx;
-}
 .callout{
   position: absolute;
   top: 50%;
@@ -74,19 +35,7 @@
     <button @tap="tapHs">改变高度地图自适应高度</button>
     <view hidden="{{isb}}">465</view>
   </view>
-    <map id="wxMap" show-location="true" longitude="{{longitude}}" latitude="{{latitude}}" polyline="{{polyline}}" show-compass="true" scale="{{scale}}" markers="{{markers}}" @markertap="makertap" @regionchange="regionchange">
-      <!--返回定位原点-->
-      <cover-image class="position_orin" src="../static/location.png" @tap="goToLocation"></cover-image>
-      <!--地图中心显示的图片-->
-      <cover-view class="sqyc_marker_qi">
-        <cover-image class="marker" src="../static/poi.png"></cover-image>
-      </cover-view>
-      <!--上车地址图片-->
-      <cover-view class="icon">
-        <cover-image class="icon-jt" src="../static/sqyc_marker_qi.png" ></cover-image>
-      </cover-view>
-      <!--类似首汽 选择上下地址后返回地址选择-->
-      <cover-image class="position_back" src="../static/arrow.png" @tap="goBack"></cover-image>
+    <map id="wxMap" show-location="true" longitude="{{longitude}}" latitude="{{latitude}}" polyline="{{polyline}}" show-compass="true" scale="{{scale}}" markers="{{markers}}" @markertap="makertap" @regionchange="regionchange" controls="{{controls}}" @controltap="controltap">
       <view class="callout" hidden="{{isCallout}}"><text class="txt">1分钟</text>之后上车</view>
     </map>
   </view>
@@ -133,7 +82,8 @@
       }],
       isb: true,
       timer: '',
-      isCallout: true
+      isCallout: true,
+      controls: []
     }
     computed = { // 声明[计算属性]
       now () {
@@ -142,20 +92,16 @@
     }
     watch = {} // 声明数据watcher
     methods = { // 声明页面响应事件。注意，此处只用于声明页面bind，catch事件
-      goBack () {
-        console.log('执行操作')
-      },
       tapHs () {
         var that = this
-        that.isb = !this.isb
+        this.isb = !this.isb
+        setTimeout(function () {
+          that.controlInit()
+        }, 100)
       },
       makertap (e) {
         console.log(e)
         // var id = e.markerId
-      },
-      goToLocation () { // 将地图中心移动到当前定位点。需要配合map组件的show-location使用
-        var that = this
-        map.goToLocation(that)
       },
       regionchange (e) {
         let that = this
@@ -170,7 +116,68 @@
           map.getCenterLocation(that, getCenterLocation)
         }, 300)
         that.isCallout = false
+      },
+      controltap (e) {
+        var that = this
+        if (e.controlId === 1) {
+          console.log('点击id为1的controls要执行的操作')
+          map.goToLocation(that)
+        } else if (e.controlId === 2) {
+          console.log('点击id为2的controls要执行的操作')
+        } else if (e.controlId === 3) {
+          console.log('点击id为3的controls要执行的操作')
+        }
       }
+    }
+    controlInit () {
+      var that = this
+      // 获取地图高度，在计算图标坐标。设置controls
+      const query = wx.createSelectorQuery()
+      query.select('#wxMap').boundingClientRect()
+      query.exec((res) => {
+        // const sys = wx.getSystemInfoSync()
+        let top = res[0].height - 50
+        let left = res[0].width - 50
+        that.controls = [{
+          id: 1,
+          iconPath: '/static/location.png',
+          position: {
+            left: left,
+            top: top,
+            width: 40,
+            height: 40
+          },
+          clickable: true
+        },
+        {
+          id: 2,
+          iconPath: '/static/poi.png',
+          position: {
+            left: res[0].width / 2 - 18,
+            top: res[0].height / 2 - 38,
+            width: 36,
+            height: 36
+          },
+          clickable: true
+        },
+        {
+          id: 3,
+          iconPath: '/static/arrow.png',
+          position: {
+            left: 10,
+            top: res[0].height - 50,
+            width: 40,
+            height: 40
+          },
+          clickable: true
+        }]
+        that.$apply()
+        // 设置完controls ，可以更改图片
+        setTimeout(function () {
+          that.controls[1].iconPath = '/static/sqyc_marker_qi.png'
+          that.$apply()
+        }, 3000)
+      })
     }
     events = { // 声明组件之间的事件传递
     }
@@ -228,6 +235,7 @@
         vm.$apply()
       }
       map.getPoiAround(that, {}, getPoiAround)
+      that.controlInit() // 初始化controls， 如果地图宽高变化了。要重新初始化，
     } // 只在 Page 实例中会存在页面生命周期函数
   }
 </script>

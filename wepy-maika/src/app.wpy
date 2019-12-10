@@ -34,7 +34,8 @@ export default class extends wepy.app {
       'pages/user',
       'pages/login',
       'pages/myTrip',
-      'pages/myMap'
+      'pages/myMap',
+      'pages/myMapTwo'
     ],
     window: {
       backgroundTextStyle: 'light',
