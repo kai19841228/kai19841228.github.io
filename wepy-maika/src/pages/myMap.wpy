@@ -12,11 +12,9 @@
   bottom:45rpx;
 }
 .sqyc_marker_qi{
-  top: 45%;
+  top: 50%;
   left: 49.8%;
-  -webkit-transform:translate(-50%,-50%);
-  -moz-transform:translate(-50%,-50%);
-  transform:translate(-50%,-50%);
+  transform:translate(-50%,-100%);
   position: absolute;
 }
 .sqyc_marker_qi .marker{
@@ -25,11 +23,9 @@
   margin: 10rpx auto 0;
 }
 .icon{
-  top: 45%;
+  top: 50%;
   left: 49.8%;
-  -webkit-transform:translate(-50%,-50%);
-  -moz-transform:translate(-50%,-50%);
-  transform:translate(-50%,-50%);
+  transform:translate(-50%,-100%);
   position: absolute;
 }
 .icon-jt{
@@ -214,7 +210,30 @@
             longitude: item.longitude,
             iconPath: '/static/sqyc_marker.png',
             width: 40,
-            height: 40
+            height: 40,
+            // label: {
+            //   content: item.latitude + '' + item.longitude,
+            //   color: '#333333',
+            //   fontSize: '12',
+            //   anchorX: -70,
+            //   anchorY: -80,
+            //   borderWidth: 1,
+            //   borderColor: '#f0f',
+            //   borderRadius: 0,
+            //   bgColor: '#ffffff',
+            //   padding: 10,
+            //   textAlign: 'center'
+            // },
+            callout: {
+              content: item.latitude + '' + item.longitude,
+              color: '#333333',
+              fontSize: '12',
+              borderRadius: 15,
+              bgColor: '#ffffff',
+              padding: 10,
+              display: 'BYCLICK',
+              textAlign: 'center'
+            }
           })
           vm.polyline[0].points.push({
             longitude: item.longitude,

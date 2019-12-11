@@ -221,7 +221,17 @@
             longitude: item.longitude,
             iconPath: '/static/sqyc_marker.png',
             width: 40,
-            height: 40
+            height: 40,
+            callout: {
+              content: item.latitude + '' + item.longitude,
+              color: '#333333',
+              fontSize: '12',
+              borderRadius: 15,
+              bgColor: '#ffffff',
+              padding: 10,
+              display: 'ALWAYS',
+              textAlign: 'center'
+            }
           })
           vm.polyline[0].points.push({
             longitude: item.longitude,
