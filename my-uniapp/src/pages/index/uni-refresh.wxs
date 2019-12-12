@@ -1,0 +1,25 @@
+function orderStatusFilter  (status) {
+    switch (parseInt(status)) {
+    case 10: return '预定中'
+    case 13: return '已受理'
+    case 14: return '待付款'
+    case 15: return '待服务'
+    case 20: return '已出发'
+    case 25: return '已到达'
+    case 30: return '服务中'
+    case 40: return '待结算'
+    case 42: return '支付中'
+    case 43: return '扣款中'
+    case 44: return '待支付'
+    case 45: return '已结算'
+    case 50: return '已完成'
+    case 55: return '订单异议'
+    case 60: return '已取消'
+    }
+}
+function propObserver(newValue, oldValue, instance) {
+    pullDown = newValue;
+}
+module.exports = {
+    orderStatusFilter: orderStatusFilter
+}

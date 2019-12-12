@@ -1,0 +1,41 @@
+body{
+	font-size:28upx;
+}
+.bgColor {
+	background-color:#f55500;
+}
+.bgDeepColor{
+	background-color:#d04900;
+}
+.grayColor{
+	background-color:rgb(243,241,241);
+}
+.borderColorTop{
+	border-top: solid 1px rgb(220,220,220);
+}
+.borderColorBottom{
+	border-bottom: solid 1px rgb(220,220,220);
+}
+.marginTop40{
+	margin-top: 40upx;
+}
+.marginTop30{
+	margin-top: 30upx;
+}
+.fl{
+	float: left;
+}
+.fr{
+	float: right;
+}
+.clear:after{
+	content: '';
+	display: block;
+	height: 0;
+	line-height: 0;
+	clear: both;
+}
+@-webkit-keyframes rotation{
+	from {-webkit-transform: rotate(0deg);}
+	to {-webkit-transform: rotate(360deg);}
+	}
