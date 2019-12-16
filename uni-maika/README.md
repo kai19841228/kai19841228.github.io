@@ -1,6 +1,6 @@
-# myapp
+# uni-maika
 
-# vuecli3 建的pwa项目
+# fly 异步插件安装全局了。
 
 ## Project setup
 ```
@@ -15,16 +15,6 @@ npm run serve
 ### Compiles and minifies for production
 ```
 npm run build
-```
-
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
 ```
 
 ### Customize configuration

@@ -26,6 +26,16 @@
 				</view>
 			</view>
 		</view>
+		<!-- #ifdef MP-WEIXIN -->
+		<view class="wx">
+			我是微信显示的元素
+		</view>
+		<!-- #endif -->
+		<!-- #ifdef MP-ALIPAY -->
+		<view class="">
+			我是支付宝显示的元素
+		</view>
+		<!-- #endif -->
 		<image class="logo" src="/static/logo.png"></image>
 		<view>
 			<text class="title">{{title}}</text>
@@ -90,7 +100,15 @@
 		components:{
 			top
 		},
+		// 监听页面加载
 		onLoad(options) {
+			console.log(options)
+			// #ifdef MP-WEIXIN
+			console.log('微信执行的代码')
+			// #endif
+			// #ifdef MP-ALIPAY
+			console.log('支付宝执行的代码')
+			// #endif
 			console.log(this.$store)
 			console.log(platform)
 			console.log(this.$utils.peoNum(200000))
@@ -100,6 +118,14 @@
 				console.log(data)
 			}, this)
 		},
+		// 监听页面显示
+		onShow() {},
+		// 页面初次渲染完成
+		onReady() {},
+		// 监听页面隐藏
+		onHide() {},
+		// 监听页面卸载
+		onUnload() {},
 		computed: {
 			// ...mapGetters(['getShowflag']),
 			...mapState({
@@ -125,6 +151,16 @@
 </script>
 
 <style scoped>
+	/* #ifdef MP-WEIXIN */
+	.wx{
+		color: #04BE02;
+	}
+	/* #endif */
+	/* #ifdef MP-ALIPAY */
+	.wx{
+		color: #10AEFF;
+	}
+	/* #endif */
 	.content {
 		text-align: center;
 		height: 400upx;

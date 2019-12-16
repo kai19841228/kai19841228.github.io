@@ -1,9 +1,6 @@
 <script>
 	import Vue from 'vue'
 	export default {
-		globalData: {  
-			text: 'text'  
-		},
 		// 初始化完成时触发
 		onLaunch: function(options) {
 			console.log('App Launch')
@@ -22,16 +19,16 @@
 		},
 		// 监听app显示
 		onShow: function() {
-			console.log('App Show')
+			// console.log('App Show')
 		},
 		// 监听app隐藏
 		onHide: function() {
-			console.log('App Hide')
+			// console.log('App Hide')
 		}
 	}
 </script>
 
 <style>
 	/*每个页面公共css */
-	@import './static/common';
+	/* @import './static/common'; */
 </style>
