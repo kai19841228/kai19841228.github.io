@@ -52,10 +52,8 @@
 				this.$store.dispatch('setMenuData', {a: 1})
 				console.log('top组件 store更改之后' + this.menu.a)
 			}.bind(this), 3000)
-			console.log('激活')
 		},
 		destroyed () {
-			console.log('注销')
 		}
 	}
 </script>

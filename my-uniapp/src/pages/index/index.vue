@@ -66,8 +66,8 @@
 				imgSrc: '/static/logo.png',
 				blockWidth: '32%',
 				prodata: [
-					{name: '李磊', age: '20'},
-					{name: '韩磊', age: '22'},
+					{name: '李*磊', age: '20'},
+					{name: '韩*磊', age: '22'},
 					{name: '测试1', age: '25'},
 					{name: '测试2', age: '27'},
 					{name: '测试3', age: '20'}
@@ -102,6 +102,7 @@
 		},
 		// 监听页面加载
 		onLoad(options) {
+			let that = this
 			console.log(options)
 			// #ifdef MP-WEIXIN
 			console.log('微信执行的代码')
@@ -109,23 +110,33 @@
 			// #ifdef MP-ALIPAY
 			console.log('支付宝执行的代码')
 			// #endif
-			console.log(this.$store)
+			console.log(that.$store)
 			console.log(platform)
-			console.log(this.$utils.peoNum(200000))
+			console.log(that.$utils.peoNum(200000))
 			// 调用组件里的方法
-			this.selectComponent('#top').$vm.handel()
+			that.selectComponent('#top').$vm.handel()
 			ajaxApi.getPostParamCallF('/api/mycar/user/city/getCityList', {cityName: ''}, function (vm, data) {
 				console.log(data)
-			}, this)
+			}, that)
 		},
 		// 监听页面显示
-		onShow() {},
+		onShow() {
+			setTimeout(function () {
+				this.title = '测试uniApp Watch监测'
+			}.bind(this), 5000)
+		},
 		// 页面初次渲染完成
 		onReady() {},
 		// 监听页面隐藏
 		onHide() {},
 		// 监听页面卸载
 		onUnload() {},
+		// 监测数据变动
+		watch: {
+			'title': function(newVal, oldVal) {
+				console.log(newVal, oldVal)
+			}
+		},
 		computed: {
 			// ...mapGetters(['getShowflag']),
 			...mapState({

@@ -13,11 +13,11 @@
 			if (options.query.env === 'dev') {
 				Vue.prototype.$baseUrl = 'http://dev.cebbank.m.imycargo.com'
 			} else if (options.query.env === 'test') {
-				Vue.prototype.$baseUrl = 'http://test.m.imycargo.com'
+				Vue.prototype.$baseUrl = 'http://test.cebbank.m.imycargo.com'
 			} else if (options.query.env === 'pre') {
-				Vue.prototype.$baseUrl = 'http://test.m.imycargo.com'
+				Vue.prototype.$baseUrl = 'http://test.cebbank.m.imycargo.com'
 			} else {
-				Vue.prototype.$baseUrl = 'http://m.imycargo.com'
+				Vue.prototype.$baseUrl = 'http://cebbank.m.imycargo.com'
 			}
 		},
 		// 监听app显示
