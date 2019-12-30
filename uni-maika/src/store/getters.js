@@ -1,6 +1,6 @@
 const getters = {
-  getMenu: state => {
-    return state.menu
+  getServiceType: state => {
+    return state.serviceType
   }
 }
 export default getters

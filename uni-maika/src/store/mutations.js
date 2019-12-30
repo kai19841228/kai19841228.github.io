@@ -1,6 +1,6 @@
 import * as types from './mutation-type.js'
 export default {
-  [types.SET_MENU_DATA] (state, data) {
-    state.menu = data
+  [types.SET_SERVICE_TYPE] (state, data) {
+    state.serviceType = data.serviceType
   }
 }

@@ -7,7 +7,7 @@
 			</swiper-item>
 		</swiper>
 		<view class="bar">
-			<view class="iconSpan" v-for="(val,index) in contentBar" :key="index">
+			<view class="iconSpan" v-for="(val,index) in contentBar" :key="index" @tap="barHandle(index)">
 				<image :src="val.src" class="iconBarImg"></image>
 				<view>{{val.name}}</view>
 			</view>
@@ -36,7 +36,7 @@
 			我是支付宝显示的元素
 		</view>
 		<!-- #endif -->
-		<image class="logo" src="/static/logo.png"></image>
+		<image class="logo" src="/static/logo.png" @tap="goUrl('/userCenter/index/index')"></image>
 		<view>
 			<text class="title">{{title}}</text>
 		</view>
@@ -156,6 +156,9 @@
 				uni.navigateTo({
 					url: str
 				})
+			},
+			barHandle (n, event) {
+				console.log(n)
 			}
     }
 	}

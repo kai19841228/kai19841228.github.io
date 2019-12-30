@@ -1,9 +1,12 @@
 <script>
 	import Vue from 'vue'
 	export default {
+		globalData: {  
+			text: 'text'  
+		},
 		// 初始化完成时触发
 		onLaunch: function(options) {
-			console.log('App Launch')
+			// console.log('App Launch')
 			// 根据query所带参数来调用不容环境的接口。 options 和下边这句 是一样的数据
 			// var options = uni.getLaunchOptionsSync()
 			// 设置网络接口请求域名，环境不同，域名不同

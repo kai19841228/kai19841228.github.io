@@ -7,6 +7,22 @@
 			}
 		}
 	],
+	"subPackages": [{
+		"root": "userCenter",
+		"pages": [{
+			"path": "index/index",
+			"style": {
+				"navigationBarTitleText": "subPackages"
+			}
+		}]
+	}],
+	// packages 进入页面后预下载分包的 root 或 name。APP 表示主包
+	"preloadRule": {
+		"userCenter/index/index": {
+			"network": "all",
+			"packages": ["__APP__"]
+		}
+	},
 	"condition": { //模式配置，仅开发期间生效
 		"current": 0, //当前激活的模式（list 的索引项）
 		"list": [{

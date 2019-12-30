@@ -1,1 +1,1 @@
-export const SET_MENU_DATA = 'SET_MENU_DATA'
+export const SET_SERVICE_TYPE = 'SET_SERVICE_TYPE'
