@@ -111,9 +111,9 @@ export default {
 			if (dayStr === '今天') {
 				dayInfo = [new Date().getMonth() + 1, new Date().getDate()]
 			} else if(dayStr === '明天') {
-				dayInfo = [new Date().getMonth() + 2, new Date().getDate() + 1]
+				dayInfo = [new Date().getMonth() + 1, new Date().getDate() + 1]
 			} else if (dayStr === '后天') {
-				dayInfo = [new Date().getMonth() + 3, new Date().getDate() + 2]
+				dayInfo = [new Date().getMonth() + 1, new Date().getDate() + 2]
 			}
       let choosedTime = new Date()
       choosedTime.setMonth(dayInfo[0] - 1)
@@ -164,16 +164,16 @@ export default {
       // console.log('days range:', dayStart, dayEnd)
       this.firstIndexOfDateItem = dayStart
       for (let d = dayStart; d < dayEnd; d++) {
-				// if (d === 0){
-				// 	listDays.push('今天')
-				// } else if (d === 1) {
-				// 	listDays.push('明天')
-				// } else if (d === 2) {
-				// 	listDays.push('后天')
-				// } else {
-				// 	listDays.push(t.printMonthDayAndWeek(t.nextNDay(d)))
-				// }
-				listDays.push(t.printMonthDayAndWeek(t.nextNDay(d)))
+				if (d === 0){
+					listDays.push('今天')
+				} else if (d === 1) {
+					listDays.push('明天')
+				} else if (d === 2) {
+					listDays.push('后天')
+				} else {
+					listDays.push(t.printMonthDayAndWeek(t.nextNDay(d)))
+				}
+				// listDays.push(t.printMonthDayAndWeek(t.nextNDay(d)))
       }
       return listDays
     },
