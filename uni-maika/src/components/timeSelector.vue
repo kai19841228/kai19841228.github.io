@@ -98,7 +98,6 @@ export default {
       return padZeros + str
     },
     getChooseTime (dialIndex) {
-			console.log(this.dialOptions)
       let chooseTime = ''
       if (this.dialOptions[1][dialIndex[1]] === STRNOW) {
         chooseTime = STRNOW
@@ -109,6 +108,13 @@ export default {
       let hour = this.getFormatString(this.dialOptions[1][dialIndex[1]])
       let minute = this.getFormatString(this.dialOptions[2][dialIndex[2]])
       let dayInfo = dayStr.replace(/[\u4E00-\u9FA5]/g, ' ').split(' ')
+			if (dayStr === '今天') {
+				dayInfo = [new Date().getMonth() + 1, new Date().getDate()]
+			} else if(dayStr === '明天') {
+				dayInfo = [new Date().getMonth() + 2, new Date().getDate() + 1]
+			} else if (dayStr === '后天') {
+				dayInfo = [new Date().getMonth() + 3, new Date().getDate() + 2]
+			}
       let choosedTime = new Date()
       choosedTime.setMonth(dayInfo[0] - 1)
       choosedTime.setDate(dayInfo[1])
