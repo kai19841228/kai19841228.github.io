@@ -2,7 +2,7 @@
 	<view class="mainBody">
 		<timeSelector v-if="showComponent('timeSelector')"></timeSelector>
 		<div class="phone item"><input type="tel" @blur="userPhoneChange" v-model="userPhone" maxlength="11" placeholder="预订人手机号"></div>
-		<div class="item" style="padding:7px 0;background:none;padding-left: 40px;"><span style="padding-right:16px;">代人叫车</span><switch :checked="switchStatu" @change="switchChange"/></div>
+		<div class="item" style="padding:7px 0;background:none;padding-left: 40px;"><span style="padding-right:16px;">代人叫车</span><switch :checked="switchStatu" @change="switchChange" color="#ff8400"/></div>
 		<div v-show="switchStatu" class="phone item"><input type="tel" @blur="riderPhoneChange" v-model="riderPhone" maxlength="11" placeholder="预订人手机号"></div>
 		<div v-show="switchStatu" class="user item"><input type="tel" @blur="riderNameChange" v-model="riderName" placeholder="预订人姓名"></div>
 		<div class="item"><input type="text" disabled @click="addressHandle('up')" v-model="upAdress.name" placeholder="您在哪上车"></div>
