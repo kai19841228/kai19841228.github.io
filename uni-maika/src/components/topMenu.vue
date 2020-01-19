@@ -14,23 +14,30 @@
 	import {mapState, mapMutations, mapGetters, mapActions} from 'vuex'
 	export default {
 		name: "top",
-		props: ['menus', 'isActive'],
+		props: ['menus'],
 		data() {
 			return {
-				scrollWidth: ''
+				scrollWidth: '',
+				isActive: ''
 			}
 		},
 		methods: {
-			onUser () {
-			},
 			onTypeChange (item) {
-				uni.$emit('activeChange', {
-					data: item
-				})
-				this.$store.dispatch('setServiceType', {serviceType: item})
+				if (item === this.$store.state.serviceTypeStr) return false
+				this.$store.dispatch('setServiceType', {serviceTypeStr: item})
+				uni.$emit('activeChange', {})
+			},
+			onUser () {
+				let url = '/pages/userCenter/index'
+				uni.navigateTo({ url })
 			}
 		},
 		computed: {
+			...mapState({
+				ActiveChange: function (state) {
+					this.isActive = state.serviceTypeStr
+				}
+			})
     },
 		mounted () {
 			const query = uni.createSelectorQuery().in(this)

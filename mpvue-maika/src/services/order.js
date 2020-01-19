@@ -132,7 +132,7 @@ const orderData = {
     orderData.Ajax(vm, '/api/mycar/user/orderCollect/estimateCost/v2-2-5', param, orderData.dealOrderCollect)
   },
   dealOrderCollect (vm, data) {
-    vm.predict = data.data.costList[0]
+    vm.predict = data.data.estimateCostVOList[0]
   },
   // 加密
   encrypt (data) {

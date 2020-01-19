@@ -41,6 +41,9 @@ const order = {
   // 定位当前城市
   getCurrentCity (vm, data) {
     ajaxApi.getPostParam('/api/mycar/user/city/getCurrentCityServiceTypeByIp', data, vm).then(function (response) {
+      if (response && response.data && response.data.data && response.data.data.token) {
+        uni.setStorageSync('token', response.data.data.token)
+      }
       order.dealCurrentCity(vm, response)
     })
   },
@@ -89,7 +92,7 @@ const order = {
     ajaxApi.getPostParamCallF('/api/mycar/user/orderCollect/estimateCost/v2-2-5', param, order.dealOrderCollect, vm)
   },
   dealOrderCollect (vm, data) {
-    vm.predict = data.costList[0]
+    vm.predict = data.estimateCostVOList[0]
     vm.$apply()
   },
   // 加密
@@ -127,6 +130,9 @@ const order = {
       currentPoint: order.encrypt(vm.upAdress.location.lng + ',' + vm.upAdress.location.lat) // 预定上车坐标点
     }
     ajaxApi.getPostParam('/api/mycar/user/order/placeOrderInfoInH5', param, vm).then(function (response) {
+      if (response && response.data && response.data.data && response.data.data.token) {
+        uni.setStorageSync('token', response.data.data.token)
+      }
       order.dealPlaceOrder(vm, response)
     })
   },
@@ -180,6 +186,9 @@ const order = {
       // 100状态为取消 调用接口返回提示信息
       vm.clearTime()
       ajaxApi.getPostParam('/api/mycar/user/order/info/getMyCarOrderDetail/v2-2-5', {orderNo: vm.orderNo}, vm).then(function (response) {
+        if (response && response.data && response.data.data && response.data.data.token) {
+          uni.setStorageSync('token', response.data.data.token)
+        }
         if (response.data.code === 0) {
           wx.showModal({
             title: '提示',
@@ -207,6 +216,9 @@ const order = {
   // 取消预判
   cancelOrderPrejudge (vm) {
     ajaxApi.getPostParam('/api/mycar/user/orderMgmt/checkCancel', {orderId: vm.orderId}, vm).then(function (response) {
+      if (response && response.data && response.data.data && response.data.data.token) {
+        uni.setStorageSync('token', response.data.data.token)
+      }
       if (response.data.code === 500501 || response.data.code === 500502 || response.data.code === 500503 || response.data.code === 500506 || response.data.code === 500507 || response.data.code === 500508 || response.data.code === 500510) {
         wx.showModal({
           title: '提示',

@@ -10,7 +10,6 @@ Vue.prototype.$utils = utils
 Vue.prototype.$store = store
 const app = new Vue({
   ...App,
-  store,
   created () {},
   methods: {},
   mounted () {}

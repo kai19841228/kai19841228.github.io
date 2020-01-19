@@ -23,6 +23,14 @@ const PubFuc = {
 			sec = '0'+sec;
 		}
 		return min+':'+sec
-	}
+	},
+  /*
+  * 验证是不是手机号。1开头的11位数字。
+  */
+  checkPhone: function (a) {
+    var patrn = /^((?:11|12|13|14|15|16|17|18|19)\d{9}|0(?:10|2\d|[3-9]\d{2})[1-9]\d{6,7})$/
+    if (!patrn.exec(a)) return false
+    return true
+  }
 }
 export default PubFuc
