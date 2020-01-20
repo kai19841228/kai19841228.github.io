@@ -101,7 +101,7 @@ const order = {
     ajaxApi.getPostParamCallF('/api/mycar/user/orderCollect/estimateCost/v2-2-5', param, order.dealOrderCollect, vm)
 	},
 	dealOrderCollect (vm, data) {
-		vm.predict = data.estimateCostVOList[0]
+		vm.data = data
 		vm.$store.dispatch('setPredict', data.estimateCostVOList[0])
 	},
   // 下单

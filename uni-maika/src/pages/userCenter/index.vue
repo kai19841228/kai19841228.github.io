@@ -95,12 +95,12 @@ export default {
   }
 }
 </script>
-<style lang="postcss" scoped>
+<style lang="css" scoped>
 .user-page {
     width: 100%;
     height: 100%;
     background-color: #fff;
-    padding-top: 10rpx;
+    padding-top: 30rpx;
     box-sizing: border-box;
     -weblit-box-sizing: border-box;
 }

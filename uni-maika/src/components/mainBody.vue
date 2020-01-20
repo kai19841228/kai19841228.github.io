@@ -7,13 +7,17 @@
 		<div v-show="switchStatu" class="user item"><input type="tel" @blur="riderNameChange" v-model="riderName" placeholder="预订人姓名"></div>
 		<div class="item"><input type="text" disabled @click="addressHandle('up')" v-model="upAdress.name" placeholder="您在哪上车"></div>
 		<div class="downAdress item"><input type="text" disabled @click="addressHandle('down')" v-model="downAdress.name" placeholder="您在哪下车"></div>
-		<div class="cost">
-			<h1>优享型</h1>
-			<img style="width:200px;height:56px;" :src="predict.imgUrl || '//rest-h5.imycargo.com/static/appimg/car.png'">
-			<p>约 <span>{{predict.debtAmount || 0}}</span> 元 
-			<em style="display: inline-block;" v-if="predict && predict.discountAmount != 0">已减免 <span>{{predict.discountAmount}}</span> 元</em></p>
-			<p><span class="valuation" @tap="valuationHandle">计价规则</span></p>
-		</div>
+		<swiper class="swiper" duration="600" @change="planChange">
+			<swiper-item v-for="(item, index) in data.estimateCostVOList" :key="index">
+				<div class="cost">
+					<h1>{{item.groupName || '优享型'}}</h1>
+					<img style="width:200px;height:56px;" :src="item.imgUrl || '//rest-h5.imycargo.com/static/appimg/car.png'">
+					<p>约 <span>{{item.debtAmount || 0}}</span> 元 
+					<em style="display: inline-block;" v-if="item.discountAmount && item.discountAmount != 0">已减免 <span>{{item.discountAmount}}</span> 元</em></p>
+					<p><span class="valuation" @tap="valuationHandle">计价规则</span></p>
+				</div>
+			</swiper-item>
+		</swiper>
 	</view>
 </template>
 
@@ -26,13 +30,29 @@
 		name: "top",
 		data() {
 			return {
-				predict: ''
+				data: {
+					estimateCostVOList: [
+						{
+							groupName: '优享型'
+						},
+						{
+							groupName: '经济型'
+						},
+						{
+							groupName: '豪华型'
+						}
+					],
+					estimateCostVOList: [0, 1, 2]
+				}
 			}
 		},
 		components: {
 			timeSelector
 		},
 		methods: {
+			planChange (e) {
+				this.$store.dispatch('setPredict', this.data.estimateCostVOList[e.detail.current])
+			},
 			valuationHandle () {
 				uni.navigateTo({
 				   url: '/pages/valuation/valuation'
@@ -133,6 +153,10 @@
 	}
 	.mainBody .downAdress{
 	  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAACCklEQVQ4T61VTWsTURQ9Z0aMSBCz8KPiQtBfUESculF3FRTFzGSh/0CrWBcqtDFfILpI0cR/4MaZiKKgO+Mq09L+hIIuotW6iEgWqZq58loyncxMAwN5y3vuPe9+vfOImDPzfjp1YH/6KoErQp4kMKHcBFijyIoAr3/+6r6qXfiwEQ5n2FBsZU2SVYJH4y4b2ATS1kRm56YaTtDPJywING3RfErw5iiiMCaQunfauV0gPIX5hKWWWSOTkfnZitTzU86MT1hpZU2hZifJLJopcnnDtqkGcDCTXkVMzwg0++gvSE9b3pWC3qc3qUO/I8C56OXydb3TPc6im7umQV5EbvTwJH/Gvr813KHDsms9AnAvHOOB11luWQ6I7DAon+YN53wMme9Wds0mwLNDcSINllzrM4FjQcADLj007Hejelp0rYsa8DboI8AXlX4PQCoI9HWZKJxyvo8iLDTNw/oeroUy3Bg/4fhLXrQcSOxQYlZju8CKa32MrI8ayk5rA+DxvGE/SLw2m8qSSa/GiYFabBGvqml/lv/u3qvrvX+TpDa7w2K31zvdE5tvubKUM8WT8Ty9QVdKrllLqjSDWIL1OePltjgoQMmXvmQ9g+BGIpEQPO8b9q2IfA1Itsr3qnFiEXqebQHvKoWJFdigUQ3qUGZfVkQuC6G+gCMKF+AbBSsk3/zo/G7EfQH/Afuv6qnAoaB9AAAAAElFTkSuQmCC);
+	}
+	.swiper{
+		width: 100%;
+		height: 173px;
 	}
 	.cost{
 	  padding: 10px;

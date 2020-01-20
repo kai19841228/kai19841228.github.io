@@ -24,7 +24,7 @@ export default {
     // 显示天数（含当天）
     showDays: {
       type: Number,
-      default: 8
+      default: 7
     },
     // 控制是否显示'现在'，默认值1可以省略；不显示'现在'传0
     hasNow: {
