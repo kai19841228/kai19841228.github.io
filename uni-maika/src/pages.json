@@ -53,6 +53,18 @@
 			"style": {
 				"navigationBarTitleText": "充值结果"
 			}
+		},
+		{
+			"path": "pages/orderPolling/index",
+			"style": {
+				"navigationBarTitleText": "派单中"
+			}
+		},
+		{
+			"path": "pages/orderSuc/index",
+			"style": {
+				"navigationBarTitleText": "派单成功"
+			}
 		}
 	],
 	"globalStyle": {

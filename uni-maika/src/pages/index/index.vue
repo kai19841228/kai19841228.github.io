@@ -106,7 +106,11 @@
 			},
 			pai (item) {
 				if (item === 1) {
+					const url = '/pages/orderPolling/index'
+					uni.navigateTo({ url })
 				} else if (item === 2) {
+					const url = '/pages/orderSuc/index'
+					uni.navigateTo({ url })
 				} else if (item === 3) {
 					const url = '/pages/Recharge/index?city=up'
 					uni.navigateTo({ url })
