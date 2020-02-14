@@ -124,6 +124,10 @@
 			setTimeout(function () {
 				this.title = '测试uniApp Watch监测'
 			}.bind(this), 5000)
+			// this.$store.dispatch('getCity', {vm: this})
+		},
+		onReachBottom() {
+			console.log('000000000')
 		},
 		// 页面初次渲染完成
 		onReady() {},

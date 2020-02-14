@@ -136,23 +136,13 @@
 						// 授权列表，布尔值。在手机上查看
 					}
 			})
-			// 获取授权列表，若果授权了用户信息，获取用户信息
-			uni.getSetting({
-				success: res => {
-					console.log(res)
-					if (res.authSetting['scope.userInfo']) {
-						// 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-						wx.getUserInfo({
-							success: res => {
-							}
-						})
-					}
-				}
-			})
 		},
 		// 监听页面显示
 		onShow() {
 			console.log(this.$store)
+			// 获取授权列表，若果授权了用户信息，获取用户信息
+			this.$store.dispatch('getLocation', {vm: this})
+			this.$store.dispatch('getCity', {vm: this})
 			// 进入主页 看上车地址有没有城市名称 没有调用定位当前城市信息和服务类型
 			// 城市名称有值 检查上车城市开通服务了没有
 			if (!this.$store.state.cityUp.cityName) {
@@ -183,7 +173,7 @@
 			}
 			return {
 				title: '麦卡出行',
-				path: '/pages/index/index',
+				path: 'pages/index/index',
 				imageUrl:'../../static/images/home_share.jpg',
 				success: function (res) {
 					// 转发成功

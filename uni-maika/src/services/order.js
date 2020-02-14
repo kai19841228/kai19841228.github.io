@@ -12,7 +12,7 @@ const order = {
 	},
 	// 城市列表
 	getCityList (vm) {
-		ajaxApi.getPostParamCallF('/api/mycar/user/city/getCityList', {cityName: vm.searchCityText}, order.dealCityList, vm)
+		ajaxApi.getPostParamCallF('/api/mycar/user/city/getCityList', {cityName: vm.searchCityText || ''}, order.dealCityList, vm)
 	},
 	dealCityList (vm, data) {
 		console.log(data)
