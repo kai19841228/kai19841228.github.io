@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title>拼车mapDEMO</title>
+    <link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css"/>
+    <style type="text/css">
+    </style>
+    <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=ec4c5150708c5ff72d41f656ca2f6f0c"></script>
+</head>
+<body>
+<div id="container"></div>
+<script type="text/javascript">
+var driving
+var map = new AMap.Map('container', {
+    resizeEnable: true
+});
+//构造路线导航类
+map.plugin(['AMap.Driving'], function () {
+    var drivingOption = {
+        //驾车策略，包括 LEAST_TIME，LEAST_FEE, LEAST_DISTANCE,REAL_TRAFFIC 最短时间、最少费用、最短路径、规避拥堵
+        policy: AMap.DrivingPolicy.LEAST_TIME,
+        map: map
+    }
+   driving = new AMap.Driving(drivingOption) // 构造驾车导航类
+   // 根据起终点经纬度规划驾车导航路线
+    driving.search(new AMap.LngLat(116.379028, 39.865042), new AMap.LngLat(116.427281, 39.903719));
+    setTimeout(function(){
+        driving.search(new AMap.LngLat(116.379028, 39.865042), new AMap.LngLat(116.427281, 39.903719),{waypoints:[new AMap.LngLat(116.398788,39.883064)]});
+        setInterval(function(){
+            driving.search(new AMap.LngLat(116.379028, 39.865042), new AMap.LngLat(116.427281, 39.903719),{waypoints:[new AMap.LngLat(116.398788,39.883064),new AMap.LngLat(116.434966,39.90861)]});
+        },5000)
+    },5000)
+})
+</script>
+</body>
+</html>

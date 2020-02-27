@@ -1,0 +1,109 @@
+@charset "utf-8";
+#APP{
+	position: relative;
+}
+#container,#APP{
+	width: 100%;
+	height: 100%;
+}
+
+.select { position: absolute; z-index: 1000;top: 20px;right: 20px;
+	width: 100px; color: #cccccc; vertical-align: middle; text-align: left;
+	user-select: none; -webkit-touch-callout: none;
+	background: #FFFFFF;
+	-webkit-box-shadow:0px 0px 5px rgba(0,0,0,0.15);
+}
+.select .placeholder { position: relative; display: block; background-color: #393d41; z-index: 1;
+	padding: 10px; border-radius: 2px; cursor: pointer;
+	width: 75px;
+	overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.select .placeholder:hover { background: #34383c;}
+.select .placeholder:after { position: absolute; right: 0em; top: 50%;
+	transform: translateY(-50%) scale(0.7);
+	-webkit-transform: translateY(-50%) scale(0.7);
+	font-family: 'FontAwesome'; content: '\f078'; z-index: 10;}
+.select.is-open .placeholder:after { content: '\f077';}
+.select.is-open ul { display: block;}
+.select.select--white .placeholder { background: #fff; color: #999;}
+.select.select--white .placeholder:hover { background: #fafafa;}
+.select ul { display: none; position: absolute; overflow: auto;max-height: 336px;
+	width: 100%; background: #fff; border-radius: 2px; top: 100%; left: 0; list-style: none; margin: 0px 0 0 0;
+	padding: 0; z-index: 100;}
+.select ul li { display: block; text-align: left;
+	padding: 0.8em 1em 0.8em 1em; color: #999;
+	cursor: pointer;}
+.select ul li:hover {
+	background: #4ebbf0; color: #fff;
+}
+
+
+.hold{width: 100px;height: 100px;position: relative;}
+.hold span{display: block;position: absolute;top: 0;left: 0;
+  width: 100%;height: 100%;
+  border-radius: 50%;
+  transform:scale(0.2);
+}
+.s1{animation: myfirst 1.5s infinite;background-color: rgba(30,70,156,0.3);animation-delay:0.75s;}
+.s2{animation: myfirst 1.5s infinite;background-color: rgba(30,70,156,0.3);animation-delay:0.5s;}
+.s3{animation: myfirst 1.5s infinite;background-color: rgba(30,70,156,0.3);animation-delay:0.25s;}
+.s4{
+   transform:scale(1);
+}
+.s4 img{
+ width:100px;
+}
+@keyframes myfirst
+{
+	from {transform:scale(0.2);opacity: 1;}
+	to {transform:scale(1);opacity: 0;}
+}
+.holdCar{width: 100px;height: 100px;position: relative;}
+.holdCar span{display: block;position: absolute;top: 0;left: 0;
+	width: 100%;height: 100%;
+	border-radius: 50%;
+	
+}
+.c1{animation: myfirstCar 1.5s infinite;background-color: rgba(200,22,29,0.4);animation-delay:0.75s;transform:scale(0.2);}
+.c2{animation: myfirstCar 1.5s infinite;background-color: rgba(200,22,29,0.4);animation-delay:0.5s;transform:scale(0.2);}
+.c3{animation: myfirstCar 1.5s infinite;background-color: rgba(200,22,29,0.4);animation-delay:0.25s;transform:scale(0.2);}
+/* .c4{
+	transform:scale(1);
+	
+}*/
+.holdCar .c4{
+position: absolute;
+top: -6px;
+}
+.c4 img{
+	width:100px;
+	transform:scale(0.2);
+}
+
+.c4 .chepai{
+	position: absolute;
+	top: -21px;
+	width: 210px;
+	left: -58px;
+	display: block;
+	transform:scale(0.6);
+}
+.c4 .chepai01{
+	position: absolute;
+	top: -6px;
+	left: -57px;
+	display: block;
+	width: 210px;
+	text-align: center;
+	font-size: 21px;
+	height: 54px;
+	line-height: 44px;
+	background: url(../img/dingdanp.png) no-repeat center center;
+	background-size: 70% 100%;
+}
+
+@keyframes myfirstCar
+{
+	from {transform:scale(0.2);opacity: 1;}
+	to {transform:scale(1);opacity: 0;}
+}

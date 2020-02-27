@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+    <meta name="viewport" content="initial-scale=1, user-scalable=0, minimal-ui" charset="UTF-8">
+    <title>首汽约车企业平台</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/1.8.3/jquery.js"></script>
+    <script src="https://reslib.01zhuanche.com/js/station/c.vconsole.min.js"></script>
+<style type="text/css">
+
+div.lanren{
+	margin: 0px auto;
+	width: 800px;
+	position: relative;
+	
+	animation: a 1000s;
+	-webkit-animation: a 1000s;
+	-moz-animation: a 1000s;
+}
+img:nth-child(2){
+	position: absolute;
+	top: 80px;
+	left: 400px;
+	
+	animation: b 1000s;
+	-webkit-animation: b 1000s;
+	-moz-animation: b 1000s;
+	
+	transform-origin:top center;
+	-webkit-transform-origin:top center;
+	-moz-transform-origin:top center;
+}
+img:nth-child(3){
+	position: absolute;
+	top: 700px;
+	left: 400px;
+	
+	animation: b 1000s;
+	-webkit-animation: b 1000s;
+	-moz-animation: b 1000s;
+	
+	transform-origin:top center;
+	-webkit-transform-origin:top center;
+	-moz-transform-origin:top center;
+}
+img:nth-child(4){
+	position: absolute;
+	top: 300px;
+	left: 0px;
+	
+	animation: b 1000s;
+	-webkit-animation: b 1000s;
+	-moz-animation: b 1000s;
+	
+	transform-origin:top center;
+	-webkit-transform-origin:top center;
+	-moz-transform-origin:top center;
+}
+@keyframes a{
+	form{
+		transform: rotate(0deg);
+		-webkit-transform: rotate(0deg);
+		-moz-transform: rotate(0deg);
+	}
+	to{
+		transform: rotate(36000deg);
+		-webkit-transform: rotate(36000deg);
+		-moz-transform: rotate(36000deg);
+	}
+}
+@keyframes b{
+	form{
+		transform: rotate(0deg);
+		-webkit-transform: rotate(0deg);
+		-moz-transform: rotate(0deg);
+	}
+	to{
+		transform: rotate(-36000deg);
+		-webkit-transform: rotate(-36000deg);
+		-moz-transform: rotate(-36000deg);
+	}
+}
+
+</style>
+</head>
+<body>
+	<div style="transform: scale(0.5);transform-origin: top center;">
+		<div class="lanren">
+			<img src="./img/fsw.png">
+			<img src="./img/boy.png">
+			<img src="./img/girl.png">
+			<img src="./img/shamegirl.png">
+		</div>
+	</div>
+<script type="text/javascript">
+</script>
+</body>
+</html>

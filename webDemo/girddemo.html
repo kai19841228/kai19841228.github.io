@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+    <meta name="viewport" content="initial-scale=1, user-scalable=0, minimal-ui" charset="UTF-8">
+    <title>首汽约车企业平台</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script src="https://reslib.01zhuanche.com/js/station/c.vconsole.min.js"></script>
+    <style type="text/css">
+    	*{
+            margin:0;
+            padding:0;
+            border:none;
+            box-sizing: border-box;
+        }
+        .wrapper{
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: 100vh;
+        }
+        .contion{
+            flex: 1;
+        }
+        .subnav{
+            display: flex;
+            flex-wrap: wrap;
+            font-size: 12px;
+            color: #666666;
+        }
+        .subnav>.item{
+            flex: 0 0 20%;
+        }
+        .nav{
+            border-radius: 10px;
+            margin: 0px 5px;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            border: 1px solid #eeeeee;
+            overflow: hidden;
+            font-size: 12px;
+            color: #666666;
+        }
+        .item{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 80px;
+        }
+        .item span[class^="nav-icon"]{
+            width: 28px;
+            height: 28px;
+            background-image: url(./img/subnav.png);
+            background-size: 28px auto;
+            background-repeat: no-repeat;
+            margin-top: 0px;
+            margin-bottom:0px;
+            display: block;
+        }
+        .nav-icon-wifi{
+            background-position: 0 -28px;
+        }
+        .nav-icon-insurance{
+            background-position: 0 -56px;
+        }
+        .nav-icon-shopping{
+            background-position: 0 -84px;
+        }
+        .nav-icon-guide{
+            background-position: 0 -112px;
+        }
+        .nav-icon-flight{
+            background-position: 0 -140px;
+        }
+        .nav-icon-card{
+            background-position: 0 -168px;
+        }
+        .nav-icon-creditCard{
+            background-position: 0 -196px;
+        }
+        .nav-icon-photograph{
+            background-position: 0 -224px;
+            position: relative;
+        }
+        .subnav-new-tag{
+            position: absolute;
+            font-size: 8px;
+            color: #fff;
+            background: -webkit-gradient(linear,left top,right top,from(#f94242),to(#ffa25f));
+            background: linear-gradient(to right,#f94242,#ffa25f);
+            border-radius: 7px;
+            padding: 2px 5px;
+            text-transform: uppercase;
+            top: -2px;
+            right: -15px;
+        }
+        .nav-icon-more{
+            background-position: 0 -252px;
+        }
+        @media(max-width: 410px){
+            .nav{
+                grid-template-columns: repeat(5,1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="subnav">
+            <div class="item">
+                <span class="nav-icon-travl"></span>
+                <span>自由行</span>
+            </div>
+            <div class="item">
+                <span class="nav-icon-wifi"></span>
+                <span>WiFi电话卡</span>
+            </div>
+            <div class="item">
+                <span class="nav-icon-insurance"></span>
+                <span>保险·签证</span>
+            </div>
+            <div class="item">
+                <span class="nav-icon-shopping"></span>
+                <span>换钞·购物</span>
+            </div>
+            <div class="item">
+                <span class="nav-icon-guide"></span>
+                <span>当地向导</span>
+            </div>
+            <div class="item">
+                <span class="nav-icon-flight"></span>
+                <span>特价机票</span>
+            </div>
+            <div class="item">
+                <span class="nav-icon-card"></span>
+                <span>礼品卡</span>
+            </div>
+            <div class="item">
+                <span class="nav-icon-creditCard"></span>
+                <span>申卡·借钱</span>
+            </div>
+            <div class="item">
+                <span class="nav-icon-photograph">
+                    <span class="subnav-new-tag">NEW</span>
+                </span>
+                <span>旅拍</span>
+            </div>
+            <div class="item">
+                <span class="nav-icon-more"></span>
+                <span>更多</span>
+            </div>
+        </div>
+
+        <div class="contion"></div>
+        <div class="nav">
+            <div class="item">
+                <span class="nav-icon-travl"></span>
+                <span>自由行</span>
+            </div>
+            <div class="item">
+                <span class="nav-icon-wifi"></span>
+                <span>WiFi电话卡</span>
+            </div>
+            <div class="item">
+                <span class="nav-icon-insurance"></span>
+                <span>保险·签证</span>
+            </div>
+            <div class="item">
+                <span class="nav-icon-shopping"></span>
+                <span>换钞·购物</span>
+            </div>
+            <div class="item">
+                <span class="nav-icon-guide"></span>
+                <span>当地向导</span>
+            </div>
+            <div class="item">
+                <span class="nav-icon-flight"></span>
+                <span>特价机票</span>
+            </div>
+            <div class="item">
+                <span class="nav-icon-card"></span>
+                <span>礼品卡</span>
+            </div>
+            <div class="item">
+                <span class="nav-icon-creditCard"></span>
+                <span>申卡·借钱</span>
+            </div>
+            <div class="item">
+                <span class="nav-icon-photograph">
+                    <span class="subnav-new-tag">NEW</span>
+                </span>
+                <span>旅拍</span>
+            </div>
+            <div class="item">
+                <span class="nav-icon-more"></span>
+                <span>更多</span>
+            </div>
+        </div>
+    </div>
+<script type="text/javascript">
+</script>
+</body>
+</html>

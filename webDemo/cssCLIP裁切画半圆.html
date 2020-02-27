@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>demo</title>
+    <script src="https://cdn.bootcss.com/jquery/1.8.3/jquery.js"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+#wrapper {
+    transform: translate(-50%, -50%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100px;
+    height: 100px;
+}
+.clip{
+    position:relative;
+    width: 50px;
+    height: 100px;
+    overflow: hidden;
+    /* rect 四个值对左上的值，上，右，下，左 */
+}
+.mask{
+    width: 50px;
+    height: 100px;
+    overflow: hidden;
+    transform: rotate(-180deg);
+    transform-origin: 100% 50%;
+}
+.cirel{
+    border: 8px solid #F00;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    clip:rect(0px 50px 1010px 0px);
+}
+    </style>
+</head>
+<body style="position: relative;height: 100vh;">
+    <div id="wrapper">
+        <div class="clip">
+            <div class="mask">
+                <div class="cirel"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var per = -180
+        setInterval(function(){
+            per=per+30
+            if(per>0){
+                per =-180
+            }
+            $('.mask').css("webkitTransform","rotate("+per+"deg)")
+            $('.mask').css("transform","rotate("+per+"deg)")
+        },1000)
+    </script>
+</body>
+</html>

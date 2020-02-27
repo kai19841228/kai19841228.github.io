@@ -1,0 +1,279 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta http-equiv="x-dns-prefetch-control" content="on">
+<meta http-equiv="Cache-Control" content="no-transform " />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta name="apple-touch-fullscreen" content="yes">
+<meta name="format-detection" content="telephone=no">
+<title>麦卡出行-定制包车|旅游包车|会务用车|接机送机</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="Copyright" content="">
+<meta name="author" content="">
+<meta http-equiv="Access-Control-Allow-Origin" content="*">
+<!-- 网站的ico图标 -->
+<link rel="shortcut icon" href="./public/img/icon.png" type="image/x-icon">
+<link href="./public/css/reset.css" rel="stylesheet" type="text/css">
+<link href="./public/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href="./public/css/index.css" rel="stylesheet" type="text/css">
+<script src = "https://webapi.amap.com/maps?v=1.4.10&key=9cd8dd76aadccbf1ef5c1a8a400f87a8"></script>
+<script src = "./public/js/jquery1.8.3.min.js" ></script>
+<script src = "./public/js/socket.io.js" ></script>
+<script type="text/javascript">
+	// 域名处理
+	var sendLink = {}
+	if (location.host.toLowerCase().indexOf('test')>-1) {
+		sendLink = {
+			url: "http://test.manage.imycargo.com"
+		}
+	} else if (location.host.toLowerCase().indexOf('pre')>-1) {
+		sendLink = {
+			url: "http://pre.manage.imycargo.com"
+		}
+	} else if(location.host.toLowerCase().indexOf('127.0.0.1')>-1) {
+		sendLink = {
+			url: "http://test.manage.imycargo.com"
+		}
+	} else {
+		sendLink = {
+			url: "https://manage.imycargo.com"
+		}
+		window.console.log=function(){}
+	}
+	//字符串缓冲器
+	function StringBuffer() {
+		this._things_ = new Array();
+	};
+	StringBuffer.prototype.append = function(str) {
+		this._things_.push(str);
+		return this;
+	};
+	StringBuffer.prototype.toString = function() {
+		return this._things_.join("");
+	};
+	//var sb = new StringBuffer();
+	//sb.append('<div class="level1 cr">');
+	//sb.append('79798797979');
+	//sb.append('</div>');
+	//sb.toString();
+	//console.log(sb.toString())
+	//var b = new StringBuffer();
+	//console.log(b)
+	setInterval(function () {
+			location.reload();
+	}, 3600000);//reload
+</script>
+</head>
+<body>
+	<div id="APP">
+		<div id="citySelect" class="select select--white">
+			<span class="placeholder">请选择</span>
+			<ul>
+				<li>q</li>
+				<li>q</li>
+				<li>q</li>
+			</ul>
+		</div>
+		<div id="container" class="map" tabindex="0"></div>
+	</div>
+	<!-- <div class="hold">
+		<span class="s1"></span>
+		<span class="s2"></span>
+		<span class="s3"></span>
+		<span class="s4">
+			<img src="./public/img/dingdan.png" >
+		</span>
+	</div>
+	<div class="holdCar">
+		<span class="c1"></span>
+		<span class="c2"></span>
+		<span class="c3"></span>
+		<span class="c4">
+			<img src="./public/img/dingdanc.png" >
+			<div class="chepai01">京BKK23456</div>
+		</span>
+	</div> -->
+	<script type="text/javascript">
+		window.addEventListener("beforeunload", function (event) {
+			if(socket !== ''){
+				socket.disconnect()
+			}
+		})
+		window.onunload = function(){
+			if(socket !== ''){
+				socket.disconnect()
+			}
+		}
+		var map = new AMap.Map('container', {
+		});
+		AMap.Marker.prototype.timer = function(t){
+			var _this = this;
+			this.timerId=window.setTimeout(function(){
+				_this.setMap(null);
+				window.clearTimeout(this.timerId);
+			},t);
+		};
+		// 点标记显示内容，HTML要素字符串
+		function blueMarder(){
+			var markerBlue = '' +
+				'<div class="hold">' +
+				'   <span class="s1"></span>' +
+				'   <span class="s2"></span>' +
+				'   <span class="s3"></span>' +
+				'   <span class="s4"><img src="./public/img/dingdan.png" ></span>' +
+				'</div>';
+			return markerBlue
+		}
+		/*拼接字符串 绑定后把车牌号拼接上显示*/
+		function redMarker (license){
+			var markerRed = '' +
+				'<div class="holdCar">' +
+				'   <span class="c1"></span>' +
+				'   <span class="c2"></span>' +
+				'   <span class="c3"></span>' +
+				'   <span class="c4"><img src="./public/img/dingdanc.png" ><div class="chepai01">'+license+'</div></span>' +
+				'</div>';
+			return markerRed
+		}
+		var markers = []
+		function changeMarkers(orderNo,vehicleLicense,locaTion){
+			if (markers.length > 0) {
+				var len = markers.length;
+				$.each(markers,function(index,item){
+					if(orderNo == item.getExtData()){
+						item.setMap(null);
+					}
+				});
+			}
+			var marker = new AMap.Marker({
+				position: new AMap.LngLat(locaTion[0],locaTion[1]),//基点位置
+				offset:new AMap.Pixel(-100, -40),
+				content:redMarker (vehicleLicense)
+			});
+			marker.setMap(map);
+			marker.timer(10000);
+		}
+		function removeMarker(len, orderNo) {
+			for (var index = 0; index < len; index++) {
+				var item = markers[index];
+				if(orderNo == item.getExtData()){
+					markers.splice(index,1);
+					item.setMap(null);
+					break;
+				}
+			}
+		}
+		/* socket */
+		var socket =''
+		function socketIO(){
+			if(socket !== ''){
+				socket.disconnect()
+			}
+			socket = io('/', {
+				query: 'actionType=DATAV_ORDER_NOTIFY&sysCode=monitor&token=WEB_MANAGE-YWRtaW58MTU0NDY2NTM2Mzc1NA..'
+			})
+			socket.on('connect', function () {
+				console.log('连接成功')
+			})
+			socket.on('disconnect', function () {
+			console.log('与服务其断开')
+			})
+			socket.on('reconnect', function () {
+			console.log('重新连接到服务器')
+			})
+			/* 
+				监控服务器事件，在地图上渲染
+			*/
+			socket.on('DATAV_ORDER_NOTIFY', function (data) {
+				console.log(data)
+				var ele = JSON.parse(data)
+				console.log(typeof ele)
+				var locaTion = ele.bookingStartPoint.split(",")
+				if(ele.type == 'findDriver'){
+					window.setTimeout(function(){return changeMarkers(ele.orderNo,ele.carNo,locaTion)},5000);
+				}else{
+					var marker = new AMap.Marker({
+						position: new AMap.LngLat(locaTion[0],locaTion[1]),//基点位置
+						offset:new AMap.Pixel(-100, -40),
+						content:blueMarder(),
+						extData: ele.orderNo
+					});
+					marker.setMap(map);
+					// 设置点标记的动画效果，此处为弹跳效果
+					marker.timer(60000);
+					markers.push(marker);
+					var len = markers.length;
+					
+					window.setTimeout(function(){return removeMarker(len, ele.orderNo)},60000);
+				}
+			});
+		}
+		socketIO()
+		/* socket */
+	var citydata = [
+	        {
+	        	"cityCode": "",
+	        	"cityId": 3,
+	        	"cityName": "北京"
+	        },{
+	            "cityCode": "",
+	            "cityId": 1,
+	            "cityName": "芜湖"
+	        }
+	    ]
+	function getCity(){
+		$.ajax({
+			type:"post",
+			url: '/api/car-datav/city/list',
+			// url: 'http://test.manage.imycargo.com/api/car-datav/city/list',
+			// url: 'https://gw-passenger-wap.01zhuanche.com/gw-passenger-wap/zhuanche-passenger/api/v1/city/list?status=1',
+			dataType:"json",
+			success: function(res){
+				var res = res || {};
+				if(res.code == 0){
+					console.log(res)
+					var citydata = res.data
+					var sb = new StringBuffer();
+					for (var elem of citydata) {
+						// console.log(elem)
+						sb.append('<li cityName ="'+ elem.cityName +'" cityid ="'+elem.cityId+'">'+elem.cityName+'</li>');
+					}
+					$("#citySelect ul").html(sb.toString())
+					$('.select ul>li').eq(0).click()
+				}
+			},
+			error: function(res){
+				console.log('ajax错误');
+				console.log(res)
+			}
+		});
+	}
+	$(function(){
+		$('.select').on('click', '.placeholder', function(e) {
+			var parent = $(this).closest('.select');
+			if (!parent.hasClass('is-open')) {
+				parent.addClass('is-open');
+				$('.select.is-open').not(parent).removeClass('is-open');
+			} else {
+				parent.removeClass('is-open');
+			}
+			e.stopPropagation();
+		}).on('click', 'ul>li', function(e) {
+			var parent = $(this).closest('.select');
+			parent.removeClass('is-open').find('.placeholder').text($(this).text());
+			map.setCity($(this).attr('cityName'));
+		});
+		$('body').on('click', function() {
+			$('.select.is-open').removeClass('is-open');
+		});
+		$(window).on("load",function(){
+			getCity()
+		})
+	})
+	</script>
+</body>
+</html>

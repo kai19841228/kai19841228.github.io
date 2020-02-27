@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+		<title>二维码</title>
+		<script type="text/javascript" src="jquery-1.11.1.js"></script>
+		<script type="text/javascript" src="jquery.qrcode.js"></script>
+		<script type="text/javascript" src="utf.js"></script>
+		<style type="text/css">
+			.qr-code {
+				width: 450px;
+				height: 450px;
+				margin: 0 auto;
+				padding: 20px;
+				border: 1px solid #ddd;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="qrcode" class="qr-code"></div>
+		<script type="text/javascript">
+			$(function() {
+				function qrcode() {
+					$('#qrcode').html('');
+					var params = window.location.search
+					// var license = 'carLicense'  //英文
+					var license = decodeURIComponent('啦啦') // 中文
+					// var text = 'https://booking.01zhuanche.com/car.html#/ScanMain' + params + '&t=' + Date.parse(new Date()) / 1000
+					var text = 'https://www.baidu.com/'
+					var width = $('#qrcode').height()
+					jQuery('#qrcode').qrcode({
+						render: "canvas",
+						text: text,
+						width: width,//二维码的宽度
+						height: width, //二维码的高度
+						background: "#ffffff", //二维码的后景色
+						foreground: "#000000", //二维码的前景色
+						correctLevel: QRErrorCorrectLevel.H,
+						src: 'logo1.jpg'//二维码中心的图片
+					});
+				}
+				(function(argument) {
+					qrcode()
+				})()
+			})
+		</script>
+	</body>
+</html>

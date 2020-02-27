@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+		<title>二维码</title>
+		<script type="text/javascript" src="jquery-1.11.1.js"></script>
+		<script type="text/javascript" src="qart.min.js"></script>
+		<style type="text/css">
+			.qr-code {
+				width: 195px;
+				height: 195px;
+				margin: 0 auto;
+				padding: 20px;
+				border: 1px solid #ddd;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="qrcode" class="qr-code"></div>
+		<script type="text/javascript">
+			// 要在服务器环境下,否则报错...
+			$(function() {
+				var value = 'http://www.jq22.com';
+				var filter = 'color';  // threshold 黑白 color 彩色
+				var imagePath = 'logo1.jpg';
+				function makeQArt() {
+						new QArt({
+								value: value,
+								imagePath: imagePath,
+								filter: filter
+						}).make(document.getElementById('qrcode'));
+				}
+				makeQArt();
+			})
+		</script>
+	</body>
+</html>

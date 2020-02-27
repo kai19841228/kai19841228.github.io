@@ -1,0 +1,66 @@
+  // 创建点覆盖物
+    var marker = new AMap.Marker({
+        position: new AMap.LngLat(116.39, 39.92),
+        icon: '//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-default.png',
+        offset: new AMap.Pixel(-13, -30)
+    });
+//添加多个覆盖物
+map.add([polyline, polygon,marker]);
+
+// 清除地图上所有添加的覆盖物
+        map.clearMap();
+
+https://www.cnblogs.com/tandi19960505/p/8052825.html   socket参考
+https://socket.io/docs/client-api/    socket API
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.1/socket.io.js"></script>
+//创建socket
+  if (socket !== '') {
+      socket.disconnect() //socketIO断开链接
+    }
+  var socket = io('http://localhost:8888', {
+      'reconnect': false,
+      'auto connect': false,
+      query: 'actionType=DRIVER_LOCATION&cityId=' + vm.queryParam.cityId + '&sysCode=carweb&token=' + token + ''
+    });
+/*query  是传的参数*/
+  /* 
+    创建自定义事件 'news'
+    作用：接受服务端 socket.emit('news', 数据); 发出的数据
+  */
+  socket.on('news', function (data) {
+
+    //输出服务端响应了数据
+    console.log(data);
+
+    //向服务端的自定义事件 'my other event' 发出数据
+    socket.emit('my other event', { my: 'data' });
+  });
+
+加载海量点
+参考  https://lbs.amap.com/api/javascript-api/example/marker/massmarks 
+
+ var map = new AMap.Map('container', {
+        zoom: 4,
+        center: [102.342785, 35.312316]
+    });
+
+    var style = [{
+        url: 'https://a.amap.com/jsapi_demos/static/images/mass2.png',
+        anchor: new AMap.Pixel(3, 3),
+        size: new AMap.Size(5, 5)
+    }
+    ];
+
+    var mass = new AMap.MassMarks(citys, {
+        opacity: 0.8,
+        zIndex: 111,
+        cursor: 'pointer',
+        style: style
+    });
+
+    mass.setMap(map);
+海量点api https://lbs.amap.com/api/javascript-api/reference/layer#MassMarks
+更新海量点 mass.setData([{"lnglat":[116.405285,39.904989],"name":"北京市","style":0}])
+清除海量点 mass.clear( )
+
+https://lbs.amap.com/api/javascript-api/example/marker/custom-icon-content 自定义marker层 小车动画。

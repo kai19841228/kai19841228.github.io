@@ -1,0 +1,4 @@
+https://github.com/ximan/mobile-lesson/tree/gh-pages/lesson03
+
+小程序  单位是pt 也是以750作为设计尺寸。是几像素就是几pt，
+https://developers.weixin.qq.com/miniprogram/dev/ 官方文档

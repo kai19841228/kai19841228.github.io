@@ -1,0 +1,34 @@
+<html>  
+<body>
+<h1>Test Scheme</h1> 
+<!--自动加载隐藏页面跳转-->
+<!--<iframe src="gbpassenger://01zhuanche.com/" style="display:none"></iframe>-->
+<!--手动点击跳转-->
+<a href="gbpassenger://01zhuanche.com/">Click 首页</a>
+<a href="gbpassenger://01zhuanche.com/account">account</a>
+<a href="gbpassenger://01zhuanche.com/creditCard">Click</a>
+<a href="gbpassenger://01zhuanche.com/mytrip">mytrip</a>
+<a href="gbpassenger://01zhuanche.com/coupon">coupon</a>
+<a href="gbpassenger://01zhuanche.com/inviteFriends">inviteFriends</a>
+<script src="../js/jquery1.8.3.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		var u = navigator.userAgent;
+		var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+		var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+		console.log('是否是Android：'+isAndroid);
+		console.log('是否是iOS：'+isiOS);
+               //此操作会调起app并阻止接下来的js执行
+              // $('body').append("<iframe src='gbpassenger://01zhuanche.com/' style='display:none' target='' ></iframe>");
+               //没有安装应用会执行下面的语句
+               //setTimeout(function(){window.location = 'http://www.yourdlurl.com/download.html'},600);
+               //ios
+               //setTimeout(function(){window.location = 'itms-apps://itunes.apple.com/app/idXXXXXXX'},25);
+	                window.location.href = 'gbpassenger://01zhuanche.com/';
+		 
+
+	})
+	
+</script>
+</body>  
+</html>

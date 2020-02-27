@@ -1,0 +1,36 @@
+https://segmentfault.com/a/1190000000525648  参考
+
+// 绘制轨迹
+			    let polyline = new AMap.Polyline({
+			        path: lineArr,
+			        strokeColor: '#00A', //线颜色
+			        strokeOpacity: 1, //线透明度
+			        strokeWeight: 3, //线宽
+			        strokeStyle: 'solid'  //线样式
+			    })
+//把折线添加到地图上
+			    polyline.setMap(map)
+
+marker = new AMap.Marker({
+            icon: "http://webapi.amap.com/theme/v1.3/markers/n/mark_b.png",
+            position: [116.405467, 39.907761]
+        });
+//把marker添加到地图上
+        marker.setMap(map);
+
+http://lbs.amap.com/api/javascript-api/reference/map/  地图先关属性，事件
+map.clearMap()  //清楚地图上的覆盖物
+
+map.setFitView() //当前显示自动适应屏幕。
+
+map.getAllOverlays() //获取地图上的所有覆盖物 可选参数有:‘marker’、‘circle’、‘polyline’、‘polygon’
+map.getAllOverlays('marker') // 获取地图上的指定覆盖层
+map.clearInfoWindow() //清除地图上的信息窗体
+map.on('click', function (e) { // 给地图添加点击事件 ，能返回经纬度。
+	console.log(e)
+})
+marker.on('click', markerClick)  // 给marker添加事件。
+function markerClick (e) {
+	console.log(e)
+}
+marker.setMap(null) 对于制定marker，可以单独清除每一个覆盖物：

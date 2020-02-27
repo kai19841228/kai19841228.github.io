@@ -1,0 +1,12 @@
+高德地图 知识点
+Q
+变黑的问题是苹果系统应用切到后台绘制canvas的bug，目前JS API没办法解决
+建议你们这样： App检测到被切换成后台时应用通知webview，停止自动更新路线或marker等操作，等App被唤起时再次发通知重新开始自动更新   保证应用在切换到后台时不调用JS API相关更新地图的方法即可
+如果在切入后台后，执行了某些接口引起了地图绘制都可能出现这种情况， setFitView() 也会引起，
+A
+如果无法检测到应用后台状态，创建地图时添加两个参数：
+overlayRender: 'd'
+baseRender: 'd'
+
+map.setFitView()    
+map.setFitView(overlaysList);//自适应显示

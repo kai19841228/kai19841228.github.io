@@ -1,0 +1,108 @@
+<html>
+	<head></head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<style>
+	body {
+        height: 100%;
+        margin: 0;
+        width: 100%;
+        padding: 0;
+        overflow: hidden;
+        font-size: 13px;
+    }
+    .map {
+        height: 100%;
+        width: 100%;
+    }
+    .hold{height: 50%;}
+    </style>
+	<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.5&key=ec4c5150708c5ff72d41f656ca2f6f0c"></script>
+	<body>
+		<div class="hold">
+			<div id="container" class="map"></div>
+		</div>
+	<script type="text/javascript">
+	var lineArr = []
+	var moveArr = []
+			var marker
+			var map = new AMap.Map('container', {
+		        resizeEnable: true
+		    })
+		    map.clearMap()
+		    map.plugin(['AMap.Driving'], function () {
+                var drivingOption = {
+                	//驾车策略，包括 LEAST_TIME，LEAST_FEE, LEAST_DISTANCE,REAL_TRAFFIC
+                    policy: AMap.DrivingPolicy.LEAST_TIME,
+                    map: map
+                }
+                var driving = new AMap.Driving(drivingOption) //构造驾车导航类
+                // 根据起终点经纬度规划驾车导航路线
+    			//driving.search(new AMap.LngLat(116.379028, 39.865042), new AMap.LngLat(116.427281, 39.903719));
+                //根据起终点坐标和途经点的规划驾车路线
+                driving.search(new AMap.LngLat(116.427988,39.901927), new AMap.LngLat(116.378549,39.864912),{waypoints:[new AMap.LngLat(116.404814,39.907853)]}, function (status, result) {
+                	console.log('导航规划后的回调：' + '**********************')
+                	driving_routeCallBack (result)
+                })
+            })
+            function driving_routeCallBack (data) {
+            	console.log(data)
+            	console.log(data.routes[0].steps[0].end_location.lng)
+            	console.log(data.routes[0].steps[0].end_location.lat)
+            	// lineArr 数组填充值。
+            	data.routes[0].steps.map(function (item, index) {
+            		// lineArr.push([item.end_location.lng, item.end_location.lat])
+            		lineArr.push(item.end_location)
+            	})
+            	console.log(lineArr)
+            	// 把起点终点坐标添加到，lineArr数组
+            	lineArr.push(data.end.location)
+            	lineArr.unshift(data.start.location)
+            	// map.clearMap()
+            	// 绘制轨迹
+			    let polyline = new AMap.Polyline({
+			        map: map,
+			        path: lineArr,
+			        strokeColor: '#00A', //线颜色
+			        strokeOpacity: 1, //线透明度
+			        strokeWeight: 3, //线宽
+			        strokeStyle: 'solid'  //线样式
+			    })
+			    // 地图里的小车图片
+			    marker = new AMap.Marker({
+			        map: map,
+			        position: [116.427988,39.901927],
+			        icon: 'http://webapi.amap.com/images/car.png',
+			        offset: new AMap.Pixel(-26, -13),
+			        autoRotation: true
+			    })
+			    // 小车过后的划线，不需要刻意透明。
+			    var passedPolyline = new AMap.Polyline({
+			        map: map,
+			        // path: lineArr,
+			        strokeColor: '#F00',  //线颜色
+			        strokeOpacity: 1, //线透明度
+			        strokeWeight: 3, //线宽
+			        strokeStyle: 'solid'  //线样式
+			    })
+			    marker.on('moving', function (e) {
+			        passedPolyline.setPath(e.passedPath)
+			    })
+			    map.setFitView()
+			    // 播放动画。number越大动画越快，
+			    // marker.moveAlong(lineArr, 500)
+			    var n = 0
+			    moveArr.push(lineArr[0])
+			    setInterval(function(){
+			    	n++
+			    	if(moveArr.length>=2){
+			    		moveArr.shift()
+			    	}else{
+			    		moveArr.push()
+			    	}
+			    	moveArr.push(lineArr[n])
+			    	marker.moveAlong(moveArr, 500)
+			    },5000)
+            }
+	</script>
+	</body>
+</html>

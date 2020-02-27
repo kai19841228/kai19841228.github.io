@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+		<title>二维码</title>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+		<script src="https://cdn.bootcss.com/jquery/1.8.3/jquery.js"></script>
+		<script src="https://reslib.01zhuanche.com/js/station/c.vconsole.min.js"></script>
+		<script src="https://cdn.bootcss.com/underscore.js/1.9.0/underscore-min.js"></script>
+		
+		<script src="base64image.js" type="text/javascript"></script>
+		<script src="exif.js" type="text/javascript"></script>
+		<style type="text/css">
+			.fileHold{
+				position: absolute;
+				left: 0;
+				bottom: 50px;
+				width: 100%;
+			}
+			.btn_pic{
+				width: 80%;
+				margin: 0 auto;
+				display: block;
+				background-color: #4C585C;
+				height: 96px;
+				line-height: 96px;
+				border-radius: 50px;
+				color: #fff;
+				font-size: 32px;
+				text-align: center;
+			}
+			.pic_inp_up {
+				position: absolute;
+				top: 0;
+				left: 10%;
+				width: 80%;
+				height: 96px;
+				line-height: 96px;
+				opacity: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app" class="app">
+			<img :src="src" >
+			<div class="fileHold">
+				<a href="javascript:;" class="btn_pic">请上传行程页面截图</a>
+				<input type="file"  name="file" accept="image/*" v-on:change="fileUp2($event.currentTarget)" ref="fileImg" id="fileImg" class="pic_inp_up">
+			</div>
+		</div>
+		<script type="text/javascript">
+			var vm = new Vue({
+				el: '#app',
+				data: {
+					src: ''
+				},
+				methods: {
+					//上传图片
+					fileUp2: function(me) {
+						var self = this;
+						var imgName = me.files[0].name
+						console.log(event)
+						console.log(me)
+						base64Image({
+							width: 750,
+							/*【选填】宽度默认750，如果图片尺寸大于该宽度，图片将被设置为该宽度*/
+							ratio: 0.75,
+							/*【选填】压缩率默认0.75 */
+							file: me,
+							/*【必填】对应的上传元素 */
+							callback: function(imageUrl) { /*【必填】处理成功后的回调函数 */
+								/*imageUrl为得到的图片base64数据，这里可以进行上传到服务器或者其他逻辑操作 */
+								console.log(imageUrl)
+								self.src = imageUrl
+							},
+						});
+					}
+				},
+				mounted: function () {
+				}
+			})
+		</script>
+	</body>
+</html>
