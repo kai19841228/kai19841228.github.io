@@ -1,0 +1,55 @@
+-webkit-touch-callout:none; /* 禁用长触弹出的下载图片菜单 */
+-webkit-user-select:none; /* 禁用长触选择文字等功能 */
+
+p{color:#F00!important;}      !important优先级最高。看情况使用。
+@import url(style.css);       把css样式表加载进来，写在style里或者在外链样式里引入。
+
+pointer-events: none;  可以设置ele不感应鼠标事件，改为auto 就感应事件了。
+
+background-image: image-set( "test.png" 1x, "test-2x.png" 2x, "test-print.png" 600dpi ); 
+普通屏幕使用 test.png，为高分屏使用 test-2x.png，如果更高的分辨率则使用 test-print.png，比如印刷。
+
+.wrap a[href^="http://"]{}    给调用网址的a标签设置单独的样式 邮箱  标题包含 链接图片以png结尾的！
+a[href^="mailto:"]    a[title*="hubwiz"]  a[href$="png"]
+a:first-child   a元素里第一个元素
+a:last-child    a元素里最后一个元素
+p:nth-child(3)   匹配该元素的第N个元素。必须大于0
+p:nth-child(2n)  匹配该元素里的2的倍数的元素的样式
+p:nth-child(n+2) 匹配该元素里的大于2的元素
+p:nth-child(-n+2) 匹配该元素里的前2个元素
+p:nth-of-type(odd)    匹配奇数的样式
+p:nth-of-type(even)   匹配元素偶数个的样式
+p:first-of-type       该类型元素的第一个，是一个集合，p元素里的第一个。
+p:last-of-type        是上边的反例，选取该类型的最后一个。
+p:nth-last-of-type(3)  匹配该类型元素的最后一个，
+p:nth-last-child(4)   从后往前匹配元素，从1开始
+p:empty               匹配元素没有内容的元素的样式。
+.nav-item:not(:last-child)    匹配不是最后一个的的p元素  
+.nav-item:not(.is-active):hover:before
+//================================================================jquery  css3选择器
+ $("div[title='A']")              //显示所有属性title的值是"A"的元素
+$("div[title!='A']")              //显示所有属性title的值不是"A"的元素
+$("div[title^='A']")              //显示所有属性title的值是"A"开始的元素
+ $("div[title$='C']")             //显示所有属性title的值是"C"结束的元素
+$("div[title*='B']")              //显示所有属性title的值中含有"B"的元素
+$("div[id='divAB'][title*='B']")  //显示所有属性title的值中含有"B"且属性id的值是“divAB”的元素
+//=================================================================box-sizing
+box-sizing:border-box padding在定制的宽高里;content-box padding margin都记在宽高内。
+
+outline:2px solid red;  outline-offset:15px; 设置轮廓样式，和轮廓间距。 
+非IE及ie8及以上浏览器都支持 在css3里使用变量
+:root {
+  --main-bg-color: pink;
+}
+body {
+  background-color: var(--main-bg-color);
+}
+
+.css{   css平滑滚动兼容
+overflow:auto;/* winphone8和android4+ */
+-webkit-overflow-scrolling: touch; /* ios5+ */
+}
+grid-template-columns: repeat(2, 50px 1fr) 100px; 使用grid
+grid-auto-rows: minmax(200px, auto);
+
+width: calc(100% - 40px);     css3适应屏幕

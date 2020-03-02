@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<script src="https://cdn.bootcss.com/jquery/1.8.3/jquery.js"></script>
+<title></title>
+<style>
+	.box div{
+		width: 600px; height: 600px; margin: 0px auto; border-radius: 50%; overflow: hidden;
+		background: url(./img/earth.jpg);
+		background-position-x:0px;
+		background-size: cover;
+		box-shadow: rgb(0, 0, 0) 0px 0px 170px 0px inset;
+		/* animation: b 10000s infinite linear; */
+	}
+@keyframes b{
+	form{
+		background-position-x: 0;
+		/* transform: translateX(0); */
+	}
+	to{
+		background-position-X: -143200px;
+		/* transform: translateX(-1000px); */
+	}
+}
+</style>
+
+</head>
+<body>
+
+<div class="box">
+	<div></div>
+</div>
+<script>
+	$(function() {
+		ab();
+
+		function ab() {
+			var k=0
+			setInterval(function(){
+				k++;
+				$('.box div').css('background-position-x',"-"+k+"px")
+			},40);
+		}
+	})
+</script>
+</body></html>

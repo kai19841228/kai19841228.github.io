@@ -1,0 +1,127 @@
+transform:rotate(45deg) scale(1.2) skew(30deg,10deg) translate(10px,15px)//多属性可以写在一起。
+ transform:scale(2,4);          X轴和Y轴上的缩放，要是一样就写一个就OK  
+ transform:scaleX(n);           scaleY(n)
+transform: skew(30deg,20deg);   XY上的斜切角度   skewX(angle) skewY(angle)
+transform: translateX(n);       translateY(n)
+width,height,background和上述属性才能做transform动画。以后再工作中在探索。
+
+transform:rotateX(120deg);      3D转换沿着XY轴转动 rotateX()rotateY() perspective: 800px;3D效果要设置景深，
+transform:translate3d(x,y,z)    3D XYZ上的距离。 translateX(x)也可单独使用。
+transform:scale3d(x,y,z)        3D在XYZ轴上的缩放。 scaleX(x)也可以单独使用。
+transform:rotate3d(x,y,z,angle) 3D在XYZ轴上的旋转角度  rotateX(angle)也可以单独使用。
+transform:perspective(n)        3D元素的透视图
+
+／／为动画DOM元素添加 CSS3 样式 -webkit-transform: transition3d(0,0,0) 或 -webkit-transform: translateZ(0)，这两个属性都会开启GPU硬件加速模式，从而让浏览器在渲染动画时从CPU转向GPU
+／／＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝3步播放y轴0-360px；类似gif动画。
+.p1-btylight img{-webkit-animation: lightft .3s steps(3) infinite; animation: lightft .3s steps(3)  infinite;}
+@keyframes lightft {
+  0% { -webkit-transform: translate3d(0, 0, 0); transform: translate3d(0, 0, 0); }
+  100%{-webkit-transform: translate3d(0, -360px, 0); transform: translate3d(0, -360px, 0);}
+}
+
+transition: property duration timing-function delay; 过度属性 动画时间 欢动曲线 延时时间
+1. transtion-property 用于指定哪些属性值改变时显示transition动画效果。none表示没有，all表示所有，或者用逗号分隔需要指定的属性，如transition-property: background,width,height.
+2. transition-duration 表示动画持续时间，可以设置多个值，中间用逗号分隔，其中每个值对应transition-perproty设置的每个属性。例如：
+
+transition-perproty: width,height;
+transition-duration:1s,0.5s
+/*表示宽度的转换动画持续的时间为1s，高度转换动画持续的时间为0.5s*/
+
+3. transition-timing-function 表示转换动画的效果，有多个值可以选择：
+
+　　1）Linear 指定一个线性渐变
+
+　　2）ease 指定一个逐渐慢下来的动画
+
+　　3）ease-in 指定一个先慢后快的渐变动画
+
+　　4）ease-out 指定一个先快后慢的渐变动画
+
+　　5）ease-in-out 指定一个先慢后快再慢的渐变动画
+
+　　6）cubic-bezier 使用贝塞尔曲线来指定一个复杂的动画渐变效果（这个效果很不错，可以做比较复杂的效果，附带一个制作效果的网站：http://matthewlein.com/ceaser/）
+
+4. transtion-delay 指定在动画开始前等待的时间，不需要时可以省略。
+
+
+transition:all 0.5s ease-out;
+-moz-transition:all 0.5s ease-out; /* Firefox 4 */
+-webkit-transition:all 0.5s ease-out; /* Safari and Chrome */
+-o-transition:all 0.5s ease-out; /* Opera */
+//==============================================用到3D动画的时候要设置景深才有3D效果。
+//==============================================perspective-origin  规定 3D 元素的底部位置。
+//==============================================backface-visibility 定义元素在不面对屏幕时是否可见。
+-webkit-perspective: 800px;
+-moz-perspective: 800px;
+-o-perspective: 800px;
+perspective: 800px;  规定 3D 元素的透视效果
+
+perspective-origin: 10% 10%;
+-webkit-perspective-origin: 10% 10%;	/* Safari 和 Chrome */  设置 3D 元素的基点位置
+
+backface-visibility 属性定义当元素不面向屏幕时是否可见。
+-webkit-backface-visibility:hidden;   
+-webkit-backface-visibility:visible;  
+
+使被转换的子元素保留其 3D 转换：如在3d旋转层叠关系保留
+transform-style: preserve-3d;
+-webkit-transform-style: preserve-3d;
+
+transform-origin:0% 50%;//===============设置变形的原点，类似注册点。
+
+
+animation================================要注意在写以上的属性时，都要根据不同的浏览器加上前缀，-webkit-,-o-,-ms-,-moz-
+======================================================================================================================
+1. animation-name 此属性指定动画应对的keyframes，比如设置animation-name为loading，那么动画就对应@keyframes loading所声明的关键帧。如果没有定义关键帧，动画将不会生效。
+
+2. animation-duration 定义一次动画的持续时间，默认值为0
+
+3. animation-delay 定义从触发到开始动画的时间
+
+4. animation-timing-function 定义动画显示的效果，例如先快后慢，先慢后快等，属性值与transition-timing-function相同
+
+5. animation-iteration-count 该属性定义动画循环的次数，默认为1。我们可以用infinite来使动画无限次循环，这是transition动画所无法支持的。
+
+6. animation-direction 定义动画播放的方向，默认值为normal，代表每次动画都向前播放。另外一个值是alternate，第偶数次动画向前播放，第奇数次逆向播放。
+7  animation-play-state: paused|running;     动画暂停 paused规定动画已暂停 running 规定动画正在播放
+                                             paused规定动画已暂停 running 规定动画正在播放
+animation-play-state:paused; 
+-webkit-animation-play-state:paused; /* Safari 和 Chrome */
+
+8  animation-fill-mode：定义播放完css动画，forwards停留在结束位置，backwards停留在开始位置。
+     animation: myfirst 5s linear 2s infinite alternate;  简写样例。
+@keyframes myfirst
+{
+	0%		{transform: rotate(0deg);left:0px;}
+	25%		{transform: rotate(20deg);left:0px;}
+	50%		{transform: rotate(0deg);left:500px;}
+	55%		{transform: rotate(0deg);left:500px;}
+	70%		{transform: rotate(0deg);left:500px;background:#1ec7e6;}
+	100%	{transform: rotate(-360deg);left:0px;}
+}
+@keyframes myfirst
+{
+from {background: red;}
+to {background: yellow;}
+}
+
+——————————————————js控制csss动画
+document.getElementById(“mask”).style.transition = "translate(-20px,0px)";
+$(“.mask”)[0].style.transition = "-webkit-transform 500ms ease-in-out";
+$(“.mask”)[0].style.webkitTransform = "translate(-20px,0px)";
+
+$('.mask').css("transform","rotate("+per+"deg)")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
