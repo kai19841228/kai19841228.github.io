@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<script src="https://cdn.bootcss.com/jquery/1.8.3/jquery.js"></script>
+<title></title>
+<style>
+	*{
+		margin: 0;
+		padding: 0;
+		border: 0;
+		box-sizing: border-box;
+	}
+.main {
+  display: flex;
+  flex-wrap: wrap;
+}
+[data-filter*=image-] {
+  flex: 0 1 20%;
+  position: relative;
+  z-index: 0;
+}
+[data-filter*=image-] h2{
+	font-size: 12px;
+	word-wrap: break-all;
+}
+[data-filter*=image-] img {
+  height: auto;
+  width: 100%;
+  transition:all 0.5s ease-out;
+-moz-transition:all 0.5s ease-out; /* Firefox 4 */
+-webkit-transition:all 0.5s ease-out; /* Safari and Chrome */
+-o-transition:all 0.5s ease-out; /* Opera */
+}
+[data-filter="image-grayscale"] img {
+  filter: grayscale(50%);
+}
+
+[data-filter="image-saturate"] img {
+  filter: saturate(360%);
+}
+
+[data-filter="image-sepia"] img {
+  filter: sepia(100%);
+}
+
+[data-filter="image-invert"] img {
+  filter: invert(100%);
+}
+
+[data-filter="image-opacity"] img {
+  filter: opacity(50%);
+}
+
+[data-filter="image-brightness"] img {
+  filter: brightness(120%);
+}
+
+[data-filter="image-contrast"] img {
+  filter: contrast(160%);
+}
+
+[data-filter="image-hue-rotate"] img {
+  filter: hue-rotate(160deg);
+}
+
+[data-filter="image-blur"] img {
+  filter: blur(2px);
+}
+[data-filter="image-filter"] img {
+  -o-object-fit: cover;
+     object-fit: cover;
+  -webkit-filter: url(#water);
+          filter: url(#water);
+}
+[data-filter="image-boli"] img {
+  -o-object-fit: cover;
+     object-fit: cover;
+  -webkit-filter: url(#filter);
+          filter: url(#filter);
+}
+[data-filter="image-drop1"] img {
+	width: 100px;
+	filter: drop-shadow(30px 10px 4px #4444dd);
+}
+[data-filter="image-drop2"] img {
+	width: 100px;
+	filter: drop-shadow(0px -10px 4px #4444dd);
+}
+[data-filter="image-drop3"] img {
+	width: 100px;
+	filter: drop-shadow(0px 0px 30px #4444dd);
+}
+h1 {
+    font-size: 2.5rem;
+    font-weight: 300;
+    line-height: 1;
+    margin: 2rem 0 3rem;
+    padding: 0;
+    text-align: center;
+    width: 100vw;
+}
+h1 span {
+    color: #f8be00;
+    font-size: 5rem;
+    font-weight: 800;
+    margin: 0;
+}
+</style>
+
+<style>
+	.avator {
+		position: relative;
+		width: 200px;
+		height: 200px;
+		border-radius: 50%;
+		background: url("./img/2.jpg") no-repeat center center;
+		background-size: 100% 100%;
+		}	
+		.avator::after {
+		content: "";
+		position: absolute;
+		top: 20%;
+		left: 0%;
+		width: 100%;
+		height: 100%;
+		background: inherit;
+		background-size: 100% 100%;
+		border-radius: 50%;
+		-webkit-transform: scale(0.95);
+		transform: scale(0.95);
+		-webkit-filter: blur(10px) brightness(80%) opacity(0.8);
+		filter: blur(10px) brightness(80%) opacity(0.8);
+		z-index: -1;
+		}
+</style>
+</head>
+<body>
+	<h1>CSS <span>Filters</span></h1>
+	<div class="main">
+		<div data-filter="image-grayscale">
+			<h2>grayscale灰度 值为0-1之间的小数</h2>
+			<img src="img/2.jpg">
+		</div>
+		<div data-filter="image-saturate">
+			<h2>saturate饱和度</h2>
+			<img src="img/2.jpg">
+		</div>
+		<div data-filter="image-sepia">
+			<h2>sepia<br>将图像转换为深褐色 值为0-1之间的小数</h2>
+			<img src="img/2.jpg">
+		</div>
+		<div data-filter="image-invert">
+			<h2>invert反向 值为0-1之间的小数</h2>
+			<img src="img/2.jpg">
+		</div>
+		<div data-filter="image-opacity">
+			<h2>opacity透明度 值为0-1之间的小数</h2>
+			<img src="img/2.jpg">
+		</div>
+		<div data-filter="image-brightness">
+			<h2>brightness亮度 值为0-1之间的小数</h2>
+			<img src="img/2.jpg">
+		</div>
+		<div data-filter="image-contrast">
+			<h2>contrast对比度</h2>
+			<img src="img/2.jpg">
+		</div>
+		<div data-filter="image-hue-rotate">
+			<h2>hue-rotate色相旋转 值为angle</h2>
+			<img src="img/2.jpg">
+		</div>
+		<div data-filter="image-blur">
+			<h2>blur模糊</h2>
+			<img src="img/2.jpg">
+		</div>
+		<div data-filter="image-normal">
+			<h2>normal</h2>
+			<img src="img/2.jpg">
+		</div>
+		<div data-filter="image-filter">
+			<h2>svg水波纹</h2>
+			<img src="img/2.jpg">
+			<svg width="0" height="0"
+			xmlns="http://www.w3.org/2000/svg"
+			xmlns:xlink="http://www.w3.org/1999/xlink">
+			<filter id="water">
+				<feTurbulence type="fractalNoise" baseFrequency=".05 .05" numOctaves="1" result="noise1"></feTurbulence>
+				<feColorMatrix in="noise1" type="hueRotate" values="0" result="noise2">
+				<animate attributeName="values" from="0" to="360" dur="1s" repeatCount="indefinite"/>
+				</feColorMatrix>
+				<feDisplacementMap xChannelSelector="R" yChannelSelector="G" scale="7" in="SourceGraphic" in2="noise2" />
+			</filter>
+			</svg>
+		</div>
+		<div data-filter="image-boli">
+			<h2>svg磨砂玻璃</h2>
+			<img src="img/2.jpg">
+			<svg width="0" height="0"
+			xmlns="http://www.w3.org/2000/svg"
+			xmlns:xlink="http://www.w3.org/1999/xlink">
+			<svg version="1.1" xmlns="http://www.w3.org/2000/svg">
+				<defs>
+				  <filter id="filter">
+					<feGaussianBlur id="feGaussianBlur" stdDeviation="10"></feGaussianBlur>
+					<feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="joint"></feColorMatrix>
+					<feTurbulence id="feTurbulence" type="turbulence" baseFrequency="0.05" numOctaves="1" result="turbulence"></feTurbulence>
+					<feDisplacementMap id="feDisplacementMap" in2="turbulence" in="SourceGraphic" scale="100" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap>
+				  </filter>
+				</defs>
+			  </svg>
+		</div>
+		<div data-filter="image-drop1">
+			<h2>drop-shadow</h2>
+			<img src="img/2.jpg">
+		</div>
+		<div data-filter="image-drop2">
+			<h2>drop-shadow</h2>
+			<img src="img/2.jpg">
+		</div>
+		<div data-filter="image-drop3">
+			<h2>drop-shadow</h2>
+			<img src="img/2.jpg">
+		</div>
+		<div data-filter="image-normal">
+			<h2>normal</h2>
+			<!-- <img style="position: relative;" src="img/2.jpg"> -->
+			<div class="avator"></div>
+		</div>
+	</div>
+<script>
+</script>
+</body></html>

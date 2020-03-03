@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html style="font-size: 100px;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+		<title></title>
+		
+		<link rel="stylesheet" type="text/css" href="./css/swiper.min.css">
+		
+		<link rel="stylesheet" type="text/css" href="./css/style.css">
+		
+		<script src="./js/jquery-1.8.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="./js/swiper.min.js" type="text/javascript" charset="utf-8"></script>
+		<!-- 阿里高清方案 -->
+		<script>
+			(function(doc, win) {
+				var docEl = doc.documentElement,
+					resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+					recalc = function() {
+						var clientWidth = docEl.clientWidth;
+						if(!clientWidth) return;
+						docEl.style.fontSize = 100 * (clientWidth / 375) + 'px';
+					};
+				if(!doc.addEventListener) return;
+				win.addEventListener(resizeEvt, recalc, false);
+				doc.addEventListener('DOMContentLoaded', recalc, false);
+			})(document, window);
+		</script>
+
+	</head>
+ 
+	<body>
+		<h2 style="text-align: center">请在移动端预览,不支持pc端</h2>
+		<div id="wrapper">
+			<div class="header">
+				<a href="appfun:productdetail:pop" class="back iconfont icon-arrow-left "></a>
+				<a href="https://www.17sucai.com/preview/1750622/2019-09-21/spyl/rule.html" class="rules iconfont icon-arrow-right "></a>
+			</div>
+			<!--轮播-->
+			<div class="carousel">
+				<div class="swiper-container case swiper-container-initialized swiper-container-horizontal swiper-container-ios">
+					<div class="swiper-wrapper bsd load-div" style="transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;">
+						<div class="swiper-slide swiper-slide-active" style="width: 375px;">
+							<div class="swiper-slideVideo">
+								<video src="https://cloud.video.taobao.com/play/u/1699136323/p/2/e/6/t/1/50119750594.mp4?appKey=38829" id="slideVideo" webkit-playsinline="true" playsinline="true" width="100%" height="100%" type="video/mp4" preload="" x-webkit-airplay="true" x5-playsinline="true" poster="img/t4.jpg">
+									<source type="video/mp4" src="https://cloud.video.taobao.com/play/u/1699136323/p/2/e/6/t/1/50119750594.mp4?appKey=38829">
+								</video>
+								<div class="video_btn" style="display: block;">
+									<img src="./img/playerBtn.png">
+								</div>
+							</div>
+						</div>
+						<div class="swiper-slide swiper-slide-next" style="width: 375px;"><img src="./img/t1.jpg" alt="">
+						</div>
+						<div class="swiper-slide" style="width: 375px;"><img src="./img/t2.jpg" alt="">
+						</div>
+						<div class="swiper-slide" style="width: 375px;"><img src="./img/t3.jpg" alt="">
+						</div>
+						<div class="swiper-slide" style="width: 375px;"><img src="./img/t4.jpg" alt="">
+						</div>
+					</div>
+					<!--视频/图片按钮-->
+					<div class="vAndi" style="display: block;">
+						<div class="vAndiCont">
+							<div class="videoBtn SWactive">
+								视频
+							</div>
+							<div class="imgBtn">
+								图片
+							</div>
+						</div>
+					</div>
+					<div class="weizhi" style="display: none;">
+						<!--分页-->
+						<div class="swiper-pagination"></div>
+					</div>
+				<span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
+			</div>
+		</div>
+	
+ 
+
+<script type="text/javascript">
+
+	$(".video_btn").on("click", function() {
+		$("#slideVideo").trigger('play');
+		$(".video_btn").hide();
+		return false;
+	})
+	$(".swiper-slideVideo").on("click", function() {
+		$("#slideVideo").trigger('pause');
+		$(".video_btn").show();
+	})
+	$("#slideVideo").on("ended", function() {
+		$(".video_btn").show();
+	})
+	$(".vAndi").show();
+	$(".videoBtn").on("click", function() {
+		$(".videoBtn").addClass("SWactive");
+		$(".imgBtn").removeClass("SWactive");
+		swiper1.slideTo(0, 1000, false);
+		$(".weizhi").hide();
+		return false;
+	})
+	$(".imgBtn").on("click", function() {
+		$(".imgBtn").addClass("SWactive");
+		$(".videoBtn").removeClass("SWactive");
+		swiper1.slideTo(1, 1000, false);
+		$("#slideVideo").trigger('pause');
+		$(".video_btn").show();
+		$(".weizhi").show();
+		return false;
+	})
+	var swiper1 = new Swiper('.case', {
+		pagination: '.swiper-pagination',
+		paginationType: 'custom',
+		//修改显示数量的下标
+		paginationCustomRender: function(swiper, current, total) {
+			var current1 = current - 1;
+			var total1 = total - 1;
+			return current1 + ' / ' + total1;
+		},
+		paginationClickable: true,
+		//							loop: true,
+ 
+		updateOnImagesReady: true,
+		// autoplay : 3000,
+		lazyLoading: true,
+		lazyLoadingInPrevNext: true,
+		lazyLoadingInPrevNextAmount: 2,
+		onSlideChangeStart: function(swiper) {
+			var sliderIndex = swiper.activeIndex;
+			$("#slideVideo").trigger('pause');
+			$(".video_btn").show();
+			if(sliderIndex == 0) {
+				$(".videoBtn").addClass("SWactive");
+				$(".imgBtn").removeClass("SWactive");
+				$(".weizhi").hide();
+			} else {
+				$(".imgBtn").addClass("SWactive");
+				$(".videoBtn").removeClass("SWactive");
+				$(".weizhi").show();
+			}
+		}
+	});
+</script></body></html>

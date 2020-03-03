@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<script src="https://cdn.bootcss.com/jquery/1.8.3/jquery.js"></script>
+	<script src="./img/TweenMax.min.js"></script>
+	<script src="./img/jquery.adipoli.min.js"></script>
+<title></title>
+<link rel="stylesheet" href="./img/adipoli.css">
+<style>
+	.container{
+		display: flex;
+		flex-direction:column;
+		align-items: center;
+	}
+</style>
+</head>
+<body>
+	<div class="container">
+
+		<div class="effect-container">
+			<div class="effect-details">startEffect : overlay, hoverEffect : sliceDown</div>
+			<img class="img-style row2" src="img/2.jpg"/>
+			<img class="img-style row2" src="img/2.jpg"/>
+			<img class="img-style row2" src="img/2.jpg"/>
+		</div>
+		
+		<div class="effect-container">
+			<div class="effect-details">startEffect : transparent, hoverEffect : boxRandom</div>
+			<img class="img-style row3" src="img/2.jpg"/>
+			<img class="img-style row3" src="img/2.jpg"/>
+			<img class="img-style row3" src="img/2.jpg"/>
+		</div>
+		
+		<div class="effect-container">
+			<div class="effect-details">startEffect : overlay, hoverEffect : foldLeft</div>
+			<img class="img-style row4" src="img/2.jpg"/>
+			<img class="img-style row4" src="img/2.jpg"/>
+			<img class="img-style row4" src="img/2.jpg"/>
+		</div>
+		
+		<div class="effect-container">
+			<div class="effect-details">startEffect : transparent, hoverEffect : boxRainGrowReverse</div>
+			<img class="img-style row5" src="img/2.jpg"/>
+			<img class="img-style row5" src="img/2.jpg"/>
+			<img class="img-style row5" src="img/2.jpg"/>
+		</div>
+		
+		<div class="effect-container">
+			<div class="effect-details">startEffect : grayscale, hoverEffect : normal(HTML5浏览器)</div>
+			<img class="img-style row6" src="img/2.jpg"/>
+			<img class="img-style row6" src="img/2.jpg"/>
+			<img class="img-style row6" src="img/2.jpg"/>
+		</div>
+		
+		<div class="effect-container">
+			<div class="effect-details">startEffect : normal, hoverEffect : popout</div>
+			<img class="img-style row1" src="img/2.jpg"/>
+			<img class="img-style row1" src="img/2.jpg"/>
+			<img class="img-style row1" src="img/2.jpg"/>
+		</div>
+		
+	</div>
+	<script>
+$(function(){
+	$('.row1').adipoli({
+		'startEffect' : 'normal',
+		'hoverEffect' : 'popout'
+	});
+	$('.row2').adipoli({
+		'startEffect' : 'overlay',
+		'hoverEffect' : 'sliceDown'
+	});
+	$('.row3').adipoli({
+		'startEffect' : 'transparent',
+		'hoverEffect' : 'boxRandom'
+	});
+	$('.row4').adipoli({
+		'startEffect' : 'overlay',
+		'hoverEffect' : 'foldLeft'
+	});
+	$('.row5').adipoli({
+		'startEffect' : 'transparent',
+		'hoverEffect' : 'boxRainGrowReverse'
+	});
+	$('.row6').adipoli({
+		'startEffect' : 'grayscale',
+		'hoverEffect' : 'normal'
+	});
+});
+	</script>
+</body>
+</html>
