@@ -1,0 +1,101 @@
+<span v-text="escapeStatus('asdf')"></span>
+<div>{{a | format("ºó×º")}}</div>
+<div v-bind:style="{ color: '#eb2a31', fontSize: '20' + 'px' ,transform:'rotate(180deg)' }">样式</div>
+<a v-bind:class="{ 'on': btnShow }"  v-on:click="btnShow && submit(‘参数’)”>按钮</a><br />
+<a :class="{ 'on': !btnShow }"  @click="btnShow && submit(‘1’)”>按钮</a>
+<template v-for="(item, key) in items">
+	<li v-for="(item, key) in items" :key=“item. message” :class="{ 'on': item.boo }">
+	    {{ item.message }}
+	</li>
+</template>
+<div v-if="ok">v-if</div>
+<div v-else>v-else</div>
+<div v-show="ok">v-show</div>
+<input v-model.number="age" type="number">
+
+<script>
+import headTop from 'src/components/header/head'   //ÒýÈë×é¼þ¡£
+import alertTip from 'src/components/common/alertTip'
+var app = new Vue({
+	el: '#app',
+	data: {
+		a:"789",
+		btnShow:true,
+		items: [
+	      {message: 'foo' ,boo:false},
+	      {message: 'Bar' ,boo:true},
+	      {message: 'foo' ,boo:false}
+	    ],
+	    ok:true,
+	    age:""
+	},
+        components: {
+            headTop,
+            alertTip,
+        },
+	beforeCreate: function() {
+	},
+	created: function() {
+	},
+	beforeMount: function() {
+	},
+	mounted: function() {
+	},
+	beforeUpdate: function() {
+	},
+	updated: function() {
+	},
+	beforeDestroy: function() {
+	},
+	destroyed: function() {
+	},
+	methods:{
+		escapeStatus:function(status){
+			return status=="asdf"?1:0;
+		},
+		submit:function(e){
+			alert(e)
+		}
+	},
+	watch:{
+	},
+	filters:{
+		format:function(val,str){
+			return val+"----"+str
+		}
+	}
+})</script>
+
+sendData=function(tag,url,data,callback){
+  	$.ajax({
+  		url:url,
+  		dataType:"json",
+  		data:data,
+  		tag:tag,
+  		success:function(res){
+  			if(res.status == 1){
+  				if(tag == 0){
+  					if( res.data[0].imageUrl!="" && res.data[0].url ){
+  						active.NowdataEmpty = true;
+  					}
+  				}else if(tag == 1 ){
+  					if( res.data[0].imageUrl && res.data[0].url ){
+  						active.PastdataEmpty = true;
+  					}
+  				}
+  				typeof callback == "function" && callback(res,tag);
+  			}
+  		}
+  	})
+}
+var callback = function(ret,statu){
+	if(statu==0){
+
+		_self.jsonNow = ret.data;
+	}else if(statu==1){
+		_self.jsonPast = ret.data;
+	}
+
+}
+
+sendData(0,"http://111.206.162.233:18081/car-rest/webservice/activities/moreActivities/"+locationId+"/0",{},callback);

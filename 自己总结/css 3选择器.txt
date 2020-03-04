@@ -1,5 +1,8 @@
 -webkit-touch-callout:none; /* 禁用长触弹出的下载图片菜单 */
 -webkit-user-select:none; /* 禁用长触选择文字等功能 */
+-webkit-tap-highlight-color: rgba(255,255,255,0); /* 设置点击链接的时候出现的高亮颜色为透明 */
+input::-webkit-input-placeholder  用于控制表单输入框占位符的外观
+p:before   p:after     向选定的元素前后插入内容
 
 p{color:#F00!important;}      !important优先级最高。看情况使用。
 @import url(style.css);       把css样式表加载进来，写在style里或者在外链样式里引入。
@@ -9,8 +12,14 @@ pointer-events: none;  可以设置ele不感应鼠标事件，改为auto 就感应事件了。
 background-image: image-set( "test.png" 1x, "test-2x.png" 2x, "test-print.png" 600dpi ); 
 普通屏幕使用 test.png，为高分屏使用 test-2x.png，如果更高的分辨率则使用 test-print.png，比如印刷。
 
-.wrap a[href^="http://"]{}    给调用网址的a标签设置单独的样式 邮箱  标题包含 链接图片以png结尾的！
-a[href^="mailto:"]    a[title*="hubwiz"]  a[href$="png"]
+a[href]  选择器用于选取带有指定属性的元素
+a[target=_blank]  选择器用于选择指定了属性和值的元素
+img[title~=flower]  选择器用于选择属性值包含一个指定单词的元素
+a[href^="http://"]{}    给调用网址的a标签设置单独的样式 邮箱  标题包含 链接图片以png结尾的！
+a[href^="mailto:"]    a[title*="hubwiz"]
+div[class$="test"]  选择器匹配元素属性值带指定的值结尾的元素
+div[class*="test"]  选择器匹配元素属性值包含指定值的元素
+div[lang|=en]       选择 lang 属性值以 "en" 开头的元素
 a:first-child   a元素里第一个元素
 a:last-child    a元素里最后一个元素
 p:nth-child(3)   匹配该元素的第N个元素。必须大于0

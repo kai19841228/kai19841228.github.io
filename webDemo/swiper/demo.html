@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="format-detection" content="telephone=no">
+		<meta http-equiv="x-rim-auto-match" content="none">
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>61儿童节，欢乐周边游</title>
+		<link rel="shortcut icon" href="https://img.yun.01zhuanche.com/frontapp/activity/imgs/logo.ico" type="image/x-icon">
+		<link rel="stylesheet" type="text/css" href="public/css/activity.css">
+		<link rel="stylesheet" href="public/css/swiper4.min.css">
+		<link rel="stylesheet" href="public/css/style.css">
+	</head>
+	<body>
+		<div class="viewport">
+			<!-- Swiper -->
+			<div class="swiper-container swiper-container-vertical">
+				<div class="swiper-wrapper">
+					<div class="swiper-slide page1 relative swiper-slide-active">
+						<div class="banner">
+							<img class="logo img" src="public/img/banner1.png" alt="">
+						</div>
+						<div class="swiper-conner shake"><img src="public/img/down.png" alt=""></div>
+						<div class="footer">
+							<img class="logo img" src="public/img/footer1.png" alt="">
+						</div>
+					</div>
+					<div class="swiper-slide page2 relative swiper-slide-next">
+						<div class="banner">
+							<img class="logo img" src="public/img/banner2.png" alt="">
+						</div>
+						<div class="swiper-conner shake"><img src="public/img/down.png" alt=""></div>
+						<div class="footer">
+							<img class="logo img" src="public/img/footer2.png" alt="">
+						</div>
+					</div>
+					<div class="swiper-slide page3 relative">
+						<div class="banner">
+							<img class="logo img" src="public/img/banner3.png" alt="">
+						</div>
+						<div class="swiper-conner shake"><img src="public/img/down.png" alt=""></div>
+						<div class="footer">
+							<img class="logo img" src="public/img/footer3.png" alt="">
+						</div>
+					</div>
+					<div class="swiper-slide page4 relative">
+						<div class="banner">
+							<img class="logo img" src="public/img/banner4.png" alt="">
+						</div>
+						<div class="swiper-conner shake"><img src="public/img/down.png" alt=""></div>
+						<div class="footer">
+							<img class="logo img" src="public/img/footer4.png" alt="">
+						</div>
+					</div>
+					<div class="swiper-slide page5">
+						<img class="img" src="public/img/page5_1.png">
+						<img class="img" src="public/img/page5_2.png">
+						<div class="form_box">
+							<input type="text" class="input phone" maxlength="11" name="" value="" placeholder="">
+							<a href="javascript:;" class="primary button submit"></a>
+							<a href="javascript:;" class="rule_link"></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="rule">
+			<div class="layer black_bg">
+				<div class="rule_box"><img class="img" src="public/img/rule.png" alt=""></div>
+			</div>
+		</div>
+		<script src="public/js/jquery1.8.3.min.js"></script>
+		<script src="public/js/activityTools.js"></script>
+		<script src="public/js/verificationCode.js"></script>
+		<script src="public/js/swiper4.min.js"></script>
+		<script src="public/js/toolkit.js"></script>
+		<link rel="stylesheet" href="layer_mobile/need/layer.css">
+		<script src="layer_mobile/layer.js"></script>
+		<link rel="stylesheet" href="https://cdn.bootcss.com/sweetalert/1.1.3/sweetalert.css">
+		<script src="https://cdn.bootcss.com/sweetalert/1.1.3/sweetalert.min.js"></script>
+		<script>
+	// 			setTimeout(function() {
+	// 				swal({
+	// 						title: "确定删除吗？",
+	// 						text: "你将无法恢复该虚拟文件！",
+	// 						type: "warning",
+	// 						showCancelButton: true,
+	// 						confirmButtonColor: "#DD6B55",
+	// 						confirmButtonText: "确定",
+	// 						cancelButtonText: "取消",
+	// 						closeOnConfirm: false,
+	// 						closeOnCancel: false
+	// 					},
+	// 					function(isConfirm) {
+	// 						if (isConfirm) {
+	// 							swal("删除！", "你的虚拟文件已经被删除。", "success");
+	// 						} else {
+	// 							swal("取消！", "你的虚拟文件是安全的:)", "error");
+	// 						}
+	// 					});
+	// 			}, 1000)
+				// layer.open({
+				// 	title: [
+				// 		'我是标题',
+				// 		'background-color:#ff8400; color:#fff;'
+				// 	],
+				// 	anim: 'up',
+				// 	content: '展现的是全部结构',
+				// 	btn: ['确认', '取消'],
+				// 	yes: function(index) {
+				// 		console.log(0)
+				// 		layer.close(index)
+				// 	},
+				// 	no: function() {
+				// 		console.log(7)
+				// 	}
+				// });
+			</script>
+		<script>
+			var obj = {
+				shareTitle: '61儿童节带孩子来这儿玩！',
+				shareDesc: '领取首汽约车欢乐周边游8折券，陪伴孩子成长的每一段旅程',
+				shareImage: 'https://img.yun.01zhuanche.com/frontapp/activity/2018/05/images/61/sharelogo.png',
+				shareLink: '',
+				api: {
+					'msg': lottery + '/touch/specialActivity/actMessage',
+					'coupon': lottery + '/touch/flsendCoupon/sendCouponByTemplate'
+				},
+				phone: '',
+				play: 'act_20180528lyzby',
+				successText: '恭喜您，六一周边游优惠券已放入您的首汽约车账户中',
+				eventSta: {
+					sign: 'act_20180528lyzby',
+					type: 'click',
+					slogan: '六一活动'
+				}
+			};
+			//替换input输入时背景
+			$(".phone").blur(function() {
+				if ($(".phone").val().length <= 0) {
+					$(".phone").css("background-image", "url('public/img/btn_input_def.png')");
+				}
+			});
+			$(".phone").focus(function() {
+				$(".phone").css("background-image", "url('public/img/btn_input_act.png')");
+			});
+			//规则
+			$('.rule_link').bind('click', function() {
+				$('#rule').show().click(function() {
+					$('#rule').hide();
+					$('#rule').off('click')
+				});
+			});
+			//提交
+			$('.form_box .submit').click(function(event) {
+				obj.phone = $('.phone').val();
+				if (checkPhone(obj.phone)) {
+					showMsgCode(obj.phone, obj.api.msg, function(code) {
+						if (code) {
+							var data = {
+								'phone': obj.phone,
+								'validateCode': code,
+								'play': obj.play,
+								'downloadchannel': channel
+							};
+							sendRequest(obj.api.coupon, 'post', data, function(res) {
+								if (res) {
+									if (res.code == 601) {
+										if (isInApp()) {
+											showDialog(obj.successText);
+										} else {
+											if (channel) {
+												showDialog(obj.successText, '', 'http://m.01zhuanche.com/?channel=' + channel);
+											} else {
+												showDialog(obj.successText, '', 'http://m.01zhuanche.com/');
+											}
+											$('#dialog_download_app').click(function(event) {
+												baiduEvent(obj.eventSta);
+											});
+										}
+									} else {
+										showDialog(res.msg);
+									}
+								}
+							});
+						}
+					});
+				}
+			});
+		</script>
+		<!-- Initialize Swiper -->
+		<script>
+			var swiper = new Swiper('.swiper-container', {
+				direction: 'vertical',
+				height: window.innerHeight,
+				observer: true,
+				observeParents: true,
+				on: {
+					slideChangeTransitionEnd: function(event) {
+						if (swiper.activeIndex == 3) {
+							$('.phone').blur();
+						}
+					},
+				}
+			});
+			var startScroll, touchStart, touchCurrent;
+			swiper.slides.on('touchstart', function(e) {
+				startScroll = this.scrollTop;
+				touchStart = e.targetTouches[0].pageY;
+			}, true);
+			swiper.slides.on('touchmove', function(e) {
+				touchCurrent = e.targetTouches[0].pageY;
+				var touchesDiff = touchCurrent - touchStart;
+				var slide = this;
+				var onlyScrolling =
+					(slide.scrollHeight > slide.offsetHeight) &&
+					(
+						(touchesDiff < 0 && startScroll === 0) ||
+						(touchesDiff > 0 && startScroll === (slide.scrollHeight - slide.offsetHeight)) ||
+						(startScroll > 0 && startScroll < (slide.scrollHeight - slide.offsetHeight))
+					);
+				if (onlyScrolling) {
+					e.stopPropagation();
+				}
+			}, true);
+		</script>
+		<!-- 微信分享   -->
+		<script src="public/js/jweixin-1.2.0.js"></script>
+		<script>
+			//	微信分享
+			var qurey = window.location.search;
+			var uri = window.location.pathname; //当前页面相对路径
+			var share = {
+				imgUrl: obj.shareImage || 'https://img.yun.01zhuanche.com/frontapp/activity/imgs/share1.png', // 分享后展示图片
+				lineLink: "", // 点击分享后跳转的页面地址
+				shareTitle: obj.shareTitle, // 分享后主标题
+				descContent: obj.shareDesc // 分享后副标题
+			};
+			// shareHs(uri, qurey, share);
+		</script>
+	</body>
+</html>

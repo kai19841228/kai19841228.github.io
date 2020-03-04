@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html style="font-size: 100px;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="format-detection" content="telephone=no">
+		<meta http-equiv="x-rim-auto-match" content="none">
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>61儿童节，欢乐周边游</title>
+		<link rel="shortcut icon" href="https://img.yun.01zhuanche.com/frontapp/activity/imgs/logo.ico" type="image/x-icon">
+		<link rel="stylesheet" type="text/css" href="public/css/activity.css">
+		<link rel="stylesheet" href="public/css/swiper4.min.css">
+		<script charset="utf-8" src="public/js/v.js"></script><script src="public/js/hm.js"></script><script type="text/javascript" src="public/js/c.base.js"></script>
+		<script type="text/javascript" src="public/js/c.toolkit.js"></script>
+		<script src="public/js/jquery1.8.3.min.js"></script>
+		<script src="public/js/activityTools.js"></script>
+		<script src="public/js/verificationCode.js"></script>
+		<link rel="stylesheet" href="layer_mobile/need/swiper4.min.css">
+		<script src="layer_mobile/layer.js"></script>
+
+		<style>
+			/**/
+			
+			html,
+			body,
+			.viewport {
+				height: 100%;
+			}
+			
+			img {
+				width: 100%;
+			}
+			
+			@-webkit-keyframes shake {
+				0% {
+					-webkit-transform: translate(0px, 0px);
+					transform: translate(0px, 0px)
+				}
+				50% {
+					-webkit-transform: translate(0px, -10px);
+					transform: translate(0px, -10px)
+				}
+				100% {
+					-webkit-transform: translate(0px, 0px);
+					transform: translate(0px, 0px)
+				}
+			}
+			
+			@keyframes shake {
+				0% {
+					-webkit-transform: translate(0px, 0px);
+					transform: translate(0px, 0px)
+				}
+				50% {
+					-webkit-transform: translate(0px, -10px);
+					transform: translate(0px, -10px)
+				}
+				100% {
+					-webkit-transform: translate(0px, 0px);
+					transform: translate(0px, 0px)
+				}
+			}
+			
+			.shake {
+				-webkit-animation: shake 1000ms ease-in-out 0s infinite;
+				animation: shake 1000ms ease-in-out 0s infinite;
+				-webkit-transform-origin: center center;
+				transform-origin: center center;
+			}
+			
+			@-webkit-keyframes rotation {
+				from {
+					-webkit-transform: rotate(0deg);
+					transform: rotate(0deg);
+				}
+				to {
+					-webkit-transform: rotate(360deg);
+					transform: rotate(360deg);
+				}
+			}
+			
+			@keyframes rotation {
+				from {
+					-webkit-transform: rotate(0deg);
+					transform: rotate(0deg);
+				}
+				to {
+					-webkit-transform: rotate(360deg);
+					transform: rotate(360deg);
+				}
+			}
+			
+			.bg_01 {
+				background: url(public/img/bg1.jpg) no-repeat top/cover;
+				height: 100%;
+			}
+			
+			.bg_02 {
+				background: url(public/img/bg2.jpg) no-repeat top/cover;
+				height: 100%;
+			}
+			
+			.bg_03 {
+				background: url(public/img/bg3.jpg) no-repeat top/cover;
+				height: 100%;
+			}
+			
+			.bg_04 {
+				background: url(public/img/bg4.jpg) no-repeat top/cover;
+				height: 100%;
+			}
+			
+			.bg_05 {
+				background: url(public/img/bg5.jpg) no-repeat top/cover;
+				height: 100%;
+			}
+			
+			.absolute {
+				position: absolute;
+				left: 0;
+				top: 0;
+				width: 100%;
+				-webkit-box-sizing: border-box;
+				box-sizing: border-box;
+				z-index: 1;
+			}
+			
+			.swiper-conner {
+				display: block;
+				position: absolute;
+				margin: 0 auto;
+				left: 0;
+				right: 0;
+				bottom: .2rem;
+				z-index: 2;
+				width: .6rem;
+				height: .42rem;
+			}
+			
+			.banner {
+				position: absolute;
+				left: 0;
+				top: 0;
+				width: 100%;
+				-webkit-box-sizing: border-box;
+				box-sizing: border-box;
+				text-align: center;
+				z-index: 1;
+			}
+			
+			.footer {
+				position: absolute;
+				left: 0;
+				bottom: 0;
+				width: 100%;
+				-webkit-box-sizing: border-box;
+				box-sizing: border-box;
+				text-align: center;
+				z-index: 1;
+				margin-bottom: .1rem;
+			}
+			
+			.swiper-container {
+				width: 100%;
+				height: 100%;
+			}
+			
+			.swiper-slide {
+				overflow: auto;
+				-webkit-overflow-scrolling: touch;
+			}
+			
+			.viewport .form_box .input {
+				width: 5.2rem;
+				height: 1rem;
+				border-radius: 10px;
+				background: #fffaf6 url('public/img/btn_input_def.png') no-repeat center/100%;
+			}
+			
+			.viewport .form_box .button {
+				background: url('public/img/btn_get.png') no-repeat center/100%;
+				margin: 0 auto;
+				width: 5.2rem;
+				height: 1rem;
+			}
+			
+			.viewport .form_box .rule_link {
+				background: url('public/img/btn_rulelink.png') no-repeat center/100%;
+				margin-top: .3rem;
+				width: 1rem;
+				height: .27rem;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="viewport">
+			<!-- Swiper -->
+			<div class="swiper-container swiper-container-vertical">
+				<div class="swiper-wrapper" style="transform: translate3d(0px, 0px, 0px);">
+					<div class="swiper-slide bg_01 relative swiper-slide-active" style="height: 864px;">
+						<div class="banner">
+							<img class="logo" src="public/img/banner1.png" alt="">
+						</div>
+						<div class="swiper-conner shake"><img src="public/img/down.png" alt=""></div>
+						<div class="footer">
+							<img class="logo" src="public/img/footer1.png" alt="">
+						</div>
+					</div>
+					<div class="swiper-slide bg_02 relative swiper-slide-next" style="height: 864px;">
+						<div class="banner">
+							<img class="logo" src="public/img/banner2.png" alt="">
+						</div>
+						<div class="swiper-conner shake"><img src="public/img/down.png" alt=""></div>
+						<div class="footer">
+							<img class="logo" src="public/img/footer2.png" alt="">
+						</div>
+					</div>
+					<div class="swiper-slide bg_03 relative" style="height: 864px;">
+						<div class="banner">
+							<img class="logo" src="public/img/banner3.png" alt="">
+						</div>
+						<div class="swiper-conner shake"><img src="public/img/down.png" alt=""></div>
+						<div class="footer">
+							<img class="logo" src="public/img/footer3.png" alt="">
+						</div>
+					</div>
+					<div class="swiper-slide bg_04 relative" style="height: 864px;">
+						<div class="banner">
+							<img class="logo" src="public/img/banner4.png" alt="">
+						</div>
+						<div class="swiper-conner shake"><img src="public/img/down.png" alt=""></div>
+						<div class="footer">
+							<img class="logo" src="public/img/footer4.png" alt="">
+						</div>
+					</div>
+
+					<div class="swiper-slide bg_05" style="height: 864px;">
+						<img src="public/img/page5_1.png">
+						<img src="public/img/page5_2.png">
+						<div class="form_box">
+							<input type="text" class="input phone" maxlength="11" name="" value="" placeholder="">
+							<a href="javascript:;" class="primary button submit"></a>
+							<a href="javascript:;" class="rule_link"></a>
+						</div>
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+		<div id="rule">
+			<div class="layer black_bg">
+				<div class="rule_box"><img src="public/img/rule.png" alt=""></div>
+			</div>
+		</div>
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+		<script>
+			setTimeout(function(){
+				swal({ 
+				  title: "自动关闭弹窗！", 
+				  text: "2秒后自动关闭。", 
+				  icon: "warning",
+				  content: {
+					element: "input",
+					attributes: {
+					  placeholder: "Type your password",
+					  type: "password",
+					}
+				  },
+				  dangerMode: true,//删除按钮为红色,
+				  // timer: 2000,
+				  buttons: {
+					cancel: {
+					  text: "取消",
+					  value: 'cancel',
+					  visible: true,
+					  className: "",
+					  closeModal: true,
+					},
+					sure: {
+					  text: "确定",
+					  value: 'sure',
+					  visible: true,
+					  className: "",
+					  closeModal: true,
+					}
+				  }
+				}).then((value) => {
+				  switch (value) {
+					case "cancel":
+					  swal("取消");
+					  break;
+					case "sure":
+					  swal("删除");
+					  break;
+				  }
+				})
+			},1000)
+			var obj = {
+				shareTitle: '61儿童节带孩子来这儿玩！',
+				shareDesc: '领取首汽约车欢乐周边游8折券，陪伴孩子成长的每一段旅程',
+				shareImage: 'https://img.yun.01zhuanche.com/frontapp/activity/2018/05/images/61/sharelogo.png',
+				shareLink: '',
+				api: {
+					'msg': lottery + '/touch/specialActivity/actMessage',
+					'coupon': lottery + '/touch/flsendCoupon/sendCouponByTemplate'
+				},
+				phone: '',
+				play: 'act_20180528lyzby',
+				myInterval: '',
+				couponName: '',
+				successText: '恭喜您，六一周边游优惠券已放入您的首汽约车账户中',
+				eventSta: {
+					sign: 'act_20180528lyzby',
+					type: 'click',
+					slogan: '六一活动'
+				}
+			};
+			//替换input输入时背景
+			$(".phone").blur(function() {
+				if($(".phone").val().length <= 0) {
+					$(".phone").css("background-image", "url('public/img/btn_input_def.png')");
+				}
+			});
+			$(".phone").focus(function() {
+				$(".phone").css("background-image", "url('public/img/btn_input_act.png')");
+			});
+
+			//规则
+			$('.rule_link').bind('click', function() {
+				$('#rule').show().click(function() {
+					$('#rule').hide();
+				});
+			});
+			//提交
+			$('.form_box .submit').click(function(event) {
+				obj.phone = $('.phone').val();
+				if(checkPhone(obj.phone)) {
+					showMsgCode(obj.phone, obj.api.msg, function(code) {
+						if(code) {
+
+							var data = {
+								'phone': obj.phone,
+								'validateCode': code,
+								'play': obj.play,
+								'downloadchannel': channel
+							};
+
+							sendRequest(obj.api.coupon, 'post', data, function(res) {
+								if(res) {
+									if(res.code == 601) {
+
+										if(isInApp()) {
+											showDialog(obj.successText);
+										} else {
+
+											if(channel) {
+												showDialog(obj.successText, '', 'http://m.01zhuanche.com/?channel=' + channel);
+											} else {
+												showDialog(obj.successText, '', 'http://m.01zhuanche.com/');
+											}
+
+											$('#dialog_download_app').click(function(event) {
+												baiduEvent(obj.eventSta);
+											});
+										}
+
+									} else {
+										showDialog(res.msg);
+
+									}
+
+								}
+							});
+						}
+					});
+				}
+
+			});
+		</script>
+		<script src="public/js/swiper4.min.js"></script>
+		<!-- Initialize Swiper -->
+		<script>
+			var swiper = new Swiper('.swiper-container', {
+				direction: 'vertical',
+				height: window.innerHeight,
+				observer: true,
+				observeParents: true,
+				on: {
+					slideChangeTransitionEnd: function(event) {
+						
+						if(swiper.activeIndex == 3) {
+							$('.phone').blur();
+						}
+					},
+				},
+
+			});
+			var startScroll, touchStart, touchCurrent;
+			swiper.slides.on('touchstart', function(e) {
+				startScroll = this.scrollTop;
+				touchStart = e.targetTouches[0].pageY;
+			}, true);
+			swiper.slides.on('touchmove', function(e) {
+				touchCurrent = e.targetTouches[0].pageY;
+				var touchesDiff = touchCurrent - touchStart;
+				var slide = this;
+				var onlyScrolling =
+					(slide.scrollHeight > slide.offsetHeight) &&
+					(
+						(touchesDiff < 0 && startScroll === 0) ||
+						(touchesDiff > 0 && startScroll === (slide.scrollHeight - slide.offsetHeight)) ||
+						(startScroll > 0 && startScroll < (slide.scrollHeight - slide.offsetHeight))
+					);
+				if(onlyScrolling) {
+					e.stopPropagation();
+				}
+			}, true);
+		</script>
+		<!-- 微信分享   -->
+		<script src="public/js/jweixin-1.2.0.js"></script>
+		<script>
+			//	微信分享
+			var qurey = window.location.search;
+			var uri = window.location.pathname; //当前页面相对路径
+			var share = {
+				imgUrl: obj.shareImage || 'https://img.yun.01zhuanche.com/frontapp/activity/imgs/share1.png', // 分享后展示图片
+				lineLink: "", // 点击分享后跳转的页面地址
+				shareTitle: obj.shareTitle, // 分享后主标题
+				descContent: obj.shareDesc // 分享后副标题
+			};
+			// shareHs(uri, qurey, share);
+		</script>
+	
+
+</body></html>

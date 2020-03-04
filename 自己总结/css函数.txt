@@ -1,0 +1,30 @@
+计算属性
+width: -webkit-calc(100% - 30%);
+  width: -o-calc(100% - 30%);
+  width: -moz-calc(100% - 30%);
+  width: -ms-calc(100% - 30%);
+  width: calc(100% - 30%);
+
+
+a:after {content: " (" attr(href) ")";}  获取a标签的href属性，显示在after显示
+
+
+渐变色
+background: -webkit-linear-gradient(red,transparent 50%,rgb(255, 0, 0)); /* Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(red,transparent 50%,rgb(255, 0, 0)); /* Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(red,transparent 50%,rgb(255, 0, 0)); /* Firefox 3.6 to 15 */
+  background: linear-gradient(red,transparent 50%,rgb(255, 0, 0)); /* 标准语法 (必须在最后) */
+
+
+镜像渐变
+background: -webkit-radial-gradient(red, green, blue); /* Safari 5.1 - 6.0 */
+  background: -o-radial-gradient(red, green, blue); /* Opera 11.6 - 12.0 */
+  background: -moz-radial-gradient(red, green, blue); /* Firefox 3.6 - 15 */
+  background: radial-gradient(red, green, blue); /* 标准的语法（必须放在最后） */
+
+
+间隔渐变
+background: -webkit-repeating-linear-gradient(red, yellow 10%, green 20%); /* Safari 5.1 - 6.0 */
+  background: -o-repeating-linear-gradient(red, yellow 10%, green 20%); /* Opera 11.1 - 12.0 */
+  background: -moz-repeating-linear-gradient(red, yellow 10%, green 20%); /* Firefox 3.6 - 15 */
+  background: repeating-linear-gradient(red, yellow 10%, green 20%); /* 标准的语法（必须放在最后） */

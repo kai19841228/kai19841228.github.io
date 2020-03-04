@@ -119,7 +119,7 @@ h1 span {
 		content: "";
 		position: absolute;
 		top: 20%;
-		left: 0%;
+		left: 50%;
 		width: 100%;
 		height: 100%;
 		background: inherit;
@@ -127,9 +127,10 @@ h1 span {
 		border-radius: 50%;
 		-webkit-transform: scale(0.95);
 		transform: scale(0.95);
-		-webkit-filter: blur(10px) brightness(80%) opacity(0.8);
-		filter: blur(10px) brightness(80%) opacity(0.8);
+		-webkit-filter: blur(2px) brightness(80%) opacity(0.8);
+		filter: blur(2px) brightness(80%) opacity(0.8);
 		z-index: -1;
+		box-shadow: 0px 10px 10px rgba(0, 0, 0, 1);
 		}
 </style>
 </head>
@@ -221,8 +222,7 @@ h1 span {
 			<img src="img/2.jpg">
 		</div>
 		<div data-filter="image-normal">
-			<h2>normal</h2>
-			<!-- <img style="position: relative;" src="img/2.jpg"> -->
+			<h2>模糊阴影</h2>
 			<div class="avator"></div>
 		</div>
 	</div>

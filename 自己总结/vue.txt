@@ -1,0 +1,495 @@
+vue学习站点
+https://mp.weixin.qq.com/mp/homepage?__biz=MzIzMTU4MzMzOQ==&hid=11&sn=d9e5e1709fd560bca143eb72b7d92664&scene=18&uin=&key=&devicetype=Windows+10&version=6205051a&lang=zh_CN&ascene=7&winzoom=1
+
+https://github.com/bailicangdu/vue2-elm     vue模仿ele   github
+
+npm查看本地安装的包版本号
+查看全局安装的所有插件依赖树情况：npm ls -g --depth=1
+npm ls wepy-cli        // 本地包
+npm ls wepy-cli -g     // 全局安装包
+npm install --save v-viewer   图片查看器
+
+Vue.prototype.$staticUrl = ‘七牛云加速域名’   vue挂载全局变量和方法  this.$staticUrl 挂载后调用
+String.fromCharCode(65)   接收一个Unicode返回一个字符串
+'abcdwerr'.charCodeAt(0)  一个字符串返回这个字符对应的Unicode
+element ui table 添加数据行后滚动条滚动到对应的行头或行尾问题
+this.$refs.table.bodyWrapper.scrollTop =0; 
+this.$refs.table.bodyWrapper.scrollTop =this.$refs.table.bodyWrapper.scrollHeight;
+this.$refs['viewData'].viewData.validateField('addItemValue')   对某个字段进行验证
+this.$refs[‘viewData’].resetFields();               重置表单和验证信息
+this.$refs['viewData'].validateField('userPhone', function (val) {
+      res = val
+    })
+
+arr1.concat(arr2)             合并2个数组
+
+路由配置好参数返回href来进行跳转
+let routeData = vm.$router.resolve({
+      path: '/orderDetail',
+      query: {orderId: vm.orderId}
+    })
+    window.open(routeData.href, '_blank')
+
+render jsx  渲染html代码片段
+const h = vm.$createElement
+let str = '订单号：' + msg.orderNo + ',' + '乘客电话' + msg.userPhone
+this.$notify({
+        title: '订单消息',
+        duration: 30000,
+        message: h('a', {
+          attrs: {id: msg.orderId},
+          style: 'font-size: 14px;cursor: pointer',
+          on: {
+            click (event) {
+              let routeData = vm.$router.resolve({
+                path: '/orderDetail',
+                query: {orderId: event.target.getAttribute('id')}
+              })
+              window.open(routeData.href, '_blank')
+            }
+          }
+        }, str)
+      })
+
+h('p', null, [
+  h('span', null, '内容可以是 '),
+  h('i', { style: 'color: teal' }, 'VNode')
+])
+
+document.body.addEventListener('focusin', function() { //软键盘弹起事件
+  console.log('opened-------')
+});
+document.body.addEventListener('focusout', function() { //软键盘关闭事件
+  console.log('closed-------')
+});
+//浏览器环境检测 微信，支付宝，其他里边的isInApp 是app端UA标识写上了SQYC
+function checkEnv() {
+    var ua = window.navigator.userAgent.toLowerCase();
+    var environment = '';
+    if (!isInApp()) {
+        // 判断是不是微信
+        if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+            environment = 'Weixin';
+        } else if (ua.match(/AlipayClient/i) == 'alipayclient') {
+            environment = 'Alipay';
+        } else {
+            environment = 'other';
+        }
+    } else {
+        environment = 'app';
+    }
+    return environment
+}
+// 是否在应用内
+function isInApp() {
+    var ua = navigator.userAgent;
+    if (ua.indexOf("SQYC") < 0) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+微信分享 成功回调参考 https://img.yun.01zhuanche.com/frontapp/activity/js/activityTools.js?v=20190313
+
+//switch 语句用于基于不同的条件来执行不同的动作
+switch(n){
+case 1:
+  console.log(2)
+  break;
+case 2:
+  console.log(1)
+  break;
+default:
+  console.log(0)
+}
+
+Object.assign(obj1, obj2)  方法用于将所有可枚举属性的值从一个或多个源对象复制到目标对象
+var custom = ['a', 'b', 'c']  var custom = { 0: 'a', 1: 'b', 2: 'c' }  
+Object.keys(custom).forEach(key => {// 取出数组和Object的key关键字
+  console.log(key)
+})
+
+let arr = []
+for(let item of response.data.result) {     //遍历数组
+arr.push([item.longitude, item.latitude])
+用item操作每一条数据。
+}
+item：定义的每一条的变量
+response.data.result：要循环的数组
+
+response.data.result.forEach((item, index) => {    //遍历数组
+用item操作每一条数据。
+}）
+response.data.result：要循环的数组
+index:索引
+
+var numbers = [{name: "张含韵", "email": "zhang@email.com"},{name: "江一燕",   "email": "jiang@email.com"},{name: "李小璐",  "email": "li@email.com"}];
+numbers.forEach(function(item, index){console.log(item);console.log(index)
+})
+
+var users = [{name: "张含韵", "email": "zhang@email.com"},{name: "江一燕",   "email": "jiang@email.com"},{name: "李小璐",  "email": "li@email.com"}];
+// map 方法要有return 值。arr是map后组合的新数组。
+var arr = users.map(function (item,index) { console.log(index);return {name:item.name,name:item.email,a:7} })
+
+var users = [{name: "张含韵", "email": "zhang@email.com"},{name: "江一燕",   "email": "jiang@email.com"},{name: "李小璐",  "email": "li@email.com"}];
+var arr = []
+for(var x in users){
+console.log(users[x])
+arr.push({name:users[x].name})
+};console.log(arr)
+
+//定时器             在vue里函数bind（this）
+      startTimer:function () {
+        if (this.timer) {
+          clearInterval(this.timer);
+        }
+        this.timer = setInterval(function () {
+          var codeAgainTime = this.codeAgainTime;
+          codeAgainTime--;
+          if (codeAgainTime < 10) {
+            codeAgainTime = '0' + codeAgainTime;
+          }
+          if (this.codeAgainTime <= 0) {
+            clearInterval(this.timer);
+            this.codeSendStatus = false
+            this.codeAgainTime = 60;
+          } else {
+            this.codeAgainTime = codeAgainTime;
+          }
+        }.bind(this), 1000);
+      }
+
+shift + 右键 有快捷键调出命令行工具
+vue2.0脚手架写一个demo
+	准备工作
+		安装node
+				-------->node -v  (输出版本信息说明安装成功)
+				-------->npm -v  (输出版本信息说明安装成功)
+
+		安装淘宝镜像     (可加速项目安装，，安装后可用cnpm代替npm）
+				-------->npm install -g cnpm --registry=https://registry.npm.taobao.org
+                                         npm set registry https://registry.npm.taobao.org/
+
+一、vue项目创建
+	1.安装脚手架		-------->npm install --global vue-cli    2.0 安装 npm install --global vue-cli@2.9
+                                         npm uninstall -g vue-cli        2.0 卸载
+                                         npm install -g @vue/cli         3.0 安装
+                                         npm uninstall -g @vue/cli       3.0 卸载
+	2.创建新项目		-------->vue init webpack-simple vuedemo(项目名称必须小写)安装后每次从这里开始安装
+	     		    或者-------->vue init webpack vuedemo
+	3.进入项目		-------->cd vuedemo
+	4.初始化			-------->npm install
+	5.运行项目		-------->npm run dev
+	6.打包			-------->npm run build
+  停止运行项目    在控制台    control+c   会出现停止选项 
+           下载一些组件到这个项目  npm install 模块名 -D
+            i	   ->    install
+            D     ->    --save-dev     是你开发时候依赖的东西
+            S	   ->    --save            是你发布之后还依赖的东西。
+vuecli3 新命令  创建项目 vue create myapp
+               运行项目 npm run serve
+
+
+如果要用vuex的话 要自己安装   cnpm install vuex -D
+
+在开发时。一定要把 BUILD  webpack.base.conf.js里的module 里的rules 里这部分注释掉。
+module: {
+    rules: [
+      // {
+      //   test: /\.(js|vue)$/,
+      //   loader: 'eslint-loader',
+      //   enforce: 'pre',
+      //   include: [resolve('src'), resolve('test')],
+      //   options: {
+      //     formatter: require('eslint-friendly-formatter')
+      //   }
+      // },
+
+
+如果8080端口被占用。在config里的index.js里把端口改下，重启一下
+https://segmentfault.com/q/1010000005169531            要用第三方类库，没有export时要改
+
+  mode: 'history', //切换路径模式，变成history模式，不带#号
+  scrollBehavior: () => ({ y: 0 }), // 滚动条滚动的行为，不加这个默认就会记忆原来滚动条的位置
+  routes: [
+    {
+      path: '/',
+      name: 'Hello',
+      component: Hello
+    }
+  ]
+在style里引入
+<style scoped>  在单vue组件里，在style里加上scoped是只在局部起作用。
+@import './style/common';引入scss，加不加后缀名都可以。  在style里引入，在样式调用
+@import 'src/style/mixin';   @include sc(1.5rem, #333);  使用scss里的函数调用样式
+在script里引入
+import './config/rem'  引入js文件，并执行。
+import MyFoot from '@/components/Footer.vue'   引入vue单文件
+require('./assets/css/base.css'); //在js文件里引入全局的base文件
+
+@click = "gotoAddress({path: "/confirmOrder/chooseAddress", query: {id: checkoutData.cart.id, sig: checkoutData.sig}})"
+methods: {
+        	gotoAddress(path){
+        		this.$router.push(path)
+        	}
+        } 
+Vue 路由参考 https://router.vuejs.org/zh/guide/essentials/navigation.html   beforeEach beforeEnter beforeRouteEnter beforeRouteLeave
+this.$router.router.replace({path:'/helloworld/999'}) 路由跳转不会添加历史记录
+this.$router.push({path:'/helloworld/999',query:{userid:128,name:'达文西'}}); js控制路由跳转
+@click="$router.go(-1)"   点击Back的时候。路由回退。
+id:this.$route.params.id,//接收参数 url带过来的
+userid:this.$route.query.userid,    接受参数  对象带过来的参数
+username:this.$route.query.name
+
+this.$router.go(-1); 在函数里调用，返回上一个路由
+const home = r => require.ensure([], () => r(require('../page/home/home')), 'home')    按需加载组件。打完正式包有用。
+
+//在路由里设置一个meta里设个值  满足条件并且有token才能看，不满足条件去登陆。限制登录时使用
+    {
+    	path:"/middle",
+    	meta:{auth: true},
+    	component:Middle
+    }
+router.beforeEach((to,from,next)=>{
+ if(to.meta.auth){
+   if(store.state.token){
+    next();
+   }else{
+//如果判断没有token，跳转到登录页面
+    next({path:'/home'});
+   }
+ }else{
+   next();
+ }
+});
+http://www.cnblogs.com/guazi/p/6759323.html?utm_source=itdadao&utm_medium=referral   下边的参考网址！！！
+//写在路由配置里，滚轮滑到一定位置，记录，在跳转过来的时候回到记录的地方。如果没有记录，就回到0,0的位置。
+        scrollBehavior (to, from, savedPosition) {   
+	    if (savedPosition) {
+		    return savedPosition
+		} else {
+			if (from.meta.keepAlive) {
+				from.meta.savedPosition = document.body.scrollTop;
+			}
+		    return { x: 0, y: to.meta.savedPosition ||0}
+		}
+	}
+
+
+<style lang="scss" scoped>   样式文件lang是css，scss，less。
+如果要定义自己的路径。把 BUILD  webpack.base.conf.js里的resolve 里的alias在这里设置。
+resolve: {
+    extensions: ['.js', '.vue', '.json', '.scss'],
+    alias: {
+      'vue$': 'vue/dist/vue.esm.js',
+      '@': resolve('src'),
+    }
+  }
+==================================================路由切换带动画。自己配动画。
+    <transition name="router-fade" mode="out-in">
+      <keep-alive>
+          <router-view></router-view>
+      </keep-alive>
+    </transition>
+.router-fade-enter-active, .router-fade-leave-active {
+    transition: opacity .3s;
+}
+.router-fade-enter, .router-fade-leave-active {
+    opacity: 0;
+}
+		<router-link to="/home" tag="li" active-class="active">   在菜单添加路由跳转  选中之后的类 active
+	    		<a href="javascript:;">首页</a>
+	    	</router-link>
+let router = new VueRouter({                                     在路由配置里设置选中后的类名。active
+  'linkActiveClass': 'active',
+   routes // （缩写）相当于 routes: routes
+});
+
+import { mapState, mapMutations, mapGetters, mapActions } from 'vuex'
+在从store里调用全局action，在后边加上自己的在当前组件里的要调用的事件。computed里获取数据时一样的道理
+...mapActions前边的...是不能省略的。
+methods:{
+   ...mapActions([
+      'increment',
+      'decrement',
+      'clickOdd',
+      'clickAsync'
+   ]),
+   openCarTypeSelectLayer (){
+       alert(0)
+   }
+}
+       computed: {
+	  	...mapGetters(['getShowflag', 'toCount', 'getflag', 'getStartAddr']),
+	  	...mapState({
+		    watchStoreStartAddress: function (state) {
+		      	this.futurePriceParam.startAddress = state.address.bookingStartAddrShort
+		    },
+		    watchStoreEndAddress: function (state) {
+		      	this.futurePriceParam.endAddress = state.address.bookingEndAddrShort
+		    },
+		    getTimeComponentDisplay: function (state) {
+		    	console.log(state.time.timeComponentDisplay)
+		    	this.timeComponentDisplay = state.time.timeComponentDisplay
+		    }
+	    }),
+	    showCarTypeName (){
+  		alert(0)
+	    }
+	}
+this.$store.dispatch({type:'setToken',userMsg:{username:this.username,password:this.password}});//更新state  异步触发
+this.$store.dispatch({'setToken',{username:this.username,password:this.password}});//更新state  异步触发
+this.$store.commit('loginout',null);//更新state   同步触发      可以有payload 负载传值
+setToken({ commit }, payload){
+	console.log(payload.userMsg.username)
+}
+
+<user-profile ref="profile"></user-profile>
+this.$refs.profile   vue2.0获取dom
+
+state.list = state.list.concat(payload.res)     在已有的list基础上把新异步出来的数据加载list的后边
+
+==================================================在计算属性里代理store里变量，在监测计算属性变化
+computed: {
+  ...mapState({
+     watchStoreStartAddress: function (state) {
+	this.futurePriceParam.startAddress = state.address.bookingStartAddrShort
+    }
+  }）
+  getUserIcons() {
+    return this.$store.state.topo.userIcons;
+  }
+},
+watch: {
+  getUserIcons(val) {
+    this.userIcons = val;
+  }
+}
+======================================================================vue插件写法
+var Toast = {};
+Toast.install = function (Vue, options) {
+ Vue.prototype.$toast = function(){
+   alert('hello,world');
+ };
+}
+export default Toast;
+
+==============================================在首页引入调用。
+import Toast from './plugins/toast'
+Vue.use(Toast);
+
+this.$toast();// 通过this即可调用到
+
+var Toast = {};
+Toast.install = function (Vue, options) {
+ Vue.prototype.$toast = (tips) => {
+  let toastComponent = Vue.extend({ // 1、创建构造器，定义好提示信息的模板
+   template: '<div class="vue-toast">' + tips + '</div>'
+  });
+  let tpl = new toastComponent().$mount().$el; // 2、创建实例
+  document.body.appendChild(tpl); // 3、把创建的实例添加到body中
+  setTimeout(function () { // 4、延迟2秒后移除该提示
+   document.body.removeChild(tpl);
+  }, 2000)
+ }
+}
+export default Toast;
+
+在用的地方 this.$toast("出错了");// 通过this即可调用到
+
+
+==============================================================无限滚动  loading slot是指定loading动画的效果。
+http://www.jianshu.com/p/bfb5ca56b4fb
+cnpm install vue-infinite-loading --save         npm安装依赖
+import InfiniteLoading from 'vue-infinite-loading'               引入和页面里的设置
+<!--无限加载组件 START-->
+		<infinite-loading :on-infinite="onInfinite" ref="infiniteLoading" distance="100">
+      <infinite-loading spinner="bubbles">
+			</infinite-loading>
+			<!--没有更多数据时显示的文字-->
+			<span slot="no-more">
+		    	数据加载完毕
+		  </span>
+    </infinite-loading>
+    <!--无限加载  END-->
+cnpm install better-scroll --save                npm安装依赖  下边是引入和使用 es6的async和await结合使用，
+http://www.jianshu.com/p/602a0903670d            简书参考  3个网址结合上拉刷新，下拉加载更多。
+http://blog.csdn.net/qq_35844177/article/details/73350485
+http://www.mamicode.com/info-detail-1857049.html
+import BScroll from 'better-scroll'
+async initData(){
+                if (this.userInfo && this.userInfo.user_id) {
+                    this.orderData = await getOrderDetail(this.userInfo.user_id, this.orderDetail.unique_id);
+                    this.showLoading = false;
+                    this.$nextTick(() => {
+                        new BScroll('#scroll_section', {  
+                            deceleration: 0.001,
+                            bounce: true,
+                            swipeTime: 1800,
+                            click: true,
+                        }); 
+                    })
+                }
+            }
+================================================================vue异步插件
+http://www.jianshu.com/p/98b854322260
+
+安装要用 cmpm安装，npm装不上  jsonp结合就是 用来跨域访问的。
+
+import request from 'superagent'
+import jsonp from 'superagent-jsonp'
+
+.withCredentials()   跨域带cookie 参考网址  http://cnodejs.org/topic/5378720ed6e2d16149fa16bd
+request
+  .get('http://localhost:4001/')
+  .withCredentials()
+  .end(function(res){
+    assert(200 == res.status);
+    assert('tobi' == res.text);
+  })
+
+request
+      .get('https://api.douban.com/v2/movie/top250?count=8')
+      .use(jsonp)
+      .end((err, res) => {
+        if (!err) {
+          commit({
+            type: 'getMovie',
+            tag: 'topMovies',
+            res: res.body.subjects
+          })
+        }
+      })
+===================================================================安装scss 和scss loader  node-sass也要安装。
+cnpm install scss --save-dev               开发时依赖，发布之后就不用了
+cnpm install scss-loader --save-dev
+cnpm install node-sass --save-dev
+                                 一定要把 BUILD  webpack.base.conf.js里的resolve  把scss加上
+resolve: {
+    extensions: ['.js', '.vue', '.json', '.scss'],
+    alias: {
+      'vue$': 'vue/dist/vue.esm.js',
+      '@': resolve('src'),
+    }
+  }
+
+============================================================VUEX
+多个store  模块化    调用方法。
+state.subject.subject
+state.movie.movieTags
+
+============================================================引入加到路由上，
+Vue-scroll-behavior: 自定义Vue应用导航路径上的滚动行为，尤其是hash模式
+https://github.com/jeneser/vue-scroll-behavior      参考网址。
+https://jeneser.github.io/douban/#/pages/home       效果网址，切换不同栏目会记录上次滚动到哪里。
+cnpm install vue-scroll-behavior --save
+import vueScrollBehavior from 'vue-scroll-behavior'
+Vue.use(vueScrollBehavior, { router: router })
+
+事件修饰符--------------------------
+@click.stop.prevent      stop阻止时间冒泡 prevent 阻止重载页面  .self只当事件在该元素本身触发时触发回调
+
+vux ui组件使用===================================================vux ui组件使用
+要先安装  vux-loader    cnpm install vux-loader --save-dev   还要安装cnpm install less-loader --save-dev
+在按照网页的配置，就可以用vux ui组件了。
