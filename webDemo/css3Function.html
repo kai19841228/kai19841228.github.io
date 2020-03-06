@@ -71,6 +71,15 @@ a:after {content: " (" attr(href) ")";}
   background: -moz-repeating-linear-gradient(red, yellow 10%, green 20%); /* Firefox 3.6 - 15 */
   background: repeating-linear-gradient(red, yellow 10%, green 20%); /* 标准的语法（必须放在最后） */
 }
+li{
+  list-style: none;
+}
+li{padding-left:2em;}
+.list{
+  counter-reset: item;
+  /* list-style-type: decimal; */
+}
+.list li:before{counter-increment:item;content:counter(item)".";color:#f00;}
 </style>
 </head>
 <body>
@@ -89,7 +98,24 @@ a:after {content: " (" attr(href) ")";}
     <div class="item">
       <h2>repeating-linear-gradient</h2>
     </div>
-    <div class="item"></div>
+    <div class="item">
+      <ol class="list">
+        <li>Node
+          <ol>
+            <li>Node
+              <ol>
+                <li>Node</li>
+                <li>Node</li>
+                <li>Node</li>
+              </ol>
+            </li>
+            <li>Node</li>
+          </ol>
+        </li>
+        <li>Node</li>
+        <li>Node</li>
+      </ol>
+    </div>
   </div>
 </body>
 </html>

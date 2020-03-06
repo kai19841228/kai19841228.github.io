@@ -24,14 +24,107 @@
 .item{
   flex: 20%;
   height: 50px;
-  background-color: seagreen;
   box-sizing: border-box;
   margin: 0 5px;
+}
+/* 除了第一个以外的样式 */
+.item:not(:first-child){
+  background-color: rgb(248, 4, 4);
+}
+/* item的第一个元素 */
+.item:first-child{
+  background-color: snow;
+}
+/* item的最后一个元素 */
+.item:last-child{
+  background-color: wheat;
+}
+/* item的第二个元素样式 */
+.item:nth-child(2){
+  background-color: springgreen;
+}
+/* item的倒数第二个元素 */
+.item:nth-last-child(2){
+  background-color: thistle;
+}
+.content{
+  margin: 20px auto;
+}
+.content .item{
+  background-color: snow;
+}
+/* item的偶数个样式 */
+.content .item:nth-child(2n){
+  background-color: rgb(248, 4, 4);
+}
+/* item偶数样式 */
+.contenter .item:nth-of-type(odd){
+  background-color: teal;
+}
+/* item奇数样式 */
+.contenter .item:nth-of-type(even){
+  background-color: snow;
+}
+/* item的第一个元素样式 */
+.contenter .item:first-of-type{
+  background-color: red;
+}
+/* item的第一个元素样式 */
+.contenter .item:last-of-type{
+  background-color: rgb(5, 5, 5);
+}
+.cont .item{
+  background-color: snow;
+}
+/* item匹配该类型元素往前数匹配的元素 */
+.cont .item:nth-last-of-type(3){
+  background-color: tomato;
+}
+/* 往后匹配元素，1开始 */
+.cont .item:nth-of-type(3){
+  background-color: rgb(79, 8, 245);
+}
+/* 第一个元素样式 */
+.cont .item:first-of-type{
+  background-color: springgreen;
+}
+/* 最后一个元素样式 */
+.cont .item:last-of-type{
+  background-color: red;
 }
 </style>
 </head>
 <body>
   <div class="warpper">
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+  </div>
+  <div class="warpper content">
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+  </div>
+  <div class="warpper content contenter">
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+  </div>
+  <div class="warpper cont">
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
     <div class="item"></div>
     <div class="item"></div>
     <div class="item"></div>

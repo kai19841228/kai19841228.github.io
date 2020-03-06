@@ -1,3 +1,16 @@
+非IE及ie8及以上浏览器都支持 在css3里使用变量，在root离声明，使用时var来调用
+:root {
+  --main-bg-color: pink;
+}
+body {
+  background-color: var(--main-bg-color);
+}
+
+.css{   css平滑滚动兼容
+overflow:auto;/* winphone8和android4+ */
+-webkit-overflow-scrolling: touch; /* ios5+ */
+}
+
 计算属性
 width: -webkit-calc(100% - 30%);
   width: -o-calc(100% - 30%);

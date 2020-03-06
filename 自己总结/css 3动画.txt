@@ -10,6 +10,7 @@ transform:translate3d(x,y,z)    3D XYZ上的距离。 translateX(x)也可单独使用。
 transform:scale3d(x,y,z)        3D在XYZ轴上的缩放。 scaleX(x)也可以单独使用。
 transform:rotate3d(x,y,z,angle) 3D在XYZ轴上的旋转角度  rotateX(angle)也可以单独使用。
 transform:perspective(n)        3D元素的透视图
+transform-origin:0% 50%;//===============设置变形的原点，类似注册点。
 
 ／／为动画DOM元素添加 CSS3 样式 -webkit-transform: transition3d(0,0,0) 或 -webkit-transform: translateZ(0)，这两个属性都会开启GPU硬件加速模式，从而让浏览器在渲染动画时从CPU转向GPU
 ／／＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝3步播放y轴0-360px；类似gif动画。
@@ -54,7 +55,7 @@ transition:all 0.5s ease-out;
 -webkit-perspective: 800px;
 -moz-perspective: 800px;
 -o-perspective: 800px;
-perspective: 800px;  规定 3D 元素的透视效果
+perspective: 800px;  规定3D元素的透视效果,perspecitve给父级进行设置,translateZ 给子元素进行设置不同的大小
 
 perspective-origin: 10% 10%;
 -webkit-perspective-origin: 10% 10%;	/* Safari 和 Chrome */  设置 3D 元素的基点位置
@@ -63,7 +64,7 @@ backface-visibility 属性定义当元素不面向屏幕时是否可见。
 -webkit-backface-visibility:hidden;   
 -webkit-backface-visibility:visible;  
 
-使被转换的子元素保留其 3D 转换：如在3d旋转层叠关系保留
+使被转换的子元素保留其 3D 转换：如在3d旋转层叠关系保留 让子元素保持3d立体空间环境
 transform-style: preserve-3d;
 -webkit-transform-style: preserve-3d;
 

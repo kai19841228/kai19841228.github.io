@@ -1,6 +1,8 @@
 -webkit-touch-callout:none; /* 禁用长触弹出的下载图片菜单 */
 -webkit-user-select:none; /* 禁用长触选择文字等功能 */
 -webkit-tap-highlight-color: rgba(255,255,255,0); /* 设置点击链接的时候出现的高亮颜色为透明 */
+/*点击高亮我们需要清除  设置为transparent 完成透明*/
+-webkit-tap-highlight-color: transparent;
 input::-webkit-input-placeholder  用于控制表单输入框占位符的外观
 p:before   p:after     向选定的元素前后插入内容
 
@@ -24,7 +26,8 @@ a:first-child   a元素里第一个元素
 a:last-child    a元素里最后一个元素
 p:nth-child(3)   匹配该元素的第N个元素。必须大于0
 p:nth-child(2n)  匹配该元素里的2的倍数的元素的样式
-p:nth-child(n+2) 匹配该元素里的大于2的元素
+p:nth-child(2n+1)  匹配奇数元素的样式
+p:nth-child(n+2) 匹配该元素里的大于等于2的元素
 p:nth-child(-n+2) 匹配该元素里的前2个元素
 p:nth-of-type(odd)    匹配奇数的样式
 p:nth-of-type(even)   匹配元素偶数个的样式
@@ -32,6 +35,7 @@ p:first-of-type       该类型元素的第一个，是一个集合，p元素里的第一个。
 p:last-of-type        是上边的反例，选取该类型的最后一个。
 p:nth-last-of-type(3)  匹配该类型元素的最后一个，
 p:nth-last-child(4)   从后往前匹配元素，从1开始
+p:nth-of-type(2)      从前往后匹配元素，从1开始
 p:empty               匹配元素没有内容的元素的样式。
 .nav-item:not(:last-child)    匹配不是最后一个的的p元素  
 .nav-item:not(.is-active):hover:before
@@ -46,6 +50,7 @@ $("div[id='divAB'][title*='B']")  //显示所有属性title的值中含有"B"且属性id的值是
 box-sizing:border-box padding在定制的宽高里;content-box padding margin都记在宽高内。
 
 outline:2px solid red;  outline-offset:15px; 设置轮廓样式，和轮廓间距。 
+
 非IE及ie8及以上浏览器都支持 在css3里使用变量
 :root {
   --main-bg-color: pink;
