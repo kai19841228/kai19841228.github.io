@@ -166,3 +166,11 @@ http://wiki.imycargo.com/pages/viewpage.action?pageId=11831778  H5微信支付
 http://wiki.imycargo.com/pages/viewpage.action?pageId=19431445  微信内微信支付
 http://wiki.imycargo.com/pages/viewpage.action?pageId=19431451  获取用户 openid
 http://wiki.imycargo.com/pages/viewpage.action?pageId=19431464  大客户订单调价
+
+小程序域名接口  找周总谈
+小程序企业账号 注册 企业营业执照 对公账户  是否认证小程序主体（认证每年￥300） 找周总
+合法域名：test ，pre，https://rest-h5.imycargo.com   https://restapi.amap.com高德地图接口域名
+webview（业务域名）http://test.rest-h5.imycargo.com 计价规则 隐私条款等的页面 如果要区分环境就把不同环境加上。
+
+
+
