@@ -1,6 +1,6 @@
 小程序管理平台：https://mp.weixin.qq.com/   (公司账号weixin@01zhuanche.com / zhuanche123$)
 添加管理员-尽量多的权限，不然发版什么的老找领导 添加开发者-开发权限 
-小程序ID  wx89661ebf2c5429c6   小程序密钥  ae40f83b7d0923185a42c678b9690836
+小程序ID       wx89661ebf2c5429c6   小程序密钥   ae40f83b7d0923185a42c678b9690836
 王立冬    15911085932@163.com 微信公众平台账号 密码 **328*** 手机号 15911085932 微信绑定 305153482
 https://jingyan.baidu.com/article/8275fc865a14c346a03cf6e2.html  小程序注册参考
 
