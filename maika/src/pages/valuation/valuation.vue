@@ -31,7 +31,7 @@ export default {
     console.log(options)
   },
   mounted () {
-    this.htmlSrc = 'http://test.rest-h5.imycargo.com/#/pValuation?cityId=' + this.$store.state.cityUp.cityId + '&groupId=1&bookingServiceTypeId=1&bookingDate=' + Math.ceil(new Date().getTime() / 1000)
+    this.htmlSrc = 'https://rest-h5.imycargo.com/#/pValuation?cityId=' + this.$store.state.cityUp.cityId + '&groupId=1&bookingServiceTypeId=1&bookingDate=' + Math.ceil(new Date().getTime() / 1000)
 		console.log(this.htmlSrc)
   }
 }

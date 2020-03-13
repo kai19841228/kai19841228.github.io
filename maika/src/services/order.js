@@ -334,6 +334,49 @@ const order = {
 			})
     }
   },
+  // 微信内微信支付
+  jsapiPay (vm) {
+    ajaxApi.getPostParam('/pay/wxpay/recharge/user', {payAmount: vm.rechargeMoney, tradeType: 'JSAPI', openid: vm.openId}, vm).then(function (response) {
+      console.log(response)
+      if (response.data.code === 0) {
+        // 成功操作
+				uni.requestPayment(
+				{
+					'timeStamp': response.data.data.timeStamp, // 时间戳，自1970年以来的秒数
+					'nonceStr': response.data.data.nonceStr, // 随机串
+					'package': response.data.data.package,
+					'signType': response.data.data.signType, // 微信签名方式
+					'paySign': response.data.data.paySign, // 微信签名
+					'success':function(res){
+						let url = '/pages/RechargeSuc/index'
+						uni.reLaunch({ url })
+					},
+					'fail':function(res){
+						if (res.errMsg === 'requestPayment:fail cancel') {
+							uni.showToast({
+								title: '用户取消支付',
+								icon: 'none',
+								duration: 2000
+							})
+						} else if (res.errMsg === 'requestPayment:fail') {
+							uni.showToast({
+								title: '调用支付失败',
+								icon: 'none',
+								duration: 2000
+							})
+						}
+					},
+					'complete':function(res){}
+				})
+      } else {
+				uni.showToast({
+					title: response.data.message,
+					icon: 'none',
+					duration: 2000
+				})
+      }
+    })
+  },
   // 查看支付结果 发起支付页面把支付类型和outTradeNo返回,跳转结果页带过来
   payBack (vm) {
     ajaxApi.getPostParamCallF('/pay/result/wap', {payType: vm.payType, outTradeNo: vm.outTradeNo}, order.dealPayBack, vm)

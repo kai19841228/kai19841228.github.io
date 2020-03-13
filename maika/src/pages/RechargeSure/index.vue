@@ -24,8 +24,7 @@ export default {
   data () {
     return {
 			rechargeMoney: '',
-			code: '',
-			state: ''
+			openId: ''
     }
   },
   components: {
@@ -41,8 +40,7 @@ export default {
 		submitPayment () {
 			// #ifdef MP-WEIXIN
 			console.log('微信调起支付的代码')
-			let url = '/pages/RechargeSuc/index'
-			uni.reLaunch({ url })
+			order.jsapiPay(this)
 			// #endif
 			// #ifdef MP-ALIPAY
 			console.log('支付宝调起支付的代码')
@@ -59,6 +57,7 @@ export default {
 		console.log('微信获取openId代码')
 		order.getWxUserInfo().then(function (res){
 			console.log(res)
+			self.openId =res.openid
 		})
 		// #endif
 		// #ifdef MP-ALIPAY
