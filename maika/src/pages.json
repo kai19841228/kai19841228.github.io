@@ -65,6 +65,30 @@
 			"style": {
 				"navigationBarTitleText": "派单成功"
 			}
+		},
+		{
+			"path": "pages/agreement/index",
+			"style": {
+				"navigationBarTitleText": "协议"
+			}
+		},
+		{
+			"path": "pages/agreement/Privacy",
+			"style": {
+				"navigationBarTitleText": "隐私条款"
+			}
+		},
+		{
+			"path": "pages/agreement/service",
+			"style": {
+				"navigationBarTitleText": "服务条款"
+			}
+		},
+		{
+			"path": "pages/agreement/weiyuejin",
+			"style": {
+				"navigationBarTitleText": "违约金规则"
+			}
 		}
 	],
 	"globalStyle": {

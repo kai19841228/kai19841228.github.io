@@ -75,11 +75,8 @@ export default {
     this.orderId = options.orderId
   },
   mounted () {
-    order.getDriver(this)
     var self = this
-    setTimeout(function () {
-      self.driverData.score = ''
-    }, 300)
+    order.getDriver(self)
   }
 }
 </script>

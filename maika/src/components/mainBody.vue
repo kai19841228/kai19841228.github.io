@@ -34,12 +34,6 @@
 					estimateCostVOList: [
 						{
 							groupName: '优享型'
-						},
-						{
-							groupName: '经济型'
-						},
-						{
-							groupName: '豪华型'
 						}
 					],
 					estimateCostVOList: [0, 1, 2]

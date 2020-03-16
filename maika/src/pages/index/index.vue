@@ -8,6 +8,9 @@
 			<div class="submitHold"><view class="submit" @click="pai(3)">充值页面</view></div>
 		</scroll-view>
 		<!-- <view class="title">{{refresh.orderStatusFilter(60)}}</view> -->
+		<view class="Agreement" @click="toPath('/pages/agreement/index')">
+			协议
+		</view>
 	</view>
 </template>
 
@@ -87,6 +90,10 @@
 					const url = '/pages/Recharge/index'
 					uni.navigateTo({ url })
 				}
+			},
+			toPath (val) {
+				const url = val
+				uni.navigateTo({ url })
 			}
 		},
 		onLoad() {
@@ -147,5 +154,19 @@
 }
 .mainBody{
 	width: 100%;
+}
+.Agreement{
+	border-radius: 30px;
+	box-sizing: border-box;
+	background-color: #808080;
+	color: #FFF6EE;
+	font-size: 12px;
+	text-align: center;
+	line-height: 40px;
+	width: 40px;
+	height: 40px;
+	position: fixed;
+	bottom: 15px;
+	right: 15px;
 }
 </style>
