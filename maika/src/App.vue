@@ -14,7 +14,7 @@
 				Vue.prototype.$baseUrl = 'http://dev.cebbank.m.imycargo.com'
 				uni.setEnableDebug({enableDebug: true})
 			} else if (options.query.env === 'test') {
-				Vue.prototype.$baseUrl = 'http://test.cebbank.m.imycargo.com'
+				Vue.prototype.$baseUrl = 'https://test.m.imycargo.com'
 				uni.setEnableDebug({enableDebug: true})
 			} else if (options.query.env === 'pre') {
 				Vue.prototype.$baseUrl = 'http://test.cebbank.m.imycargo.com'
