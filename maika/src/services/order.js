@@ -332,7 +332,7 @@ const order = {
 					'signType': response.data.data.signType, // 微信签名方式
 					'paySign': response.data.data.paySign, // 微信签名
 					'success':function(res){
-						let url = '/pages/RechargeSuc/index?token=' + uni.getStorageSync('token') + '&payType=' + 1 + '&outTradeNo=' + response.data.data.outTradeNo
+						let url = '/pages/RechargeSuc/index?token=' + response.data.data.token + '&payType=' + 1 + '&outTradeNo=' + response.data.data.outTradeNo
 						uni.reLaunch({ url })
 					},
 					'fail':function(res){
