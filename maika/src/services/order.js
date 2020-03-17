@@ -175,37 +175,21 @@ const order = {
 	},
   // 获取openid http://www.yiyongtong.com/archives/view-4293-1.html
 	// http://www.luyixian.cn/javascript_show_168514.aspx
-  getWxUserInfo () {
+  getWxUserInfo (vm) {
     return new Promise((resolve, reject) => {
       uni.getProvider({
         service: "oauth",
         success: res => {
-          // console.log(res)
+          console.log(res)
           const provider = res.provider[0]
           uni.login({
             provider,
             success: loginRes => {
-              // console.log(loginRes)
+              console.log(loginRes)
               const code = loginRes.code
-              const appid = 'wxc3d23b99a8ecf4ab' // 小程序AppID
-              const secret = '79de8d16ff64d5968843b7b6327daae6' // 小程序密钥AppSecret
-              const url = `https://api.weixin.qq.com/sns/jscode2session?appid=${appid}&secret=${secret}&js_code=${code}&grant_type=authorization_code`
-              uni.request({
-                url,
-                success: dataRes => {
-                  // console.log(dataRes)
-									resolve({...dataRes.data, provider})
-                  uni.getUserInfo({
-                    provider,
-                    withCredentials: true,
-                    success: infoRes => {
-                      // console.log(infoRes)
-                      // 返回openId、用户信息、服务商等
-                      resolve({...dataRes.data, ...infoRes.userInfo, provider})
-                    }
-                  })
-                }
-              })
+							ajaxApi.getPostParamCallF('/pay/wxpay/user/bind/miniprogram/getUserOpenid', {code: loginRes.code, state: uni.getStorageSync('token')}, function (vm, data) {
+								resolve(data)
+							}, vm)
             }
           })
         }
@@ -336,7 +320,7 @@ const order = {
   },
   // 微信内微信支付
   jsapiPay (vm) {
-    ajaxApi.getPostParam('/pay/wxpay/recharge/user', {payAmount: vm.rechargeMoney, tradeType: 'JSAPI', openid: vm.openId}, vm).then(function (response) {
+    ajaxApi.getPostParam('/pay/wxpay/recharge/user', {payAmount: vm.rechargeMoney, tradeType: 'MINIPROGRAM', openid: vm.openId}, vm).then(function (response) {
       console.log(response)
       if (response.data.code === 0) {
         // 成功操作
@@ -348,7 +332,7 @@ const order = {
 					'signType': response.data.data.signType, // 微信签名方式
 					'paySign': response.data.data.paySign, // 微信签名
 					'success':function(res){
-						let url = '/pages/RechargeSuc/index'
+						let url = '/pages/RechargeSuc/index?token=' + uni.getStorageSync('token') + '&payType=' + 1 + '&outTradeNo=' + response.data.data.outTradeNo
 						uni.reLaunch({ url })
 					},
 					'fail':function(res){

@@ -183,3 +183,5 @@ http://pre.rest-h5.imycargo.com
 http://rest-h5.imycargo.com
 
 http://wiki.imycargo.com/pages/viewpage.action?pageId=20676897   未结算提现管理
+http://wiki.imycargo.com/pages/viewpage.action?pageId=20676903   小程序微信支付 state 传token
+

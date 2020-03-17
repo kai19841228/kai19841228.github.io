@@ -55,9 +55,11 @@ export default {
 		var self = this
 		// #ifdef MP-WEIXIN
 		console.log('微信获取openId代码')
-		order.getWxUserInfo().then(function (res){
+		order.getWxUserInfo(self).then(function (res){
+			console.log(9999)
 			console.log(res)
-			self.openId =res.openid
+			self.openId = res
+			console.log(self.openId)
 		})
 		// #endif
 		// #ifdef MP-ALIPAY
@@ -112,8 +114,8 @@ export default {
 .submitHold .submit{
 	font-size: 30upx;
 	text-align: center;
-	height: 100upx;
-	line-height: 100upx;
+	height: 40px;
+	line-height: 40px;
 	background-color: #ff8400;
 	color: #fff;
 	display: block;
