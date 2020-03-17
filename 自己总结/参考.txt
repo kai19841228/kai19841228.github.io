@@ -1,2 +1,0 @@
-pageSwitch。js  手机端切换，单页应用
-https://www.17sucai.com/preview/11/2015-07-13/%E5%9B%BE%E7%89%87%E7%BF%BB%E8%BD%AC/index.html
