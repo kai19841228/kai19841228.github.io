@@ -19,12 +19,12 @@
 <script type="text/javascript">
 	function isWeiXinQiye () {
 	    var ua = window.navigator.userAgent.toLowerCase()
-	    console.log(ua)
-	    if ((ua.match(/micromessenger/i) === 'micromessenger') && (ua.match(/wxwork/i) === 'wxwork')) {
-	      return true
-	    } else {
-	      return false
-	    }
+	        console.log(ua)
+	        if ((ua.indexOf('micromessenger') !== -1) && (ua.indexOf('wxwork') !== -1)) {
+	          return true
+	        } else {
+	          return false
+	        }
 	  }
 		console.log(isWeiXinQiye())
 </script>
