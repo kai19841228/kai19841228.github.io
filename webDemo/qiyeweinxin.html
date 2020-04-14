@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+    <meta name="viewport" content="initial-scale=1, user-scalable=0, minimal-ui" charset="UTF-8">
+    <title>企业微信环境检测</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/1.8.3/jquery.js"></script>
+    <script src="https://reslib.01zhuanche.com/js/station/c.vconsole.min.js"></script>
+    <style type="text/css">
+    	*{
+            margin:0;
+            padding:0;
+            border:none;
+        }
+    </style>
+</head>
+<body>
+    <h1>企业微信环境检测</h1>
+<script type="text/javascript">
+	function isWeiXinQiye () {
+	    var ua = window.navigator.userAgent.toLowerCase()
+	    console.log(ua)
+	    if ((ua.match(/micromessenger/i) === 'micromessenger') && (ua.match(/wxwork/i) === 'wxwork')) {
+	      return true
+	    } else {
+	      return false
+	    }
+	  }
+		console.log(isWeiXinQiye())
+</script>
+</body>
+</html>
