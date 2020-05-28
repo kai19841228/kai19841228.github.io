@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <script src="http://libs.baidu.com/jquery/1.8.3/jquery.min.js"></script>
-	<script src = "https://webapi.amap.com/maps?v=1.4.10&key=565a6b4ad06b2391b8a81eaf2bdcf511&plugin=AMap.Driving"></script>
+	<script src = "https://webapi.amap.com/maps?v=1.4.10&key=565a6b4ad06b2391b8a81eaf2bdcf511&plugin=AMap.Driving,AMap.Geolocation"></script>
 	<script type="text/javascript" src="https://cache.amap.com/lbs/static/addToolbar.js"></script>
     <title>定位</title>
 		<style type="text/css">
@@ -38,6 +38,7 @@
     	弹层展示
     </div>
     <script type="text/javascript">
+			var markerArr = []
         //基本地图加载
         var map = new AMap.Map("container", {
             resizeEnable: true,
@@ -52,26 +53,47 @@
         }); 
 				function aa () {
         // 根据起终点经纬度规划驾车导航路线
-        driving.search(new AMap.LngLat(116.379028, 39.865042), new AMap.LngLat(116.427281, 39.903719), function(status, result) {
+        driving.search(new AMap.LngLat(116.448613,39.9038), new AMap.LngLat( 116.448694,39.904693), function(status, result) {
             // result 即是对应的驾车导航信息，相关数据结构文档请参考  https://lbs.amap.com/api/javascript-api/reference/route-search#m_DrivingResult
             if (status === 'complete') {
-                console.log('绘制驾车路线完成')
-                var m1 = new AMap.Marker({
-          position: [116.379028, 39.865042]
-        });
-        var m2 = new AMap.Marker({
-          position: [116.427281, 39.903719]
-        });
-              map.add(m1);
-        map.add(m2);
-              infoWindow = new AMap.InfoWindow({
-          isCustom: true,
-          content: "7777777777777777777",
-          offset: new AMap.Pixel(0, -22)
-        });
-              infoWindow.open(map, [116.427281, 39.903719])
+							console.log('绘制驾车路线完成')
+							var m1 = new AMap.Marker({
+								position: [116.448613,39.9038]
+							});
+							var m2 = new AMap.Marker({
+								position: [ 116.448694,39.904693]
+							});
+										map.add(m1);
+							map.add(m2);
+										infoWindow = new AMap.InfoWindow({
+								isCustom: true,
+								content: "77777777",
+								offset: new AMap.Pixel(0, -22)
+							});
+              infoWindow.open(map, [ 116.448694,39.904693])
+							let lineArr = [];
+							 for (let item of result.routes[0].steps) {
+							   lineArr.push([item.start_location.lng, item.start_location.lat]);
+							 }
+							 var polyline = new AMap.Polyline({
+							   path: lineArr,
+							   showDir: true,
+							   strokeColor: "#000", //线颜色
+							   strokeOpacity: 1, //线透明度
+							   strokeWeight: 6
+							});
+							polyline.setMap(map);
+							if (geoLagLat.lng) {
+								let curMarker = new AMap.Marker({
+									icon: "./img/currentPoint.svg",
+									position: new AMap.LngLat(geoLagLat.lng, geoLagLat.lat),
+									offset: new AMap.Pixel(-25, -22),
+									zIndex: 5
+								});
+								curMarker.setMap(map);
+							}
 							console.log(map.getAllOverlays())
-							map.setFitView('','',[60,300,120,120]);
+							map.setFitView('',false,[60,300,60,60]);
 							// map.setZoom(map.getZoom() - 1)
 							// map.panBy(0,-50);
               
@@ -82,8 +104,76 @@
 				}
 				aa()
 				setInterval(function(){
+					// console.log(map.getAllOverlays()[4].Ke.icon)
+					let arr = []
+					for(let item of map.getAllOverlays()) {
+						if(item.Ke.icon){
+							console.log(item.Ke.icon)
+						} else {
+							arr.push(item)
+						}
+					}
+					map.clearMap()
+					// map.removeOverlay(arr)
+					// map.remove(arr)
+					// driving.clearMap
 					aa()
 				},5000)
     </script>
+		<script type="text/javascript">
+			var geoLagLat = {}
+			geolocation = new AMap.Geolocation({
+			      showButton: true,
+			      GeoLocationFirst: true,
+			      enableHighAccuracy: true, //是否使用高精度定位，默认:true
+			      timeout: 10000, //超过10秒后停止定位，默认：5s
+			      buttonPosition: "RB", //定位按钮的停靠位置
+			      buttonDom:
+			        "<img src='./img/mapPoint.svg' height='100%' width='100%' id='pointImg'/>",
+			      buttonOffset: new AMap.Pixel(10, 320), //定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
+			      zoomToAccuracy: false, //定位成功后是否自动调整地图视野到定位点
+			      panToLocation: false,
+			      showMarker: true, //是否显示定位点
+			      markerOptions: {
+			        autoRotation: true,
+			        // angle: -90,
+			        offset: new AMap.Pixel(-25, -22),
+			        content: '<img src="./img/currentPoint.svg"/>',
+			        imageSize: new AMap.Size(52, 50),
+			        zIndex: 5
+			      },
+			      showCircle: false, //是否显示定位精度圈
+			      circleOptions: {
+			        //定位精度圈的样式
+			        strokeColor: "#0093FF",
+			        noSelect: true,
+			        strokeOpacity: 0.5,
+			        strokeWeight: 10,
+			        fillColor: "#4D8AFF",
+			        fillOpacity: 0.25
+			      }
+			    });
+					map.addControl(geolocation);
+					geolocation.getCurrentPosition();
+					AMap.event.addListener(geolocation, "complete", onComplete);
+					function onComplete(result) {
+						console.log(result)
+						geoLagLat = {
+							lng: result.position.lng,
+							lat: result.position.lat
+						}
+						// let curMarker = new AMap.Marker({
+						// 	icon: "./img/currentPoint.svg",
+						// 	position: result.position,
+						// 	offset: new AMap.Pixel(-25, -22),
+						// 	zIndex: 5
+						// });
+						// curMarker.setMap(map);
+					}
+					AMap.event.addListener(geolocation, "error", onError);
+					function onError(result) {
+						console.log(result)
+					}
+		</script>
 </body>
 </html>
