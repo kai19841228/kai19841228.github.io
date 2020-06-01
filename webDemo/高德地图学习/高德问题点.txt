@@ -10,3 +10,5 @@ baseRender: 'd'
 
 map.setFitView()    
 map.setFitView(overlaysList);//自适应显示
+
+map.setFitView('',false,[60,300,60,60]); 重置地图可是区域,数组是要显示的点,第二个参数是否需要动画，第三个参数地图上下左右的像素避让宽度
