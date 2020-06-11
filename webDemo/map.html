@@ -42,7 +42,7 @@
         //基本地图加载
         var map = new AMap.Map("container", {
             resizeEnable: true,
-            center: [116.397428, 39.90923],//地图中心点
+            // center: [116.397428, 39.90923],//地图中心点
             zoom: 13 //地图显示的缩放级别
         });
         //构造路线导航类
@@ -55,6 +55,7 @@
         // 根据起终点经纬度规划驾车导航路线
         driving.search(new AMap.LngLat(116.448613,39.9038), new AMap.LngLat( 116.448694,39.904693), function(status, result) {
             // result 即是对应的驾车导航信息，相关数据结构文档请参考  https://lbs.amap.com/api/javascript-api/reference/route-search#m_DrivingResult
+						console.log(result)
             if (status === 'complete') {
 							console.log('绘制驾车路线完成')
 							var m1 = new AMap.Marker({
@@ -73,8 +74,13 @@
               infoWindow.open(map, [ 116.448694,39.904693])
 							let lineArr = [];
 							 for (let item of result.routes[0].steps) {
-							   lineArr.push([item.start_location.lng, item.start_location.lat]);
+								 if (item.path.length >1) {
+									for (let ite of item.path) {
+										lineArr.push([ite.lng, ite.lat]);
+									}
+								 }
 							 }
+							 // 路由返回坐标点，画出的线路
 							 var polyline = new AMap.Polyline({
 							   path: lineArr,
 							   showDir: true,
@@ -103,22 +109,22 @@
         });
 				}
 				aa()
-				setInterval(function(){
-					// console.log(map.getAllOverlays()[4].Ke.icon)
-					let arr = []
-					for(let item of map.getAllOverlays()) {
-						if(item.Ke.icon){
-							console.log(item.Ke.icon)
-						} else {
-							arr.push(item)
-						}
-					}
-					map.clearMap()
-					// map.removeOverlay(arr)
-					// map.remove(arr)
-					// driving.clearMap
-					aa()
-				},5000)
+				// setInterval(function(){
+				// 	// console.log(map.getAllOverlays()[4].Ke.icon)
+				// 	let arr = []
+				// 	for(let item of map.getAllOverlays()) {
+				// 		if(item.Ke.icon){
+				// 			console.log(item.Ke.icon)
+				// 		} else {
+				// 			arr.push(item)
+				// 		}
+				// 	}
+				// 	map.clearMap()
+				// 	// map.removeOverlay(arr)
+				// 	// map.remove(arr)
+				// 	// driving.clearMap
+				// 	aa()
+				// },5000)
     </script>
 		<script type="text/javascript">
 			var geoLagLat = {}

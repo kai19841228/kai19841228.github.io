@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<script src="http://libs.baidu.com/jquery/1.8.3/jquery.min.js"></script>
+	<script src = "https://webapi.amap.com/maps?v=1.4.10&key=565a6b4ad06b2391b8a81eaf2bdcf511&plugin=AMap.Driving,AMap.Geolocation,AMap.Geocoder"></script>
+	<script type="text/javascript" src="https://cache.amap.com/lbs/static/addToolbar.js"></script>
+    <title>定位当前城市和城市编码</title>
+		<style type="text/css">
+			*{
+				margin:0;
+				padding: 0;
+				border: 1;
+			}
+			body{
+				overflow: hidden;
+				position: relative;
+			}
+			#container {
+				width: 100%;
+				height: 100vh;
+				/* display: none; */
+			}
+		</style>
+</head>
+<body>
+	<div id="container"></div>
+    <script type="text/javascript">
+			var markerArr = []
+        //基本地图加载
+        var map = map = new AMap.Map('container', {
+            resizeEnable: true,
+            // center: [116.397428, 39.90923],//地图中心点
+            zoom: 13 //地图显示的缩放级别
+        });
+				map.on("complete", function () {
+					console.log(999999999)
+				})
+        console.log(map.getAdcode()) // 获取code码
+        console.log(map.getCenter()) // 获取map的中心点
+				map.getCity(function(res){ // 获取城市
+					console.log(res)
+				})
+				var geocoder = new AMap.Geocoder({}); // 根据经纬度返回你地理信息
+				// geocoder.getAddress(new AMap.LngLat('118.433686','31.353603'), function(status, result) {
+				geocoder.getAddress(map.getCenter(), function(status, result) {
+					console.log(result)
+					if (status === "complete" && result.regeocode) {
+						let res = {
+							bookingUserAddr: result.regeocode.addressComponent.township,
+							cityCode: result.regeocode.addressComponent.adcode,
+							cityName:
+								result.regeocode.addressComponent.city === ""
+									? result.regeocode.addressComponent.province
+									: result.regeocode.addressComponent.city,
+							bookingUserAddrShort: result.regeocode.formattedAddress,
+							position: map.getCenter()
+						};
+						console.log(res)
+					}
+				})
+    </script>
+</body>
+</html>
