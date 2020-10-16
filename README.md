@@ -16,3 +16,12 @@ pwa 是vue 2.96 用 sw-precache-webpack-plugin 实现的缓存
 A2HS 是原生js 实现的sw
 
 myapp 是vue3.0 实现的pwa。
+
+wepy-maika 文件夹下是 wepy的实例
+mpvue-maika 文件夹 是mpvue的实例
+my-mpvue 文件夹里 mpvue的一些实例
+uni-maika 文件夹是uniApp的实例
+webDemo 文件夹里是一些demo的实例效果
+map 文件夹里是map的实例
+ofo 文件夹里是map的一些实例
+wxParse-master html转小程序标签显示

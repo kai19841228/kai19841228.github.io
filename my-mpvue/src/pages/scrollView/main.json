@@ -1,0 +1,10 @@
+{
+  "backgroundTextStyle": "dark",
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTitleText": "我的自定义标题",
+  "navigationBarTextStyle": "black",
+  "enablePullDownRefresh": true,
+  "onPullDownRefresh": true,
+  "onReachBottom": true,
+  "onReachBottomDistance": 50
+}
